@@ -20,5 +20,6 @@ module.exports = app => {
   router.get('/getCaptcha',controller.website.user.getCaptcha);
   router.get('/checkCaptcha',controller.website.user.checkCaptcha);
 
+  router.post('/website/user/createUser', controller.website.user.createUser);
   router.resources('/website/user',controller.website.user);
 };
