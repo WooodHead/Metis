@@ -139,15 +139,34 @@ module.exports = app => {
     return await this.findOne({
       where:{
         mobile:mobile,
-        active:1,
+        activesign:1,
       },
       include:[
         {
-          model: app.model.Roles,
+          model: app.model.Role,
           through:{
             attributes:['userId','roleId'],
           },
-          attributes:['Id','name']
+          attributes:['Id','rolename']
+        }
+      ],
+      attributes:['Id','mobile','realname','password']
+    });
+  }
+
+  User.loginFindByUserWithEmail = async function (email){
+    return await this.findOne({
+      where:{
+        email:email,
+        activesign:1,
+      },
+      include:[
+        {
+          model: app.model.Role,
+          through:{
+            attributes:['userId','roleId'],
+          },
+          attributes:['Id','rolename']
         }
       ],
       attributes:['Id','mobile','realname','password']
@@ -156,7 +175,7 @@ module.exports = app => {
 
   User.updateAcviveByUserId = async function(userId,active){
     return await this.update({
-      active:active
+      activesign:active
     },{
       where:{
         Id:userId

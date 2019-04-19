@@ -24,7 +24,7 @@ class HomeController extends Controller {
 
   async relogin(){
     const ctx = this.ctx;
-    await ctx.render('login.html', {
+    await ctx.render('frontend/login.html', {
       message:ctx.__('usernameOrPwdError')
     });
   }

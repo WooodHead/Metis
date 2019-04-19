@@ -19,10 +19,7 @@ class User extends Service {
 
   async find(id) {
     const user = await this.ctx.model.User.findUserById(id);
-    if(user.avatarUrl){
-      let helper = this.ctx.helper;
-      user.avatarUrl = helper.baseUrl + path.join(helper.othersPath, (user.Id).toString(), user.avatarUrl);
-    }
+
     return user;
   }
 
@@ -87,9 +84,8 @@ class User extends Service {
             user.activeCode =  UUID.v1();
             const createUserObj = await this.ctx.model.User.createUser(user,transaction);
             await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, 1, transaction);
-            await transaction.commit();
             await this.ctx.service.emailService.sendActiveEmail(user.email, user.activeCode);
-
+            await transaction.commit();
             return createUserObj;
           } catch (e) {
             console.log(e);
@@ -147,10 +143,13 @@ class User extends Service {
 
   async loginFindByUserWithMobile(mobile) {
     let user = await this.ctx.model.User.loginFindByUserWithMobile(mobile);
-    if(user.avatarUrl){
-      let helper = this.ctx.helper;
-      user.avatarUrl = helper.baseUrl + path.join(helper.othersPath, (user.Id).toString(), user.avatarUrl);
-    }
+
+    return user;
+  }
+
+  async loginFindByUserWithEmail(email) {
+    let user = await this.ctx.model.User.loginFindByUserWithEmail(email);
+
     return user;
   }
 

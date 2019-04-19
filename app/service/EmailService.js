@@ -2,6 +2,8 @@
 
 const Service = require('egg').Service;
 const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 
 class Email extends Service {
 
@@ -24,13 +26,14 @@ class Email extends Service {
     var mailOptions = {
       from: ctx.helper.email_send_address, // 发件地址
       to: email, // 收件列表
-      subject: "邮件激活", // 标题
+      subject: "邮件激活", // 标题blog-simple.html
+      //html: fs.createReadStream(path.resolve(__dirname,'../../', 'blog-simple.html'))
     }
 
     if (mailType == 0){
       mailOptions.text = "您好 ";
-      mailOptions.html = '<b>感谢您访问图钉墙!</b> <a href="'+ctx.helper.email_verify_address
-        +'?email='+email+'&activeCode='+activeCode+'">请点击激活账号</a>';
+       mailOptions.html = '<b>感谢您访问图钉墙!</b> <a href="'+ctx.helper.email_verify_address
+         +'?email='+email+'&activeCode='+activeCode+'">请点击激活账号</a>';
     }
     else if (mailType == 1){
       mailOptions.text = "您好，您的激活码为:" + activeCode;
@@ -39,6 +42,7 @@ class Email extends Service {
     // 发送邮件
     await transport.sendMail(mailOptions, function(error, response) {
       if (error) {
+        console.log(error);
         return false;
       } else {
         return true;
