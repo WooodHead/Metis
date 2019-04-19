@@ -62,13 +62,18 @@ var config = {
         attachUpload: "/dcpro/file/uploadMultiFile",		//附件上传路径问题解决方案/DesignYL/+
         judgeToScoreList:"review/getReviewListByUserId",
         judgeScore:"review/updateReviewScore",
-        sendMobileCode:"sms/sendMessage?mobile=",
-        vertifyCode:"sms/vertifyCode",
         updatePwdByMobile:"user/updatePwdByMobile",
-        
+
         manageNews:"news/findManageNewsByPage",
         judgeGetByPage:"judge/getAllJudge",
         judgeDetail:"judge/findJudgeById/:id",
+
+        // register 界面
+        sendMobileCode:"/website/sms/sendMessage?mobile=",
+        vertifyCode:"/website/sms/vertifySms",
+        getCaptcha:"/getCaptcha",
+        checkCaptcha:"/checkCaptcha"
+
     },
     viewUrls: {
         login: "login",
@@ -155,10 +160,10 @@ function getBrowserInfo(){
         }
     }
 }
-$(document).ready(function () { 
-	
+$(document).ready(function () {
+
 	getBrowserInfo();
-	
+
     $("input[type='text'],input[type='email']").blur(function () {
         $(this).val($(this).val().trim());
     });

@@ -51,7 +51,7 @@ var register = new Vue({
 	},
     methods: {
     	//验证方式选择
-    	radioChange:function(value){
+    	radioChange(value){
     		if(value == "0"){				//  email
     			this.showMobileCode = false;
     			this.disableSbt = false;
@@ -62,11 +62,11 @@ var register = new Vue({
     		}
     	},
     	//发送手机验证短信
-    	sendAcodeStg:function(){
+    	sendAcodeStg(){
     		var that = this;
     		this.$Loading.start();
     		if(this.formItem.mobile.length == 11){
-    			var url = config.ajaxUrls.sendMobileCode + this.formItem.mobile + "&type=3";
+    			var url = config.ajaxUrls.sendMobileCode + this.formItem.mobile;
     			$.ajax({
                     dataType:"json",
                     type:"get",
@@ -74,11 +74,11 @@ var register = new Vue({
                     success:function(res){
                         if(res.success){
                     		that.$Loading.finish();
-                        	that.$Notice.success({title:res.message, duration:3});
+                        	that.$Notice.success({title:res.data, duration:3});
                         	clock(that);
                         }else{
                     		that.$Loading.error();
-                        	that.$Notice.error({title:res.message, duration:3});
+                        	that.$Notice.error({title:res.data, duration:3});
                         }
                     },
                     error:function(){
@@ -92,7 +92,7 @@ var register = new Vue({
     		}
     	},
     	//验证手机验证码
-    	checkMobileCode:function(event){
+    	checkMobileCode(event){
 			var that = this,
 			url = config.ajaxUrls.vertifyCode;
 			if(event.target.value.length == 6){
@@ -102,6 +102,7 @@ var register = new Vue({
 	                url:url,
 	                data:{mobile:this.formItem.mobile,code:this.formItem.mobileCode},
 	                success:function(res){
+						console.log(res);
 	                    if(res.success){
 	                    	that.$Notice.success({title:res.message, duration:3});
 	                    	that.disableSbt = false;
@@ -116,18 +117,44 @@ var register = new Vue({
 			}
     	},
     	//验证两次密码输入
-    	conPwdBlur:function(){
+    	conPwdBlur(){
     		if(this.formItem.password && this.formItem.confirmPassword != this.formItem.password){
     			this.$Notice.error({ title: '输入的密码不一致', duration:3});
     		}
     	},
     	//刷新图片验证码内容
-    	tapClick: function () {
-    		var timeStamp = '?' + new Date().getTime() + 'r' + Math.random();
-    		this.imgSrc = "user/getCode"+timeStamp;
+    	tapClick () {
+			let that = this;
+            $.ajax({
+                url: config.ajaxUrls.getCaptcha,
+                type: 'GET',
+                success(res){
+                    document.getElementsByTagName("object")[0].innerHTML = res;
+                }
+            });
+        },
+		// 验证图片验证码
+		checkCaptcha(event){
+            let that = this;
+            if(event.target.value.length == 5){
+                $.ajax({
+                    url: config.ajaxUrls.checkCaptcha,
+                    type: 'GET',
+                    data:{captchaText:this.formItem.captchaText},
+                    success(res){
+                        if (res.status == 200){
+                            that.$Notice.success({title:res.data});
+                            that.captchaBol = true;
+                        }else{
+                            that.$Notice.error({title:res.data});
+                            that.captchaBol = false;
+                        }
+                    }
+                });
+            }
         },
         //提交
-        submit:function(name){
+        submit(name){
         	this.$Loading.start();
         	this.$refs[name].validate((valid) => {
                 if (valid) {
@@ -166,8 +193,15 @@ var register = new Vue({
             })
         }
     },
-    created:function(){
+    created(){
     	this.registerStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.footHeight - config.cssHeight.headHeight - 40 + "px";
+		$.ajax({
+            url: config.ajaxUrls.getCaptcha,
+            type: 'GET',
+            success(res){
+                document.getElementsByTagName("object")[0].innerHTML = res;
+            }
+        });
     }
 })
 function clock(that){

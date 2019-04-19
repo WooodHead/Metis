@@ -8,14 +8,14 @@
 	<body>
 
 		<div>
-			<a class="close" href=""><spring:message code="close"/></a>
+			<a class="close" href="">关闭</a>
 		</div>
 
 		<form class="pCenter" id="myForm" method="post" action="dologin">
 			<div class="logo">
 				<span class="glyphicon glyphicon-user"></span>
 			</div>
-			<h1 class="appTitle"><spring:message code="system_login"/></h1>
+			<h1 class="appTitle">系统登录</h1>
 			<div class="row">
 				<input class="ctrlInput icon1" type="text" name="username" placeholder="请输入邮箱/手机号" style="margin-top: 36px;">
 			</div>
@@ -26,8 +26,8 @@
 				<label class="error tCenter">${error}</label>
 			</div>
 			<div class="row">
-				<a href="user/register" style="float: left;margin-top: -8px;">注册</a>
-				<a href="user/forgetPwd" style="float: right;margin-top: -8px;">忘记密码</a>
+				<a href="/register" style="float: left;margin-top: -8px;">注册</a>
+				<a href="/forgetPwd" style="float: right;margin-top: -8px;">忘记密码</a>
 			</div>
 			<div class="logoBottom">
 				<span class="glyphicon glyphicon-user"></span>

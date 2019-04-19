@@ -32,7 +32,7 @@
 	        </form-item>
 	        <form-item label="短信验证码" v-if="showMobileCode"  prop="mobileCode">
 	            <i-input type="text" v-model="formItem.mobileCode" @on-change="checkMobileCode" style="width:200px;" placeholder="验证码"></i-input>
-	        	<i-button type="default" :disabled="disableBtn" @click="sendAcodeStg">{{mobileCodeText}}</i-button>
+	        	<i-button type="default" :disabled="disableBtn" @click="sendAcodeStg" v-text="mobileCodeText"></i-button>
 	        </form-item>
 	        <form-item label="地址">
 	            <i-input type="text" v-model="formItem.address" placeholder="请输入地址"></i-input>
@@ -44,8 +44,9 @@
 	            <i-input type="password" v-model="formItem.confirmPassword" @on-blur="conPwdBlur" placeholder="请重新输入密码"></i-input>
 	        </form-item>
 	        <form-item label="图片验证码" prop="activecode">
-	            <i-input type="text" v-model="formItem.activecode" style="width:200px;" placeholder="请重新图片验证码"></i-input>
-	            <img :src="imgSrc" class="zyActiveCode" @click="tapClick">
+	            <i-input type="text" v-model="formItem.activecode" style="width:200px;" placeholder="请输入图片验证码"></i-input>
+				<object style="width: 160px;height: 60px;"></object>
+				<icon type="md-refresh" size="30" @click="tapClick" style="margin-top: -35px;cursor:pointer;"></icon>
 	        </form-item>
 	        <form-item>
 	            <i-button type="primary" long :disabled="disableSbt" @click="submit('formItem')">提交</i-button>
