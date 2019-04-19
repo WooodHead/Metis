@@ -9,13 +9,16 @@ module.exports = app => {
   router.get('/login', controller.home.login);
   router.get('/register', controller.home.register);
   router.get('/relogin', controller.home.relogin);
-  
+
   router.post('/login',app.passport.authenticate('local', {
        successReturnToOrRedirect : '/index',successFlash: true,
        failureRedirect: '/relogin',failureFlash: true }));
 
-  router.get('/website/sms/createSmsMessage', controller.website.smsMessage.createSmsMessage);
+  router.get('/website/sms/sendMessage', controller.website.smsMessage.createSmsMessage);
   router.get('/website/sms/vertifySms', controller.website.smsMessage.vertifySms);
+
+  router.get('/getCaptcha',controller.website.user.getCaptcha);
+  router.get('/checkCaptcha',controller.website.user.checkCaptcha);
 
   router.resources('/website/user',controller.website.user);
 };
