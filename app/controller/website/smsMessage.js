@@ -27,7 +27,7 @@ class SmsMessageController extends BaseController{
 
   async vertifySms(){
     const ctx = this.ctx;
-    const smsCode = ctx.query.smsCode;
+    const smsCode = ctx.query.code;
     const mobile = ctx.query.mobile;
     try{
       ctx.body = await ctx.service.smsMessage.getDataByCondition({mobile:mobile,code:smsCode});

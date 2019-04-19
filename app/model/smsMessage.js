@@ -5,7 +5,7 @@ module.exports = app => {
 
   const { INTEGER, STRING, DATE } = app.Sequelize;
 
-  const SendSMS = app.model.define('sms_message', {
+  const SmsMessage = app.model.define('sms_message', {
     Id: {
       type: INTEGER(11),
       allowNull: false,
@@ -32,20 +32,20 @@ module.exports = app => {
     tableName: 'sms_message'
   });
 
-  SendSMS.createSmsMessage = async function(sms){
+  SmsMessage.createSmsMessage = async function(sms){
     return this.create(sms);
   }
 
-  SendSMS.vertifyCode = async function(smsMessage){
+  SmsMessage.vertifyCode = async function(smsMessage){
     return this.findOne({
       where:{
-        cmobile:smsMessage.mobile,
+        mobile:smsMessage.mobile,
         code: smsMessage.code,
       }
     });
   }
 
-  SendSMS.getCountDataByDatetime = async function (smsMessage) {
+  SmsMessage.getCountDataByDatetime = async function (smsMessage) {
     return this.count({
       where:{
         mobile:smsMessage.mobile,
@@ -56,5 +56,5 @@ module.exports = app => {
     });
   }
 
-  return SendSMS;
+  return SmsMessage;
 };

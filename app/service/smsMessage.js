@@ -10,12 +10,13 @@ class SmsMessage extends Service {
     let code = this.ctx.helper.randomNumber(6);
     smsMessage.code = code;
 
+
     let smsSendResult = await smsUtil.sendSMS(smsMessage,3);
 
     let result = false;
 
     if (smsSendResult.Code == 'OK'){
-      await this.ctx.model.SendSMS.createSmsMessage(smsMessage);
+      await this.ctx.model.SmsMessage.createSmsMessage(smsMessage);
       result = true;
     }
     else{
@@ -28,10 +29,10 @@ class SmsMessage extends Service {
   async getDataByCondition(smsMessage) {
     let curDate = new Date();
     let preDate = moment(new Date(curDate.getTime() - 30 * 60 * 1000)).format('YYYY-MM-DD HH:mm:ss');
-    let smsObject = await this.ctx.model.SendSMS.vertifyCode(smsMessage);
+    let smsObject = await this.ctx.model.SmsMessage.vertifyCode(smsMessage);
 
     if (smsObject){
-      if(smsObject.createtime > preDate){
+      if(smsObject.createAt > preDate){
         return {success:true,data:'验证成功!',status:200};
       }
       else{
@@ -44,7 +45,7 @@ class SmsMessage extends Service {
   }
 
   async getCountDataByDatetime(syncType, date) {
-    return await this.ctx.model.SendSMS.getCountDataByDatetime(smsMessage);
+    return await this.ctx.model.SmsMessage.getCountDataByDatetime(smsMessage);
   }
 
 }
