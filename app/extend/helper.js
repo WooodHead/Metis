@@ -14,8 +14,8 @@ module.exports = {
     const alioss = exports = {};
 
     alioss.region = 'oss-cn-hangzhou';
-    alioss.AccessKeyId = 'LTAIsvWEDxxcmRUG2';
-    alioss.AccessKeySecret = 'fs0sVuCJm0AeQW23xdRwdF0EqzL5Rc';
+    alioss.AccessKeyId = 'LTAIsvXXw2cmRUG2';
+    alioss.AccessKeySecret = 'fs0sVuCJm0AeQi2XduYwdF0EqzL5Rc';
     alioss.endpoint = 'oss-cn-hangzhou.aliyuncs.com';
     alioss.PolicyFile = 'policy/all_policy.txt';
     alioss.RoleArn = 'acs:ram::1455326322404332:role/cidic-oss-role';
