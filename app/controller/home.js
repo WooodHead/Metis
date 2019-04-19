@@ -28,6 +28,20 @@ class HomeController extends Controller {
       message:ctx.__('usernameOrPwdError')
     });
   }
+
+  async judgeMgr(){
+    const ctx = this.ctx;
+    await ctx.render('backend/judgeMgr.html', {
+
+    });
+  }
+
+  async judgeCOU(){
+    const ctx = this.ctx;
+    await ctx.render('backend/judgeCOU.html', {
+
+    });
+  }
 }
 
 module.exports = HomeController;
