@@ -32,15 +32,26 @@ module.exports = app => {
     tableName: 'send_message'
   });
 
-  SendSMS.createSMS = async function(sms){
+  SendSMS.createSmsMessage = async function(sms){
     return this.create(sms);
   }
 
-  SendSMS.vertifyCode = async function(code, mobile){
-    return this.findAll({
+  SendSMS.vertifyCode = async function(smsMessage){
+    return this.findOne({
       where:{
-        code: code,
-        mobile: mobile
+        cmobile:smsMessage.mobile,
+        code: smsMessage.code,
+      }
+    });
+  }
+
+  SendSMS.getCountDataByDatetime = async function (smsMessage) {
+    return this.count({
+      where:{
+        mobile:smsMessage.mobile,
+        createtime:{
+          [app.Sequelize.Op.gte]:smsMessage.createtime
+        }
       }
     });
   }
