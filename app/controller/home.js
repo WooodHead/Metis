@@ -28,6 +28,43 @@ class HomeController extends Controller {
       message:ctx.__('usernameOrPwdError')
     });
   }
+
+  async roleIndex(){
+    const ctx = this.ctx;
+    if(ctx.isAuthenticated()){
+      if(ctx.user.roles && ctx.user.roles.length > 0){
+        if (ctx.user.roles[0].rolename == 'admin'){
+          ctx.redirect('/login');
+        }
+        else if (ctx.user.roles[0].rolename == 'judge'){
+          ctx.redirect('/login');
+        }
+        else{
+          ctx.redirect('/login');
+        }
+      }
+      else{
+        ctx.redirect('/login');
+      }
+    }
+    else{
+      ctx.redirect('/login');
+    }
+
+  }
+
+  async judgeMgr(){
+    const ctx = this.ctx;
+    await ctx.render('backend/judgeMgr.html', {
+
+    });
+  }
+
+  async judgeCOU(){
+    const ctx = this.ctx;
+    await ctx.render('backend/judgeCOU.html', {
+
+    });
 }
 
 module.exports = HomeController;
