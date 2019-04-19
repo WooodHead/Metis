@@ -20,7 +20,7 @@ function getBrowserInfo(){
 
 function check(form) {
     var mobileExp = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
-    var emailExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    var emailExp = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
     if (!mobileExp.test(form.username.value) && !emailExp.test(form.username.value)) {
         index.$Notice.error({
             title: "请输入正确的手机或邮箱格式！",
