@@ -11,7 +11,7 @@ var register = new Vue({
 				email: '',			//邮箱
 				realname: '',		//用户名称
 				mobile: '',			//手机号码
-				mobileCode: '',		//手机验证码
+				smsCode: '',		//手机验证码
 				address: '',		//地址
 				password: '',		//密码
 				captchaText: ''		//图片验证码
@@ -26,7 +26,7 @@ var register = new Vue({
         	        {required: true, message: '手机号码不能为空', trigger: 'blur'},
         	        {required: true, len:11, message: '请输入正确手机号码格式', trigger: 'blur'}
             	],
-            	mobileCode:[
+            	smsCode:[
 					{required: true, message: '请输入验证码', trigger: 'blur'},
 					{len:6, message: '验证码为6位', trigger: 'blur'}
             	],
@@ -54,7 +54,7 @@ var register = new Vue({
     		if(value == "0"){				//  email
     			this.showMobileCode = false;
     			this.disableSbt = false;
-    			this.formItem.mobileCode = "";
+    			this.formItem.smsCode = "";
     		}else if(value == "1"){			//  mobile
     			this.showMobileCode = true;
     			this.disableSbt = true;
@@ -99,7 +99,7 @@ var register = new Vue({
 	                dataType:"json",
 	                type:"GET",
 	                url:url,
-	                data:{mobile:this.formItem.mobile,code:this.formItem.mobileCode},
+	                data:{mobile:this.formItem.mobile,code:this.formItem.smsCode},
 	                success:function(res){
 						console.log(res);
 	                    if(res.success){
