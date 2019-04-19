@@ -3,7 +3,7 @@ let moment = require('moment');
 
 module.exports = app => {
 
-  const { INTEGER,STRING } = app.Sequelize;
+  const { INTEGER, STRING, DATE } = app.Sequelize;
 
   const News = app.model.define('news', {
     Id: {
@@ -75,7 +75,7 @@ module.exports = app => {
   }
 
   News.createNews = async function(news){
-    return this.create(news));
+    return this.create(news);
   }
 
   News.delNewsById = async function (id) {

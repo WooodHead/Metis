@@ -3,7 +3,7 @@ let moment = require('moment');
 
 module.exports = app => {
 
-  const { INTEGER,STRING } = app.Sequelize;
+  const { INTEGER, STRING, DATE } = app.Sequelize;
 
   const SendEmail = app.model.define('send_email', {
     Id: {
@@ -37,11 +37,11 @@ module.exports = app => {
       }
     },
   }, {
-    tableName: 'round_judge'
+    tableName: 'send_email'
   });
 
   SendEmail.createEmail = async function(){
-    
+
   }
 
   return SendEmail;

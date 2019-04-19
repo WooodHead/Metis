@@ -3,7 +3,7 @@ let moment = require('moment');
 
 module.exports = app => {
 
-  const { INTEGER,STRING } = app.Sequelize;
+  const { INTEGER, STRING, DATE } = app.Sequelize;
 
   const SendSMS = app.model.define('send_message', {
     Id: {
@@ -45,5 +45,5 @@ module.exports = app => {
     });
   }
 
-  return SendEmail;
+  return SendSMS;
 };

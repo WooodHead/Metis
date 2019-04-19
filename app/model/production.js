@@ -3,7 +3,7 @@ let moment = require('moment');
 
 module.exports = app => {
 
-  const { INTEGER,STRING,FLOAT } = app.Sequelize;
+  const { INTEGER, STRING, FLOAT, DATE } = app.Sequelize;
 
   const Production = app.model.define('production', {
     Id: {
@@ -125,7 +125,7 @@ module.exports = app => {
     return production.destroy();
   }
 
-  Production.listProductionByUserId = async function ({offset = 0, limit = 10, groupNum = 0, int subGroupNum = 0, userId = 0}){
+  Production.listProductionByUserId = async function ({offset = 0, limit = 10, groupNum = 0, subGroupNum = 0, userId = 0}){
     let condition = {
       offset,
       limit,
@@ -174,6 +174,6 @@ module.exports = app => {
     });
   }
 
-  
+
   return Production;
 };

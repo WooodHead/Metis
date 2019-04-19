@@ -2,6 +2,7 @@
 
 'use strict';
 
+const path = require('path');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -24,7 +25,7 @@ module.exports = appInfo => {
     port: 3306,
     username: 'root',
     password: 'root',
-    database: 'pinwall_pro_local',
+    database: 'metis',
     timezone:'+08:00',
     logging: true,
     define: {
@@ -112,7 +113,7 @@ module.exports = appInfo => {
     ],
     maxFileSize: 0.3 * 1024 * 1024 * 1024,
   };
-  
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

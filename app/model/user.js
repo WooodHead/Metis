@@ -154,7 +154,7 @@ module.exports = app => {
     });
   }
 
-  Users.updateAcviveByUserId = async function(userId,active){
+  User.updateAcviveByUserId = async function(userId,active){
     return await this.update({
       active:active
     },{
@@ -164,7 +164,7 @@ module.exports = app => {
     });
   }
 
-  Users.updatePwdWithMobileAndSmsCode = async function(mobile, password){
+  User.updatePwdWithMobileAndSmsCode = async function(mobile, password){
     return await this.update({
       password:password
     },{
@@ -174,7 +174,7 @@ module.exports = app => {
     });
   }
 
-  Users.findUserByMobile = async function(mobile){
+  User.findUserByMobile = async function(mobile){
     return await this.findOne({
       where:{
         mobile:mobile
@@ -191,7 +191,7 @@ module.exports = app => {
     });
   }
 
-  Users.updatePwd = async function(userId, newPwd){
+  User.updatePwd = async function(userId, newPwd){
     return await this.update({
       password:newPwd,
     },{
@@ -201,7 +201,7 @@ module.exports = app => {
     });
   }
 
-  Users.searchByRealname = async function({ offset = 0, limit = 10, realname='' }){
+  User.searchByRealname = async function({ offset = 0, limit = 10, realname='' }){
 
     let condition = {
       offset,
@@ -222,7 +222,7 @@ module.exports = app => {
     return this.findAndCountAll(condition);
   }
 
-  Users.searchByMobile = async function({ offset = 0, limit = 10, mobile='' }){
+  User.searchByMobile = async function({ offset = 0, limit = 10, mobile='' }){
     let condition = {
       offset,
       limit,
@@ -242,7 +242,7 @@ module.exports = app => {
     return this.findAndCountAll(condition);
   }
 
-  Users.updateUserAvatarUrl = async function(data){
+  User.updateUserAvatarUrl = async function(data){
     return await this.update({
       avatarUrl:data.avatarUrl
     },{
@@ -252,5 +252,5 @@ module.exports = app => {
     });
   }
 
-  return Users;
+  return User;
 };

@@ -3,7 +3,7 @@ let moment = require('moment');
 
 module.exports = app => {
 
-  const { INTEGER,STRING } = app.Sequelize;
+  const { INTEGER, STRING } = app.Sequelize;
 
   const RoundJudge = app.model.define('round_judge', {
     Id: {

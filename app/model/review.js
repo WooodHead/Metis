@@ -3,7 +3,7 @@ let moment = require('moment');
 
 module.exports = app => {
 
-  const { INTEGER,STRING } = app.Sequelize;
+  const { INTEGER, STRING, DATE } = app.Sequelize;
 
   const Review = app.model.define('review', {
     Id: {

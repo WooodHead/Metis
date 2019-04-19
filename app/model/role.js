@@ -31,7 +31,7 @@ module.exports = app => {
 
   Role.associate = function() {
 
-    app.model.Roles.belongsToMany(app.model.Users, {
+    app.model.Role.belongsToMany(app.model.User, {
       through: {
         model: app.model.UserRole,
         unique: false,
