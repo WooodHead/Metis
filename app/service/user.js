@@ -27,47 +27,80 @@ class User extends Service {
   }
 
   async createUser(user) {
-    if (user.mobile == '' || user.mobile == null) {
-      throw new Error('用户电话号码不能为空');
-    } else {
-      const userObj = await this.ctx.model.User.findUserByMobile(user.mobile);
-      if (userObj) {
-        throw new Error('用户已经存在');
+    if (user.mobileOrEmail == 1){
+      if (user.mobile == '' || user.mobile == null) {
+        throw new Error('用户电话号码不能为空');
       } else {
-        //判断短信验证码是否正确
-        let curDate = new Date();
-        let preDate = moment(new Date(curDate.getTime() - 30 * 60 * 1000)).format('YYYY-MM-DD HH:mm:ss');
-        let smsObject = await this.ctx.model.SmsMessage.getDataByCondition({
-          mobile: user.mobile,
-          code: user.smsCode
-        });
-        if (smsObject) {
-          if (smsObject.createtime > preDate) {
-            let transaction;
-            try {
-              transaction = await this.ctx.model.transaction();
-              const helper = this.ctx.helper;
-              user.password = helper.cryptoPwd(helper.cryptoPwd(user.password));
-              user.activeCode = UUID.v1();
-              user.active = 1;
-              const createUserObj = await this.ctx.model.User.createUser(user, transaction);
-              await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, 1, transaction);
-              await transaction.commit();
+        const userObj = await this.ctx.model.User.findUserByMobile(user.mobile);
+        if (userObj) {
+          throw new Error('用户已经存在');
+        } else {
+          //判断短信验证码是否正确
+          let curDate = new Date();
+          let preDate = moment(new Date(curDate.getTime() - 30 * 60 * 1000)).format('YYYY-MM-DD HH:mm:ss');
+          let smsObject = await this.ctx.model.SmsMessage.vertifyCode({
+            mobile: user.mobile,
+            code: user.smsCode
+          });
+          if (smsObject) {
+            if (smsObject.createAt > preDate) {
+              let transaction;
+              try {
+                transaction = await this.ctx.model.transaction();
+                const helper = this.ctx.helper;
+                user.password = helper.cryptoPwd(helper.cryptoPwd(user.password));
+                user.activeCode = UUID.v1();
+                user.activesign = 1;
+                const createUserObj = await this.ctx.model.User.createUser(user, transaction);
+                await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, 1, transaction);
+                await transaction.commit();
 
-              return createUserObj;
-            } catch (e) {
-              this.ctx.logger.error(e.message);
-              await transaction.rollback();
-              return false;
+                return createUserObj;
+              } catch (e) {
+                this.ctx.logger.error(e.message);
+                await transaction.rollback();
+                return false;
+              }
+            } else {
+              throw new Error('手机验证码失效');
             }
           } else {
-            throw new Error('手机验证码失效');
+            throw new Error('手机验证码不正确');
           }
-        } else {
-          throw new Error('手机验证码不正确');
         }
       }
     }
+    else{
+      if (user.email == '' || user.email == null) {
+        throw new Error('邮箱地址不能为空');
+      } else {
+        const userObj = await this.ctx.model.User.findUserByEmail(user.email);
+        if (userObj){
+          throw new Error('用户已经存在');
+        }
+        else{
+          let transaction;
+          try {
+            transaction = await this.ctx.model.transaction();
+            const helper = this.ctx.helper;
+            user.password = helper.cryptoPwd(helper.cryptoPwd(user.password));
+            user.activeCode =  UUID.v1();
+            const createUserObj = await this.ctx.model.User.createUser(user,transaction);
+            await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, 1, transaction);
+            await transaction.commit();
+            await this.ctx.service.emailService.sendActiveEmail(user.email, user.activeCode);
+
+            return createUserObj;
+          } catch (e) {
+            console.log(e);
+            this.ctx.logger.error(e.message);
+            await transaction.rollback();
+            return false;
+          }
+        }
+      }
+    }
+
   }
 
   async update({
@@ -123,42 +156,6 @@ class User extends Service {
 
   async updateAcviveByUserId(userId) {
     return await this.ctx.model.User.updateAcviveByUserId(userId);
-  }
-
-  async bindWeixinInfoByMobile(mobile, smsCode, user) {
-    let wxInfo = {};
-    wxInfo.mobile = mobile;
-    wxInfo.openId = user.openid;
-    wxInfo.nickname = user.nickname;
-    wxInfo.avatarUrl = user.headimageurl;
-    wxInfo.gender = user.sex;
-    wxInfo.province = user.province;
-    wxInfo.city = user.city;
-    wxInfo.country = user.country;
-    wxInfo.unionId = user.unionid;
-
-    let curDate = new Date();
-    let preDate = moment(new Date(curDate.getTime() - 30 * 60 * 1000)).format('YYYY-MM-DD HH:mm:ss');
-    let smsObject = await this.ctx.model.SmsMessage.getDataByCondition({
-      mobile: mobile,
-      code: smsCode
-    });
-    if (smsObject) {
-      if (smsObject.createtime > preDate) {
-        let userObject = this.ctx.model.User.findUserByMobile(mobile);
-        if (userObject) {
-          await this.ctx.model.User.updateWxInfoByMobile(wxInfo);
-          return userObject;
-        } else {
-          throw new Error('绑定用户不存在');
-        }
-      } else {
-        throw new Error('手机验证码失效');
-      }
-    } else {
-      throw new Error('手机验证码不正确');
-    }
-
   }
 
   async updatePwd(userId, newPwd) {
@@ -219,6 +216,10 @@ class User extends Service {
       this.ctx.logger.error(e.message);
       return false;
     }
+  }
+
+  async updateAcviveByActiveCodeAndEmail(email,activeCode){
+    return await this.ctx.model.User.updateAcviveByActiveCodeAndEmail(email,activeCode,1);
   }
 
   async searchByUsername(query) {

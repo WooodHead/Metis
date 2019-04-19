@@ -14,7 +14,7 @@ class UsersController extends BaseController{
     };
 
     try{
-      const result = await ctx.service.users.list(query);
+      const result = await ctx.service.user.list(query);
       super.success(result);
     }
     catch(e){
@@ -26,7 +26,7 @@ class UsersController extends BaseController{
   async show() {
     const ctx = this.ctx;
     try{
-      const result = await ctx.service.users.find(ctx.helper.parseInt(ctx.params.id));
+      const result = await ctx.service.user.find(ctx.helper.parseInt(ctx.params.id));
       super.success(result);
     }
     catch(e){
@@ -39,16 +39,17 @@ class UsersController extends BaseController{
     const ctx = this.ctx;
     try{
       let data = ctx.request.body;
-      if (data.captchaText != this.ctx.session.captcha){
+      if (data.captchaText.toLowerCase() != this.ctx.session.captcha){
         super.failure(ctx.__('verificationCodeError'));
       }
       else{
-        const user = await ctx.service.users.createUser(data);
+        const user = await ctx.service.user.createUser(data);
         super.success(ctx.__('createdSuccess'));
       }
 
     }
     catch(e){
+      console.log(e);
       ctx.logger.error(e.message);
       super.failure(e.message);
     }
@@ -62,7 +63,7 @@ class UsersController extends BaseController{
     };
 
     try{
-      await ctx.service.users.update({ id, updates });
+      await ctx.service.user.update({ id, updates });
       super.success(ctx.__('updateSuccessful'));
     }
     catch(e){
@@ -76,7 +77,7 @@ class UsersController extends BaseController{
     const id = ctx.helper.parseInt(ctx.params.id);
 
     try{
-      await ctx.service.users.del(id);
+      await ctx.service.user.del(id);
       super.success(ctx.__('deletedSuccessful'));
     }
     catch(e){
@@ -90,7 +91,7 @@ class UsersController extends BaseController{
     const userId = ctx.helper.parseInt(ctx.params.id);
 
     try{
-      await ctx.service.users.updateAcviveByUserId(userId);
+      await ctx.service.user.updateAcviveByUserId(userId);
       super.success(ctx.__('updateSuccessful'));
     }
     catch(e){
@@ -122,24 +123,19 @@ class UsersController extends BaseController{
     }
   }
 
-  async getUserByUnionId(){
-    const unionId = this.ctx.query.unionId;
-    return await ctx.service.users.findByUnionId(unionId);
-  }
-
   async updatePwd(){
     const ctx = this.ctx;
     const password = ctx.request.body.password;
     const newPwd = ctx.request.body.newPwd;
     if(ctx.user){
-      const userObject = await ctx.service.users.find(ctx.user.Id);
+      const userObject = await ctx.service.user.find(ctx.user.Id);
       const app = this.ctx.helper;
       const crypwd = ctx.helper.cryptoPwd(ctx.helper.cryptoPwd(password));
       if(userObject.password != crypwd){
         super.failure(ctx.__('oldPwdError'));
       }
       else{
-        const result = await ctx.service.users.updatePwd(ctx.user.Id, ctx.helper.cryptoPwd(ctx.helper.cryptoPwd(newPwd)));
+        const result = await ctx.service.user.updatePwd(ctx.user.Id, ctx.helper.cryptoPwd(ctx.helper.cryptoPwd(newPwd)));
         if (result){
           super.success(ctx.__('updateSuccessful'));
         }
@@ -158,7 +154,7 @@ class UsersController extends BaseController{
     const mobile = ctx.request.body.mobile;
     const smsCode = ctx.request.body.smsCode;
     const newPwd = ctx.request.body.newPwd;
-    const result = await ctx.service.users.updatePwdWithMobileAndSmsCode(mobile, smsCode, newPwd);
+    const result = await ctx.service.user.updatePwdWithMobileAndSmsCode(mobile, smsCode, newPwd);
     if (result.success){
       super.success(ctx.__('updateSuccessful'));
     }
@@ -167,11 +163,26 @@ class UsersController extends BaseController{
     }
   }
 
+  async updateAcviveByActiveCodeAndEmail(){
+    const ctx = this.ctx;
+    const email = ctx.query.email;
+    const activeCode = ctx.query.activeCode;
+
+    try{
+      await ctx.service.user.updateAcviveByActiveCodeAndEmail(email,activeCode);
+      ctx.redirect('/login');
+    }
+    catch(e){
+      console.log(e);
+      ctx.redirect('/login');
+    }
+  }
+
   async updateUserRole(){
     const ctx = this.ctx;
     const userId = ctx.request.body.userId;
     const operation = ctx.request.body.operation;
-    const result = await ctx.service.users.updateUserRole(userId,operation);
+    const result = await ctx.service.user.updateUserRole(userId,operation);
     if (result){
       super.success(ctx.__('settingSuccessful'));
     }
@@ -191,7 +202,7 @@ class UsersController extends BaseController{
       fullname:fullname
     };
     try{
-      let result = await ctx.service.users.searchByUsername(query);
+      let result = await ctx.service.user.searchByUsername(query);
       super.success(result);
     }
     catch(e){
@@ -211,7 +222,7 @@ class UsersController extends BaseController{
       mobile:mobile
     };
     try{
-      let result = await ctx.service.users.searchByMobile(query);
+      let result = await ctx.service.user.searchByMobile(query);
       super.success(result);
     }
     catch(e){
@@ -230,7 +241,7 @@ class UsersController extends BaseController{
       avatarUrl:avatarUrl
     };
     try{
-      let result = await ctx.service.users.updateUserAvatarUrl(data);
+      let result = await ctx.service.user.updateUserAvatarUrl(data);
       super.success(result);
     }
     catch(e){

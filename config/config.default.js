@@ -90,7 +90,7 @@ module.exports = appInfo => {
   };
 
   config.logger = {
-    dir: 'D:\\node_pinwall_pro_local',
+    dir: 'D:\\node_metis',
     appLogName: `${appInfo.name}-web.log`,
     coreLogName: 'egg-web.log',
     agentLogName: 'egg-agent.log',

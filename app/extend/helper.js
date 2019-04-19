@@ -31,6 +31,14 @@ module.exports = {
   rar_zipPath: 'rar_zip/',
   videoPath: 'video/',
 
+  email_host:'smtp.exmail.qq.com',
+  email_user:'d_seniors2018@cidic.cn',
+  email_pwd:'Yl2018',
+  email_send_address:'d_seniors2018@cidic.cn',
+  email_verify_address:'http://127.0.0.1:7001/website/user/updateAcviveByActiveCodeAndEmail',
+  wx_email_verify_address:'http://127.0.0.1:7001/website/user/updateWxActive',
+  getBackPwd_email_verify_address:'http://127.0.0.1:7001/updatePwd',
+
   signatureUrl(objectPath,thumbName){
     const config = this.aliConfig();
     let client = new OSS({

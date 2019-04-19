@@ -21,5 +21,6 @@ module.exports = app => {
   router.get('/checkCaptcha',controller.website.user.checkCaptcha);
 
   router.post('/website/user/createUser', controller.website.user.createUser);
+  router.get('/website/user/updateAcviveByActiveCodeAndEmail', controller.website.user.updateAcviveByActiveCodeAndEmail);
   router.resources('/website/user',controller.website.user);
 };
