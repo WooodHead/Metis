@@ -28,7 +28,6 @@ class HomeController extends Controller {
       message:ctx.__('usernameOrPwdError')
     });
   }
-
   async roleIndex(){
     const ctx = this.ctx;
     if(ctx.isAuthenticated()){
@@ -65,6 +64,7 @@ class HomeController extends Controller {
     await ctx.render('backend/judgeCOU.html', {
 
     });
+  }
 }
 
 module.exports = HomeController;
