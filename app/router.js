@@ -9,7 +9,7 @@ module.exports = app => {
   router.get('/login', controller.home.login);
   router.get('/register', controller.home.register);
   router.get('/relogin', controller.home.relogin);
-  
+
   router.get('/judgeMgr', controller.home.judgeMgr);
   router.get('/judgeCOU', controller.home.judgeCOU);
 
@@ -24,6 +24,9 @@ module.exports = app => {
 
   router.get('/getCaptcha',controller.website.user.getCaptcha);
   router.get('/checkCaptcha',controller.website.user.checkCaptcha);
+
+  router.get('/getSTSSignature/:fileType', controller.website.alioss.getSTSSignature);
+  router.get('/getUrlSignature', controller.website.alioss.getUrlSignature);
 
   router.post('/website/user/createUser', controller.website.user.createUser);
   router.get('/website/user/updateAcviveByActiveCodeAndEmail', controller.website.user.updateAcviveByActiveCodeAndEmail);
