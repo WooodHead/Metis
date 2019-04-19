@@ -15,7 +15,7 @@ class SmsMessage extends Service {
     let result = false;
 
     if (smsSendResult.Code == 'OK'){
-      await this.ctx.model.SmsMessage.createSmsMessage(smsMessage);
+      await this.ctx.model.SendSMS.createSmsMessage(smsMessage);
       result = true;
     }
     else{
@@ -28,7 +28,7 @@ class SmsMessage extends Service {
   async getDataByCondition(smsMessage) {
     let curDate = new Date();
     let preDate = moment(new Date(curDate.getTime() - 30 * 60 * 1000)).format('YYYY-MM-DD HH:mm:ss');
-    let smsObject = await this.ctx.model.SmsMessage.getDataByCondition(smsMessage);
+    let smsObject = await this.ctx.model.SendSMS.vertifyCode(smsMessage);
 
     if (smsObject){
       if(smsObject.createtime > preDate){
@@ -44,7 +44,7 @@ class SmsMessage extends Service {
   }
 
   async getCountDataByDatetime(syncType, date) {
-    return await this.ctx.model.SmsMessage.getCountDataByDatetime(smsMessage);
+    return await this.ctx.model.SendSMS.getCountDataByDatetime(smsMessage);
   }
 
 }
