@@ -1,0 +1,223 @@
+/*
+ * 澶撮儴
+ *
+ */
+ body,html{
+	margin:0;
+	padding:0;
+}
+@font-face
+{
+    font-family: zyFont;
+    src: url('../../font/metabookce-caps.eot'),
+    url('../../font/metabookce-caps.woff'),
+    url('../../font/metabookce-caps.ttf'); /* IE9 */
+}
+body{
+	/* max-width:1280px; */
+    margin: 0px auto;
+    padding: 0px;
+    font-size: 14px;
+    font-family: "Arail","Microsoft YaHei","Heiti";
+    padding-top:160px;
+    display: flex;
+    min-height: 83vh;
+    flex-direction: column;
+}
+ul{
+    margin: 0px;
+    padding: 0px;
+}
+li{
+    list-style: none;
+    display: inline-block;
+}
+a{
+    text-decoration: none;
+}
+input:focus{
+    outline: none;
+}
+img{
+    width: 100%;
+    height: auto;
+    display: block;
+    border: none;
+}
+.JMHeader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 160px;
+	z-index: 99;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+/*
+  logo鍥剧墖璁剧疆
+
+ */
+.JMHeader .JMLogo {
+	text-align: center;
+	width: auto;
+	height: 160px;
+	max-width: 50%;
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	left:0;
+}
+
+.JMHeader .JMLogo img {
+	max-height: 100%;
+	max-width: 100%;
+}
+/*鎶ュ悕鏃堕棿*/
+.JMHeader .JMNoticeBoard {
+	border: 2px solid #47a8a9;
+	background-color: #47a8a9;
+	width: 240px;
+	height: 60px;
+	position: absolute;
+	top: 30px;
+    right: 30px;
+	    /* display: none; */
+}
+.JMHeader .JMNoticeBoard .JMNoticeBoardLeft {
+	color: #47a8a9;
+	font-size: 12px;
+	margin: auto;
+	text-align: center;
+	width: 50%;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%)
+}
+.JMHeader .JMNoticeBoard .JMNoticeBoardLeft a {
+	display: inline-block;
+	width: 100%;
+	color: #fff;
+	line-height: 60px;
+	height: 60px;
+	font-size: 18px;
+}
+.JMHeader .JMNoticeBoard .JMNoticeBoardRight {
+	color: #e9608d;
+	background: #fff;
+	font-size: 12px;
+	text-align: center;
+	width: 50%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.JMHeader .JMNoticeBoard .JMNoticeBoardRight .JMItem {
+	font-weight: bold;
+	color: #515151;
+	margin: 0;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.JMHeader .JMNoticeBoard .JMNoticeBoardRight .countDown {
+	color: #47a8a9;
+	font-size: 36px;
+	display: block;
+	line-height: 1em;
+}
+/*li閫夐」*/
+.JMHeader .JMTopNav{
+  	width: 40%;
+    height: 50px;
+    position: absolute;
+    right:0;
+    bottom:0;
+    display: flex;
+}
+.JMMenu{
+    height: 100%;
+    font-size: 14px;
+    /* margin-right:20px; */
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.JMMenu .JMItem{
+  width: 15%;
+	list-style: none;
+	display: inline-block;
+}
+.JMMenu .JMItem .JMLink {
+	font-size: 14px;
+	display: block;
+	width: 100%;
+	text-align: center;
+	line-height: 50px;
+	cursor: pointer;
+	color: #6d6d6d;
+	position: relative;
+	/*     left: 160px; */
+}
+.JMMenu .JMItem .JMLink::before {
+	content: "";
+	width: 100%;
+	height: 0;
+	/* 閫夐」涓嬫柟棰滆壊閰嶇疆 */
+	background: #47a8a9;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	transition: all 0.2s ease-out;
+}
+/*li涓嬮潰鐨勫脊鍑烘晥鏋�*/
+.JMMenu .JMItem .JMLink:hover::before,
+.JMMenu .JMItem .JMLink.JMActive::before {
+	color: #fff;
+	/* 涓庝笂鏂归厤缃竴鏍� */
+	background: #47a8a9;
+	height: 5px;
+}
+/*	鐧婚檰閮ㄥ垎	*/
+.JMUserMenu {
+	display: inline-block;
+	height: 100%;
+	line-height: 50px;
+}
+.JMUserMenu .JMItem {
+	margin-right: 10px;
+	vertical-align: middle;
+}
+.JMUserMenu .JMItem .JMLink {
+	cursor: pointer;
+	line-height: 50px;
+	vertical-align: middle;
+	display: block;
+	color: #6d6d6d;
+	padding: 0px 0px 0px 10px;
+}
+/* [ gansiqu ] 鏍峰紡*/
+.JM20C7BE {
+	color: #6d6d6d!important;
+}
+/*鐧婚檰鎸夐挳鏍峰紡*/
+.JMUserMenu .JMItem .JMLink.JMIconUser {
+	width: 23px;
+	height: 30px;
+	background-size: 60%;
+}
+.JMIconUser {
+	background-image:url(../../../images/app/iconUser.png);
+	background-position:center center;
+	background-repeat: no-repeat;
+}
+.JMFooter {
+	height:80px;
+	background: #363636;
+	color: #fff;
+	text-align: center;
+}
