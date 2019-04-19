@@ -1,8 +1,3 @@
-var login = (function (config) {
-    return {
-
-    }
-})(config);
 function getBrowserInfo(){
     var ua = navigator.userAgent.toLocaleLowerCase();
     var browserType=null;
@@ -22,32 +17,29 @@ function getBrowserInfo(){
         }
     }
 }
+
+function check(form) {
+    var mobileExp = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
+    var emailExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    if (!mobileExp.test(form.username.value) && !emailExp.test(form.username.value)) {
+        index.$Notice.error({
+            title: "请输入正确的手机或邮箱格式！",
+            duration: 2
+        });
+        form.username.focus();
+        return false
+    }
+    if (form.password.value.length < 6) {
+        index.$Notice.error({
+            title: "密码位数至少6位！",
+            duration: 2
+        });
+        form.password.focus();
+        return false
+    }
+    return true;
+}
+
 $(document).ready(function () {
 	getBrowserInfo();
-    $("#myForm").validate({
-        rules: {
-            username: {
-                required: true,
-                maxlength: 30
-            },
-            password: {
-                required: true,
-                rangelength: [6, 120]
-            }
-        },
-        messages: {
-            username: {
-                required: config.validErrors.required,
-                email: config.validErrors.email,
-                maxlength: config.validErrors.maxLength.replace("${max}", 30)
-            },
-            password: {
-                required: config.validErrors.required,
-                rangelength: config.validErrors.rangLength.replace("${min}", 6).replace("${max}", 20)
-            }
-        },
-        submitHandler: function (form) {
-            form.submit();
-        }
-    });
 });
