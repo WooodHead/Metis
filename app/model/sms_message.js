@@ -5,7 +5,7 @@ module.exports = app => {
 
   const { INTEGER, STRING, DATE } = app.Sequelize;
 
-  const SendSMS = app.model.define('send_message', {
+  const SendSMS = app.model.define('sms_message', {
     Id: {
       type: INTEGER(11),
       allowNull: false,
@@ -29,7 +29,7 @@ module.exports = app => {
       }
     },
   }, {
-    tableName: 'send_message'
+    tableName: 'sms_message'
   });
 
   SendSMS.createSmsMessage = async function(sms){
