@@ -43,8 +43,8 @@
 	        <form-item label="确认密码" prop="confirmPassword">
 	            <i-input type="password" v-model="formItem.confirmPassword" @on-blur="conPwdBlur" placeholder="请重新输入密码"></i-input>
 	        </form-item>
-	        <form-item label="图片验证码" prop="activecode">
-	            <i-input type="text" v-model="formItem.activecode" style="width:200px;margin-top:-35px;" @on-change="checkCaptcha" placeholder="请输入图片验证码"></i-input>
+	        <form-item label="图片验证码" prop="captchaText">
+	            <i-input type="text" v-model="formItem.captchaText" style="width:200px;margin-top:-35px;" @on-change="checkCaptcha" placeholder="请输入图片验证码"></i-input>
 				<object style="width: 160px;height:40px;cursor:pointer;" v-on:click="tapClick"></object>
 	        </form-item>
 	        <form-item>

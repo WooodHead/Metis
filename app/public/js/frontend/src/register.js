@@ -14,7 +14,7 @@ var register = new Vue({
 				mobileCode: '',		//手机验证码
 				address: '',		//地址
 				password: '',		//密码
-				activecode: ''		//图片验证码
+				captchaText: ''		//图片验证码
             },
             ruleValidate:{
             	email:[
@@ -38,7 +38,7 @@ var register = new Vue({
             	    {required: true, message: '请输入密码', trigger: 'blur'},
               	    {min:6, message: '密码至少为6位', trigger: 'blur'}
             	],
-            	activecode:{required: true, message: '验证码不能为空', trigger: 'blur'}
+            	captchaText:{required: true, message: '验证码不能为空', trigger: 'blur'}
             },
             registerStyle:{
             	width:"40%",
@@ -139,7 +139,7 @@ var register = new Vue({
                 $.ajax({
                     url: config.ajaxUrls.checkCaptcha,
                     type: 'GET',
-                    data:{captchaText:this.formItem.activecode},
+                    data:{captchaText:this.formItem.captchaText},
                     success(res){
 						console.log(res);
                         if (res.status == 200){
