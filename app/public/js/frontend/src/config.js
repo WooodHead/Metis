@@ -72,7 +72,8 @@ var config = {
         sendMobileCode:"/website/sms/sendMessage?mobile=",
         vertifyCode:"/website/sms/vertifySms",
         getCaptcha:"/getCaptcha",
-        checkCaptcha:"/checkCaptcha"
+        checkCaptcha:"/checkCaptcha",
+        createUser:"/website/user/createUser"
 
     },
     viewUrls: {

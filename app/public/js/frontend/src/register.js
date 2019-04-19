@@ -1,12 +1,11 @@
 var register = new Vue({
 	el:".register",
-	data:function(){
+	data(){
 		return{
 			showMobileCode:true,	//手机验证码显示参数
 			disableBtn:false,		//获取验证码禁止
 			disableSbt:true,		//提交按钮禁止
 			mobileCodeText:"点击获取验证码",
-			imgSrc:"user/getCode",	//图片验证码路径
 			formItem: {
 				mobileOrEmail:"1",
 				email: '',			//邮箱
@@ -49,7 +48,7 @@ var register = new Vue({
             }
 		}
 	},
-    methods: {
+    methods:{
     	//验证方式选择
     	radioChange(value){
     		if(value == "0"){				//  email
@@ -104,10 +103,10 @@ var register = new Vue({
 	                success:function(res){
 						console.log(res);
 	                    if(res.success){
-	                    	that.$Notice.success({title:res.message, duration:3});
+	                    	that.$Notice.success({title:res.data, duration:3});
 	                    	that.disableSbt = false;
 	                    }else{
-	                    	that.$Notice.error({title:res.message, duration:3});
+	                    	that.$Notice.error({title:res.data, duration:3});
 	                    }
 	                },
 	                error:function(){
@@ -123,7 +122,7 @@ var register = new Vue({
     		}
     	},
     	//刷新图片验证码内容
-    	tapClick () {
+    	tapClick(eve){
 			let that = this;
             $.ajax({
                 url: config.ajaxUrls.getCaptcha,
@@ -140,8 +139,9 @@ var register = new Vue({
                 $.ajax({
                     url: config.ajaxUrls.checkCaptcha,
                     type: 'GET',
-                    data:{captchaText:this.formItem.captchaText},
+                    data:{captchaText:this.formItem.activecode},
                     success(res){
+						console.log(res);
                         if (res.status == 200){
                             that.$Notice.success({title:res.data});
                             that.captchaBol = true;
@@ -158,8 +158,9 @@ var register = new Vue({
         	this.$Loading.start();
         	this.$refs[name].validate((valid) => {
                 if (valid) {
+					console.log(this.formItem);
                 	var that = this,
-            		dataUrl = config.ajaxUrls.register;
+            		dataUrl = config.ajaxUrls.createUser;
 	            	$.ajax({
 	                    url:dataUrl,
 	                    type:"POST",
@@ -167,11 +168,12 @@ var register = new Vue({
 	                    contentType :"application/json; charset=UTF-8",
 	                    data:JSON.stringify(this.formItem),
 	                    success:function(res){
+							console.log("-----",res);
 	                        if(res.success){
 	                            that.$Notice.success({ title: config.messages.optSuccRedirect,duration:3,
 	                            	onClose:function(){
 	                            		that.$Loading.finish();
-	                                	window.location.href=config.viewUrls.login;
+	                                	// window.location.href = config.viewUrls.login;
 	                                }
 	                            });
 	                        }else{
