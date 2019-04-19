@@ -1,0 +1,12 @@
+[ v-cloak]{
+	display:none;
+}
+
+.zyActiveCode{
+	display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+    width: auto;
+    cursor:pointer;
+    margin-left:40px;
+}
