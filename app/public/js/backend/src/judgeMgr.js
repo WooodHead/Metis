@@ -87,7 +87,6 @@ var Component = new Vue({
     	change :function(index) {
     		var id = this.dataList[index].Id;
     		window.location.href = config.viewUrls.judgeUpdate.replace(":id",id);
-			// console.log(config.viewUrls.judgeUpdate.replace(":id",id));
         },
         remove :function(index) {
         	this.judgeTitle = this.dataList[index].name;

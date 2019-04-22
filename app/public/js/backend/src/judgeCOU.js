@@ -33,24 +33,23 @@ var judgeCOU = new Vue({
     },
     created:function(){
     	this.dataSourse.id = window.location.href.split("judgeCOU/")[1];
-    	if(this.dataSourse.id){
+    	if(this.dataSourse.id > 0){
     		var that = this;
-    		var url = config.ajaxUrls.judgeDetail.replace(":id",this.dataSourse.id);
     		$.ajax({
-                dataType:"json",
                 type:"get",
-                url:url,
+                url:config.ajaxUrls.judgeDetail,
                 data:{id:that.dataSourse.id},
                 success:function(response){
-                    if(response.success){
-                    	that.imgUrl = response.object.headicon;
-            	  		that.fileName = response.object.headicon;
+					console.log("---------",response);
+                    if(response.status == 200){
+                    	that.imgUrl = response.data.rows[0].headicon;
+            	  		that.fileName = response.data.rows[0].headicon.split("?")[0].split("judges/")[1];
             	  		that.progressPercent = 100;
 
-                    	that.dataSourse.name = response.object.name;
-                    	that.dataSourse.email = response.object.email;
-                    	that.dataSourse.sub_title = response.object.sub_title;
-                    	that.dataSourse.description = response.object.description;
+                    	that.dataSourse.name =response.data.rows[0].name;
+                    	that.dataSourse.email = response.data.rows[0].email;
+                    	that.dataSourse.sub_title = response.data.rows[0].sub_title;
+                    	that.dataSourse.description = response.data.rows[0].description;
                     	that.submitUrl = config.ajaxUrls.judgeUpdate;
                     }else{
 	            		that.$Notice.error({title:response.message});
@@ -122,33 +121,61 @@ var judgeCOU = new Vue({
     	},
     	submit: function(){
     		this.dataSourse.headicon = this.fileName;
-			console.log(this.dataSourse);
     		var that = this;
-    		$.ajax({
-    	        url:that.submitUrl,
-    	        type:"post",
-    	        dataType:"json",
-    	        contentType :"application/json; charset=UTF-8",
-    	        data:JSON.stringify(that.dataSourse),
-    	        success:function(response){
-    	            if(response.success){
+			if(this.dataSourse.id > 0){
+				console.log('修改');
+				$.ajax({
+	    	        url:that.submitUrl + '/' + this.dataSourse.id,
+	    	        type:"put",
+	    	        dataType:"json",
+	    	        contentType :"application/json; charset=UTF-8",
+	    	        data:JSON.stringify(that.dataSourse),
+	    	        success:function(response){
 						console.log(response);
-    	                if(that.redirectUrl){
-    	                	that.$Notice.success({title:response.data});
-    	                    setTimeout(function(){
-        	                    window.location.href=that.redirectUrl;
-    	                    },3000);
-    	                }else{
-    	                	that.$Notice.warning({title:response.data});
-    	                }
-    	            }else{
-    	            	that.$Notice.error({title:response.data});
-    	            }
-    	        },
-    	        error:function(){
-    	        	that.$Notice.error({title:config.messages.networkError});
-    	        }
-    	    });
+	    	            // if(response.status == 200){
+	    	            //     if(that.redirectUrl){
+	    	            //     	that.$Notice.success({title:response.data});
+	    	            //         setTimeout(function(){
+	        	        //             window.location.href = that.redirectUrl;
+	    	            //         },3000);
+	    	            //     }else{
+	    	            //     	that.$Notice.warning({title:response.data});
+	    	            //     }
+	    	            // }else{
+	    	            // 	that.$Notice.error({title:response.data});
+	    	            // }
+	    	        },
+	    	        error:function(){
+	    	        	that.$Notice.error({title:config.messages.networkError});
+	    	        }
+	    	    });
+			}else{
+				console.log('新建');
+				$.ajax({
+	    	        url:that.submitUrl,
+	    	        type:"post",
+	    	        dataType:"json",
+	    	        contentType :"application/json; charset=UTF-8",
+	    	        data:JSON.stringify(that.dataSourse),
+	    	        success:function(response){
+	    	            if(response.status == 200){
+	    	                if(that.redirectUrl){
+	    	                	that.$Notice.success({title:response.data});
+	    	                    setTimeout(function(){
+	        	                    window.location.href = that.redirectUrl;
+	    	                    },3000);
+	    	                }else{
+	    	                	that.$Notice.warning({title:response.data});
+	    	                }
+	    	            }else{
+	    	            	that.$Notice.error({title:response.data});
+	    	            }
+	    	        },
+	    	        error:function(){
+	    	        	that.$Notice.error({title:config.messages.networkError});
+	    	        }
+	    	    });
+			}
     	}
     }
 })

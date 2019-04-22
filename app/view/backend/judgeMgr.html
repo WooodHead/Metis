@@ -34,7 +34,7 @@
 		            <span style="font-size: 15px;">确定删除评委:{{judgeTitle}}？</span>
 		        </p>
 		    </modal>
-			<a class="btn btn-primary" href="/judgeCOU"> <span class="glyphicon glyphicon-plus"></span>新建</a>
+			<a class="btn btn-primary" href="/judgeCOU/0"> <span class="glyphicon glyphicon-plus"></span>新建</a>
 			<i-table :columns="columns" :data="dataList" style="margin-top:20px;"></i-table>
 			<page v-model="totalPage" :current="1" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page>
 		</div>
