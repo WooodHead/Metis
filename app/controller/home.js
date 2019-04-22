@@ -65,6 +65,13 @@ class HomeController extends Controller {
 
     });
   }
+
+  async updateJudge(){
+    const ctx = this.ctx;
+    await ctx.render('backend/judgeCOU.html', {
+
+    });
+  }  
 }
 
 module.exports = HomeController;
