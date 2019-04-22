@@ -28,6 +28,16 @@ module.exports = app => {
     tableName: 'round_judge'
   });
 
+  RoundJudge.list = async function({ offset = 0, limit = 10}){
+    let condition = {
+      offset,
+      limit,
+      order: [ [ 'Id', 'desc' ]],
+    };
+
+    return this.findAndCountAll(condition);
+  }
+
   RoundJudge.createRoundJudge = async function(roundJudge){
     return this.create(roundJudge);
   }

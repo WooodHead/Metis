@@ -33,4 +33,5 @@ module.exports = app => {
 
   router.resources('/website/user',controller.website.user);
   router.resources('/website/judge',controller.website.judge);
+  router.resources('/website/roundJudge',controller.website.roundJudge);
 };
