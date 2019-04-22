@@ -132,18 +132,18 @@ var judgeCOU = new Vue({
 	    	        data:JSON.stringify(that.dataSourse),
 	    	        success:function(response){
 						console.log(response);
-	    	            // if(response.status == 200){
-	    	            //     if(that.redirectUrl){
-	    	            //     	that.$Notice.success({title:response.data});
-	    	            //         setTimeout(function(){
-	        	        //             window.location.href = that.redirectUrl;
-	    	            //         },3000);
-	    	            //     }else{
-	    	            //     	that.$Notice.warning({title:response.data});
-	    	            //     }
-	    	            // }else{
-	    	            // 	that.$Notice.error({title:response.data});
-	    	            // }
+	    	            if(response.status == 200){
+	    	                if(that.redirectUrl){
+	    	                	that.$Notice.success({title:response.data});
+	    	                    setTimeout(function(){
+	        	                    window.location.href = that.redirectUrl;
+	    	                    },3000);
+	    	                }else{
+	    	                	that.$Notice.warning({title:response.data});
+	    	                }
+	    	            }else{
+	    	            	that.$Notice.error({title:response.data});
+	    	            }
 	    	        },
 	    	        error:function(){
 	    	        	that.$Notice.error({title:config.messages.networkError});
