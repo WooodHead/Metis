@@ -66,12 +66,12 @@ class HomeController extends Controller {
     });
   }
 
-  async updateJudge(){
+  async judgeRoundCOU(){
     const ctx = this.ctx;
-    await ctx.render('backend/judgeCOU.html', {
+    await ctx.render('backend/judgeRoundCOU.html', {
 
     });
-  }  
+  }
 }
 
 module.exports = HomeController;

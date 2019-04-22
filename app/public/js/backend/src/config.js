@@ -51,13 +51,15 @@ var config={
         workSetStatus:"production/updateProductionStatus",
         workSetRound:"review/bindProductAndRound",
         workComputeScore:"production/updateProductionScore",
+
         judgeGetByPage:"/website/judge",
-        judgeRemove:"judge/deleteJudge/:id",
+        judgeRemove:"/website/judge/:id",
         judgeCreate:"/website/judge",
         judgeUpdate:"/website/judge",
         judgeDetail:"/website/judge",
-        judgeRoundDetail:"roundJudge/getRoundJudgeById",
-        judgeRoundCreate:"roundJudge/createRoundJudge",
+
+        judgeRoundDetail:"/website/roundJudge/:id",
+        judgeRoundCreate:"/website/roundJudge",
         judgeRoundUpdate:"roundJudge/updateRoundJudge",
         judgeRoundRemove:"roundJudge/deleteRoundJudge/:id",
         judgeRoundGetByPage:"roundJudge/getRoundJudgeByPage",

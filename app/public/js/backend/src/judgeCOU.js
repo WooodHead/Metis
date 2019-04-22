@@ -37,19 +37,18 @@ var judgeCOU = new Vue({
     		var that = this;
     		$.ajax({
                 type:"get",
-                url:config.ajaxUrls.judgeDetail,
-                data:{id:that.dataSourse.id},
+                url:config.ajaxUrls.judgeDetail + '/' + that.dataSourse.id,
                 success:function(response){
 					console.log("---------",response);
                     if(response.status == 200){
-                    	that.imgUrl = response.data.rows[0].headicon;
-            	  		that.fileName = response.data.rows[0].headicon.split("?")[0].split("judges/")[1];
+                    	that.imgUrl = response.data.headicon;
+            	  		that.fileName = response.data.headicon.split("?")[0].split("judges/")[1];
             	  		that.progressPercent = 100;
-
-                    	that.dataSourse.name =response.data.rows[0].name;
-                    	that.dataSourse.email = response.data.rows[0].email;
-                    	that.dataSourse.sub_title = response.data.rows[0].sub_title;
-                    	that.dataSourse.description = response.data.rows[0].description;
+						that.dataSourse.language = response.data.language.toString();
+                    	that.dataSourse.name =response.data.name;
+                    	that.dataSourse.email = response.data.email;
+                    	that.dataSourse.sub_title = response.data.sub_title;
+                    	that.dataSourse.description = response.data.description;
                     	that.submitUrl = config.ajaxUrls.judgeUpdate;
                     }else{
 	            		that.$Notice.error({title:response.message});

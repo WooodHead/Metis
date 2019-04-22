@@ -12,6 +12,7 @@ module.exports = app => {
 
   router.get('/judgeMgr', controller.home.judgeMgr);
   router.get('/judgeCOU/:id', controller.home.judgeCOU);
+  router.get('/judgeRoundCOU/:id', controller.home.judgeRoundCOU);
 
   router.get('/roleIndex', controller.home.roleIndex);
 
