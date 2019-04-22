@@ -43,14 +43,14 @@ class AliOSSController extends BaseController {
             "oss:PutObject"
             ],
             "Resource": [
-            "acs:oss:*:*:pinwall-pro",
-            "acs:oss:*:*:pinwall-pro/*"
+            "acs:oss:*:*:dc-metis",
+            "acs:oss:*:*:dc-metis/*"
             ]
         }
       ]
   };
 
-    let roleSessionName = 'jianma-001';
+    let roleSessionName = 'cidic-oss-role';
 
     const client = new STS({
       accessKeyId: aliConfigObj.AccessKeyId,
