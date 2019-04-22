@@ -47,7 +47,7 @@ module.exports = app => {
     if (!roundJudge) {
       throw new Error('roundJudge not found');
     }
-    return review.update(roundJudge);
+    return roundJudge.update(updates);
   }
 
   RoundJudge.deleteRoundJudge = async function(id){
