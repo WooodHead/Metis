@@ -24,16 +24,14 @@ var judgeCOU = new Vue({
         progressPercent:0,
 //      需要的数据
         dataSourse:{
+			language:"0",	//语言： 0 中文
         	headicon: "",
         	id:"",
         	name:"",
-        	enName:"",	//英文名
         	email:"",
         	password:"",
         	subTitle:"",
-        	enSubTitle:"",
         	description:"",
-        	enDescription:"",
         },
         ruleDataSourse:{
         	email: [{ required: true,type:"email",message: '请输入正确格式的邮箱', trigger: 'blur' }],
@@ -60,13 +58,10 @@ var judgeCOU = new Vue({
             	  		that.progressPercent = 100;
 
                     	that.dataSourse.name = response.object.name;
-                    	that.dataSourse.enName = response.object.enName;
                     	that.dataSourse.email = response.object.email;
                     	that.dataSourse.password = response.object.password;
                     	that.dataSourse.subTitle = response.object.subTitle;
-                    	that.dataSourse.enSubTitle = response.object.enSubTitle;
                     	that.dataSourse.description = response.object.description;
-                    	that.dataSourse.enDescription = response.object.enDescription;
                     	that.submitUrl = config.ajaxUrls.judgeUpdate;
                     }else{
 	            		that.$Notice.error({title:response.message});
@@ -81,46 +76,50 @@ var judgeCOU = new Vue({
     	}
     },
     methods:{
+		radioChange:function(value){
+            if(value == "0"){				//  zh
+                this.dataSourse.language = "0";
+    		}else if(value == "1"){			//  en
+                this.dataSourse.language = "1";
+    		}
+        },
     	doUpload:function(files){
-    		/*
-        	urllib.request(appServer, {
-          		method: 'GET'
-        	}).then(function (result) {
-        	  	var creds = JSON.parse(result.data);
-        	  	if(creds.success == "true"){
-        	  		var client = initClient(creds);
-        	  		multipartUpload(client, files, that, progress);
-        	  	}
-          	});
-			*/
-
 			let that = this;
             let file = files.target.files[0];
             let fileName = calculate_object_name(files.target.files[0].name);
             this.$Notice.success({title:'上传中···'});
             $.ajax({
-                url: config.ajaxUrls.getSTSSignature.replace(':fileType','3'),
+                url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.judgesPath),
                 type: 'GET',
                 success:function(res){
                     if (res.res.status == 200) {
                         let client = new OSS({
-													region:'oss-cn-shanghai',
+							region:config.uploader.aLiYun.region,
                       		accessKeyId: res.credentials.AccessKeyId,
                       		accessKeySecret: res.credentials.AccessKeySecret,
                       		stsToken: res.credentials.SecurityToken,
-                          bucket:bucket
+                          	bucket:bucket
                     	});
-                        client.multipartUpload('judges/'+ fileName, file).then(function (res) {
+                        client.multipartUpload('judges/'+ fileName, file, {
+                    		progress: progress
+                    	}).then(function (res) {
                             let objectPath = 'judges/' + fileName;
-													$.ajax({
+							$.ajax({
                                 url: config.ajaxUrls.getUrlSignature,
                                 type: 'GET',
                                 data:{objectPath:objectPath},
                                 success:function(res){
-									console.log("=========",res);
-                                    that.$Notice.success({title:'上传成功！'});
-									that.imgUrl = res;
-									that.fileName = fileName;
+									let img = new Image();
+									img.src = res;
+									img.onload = function(){
+										if(img.width == img.height){
+											that.$Notice.success({title:'上传成功！'});
+											that.imgUrl = res;
+											that.fileName = fileName;
+										}else{
+											that.$Notice.error({title:"图片不符合尺寸要求，请重新上传……"});
+										}
+									}
                                 }
                             })
                     	});
@@ -133,67 +132,37 @@ var judgeCOU = new Vue({
             })
     	},
     	submit: function(){
+    		this.dataSourse.headicon = this.fileName;
 			console.log(this.dataSourse);
-    		// var img = new Image();
-    		// img.src = this.imgUrl;
-    		// this.dataSourse.headicon = this.fileName;
-    		// if(img.width  == img.height){
-        	// 	var that = this;
-        	// 	$.ajax({
-        	//         url:that.submitUrl,
-        	//         type:"post",
-        	//         dataType:"json",
-        	//         contentType :"application/json; charset=UTF-8",
-        	//         data:JSON.stringify(that.dataSourse),
-        	//         success:function(response){
-        	//             if(response.success){
-        	//                 if(that.redirectUrl){
-        	//                 	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
-        	//                     setTimeout(function(){
-            // 	                    window.location.href=that.redirectUrl;
-        	//                     },3000);
-        	//                 }else{
-        	//                 	that.$Notice.warning({title:that.successMessage?that.successMessage:config.messages.optSuccess});
-        	//                 }
-        	//             }else{
-        	//             	that.$Notice.error({title:response.message});
-        	//             }
-        	//         },
-        	//         error:function(){
-        	//         	that.$Notice.error({title:config.messages.networkError});
-        	//         }
-        	//     });
-    		// }else{
-            // 	that.$Notice.error({title:"封面图尺寸有误！"});
-    		// }
+    		var that = this;
+    		$.ajax({
+    	        url:that.submitUrl,
+    	        type:"post",
+    	        dataType:"json",
+    	        contentType :"application/json; charset=UTF-8",
+    	        data:JSON.stringify(that.dataSourse),
+    	        success:function(response){
+    	            if(response.success){
+						console.log(response);
+    	                // if(that.redirectUrl){
+    	                // 	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
+    	                //     setTimeout(function(){
+        	            //         window.location.href=that.redirectUrl;
+    	                //     },3000);
+    	                // }else{
+    	                // 	that.$Notice.warning({title:that.successMessage?that.successMessage:config.messages.optSuccess});
+    	                // }
+    	            }else{
+    	            	that.$Notice.error({title:response.message});
+    	            }
+    	        },
+    	        error:function(){
+    	        	that.$Notice.error({title:config.messages.networkError});
+    	        }
+    	    });
     	}
     }
 })
-
-
-function initClient(creds){
-	var client = new OSS({
-		region: region,
-  		accessKeyId: creds.accessKeyId,
-  		accessKeySecret: creds.accessKeySecret,
-  		stsToken: creds.securityToken,
-  		bucket: bucket
-	});
-	return client;
-}
-
-function multipartUpload(client, files, that, progress){
-	var file = files.target.files[0];
-	var fileName = files.target.files[0].name;
-    var newFilename =  calculate_object_name(fileName);
-	client.multipartUpload('judges/'+ newFilename, file,{
-		progress: progress
-	}).then(function (res) {
-		var res = client.signatureUrl('judges/' + newFilename);
-		that.imgUrl = res;
-		that.fileName = newFilename;
-	});
-}
 var progress = function (p) {
 	return function (done) {
 		judgeCOU.progressPercent = p * 100;
@@ -226,7 +195,7 @@ function get_suffix(filename) {
 function calculate_object_name(filename) {
 
 	let suffix = get_suffix(filename);
-	let g_object_name = random_string(20) + suffix;
+	let g_object_name = random_string(10) + suffix;
 
     return g_object_name;
 }
