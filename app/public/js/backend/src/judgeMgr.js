@@ -1,22 +1,12 @@
-'use strict';
-
-var appServer = 'http://localhost:8080/dcpro/sigUploadKey/1';
-var bucket = 'dc-sys-pro';
-var region = 'oss-cn-hangzhou';
-
-var urllib = OSS.urllib;
-var Buffer = OSS.Buffer;
-var OSS = OSS.Wrapper;
-var STS = OSS.STS;
-
 var Component = new Vue({
 	el:".judgeMgr",
 	data :function() {
         return {
-        	aoData1:{offset: 0,limit: 10},
+        	aoData1:{offset: 0,limit: 10, language:0},
         	columns: [
-        	   { title: 'ID',key: 'Id', align: 'center'},
-               { title: '头像',key: 'headicon', align: 'center',
+				{ title: 'ID',key: 'Id', align: 'center'},
+        	    { title: '语言',key: 'language', align: 'center'},
+                { title: '头像',key: 'headicon', align: 'center',
             	   render: (h, params) => {
                        return h('img', {
                     	   	domProps: {
@@ -69,8 +59,7 @@ var Component = new Vue({
            totalPage:"",
            deleteModal:false,
            index:"",
-           judgeTitle:"",
-           judgeHeadIconArr:[]
+           judgeTitle:""
         }
     },
     created:function(){
@@ -81,6 +70,7 @@ var Component = new Vue({
     	pageChange:function(changPage){
     		this.aoData1.offset = (changPage-1)*10;
     		this.dataList = [];
+            this.productImgArr = [];
     		var that = this;
     		getPageData(this);
     	},
@@ -94,18 +84,19 @@ var Component = new Vue({
         	this.deleteModal = true;
         },
         ok :function() {
-        	var id = this.dataList[this.index].id;
+        	var id = this.dataList[this.index].Id;
         	var that = this;
         	$.ajax({
                 "dataType":'json',
-                "type":"post",
+                "type":"delete",
                 "url":config.ajaxUrls.judgeRemove.replace(":id",id),
                 "success": function (response) {
-                    if(response.success===false){
-                    	that.$Notice.error({title:response.message});
-                    }else{
+                    if(response.status == 200){
+						console.log(response);
                     	that.$Notice.success({title:config.messages.optSuccess});
                     	getPageData(that);
+                    }else{
+						that.$Notice.error({title:response.message});
                     }
                 }
             });
@@ -120,16 +111,15 @@ function getPageData(that){
         "data":that.aoData1,
         "success": function (response) {
 			console.log(response);
-            if(response.status===false){
-            	that.$Notice.error({title:response.message});
+            if(response.status == 200){
+				for(var j = 0;j<response.data.rows.length;j++){
+					that.productImgArr[j] = response.data.rows[j].headicon;
+				}
+
+				that.dataList = response.data.rows;
+				that.totalPage = response.data.count;
             }else{
-    	  		for(var j = 0;j<response.data.rows.length;j++){
-        	  		that.productImgArr[j] = response.data.rows[j].headicon;
-    	  		}
-
-    	  		that.dataList = response.data.rows;
-            	that.totalPage = response.data.count;
-
+				that.$Notice.error({title:response.message});
             }
         }
     });

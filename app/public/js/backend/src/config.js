@@ -52,7 +52,7 @@ var config={
         workSetRound:"review/bindProductAndRound",
         workComputeScore:"production/updateProductionScore",
         judgeGetByPage:"/website/judge",
-        judgeRemove:"judge/deleteJudge/:id",
+        judgeRemove:"/website/judge/:id",
         judgeCreate:"/website/judge",
         judgeUpdate:"/website/judge",
         judgeDetail:"/website/judge",
