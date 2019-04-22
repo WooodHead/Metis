@@ -5,7 +5,12 @@ const Service = require('egg').Service;
 class NewsService extends Service {
 
   async listNews({ offset = 0, limit = 10, language = 0 }){
-    return await this.ctx.mode.News.listNews({offset,limit,language});
+    let resultObj = await this.ctx.mode.News.listNews({offset,limit,language});
+    const helper = this.ctx.helper;
+    resultObj.rows.forEach((element, index)=>{
+      element.thumb = helper.signatureUrl(helper.newsPath + element.thumb, "thumb_300_300");
+    });
+    return resultObj;
   }
 
   async getTopNews({ limit = 10, language = 0 }){
@@ -25,7 +30,10 @@ class NewsService extends Service {
   }
 
   async getNewsById(id){
-    return await this.ctx.mode.News.getNewsById(id);
+    const helper = this.ctx.helper;
+    let resultObj = await this.ctx.mode.News.getNewsById(id);
+    resultObj.thumb = helper.signatureUrl(helper.newsPath + resultObj.thumb);
+    return resultObj;
   }
 }
 

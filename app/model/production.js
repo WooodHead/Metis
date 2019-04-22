@@ -125,13 +125,13 @@ module.exports = app => {
     return production.destroy();
   }
 
-  Production.listProductionByUserId = async function ({offset = 0, limit = 10, groupNum = 0, subGroupNum = 0, userId = 0}){
+  Production.listProduction = async function ({offset = 0, limit = 10, groupNum = 0, subGroupNum = 0}){
     let condition = {
       offset,
       limit,
       order: [[ 'createAt', 'desc' ], [ 'Id', 'desc' ]],
       where:{
-        userId:userId
+
       }
     };
 
@@ -145,6 +145,19 @@ module.exports = app => {
       condition.where.groupNum = groupNum;
       condition.where.subGroupNum = subGroupNum;
     }
+
+    return this.findAndCountAll(condition);
+  }
+
+  Production.listProductionByUserId = async function ({offset = 0, limit = 10, userId = 0}){
+    let condition = {
+      offset,
+      limit,
+      order: [[ 'createAt', 'desc' ], [ 'Id', 'desc' ]],
+      where:{
+        userId:userId
+      }
+    };
 
     return this.findAndCountAll(condition);
   }
