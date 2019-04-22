@@ -30,5 +30,7 @@ module.exports = app => {
 
   router.post('/website/user/createUser', controller.website.user.createUser);
   router.get('/website/user/updateAcviveByActiveCodeAndEmail', controller.website.user.updateAcviveByActiveCodeAndEmail);
+
   router.resources('/website/user',controller.website.user);
+  router.resources('/website/judge',controller.website.judge);
 };
