@@ -37,9 +37,8 @@ var judgeCOU = new Vue({
     		var that = this;
     		$.ajax({
                 type:"get",
-                url:config.ajaxUrls.judgeDetail + '/' + that.dataSourse.id,
+                url:config.ajaxUrls.judgeDetail.replace(":id",this.dataSourse.id),
                 success:function(response){
-					console.log("---------",response);
                     if(response.status == 200){
                     	that.imgUrl = response.data.headicon;
             	  		that.fileName = response.data.headicon.split("?")[0].split("judges/")[1];
@@ -122,15 +121,13 @@ var judgeCOU = new Vue({
     		this.dataSourse.headicon = this.fileName;
     		var that = this;
 			if(this.dataSourse.id > 0){
-				console.log('修改');
 				$.ajax({
-	    	        url:that.submitUrl + '/' + this.dataSourse.id,
+	    	        url:that.submitUrl.replace(":id",this.dataSourse.id),
 	    	        type:"put",
 	    	        dataType:"json",
 	    	        contentType :"application/json; charset=UTF-8",
 	    	        data:JSON.stringify(that.dataSourse),
 	    	        success:function(response){
-						console.log(response);
 	    	            if(response.status == 200){
 	    	                if(that.redirectUrl){
 	    	                	that.$Notice.success({title:response.data});
@@ -149,7 +146,6 @@ var judgeCOU = new Vue({
 	    	        }
 	    	    });
 			}else{
-				console.log('新建');
 				$.ajax({
 	    	        url:that.submitUrl,
 	    	        type:"post",

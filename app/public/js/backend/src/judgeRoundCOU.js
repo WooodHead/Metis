@@ -25,9 +25,9 @@ var vm = new Vue({
                 success:function(response){
 					console.log("-----",response);
                     if(response.status == 200){
-                    	that.dataSourse.roundName = response.object.roundName;
-                    	that.dataSourse.describes = response.object.describes;
-                    	that.dataSourse.judge = response.object.judge;
+                    	that.dataSourse.roundName = response.data.roundName;
+                    	that.dataSourse.describes = response.data.describes;
+                    	that.dataSourse.judge = response.data.judge;
                     	that.submitUrl = config.ajaxUrls.judgeRoundUpdate;
                     }else{
                     	that.$Notice.error({title:response.message});
@@ -44,32 +44,59 @@ var vm = new Vue({
 	methods:{
 		submit:function(){
 			var that = this;
-    		$.ajax({
-    	        url:that.submitUrl,
-    	        type:"post",
-    	        dataType:"json",
-    	        contentType :"application/json; charset=UTF-8",
-    	        data:JSON.stringify(that.dataSourse),
-    	        success:function(response){
-					console.log(response);
-    	            // if(response.status == 200){
-    	            //     if(that.redirectUrl){
-    	            //         that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
-    	            //         setTimeout(function(){
-        	        //             window.location.href=that.redirectUrl;
-    	            //         },3000);
-    	            //     }else{
-    	            //     	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccess});
-    	            //     }
-    	            // }else{
-    	            // 	that.$Notice.error({title:response.message});
-    	            // }
-    	        },
-    	        error:function(){
-    	        	that.$Notice.error({title:config.messages.networkError});
-    	        }
-    	    });
-
+			if (this.dataSourse.id > 0) {
+				$.ajax({
+	    	        url:that.submitUrl.replace(":id",this.dataSourse.id),
+	    	        type:"put",
+	    	        dataType:"json",
+	    	        contentType :"application/json; charset=UTF-8",
+	    	        data:JSON.stringify(that.dataSourse),
+	    	        success:function(response){
+						console.log(response);
+	    	            // if(response.status == 200){
+	    	            //     if(that.redirectUrl){
+	    	            //         that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
+	    	            //         setTimeout(function(){
+	        	        //             window.location.href=that.redirectUrl;
+	    	            //         },3000);
+	    	            //     }else{
+	    	            //     	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccess});
+	    	            //     }
+	    	            // }else{
+	    	            // 	that.$Notice.error({title:response.message});
+	    	            // }
+	    	        },
+	    	        error:function(){
+	    	        	that.$Notice.error({title:config.messages.networkError});
+	    	        }
+	    	    });
+			}else {
+				$.ajax({
+	    	        url:that.submitUrl,
+	    	        type:"post",
+	    	        dataType:"json",
+	    	        contentType :"application/json; charset=UTF-8",
+	    	        data:JSON.stringify(that.dataSourse),
+	    	        success:function(response){
+						console.log(response);
+	    	            // if(response.status == 200){
+	    	            //     if(that.redirectUrl){
+	    	            //         that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
+	    	            //         setTimeout(function(){
+	        	        //             window.location.href=that.redirectUrl;
+	    	            //         },3000);
+	    	            //     }else{
+	    	            //     	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccess});
+	    	            //     }
+	    	            // }else{
+	    	            // 	that.$Notice.error({title:response.message});
+	    	            // }
+	    	        },
+	    	        error:function(){
+	    	        	that.$Notice.error({title:config.messages.networkError});
+	    	        }
+	    	    });
+			}
 		}
 	}
 })
