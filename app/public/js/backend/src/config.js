@@ -24,21 +24,16 @@ var config={
             bucketDomain:"http://7xplk9.com1.z0.glb.clouddn.com/"
         },
         aLiYun:{
-            getSignatureUrl:"#",
-            host: "",
-            policy: "",
-            accessKey: "",
-            signature: "",
-            expire: 0
+            region:"oss-cn-shanghai"
         },
         fileType:{
-            others:100,
-            attachFile:1,
-            newsImageFile:2,
-            productionFile:3
+            productPath:1,
+            attachmentPath:2,
+            judgesPath:3,
+            newsPath:4,
+            othersPath:5
         }
     },
-
     ajaxUrls:{
         imageGet:"file/image",
         newsGetAll:"news/findNewsByPage",
@@ -58,7 +53,7 @@ var config={
         workComputeScore:"production/updateProductionScore",
         judgeGetByPage:"judge/findJudgesByPage",
         judgeRemove:"judge/deleteJudge/:id",
-        judgeCreate:"judge/createJudge",
+        judgeCreate:"/website/judge",
         judgeUpdate:"judge/updateJudge",
         judgeDetail:"judge/findJudgeById/:id",
         judgeRoundDetail:"roundJudge/getRoundJudgeById",
