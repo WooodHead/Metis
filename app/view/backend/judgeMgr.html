@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- <%@ include file="../head.jsp"%> -->
+
+<link href="public/css/backend/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="public/css/backend/lib/jquery.dataTables.css" type="text/css" rel="stylesheet">
+<link href="public/css/backend/lib/jquery.toastmessage.css" type="text/css" rel="stylesheet">
+<link href="public/css/backend/src/main.css" type="text/css" rel="stylesheet">
+<!-- vue和iview引用文件 -->
+<link rel="stylesheet" type="text/css" href="public/css/backend/lib/iview.css">
+<script type="text/javascript" src="public/js/backend/lib/vue.min.js"></script>
+<script type="text/javascript" src="public/js/backend/lib/iview.min.js"></script>
+<script type="text/javascript" src="public/js/backend/lib/promise.js"></script>
+<script type="text/javascript" src="public/js/backend/lib/aliyun-oss-sdk.min.js"></script>
+</head>
+<body>
+
+	<!-- <%@ include file="header.jsp"%> -->
+
+	<!-- <div class="left">
+		<%@ include file="menu.jsp"%>
+	</div> -->
+
+	<div class="right">
+
+		<!-- 采用iview插件 -->
+		<div class="judgeMgr" v-cloak>
+	        <i-col span="24">管理</i-col>
+	        <modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
+		        <p style="color:#ed3f14;text-align:center">
+		            <Icon type="information-circled"></Icon>
+		            <span style="font-size: 15px;">确定删除评委:{{judgeTitle}}？</span>
+		        </p>
+		    </modal>
+			<a class="btn btn-primary" href="/judgeCOU"> <span class="glyphicon glyphicon-plus"></span>新建</a>
+			<i-table :columns="columns" :data="dataList" style="margin-top:20px;"></i-table>
+			<page v-model="totalPage" :current="1" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page>
+		</div>
+	</div>
+
+	<!-- <%@ include file="loading.jsp"%> -->
+
+	<script>
+		var pageName = "judge";
+	</script>
+	<script src="public/js/backend/lib/jquery-1.10.2.min.js"></script>
+	<script src="public/js/backend/lib/bootstrap.min.js"></script>
+	<script src="public/js/backend/src/config.js"></script>
+	<script src="public/js/backend/src/judgeMgr.js"></script>
+
+</body>
+</html>
