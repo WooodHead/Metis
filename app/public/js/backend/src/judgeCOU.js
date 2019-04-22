@@ -102,17 +102,17 @@ var judgeCOU = new Vue({
                 url: config.ajaxUrls.getSTSSignature.replace(':fileType','3'),
                 type: 'GET',
                 success:function(res){
-					console.log(res);
                     if (res.res.status == 200) {
                         let client = new OSS({
+													region:'oss-cn-shanghai',
                       		accessKeyId: res.credentials.AccessKeyId,
                       		accessKeySecret: res.credentials.AccessKeySecret,
                       		stsToken: res.credentials.SecurityToken,
-                            bucket:bucket
+                          bucket:bucket
                     	});
                         client.multipartUpload('judges/'+ fileName, file).then(function (res) {
                             let objectPath = 'judges/' + fileName;
-                            $.ajax({
+													$.ajax({
                                 url: config.ajaxUrls.getUrlSignature,
                                 type: 'GET',
                                 data:{objectPath:objectPath},
