@@ -26,6 +26,7 @@ class JudgeService extends Service {
   }
 
   async getJudgeById(id){
+    const helper = this.ctx.helper;
     let resultObj = await this.ctx.model.Judge.getJudgeById(id);
     resultObj.headicon = helper.signatureUrl(helper.judgesPath + resultObj.headicon);
     return resultObj;

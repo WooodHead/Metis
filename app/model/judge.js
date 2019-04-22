@@ -58,7 +58,7 @@ module.exports = app => {
       limit,
       order: [[ 'createAt', 'desc' ], [ 'Id', 'desc' ]],
       where:{
-        language:0
+        
       }
     };
 

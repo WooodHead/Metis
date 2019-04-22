@@ -61,7 +61,7 @@ class JudgeController extends BaseController{
     };
 
     try{
-      await ctx.service.judge.update({ id, updates });
+      await ctx.service.judge.updateJudge({ id, updates });
       super.success(ctx.__('updateSuccessful'));
     }
     catch(e){
