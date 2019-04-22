@@ -19,6 +19,18 @@ class RoundJudgeController extends BaseController{
     }
   }
 
+  async show() {
+    const ctx = this.ctx;
+    try{
+      const result = await ctx.service.roundJudge.getRoundJudgeById(ctx.helper.parseInt(ctx.params.id));
+      super.success(result);
+    }
+    catch(e){
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
+  }
+
   async create() {
     const ctx = this.ctx;
     try{

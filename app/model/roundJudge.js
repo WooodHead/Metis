@@ -58,5 +58,14 @@ module.exports = app => {
     return roundJudge.destroy();
   }
 
+  RoundJudge.getRoundJudgeById = async function(id){
+    const roundJudge = await this.findOne({
+      where:{
+          Id:id
+      }
+    });
+
+    return roundJudge;
+  }
   return RoundJudge;
 };
