@@ -1,14 +1,5 @@
 'use strict';
 
-// var appServer = 'http://localhost:8080/dcpro/sigUploadKey/1';
-// var bucket = 'dc-sys-pro';
-// var region = 'oss-cn-hangzhou';
-//
-// var urllib = OSS.urllib;
-// var Buffer = OSS.Buffer;
-// var OSS = OSS.Wrapper;
-// var STS = OSS.STS;
-
 var bucket = 'dc-metis';
 var urllib = OSS.urllib;
 var Buffer = OSS.Buffer;
@@ -29,20 +20,19 @@ var judgeCOU = new Vue({
         	id:"",
         	name:"",
         	email:"",
-        	password:"",
-        	subTitle:"",
+        	sub_title:"",
+			category:"0",
         	description:"",
         },
         ruleDataSourse:{
-        	email: [{ required: true,type:"email",message: '请输入正确格式的邮箱', trigger: 'blur' }],
-        	password: [{ required: true,type:"string",  min:6, message: '请输入至少6位数密码', trigger: 'blur' }]
+        	email: [{ required: true,type:"email",message: '请输入正确格式的邮箱', trigger: 'blur' }]
         },
         submitUrl: "",
         redirectUrl:config.viewUrls.judgeMgr
 
     },
     created:function(){
-    	this.dataSourse.id = window.location.href.split("judge/judgeCOU/")[1];
+    	this.dataSourse.id = window.location.href.split("judgeCOU/")[1];
     	if(this.dataSourse.id){
     		var that = this;
     		var url = config.ajaxUrls.judgeDetail.replace(":id",this.dataSourse.id);
@@ -59,8 +49,7 @@ var judgeCOU = new Vue({
 
                     	that.dataSourse.name = response.object.name;
                     	that.dataSourse.email = response.object.email;
-                    	that.dataSourse.password = response.object.password;
-                    	that.dataSourse.subTitle = response.object.subTitle;
+                    	that.dataSourse.sub_title = response.object.sub_title;
                     	that.dataSourse.description = response.object.description;
                     	that.submitUrl = config.ajaxUrls.judgeUpdate;
                     }else{
@@ -144,16 +133,16 @@ var judgeCOU = new Vue({
     	        success:function(response){
     	            if(response.success){
 						console.log(response);
-    	                // if(that.redirectUrl){
-    	                // 	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
-    	                //     setTimeout(function(){
-        	            //         window.location.href=that.redirectUrl;
-    	                //     },3000);
-    	                // }else{
-    	                // 	that.$Notice.warning({title:that.successMessage?that.successMessage:config.messages.optSuccess});
-    	                // }
+    	                if(that.redirectUrl){
+    	                	that.$Notice.success({title:response.data});
+    	                    setTimeout(function(){
+        	                    window.location.href=that.redirectUrl;
+    	                    },3000);
+    	                }else{
+    	                	that.$Notice.warning({title:response.data});
+    	                }
     	            }else{
-    	            	that.$Notice.error({title:response.message});
+    	            	that.$Notice.error({title:response.data});
     	            }
     	        },
     	        error:function(){

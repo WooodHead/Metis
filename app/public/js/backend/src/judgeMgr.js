@@ -15,7 +15,7 @@ var Component = new Vue({
         return {
         	aoData1:{offset: 0,limit: 10},
         	columns: [
-        	   { title: 'ID',key: 'id', align: 'center'},
+        	   { title: 'ID',key: 'Id', align: 'center'},
                { title: '头像',key: 'headicon', align: 'center',
             	   render: (h, params) => {
                        return h('img', {
@@ -82,11 +82,12 @@ var Component = new Vue({
     		this.aoData1.offset = (changPage-1)*10;
     		this.dataList = [];
     		var that = this;
-    		getPageData(this); 
+    		getPageData(this);
     	},
     	change :function(index) {
-    		var id = this.dataList[index].id;
-    		window.location.href=config.viewUrls.judgeUpdate.replace(":id",id);
+    		var id = this.dataList[index].Id;
+    		window.location.href = config.viewUrls.judgeUpdate.replace(":id",id);
+			// console.log(config.viewUrls.judgeUpdate.replace(":id",id));
         },
         remove :function(index) {
         	this.judgeTitle = this.dataList[index].name;
@@ -115,21 +116,22 @@ var Component = new Vue({
 function getPageData(that){
 	$.ajax({
         "dataType":'json',
-        "type":"post",
+        "type":"get",
         "url":config.ajaxUrls.judgeGetByPage,
         "data":that.aoData1,
         "success": function (response) {
-            if(response.success===false){
+			console.log(response);
+            if(response.status===false){
             	that.$Notice.error({title:response.message});
             }else{
-    	  		for(var j = 0;j<response.aaData.length;j++){
-        	  		that.productImgArr[j] = response.aaData[j].headicon;
+    	  		for(var j = 0;j<response.data.rows.length;j++){
+        	  		that.productImgArr[j] = response.data.rows[j].headicon;
     	  		}
 
-    	  		that.dataList = response.aaData;
-            	that.totalPage = response.iTotalRecords;
-            	
+    	  		that.dataList = response.data.rows;
+            	that.totalPage = response.data.count;
+
             }
         }
-    });	 
+    });
 }

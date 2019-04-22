@@ -51,7 +51,7 @@ var config={
         workSetStatus:"production/updateProductionStatus",
         workSetRound:"review/bindProductAndRound",
         workComputeScore:"production/updateProductionScore",
-        judgeGetByPage:"judge/findJudgesByPage",
+        judgeGetByPage:"/website/judge",
         judgeRemove:"judge/deleteJudge/:id",
         judgeCreate:"/website/judge",
         judgeUpdate:"judge/updateJudge",
@@ -72,8 +72,8 @@ var config={
     viewUrls:{
         newsMgr:"news/newsMgr",
         newsUpdate:"news/newsCOU/:id",
-        judgeMgr:"judge/judgeMgr",
-        judgeUpdate:"judge/judgeCOU/:id",
+        judgeMgr:"judgeMgr",
+        judgeUpdate:"judgeCOU/:id",
         judgeRoundMgr:"roundJudge/judgeRoundMgr",
         judgeRoundUpdate:"roundJudge/judgeRoundCOU/:id",
         manageWorkDetail:"production/manageWorkDetail/:id"
