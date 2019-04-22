@@ -55,7 +55,7 @@ module.exports = app => {
       limit,
       order: [[ 'createAt', 'desc' ], [ 'Id', 'desc' ]],
       where:{
-        language:0
+
       }
     };
 
@@ -70,6 +70,15 @@ module.exports = app => {
       limit,
       where:{
         language:language
+      }
+    });
+  }
+
+  News.getNewsById = async function(id){
+    return this.findOne({
+      limit,
+      where:{
+        Id:id
       }
     });
   }
