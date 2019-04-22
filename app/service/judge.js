@@ -5,7 +5,7 @@ const Service = require('egg').Service;
 class JudgeService extends Service {
 
   async listJudges({ offset = 0, limit = 10, language = 0 }){
-      return await this.ctx.model.Judge.listJudges({ offset = 0, limit = 10, language = 0 });
+      return await this.ctx.model.Judge.listJudges({ offset, limit, language });
   }
 
   async createJudge(judge){
