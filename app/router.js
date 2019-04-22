@@ -11,8 +11,8 @@ module.exports = app => {
   router.get('/relogin', controller.home.relogin);
 
   router.get('/judgeMgr', controller.home.judgeMgr);
-  router.get('/judgeCOU', controller.home.judgeCOU);
-  router.get('/judgeCOU/:id', controller.home.updateJudge);
+  router.get('/judgeCOU/:id', controller.home.judgeCOU);
+
   router.get('/roleIndex', controller.home.roleIndex);
 
   router.post('/login',app.passport.authenticate('local', {
