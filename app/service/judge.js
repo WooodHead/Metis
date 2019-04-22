@@ -5,7 +5,12 @@ const Service = require('egg').Service;
 class JudgeService extends Service {
 
   async listJudges({ offset = 0, limit = 10, language = 0 }){
-      return await this.ctx.model.Judge.listJudges({ offset, limit, language });
+      let resultObj = await this.ctx.model.Judge.listJudges({ offset, limit, language });
+      const helper = this.ctx.helper;
+      resultObj.rows.forEach((element, index)=>{
+        element.headicon = helper.signatureUrl(helper.judgesPath + element.headicon, "thumb_300_300");
+      });
+      return resultObj;
   }
 
   async createJudge(judge){
@@ -21,7 +26,9 @@ class JudgeService extends Service {
   }
 
   async getJudgeById(id){
-    return await this.ctx.model.Judge.getJudgeById(id);
+    let resultObj = await this.ctx.model.Judge.getJudgeById(id);
+    resultObj.headicon = helper.signatureUrl(helper.judgesPath + resultObj.headicon);
+    return resultObj;
   }
 }
 
