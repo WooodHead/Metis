@@ -36,7 +36,7 @@ class JudgeController extends BaseController{
     const ctx = this.ctx;
     try{
       let data = ctx.request.body;
-      await ctx.service.user.createJudge(data);
+      await ctx.service.judge.createJudge(data);
       super.success(ctx.__('createdSuccess'));
 
     }
