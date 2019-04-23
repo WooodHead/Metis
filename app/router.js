@@ -36,7 +36,8 @@ module.exports = app => {
   router.put('/website/production/updateScore/:id', controller.website.production.updateScore);
   router.put('/website/production/updateStatus/:id', controller.website.production.updateStatus);
   router.put('/website/roundJudge/bindJudge/:id', controller.website.roundJudge.bindJudge);
-
+  router.put('/website/roundJudge/updateBindJudge/:id', controller.website.roundJudge.updateBindJudge);
+  
   router.resources('/website/user',controller.website.user);
   router.resources('/website/judge',controller.website.judge);
   router.resources('/website/roundJudge',controller.website.roundJudge);

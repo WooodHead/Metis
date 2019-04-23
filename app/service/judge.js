@@ -21,6 +21,20 @@ class JudgeService extends Service {
     return await this.ctx.model.Judge.updateJudge({id,updates});
   }
 
+  async updateBindJudge({id,updates}){
+    let transaction;
+    try {
+      transaction = await this.ctx.model.transaction();
+      await this.ctx.model.Judge.updateBindJudge(id, updates.judge, transaction);
+
+      let deleteJudges = updates.deleteJudges;
+      let addJudges = updates.addJudges;
+      
+    } catch (e) {
+      await transaction.rollback();
+    }
+  }
+
   async delJudgeById(id){
     return await this.ctx.model.Judge.delJudgeById(id);
   }

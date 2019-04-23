@@ -67,13 +67,34 @@ class RoundJudgeController extends BaseController{
   async bindJudge() {
     const ctx = this.ctx;
     const id = ctx.params.id;
-    
+
     const updates = {
       judge: ctx.request.body.judges,
     };
 
     try{
       await ctx.service.roundJudge.updateRoundJudge({ id, updates });
+      super.success(ctx.__('updateSuccessful'));
+    }
+    catch(e){
+      console.log(e);
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
+  }
+
+  async updateBindJudge() {
+    const ctx = this.ctx;
+    const id = ctx.params.id;
+
+    const updates = {
+      judge: ctx.request.body.judges,
+      deleteJudges: ctx.request.body.deleteJudges,
+      addJudges: ctx.request.body.addJudges,
+    };
+
+    try{
+      await ctx.service.roundJudge.updateBindJudge({ id, updates });
       super.success(ctx.__('updateSuccessful'));
     }
     catch(e){

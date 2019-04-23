@@ -67,5 +67,17 @@ module.exports = app => {
 
     return roundJudge;
   }
+
+  RoundJudge.updateRoundJudge = async function(id, judge, transaction){
+    return roundJudge.update({
+      judge:judge
+    },{
+      transaction:transaction,
+      where : {
+        Id:id
+      }
+    });
+  }
+
   return RoundJudge;
 };
