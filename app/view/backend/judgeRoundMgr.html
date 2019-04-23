@@ -21,8 +21,8 @@
 		            <span>{{roundTitle}}</span>
 		        </p>
 		        <!-- <checkbox :indeterminate="indeterminate" v-model="checkAll" @click.prevent.native="handleCheckAll">全选</checkbox> -->
-				<!-- <checkbox-group v-model="checkAllGroup[index]" @on-change="checkAllGroupChange" v-for="(item, index) in judgeList"> -->
-	            <checkbox-group v-model="bindJudgeArr" @on-change="checkAllGroupChange" v-for="(item, index) in judgeList">
+				<checkbox-group v-model="checkAllGroup[index]" @on-change="checkAllGroupChange" v-for="(item, index) in judgeList">
+	            <!-- <checkbox-group v-model="bindJudgeArr" @on-change="checkAllGroupChange" v-for="(item, index) in judgeList"> -->
 			        <checkbox :label="item.name"></checkbox>
 			    </checkbox-group>
 		    </modal>
