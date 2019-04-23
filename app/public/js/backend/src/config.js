@@ -62,7 +62,7 @@ var config={
         judgeRoundCreate:"/website/roundJudge",
         judgeRoundUpdate:"/website/roundJudge/:id",
         judgeRoundRemove:"roundJudge/deleteRoundJudge/:id",
-        judgeRoundGetByPage:"roundJudge/getRoundJudgeByPage",
+        judgeRoundGetByPage:"/website/roundJudge",
         judgeRoundSetJudge:"roundJudge/bindingRoundJudge",
         judgeRoundChange:"roundJudge/updateBindRoundJudge",//评审轮次评委的修改接口
         sendEmail:"review/sendReviewEmail",
@@ -76,8 +76,8 @@ var config={
         newsUpdate:"news/newsCOU/:id",
         judgeMgr:"/judgeMgr",
         judgeUpdate:"judgeCOU/:id",
-        judgeRoundMgr:"roundJudge/judgeRoundMgr",
-        judgeRoundUpdate:"roundJudge/judgeRoundCOU/:id",
+        judgeRoundMgr:"/judgeRoundMgr",
+        judgeRoundUpdate:"/judgeRoundCOU/:id",
         manageWorkDetail:"production/manageWorkDetail/:id"
     },
     dataTable:{

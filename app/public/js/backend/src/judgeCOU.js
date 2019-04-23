@@ -50,7 +50,7 @@ var judgeCOU = new Vue({
                     	that.dataSourse.description = response.data.description;
                     	that.submitUrl = config.ajaxUrls.judgeUpdate;
                     }else{
-	            		that.$Notice.error({title:response.message});
+	            		that.$Notice.error({title:response.data});
                     }
                 },
                 error:function(){

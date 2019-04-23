@@ -23,7 +23,6 @@ var vm = new Vue({
                 type:"get",
                 url:config.ajaxUrls.judgeRoundDetail.replace(":id",this.dataSourse.id),
                 success:function(response){
-					console.log("-----",response);
                     if(response.status == 200){
                     	that.dataSourse.roundName = response.data.roundName;
                     	that.dataSourse.describes = response.data.describes;
@@ -52,19 +51,18 @@ var vm = new Vue({
 	    	        contentType :"application/json; charset=UTF-8",
 	    	        data:JSON.stringify(that.dataSourse),
 	    	        success:function(response){
-						console.log(response);
-	    	            // if(response.status == 200){
-	    	            //     if(that.redirectUrl){
-	    	            //         that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
-	    	            //         setTimeout(function(){
-	        	        //             window.location.href=that.redirectUrl;
-	    	            //         },3000);
-	    	            //     }else{
-	    	            //     	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccess});
-	    	            //     }
-	    	            // }else{
-	    	            // 	that.$Notice.error({title:response.message});
-	    	            // }
+	    	            if(response.status == 200){
+	    	                if(that.redirectUrl){
+	    	                    that.$Notice.success({title:response.data});
+	    	                    setTimeout(function(){
+	        	                    window.location.href = that.redirectUrl;
+	    	                    },3000);
+	    	                }else{
+	    	                	that.$Notice.error({title:response.data});
+	    	                }
+	    	            }else{
+	    	            	that.$Notice.error({title:response.data});
+	    	            }
 	    	        },
 	    	        error:function(){
 	    	        	that.$Notice.error({title:config.messages.networkError});
@@ -78,19 +76,18 @@ var vm = new Vue({
 	    	        contentType :"application/json; charset=UTF-8",
 	    	        data:JSON.stringify(that.dataSourse),
 	    	        success:function(response){
-						console.log(response);
-	    	            // if(response.status == 200){
-	    	            //     if(that.redirectUrl){
-	    	            //         that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
-	    	            //         setTimeout(function(){
-	        	        //             window.location.href=that.redirectUrl;
-	    	            //         },3000);
-	    	            //     }else{
-	    	            //     	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccess});
-	    	            //     }
-	    	            // }else{
-	    	            // 	that.$Notice.error({title:response.message});
-	    	            // }
+	    	            if(response.status == 200){
+	    	                if(that.redirectUrl){
+	    	                    that.$Notice.success({title:response.data});
+	    	                    setTimeout(function(){
+	        	                    window.location.href = that.redirectUrl;
+	    	                    },3000);
+	    	                }else{
+	    	                	that.$Notice.success({title:response.data});
+	    	                }
+	    	            }else{
+	    	            	that.$Notice.error({title:response.data});
+	    	            }
 	    	        },
 	    	        error:function(){
 	    	        	that.$Notice.error({title:config.messages.networkError});

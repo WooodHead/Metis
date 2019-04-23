@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="public/css/backend/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="public/css/backend/src/main.css" type="text/css" rel="stylesheet">
+<!-- vue和iview引用文件 -->
+<link rel="stylesheet" type="text/css" href="public/css/backend/lib/iview.css">
+<script type="text/javascript" src="public/js/backend/lib/vue.min.js"></script>
+<script type="text/javascript" src="public/js/backend/lib/iview.min.js"></script>
+</head>
+<body>
+	<div class="right">
+			<div class="judgeRoundMgr" v-cloak>
+			<i-col span="24">评审轮次管理</i-col>
+			<a class="btn btn-primary" href="judgeRoundCOU/0"> <span class="glyphicon glyphicon-plus"></span>新建</a>
+			<i-table :columns="columns" :data="dataList" style="margin-top:20px;width:100%;" ></i-table>
+		    <!-- <page v-model="totalPage" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page> -->
+			<modal v-model="setModal" @on-ok="ok" @on-cancel="cancel">
+		        <p slot="header" style="color:#f60;text-align:center">
+		            <i-con type="information-circled"></Icon>
+		            <span>{{roundTitle}}</span>
+		        </p>
+		        <!-- <checkbox :indeterminate="indeterminate" v-model="checkAll" @click.prevent.native="handleCheckAll">全选</checkbox> -->
+				<!-- <checkbox-group v-model="checkAllGroup[index]" @on-change="checkAllGroupChange" v-for="(item, index) in judgeList"> -->
+	            <checkbox-group v-model="bindJudgeArr" @on-change="checkAllGroupChange" v-for="(item, index) in judgeList">
+			        <checkbox :label="item.name"></checkbox>
+			    </checkbox-group>
+		    </modal>
+		    <modal v-model="deleteModal" @on-ok="deleteOK" title="警告！！！">
+		        <p style="color:#ed3f14;text-align:center">
+		            <Icon type="information-circled"></Icon>
+		            <span>确定删除评审轮次:{{judgeRoundTitle}}？</span>
+		        </p>
+		    </modal>
+		</div>
+	</div>
+	<script>
+		var pageName = "judgeRound";
+	</script>
+	<script src="public/js/backend/lib/jquery-1.10.2.min.js"></script>
+	<script src="public/js/backend/lib/bootstrap.min.js"></script>
+	<script src="public/js/backend/src/config.js"></script>
+	<script src="public/js/backend/src/judgeRoundMgr.js"></script>
+
+</body>
+</html>
