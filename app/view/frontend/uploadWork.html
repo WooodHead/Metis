@@ -61,26 +61,26 @@
 							<!-- 第一部分：参赛者信息 -->
 							<div v-show="step === '1'">
 								<form-item label="参与者类型">
-									<radio-group v-model="formItem.participantType" @on-change="userInfoChange">
+									<radio-group v-model="formItem.participant_type" @on-change="userInfoChange">
 								        <radio label="1" value="1">个人</radio>
 								        <radio label="2" value="2">团队</radio>
 								        <radio label="3" value="3">企业</radio>
 								    </radio-group>
 								</form-item>
-								<form-item :label="participantNameLabel" prop="participantName">
-									<i-input v-model="formItem.participantName" placeholder="请输入姓名"></i-input>
+								<form-item :label="participantNameLabel" prop="participant_name">
+									<i-input v-model="formItem.participant_name" placeholder="请输入姓名"></i-input>
 								</form-item>
-								<form-item label="队员姓名" v-show="formItem.participantType == '2'">
-									<i-input v-model="formItem.teamMember" placeholder="成员姓名用中文逗号连接"></i-input>
+								<form-item label="队员姓名" v-show="formItem.participant_type == '2'">
+									<i-input v-model="formItem.team_member" placeholder="成员姓名用中文逗号连接"></i-input>
 								</form-item>
 								<form-item :label="participantIdNumberText" prop="participantIdNumber">
-									<i-input v-model="formItem.participantIdNumber" :placeholder="idNamePlaceholder"></i-input>
+									<i-input v-model="formItem.participant_id_number" :placeholder="idNamePlaceholder"></i-input>
 								</form-item>
-								<form-item label="所属单位" v-show="formItem.participantType != '3'">
+								<form-item label="所属单位" v-show="formItem.participant_type != '3'">
 									<i-input v-model="formItem.affiliatedUnit" placeholder="请输入所属单位"></i-input>
 								</form-item>
 								<form-item label="简介" prop="participantBrief">
-									<i-input type="textarea" v-model="formItem.participantBrief" placeholder="请输入个人简介"></i-input>
+									<i-input type="textarea" v-model="formItem.participant_brief" placeholder="请输入个人简介"></i-input>
 								</form-item>
 								<form-item>
 									<i-button type="primary" @click="goStep2">下一步</i-button>
@@ -138,6 +138,7 @@
 				           			<label>请上传zip、rar格式压缩文件</label><br/>
 									<i-button icon="ios-book" id="step2_upload_ZIP_btn">附件(ZIP)</i-button>
 									<input type="file" @change="step2_upload_ZIP_change" id="step2_upload_ZIP_btninput" accept="application/x-zip-compressed" style="display:none;"/>
+									<p v-text="attachFileName"></p>
 									<i-progress :percent="attachFilePercent" />
 								</form-item>
 								<form-item>
