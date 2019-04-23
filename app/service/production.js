@@ -23,7 +23,7 @@ class ProductionService extends Service {
     resultObj.rows.forEach((element, index)=>{
       let pImageArray = element.pImage.split(',');
       if (pImageArray[0]){
-        element.pImage += helper.signatureUrl(helper.productPath + pImageArray[0], "thumb-594-840");
+        element.pImage = helper.signatureUrl(helper.productPath + pImageArray[0], "thumb-594-840");
       }
     });
     return resultObj;
@@ -35,7 +35,7 @@ class ProductionService extends Service {
     resultObj.rows.forEach((element, index)=>{
       let pImageArray = element.pImage.split(',');
       if (pImageArray[0]){
-        element.pImage += helper.signatureUrl(helper.productPath + pImageArray[0], "thumb-594-840");
+        element.pImage = helper.signatureUrl(helper.productPath + pImageArray[0], "thumb-594-840");
       }
     });
     return resultObj;
