@@ -262,7 +262,7 @@ var vm = new Vue({
 function getPageData(that){
 	$.ajax({
         "dataType":'json',
-        "type":"post",
+        "type":"GET",
         "url":config.ajaxUrls.worksGetByPage,
         "data":that.aoData1,
         "success": function (response) {
