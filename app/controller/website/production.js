@@ -66,7 +66,6 @@ class ProductionController extends BaseController{
       adviser: ctx.request.body.adviser,
       team_member: ctx.request.body.team_member,
       affiliatedUnit: ctx.request.body.affiliatedUnit,
-      score: ctx.request.body.score,
       attach_file: ctx.request.body.attach_file,
       groupNum: ctx.request.body.groupNum,
       subGroupNum: ctx.request.body.subGroupNum,

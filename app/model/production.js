@@ -37,7 +37,7 @@ module.exports = app => {
       allowNull: false,
     },
     status: {
-      type: INTEGER,
+      type: INTEGER, ////1.已提交、2.审核未通过、3.审核已通过、4.初选入围、5.初选未入围、6.复选入围、7复选未入围
       allowNull: false,
     },
     participant_type: {
@@ -50,31 +50,31 @@ module.exports = app => {
     },
     participant_id_number: {
       type: STRING,
-      allowNull: false,
+      allowNull: true,
     },
     participant_brief: {
       type: STRING,
-      allowNull: false,
+      allowNull: true,
     },
     adviser: {
       type: STRING,
-      allowNull: false,
+      allowNull: true,
     },
     team_member: {
       type: STRING,
-      allowNull: false,
+      allowNull: true,
     },
     affiliatedUnit: {
       type: STRING,
-      allowNull: false,
+      allowNull: true,
     },
     score: {
       type: FLOAT,
-      allowNull: false,
+      allowNull: true,
     },
     attach_file: {
       type: STRING,
-      allowNull: false,
+      allowNull: true,
     },
     groupNum: {
       type: INTEGER,
@@ -138,7 +138,7 @@ module.exports = app => {
     if (status != 0){
       condition.where.status = status;
     }
-    
+
     if (groupNum != 0 && subGroupNum == 0){
       condition.where.groupNum = groupNum;
     }
