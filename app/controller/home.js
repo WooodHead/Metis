@@ -86,6 +86,13 @@ class HomeController extends Controller {
 
     });
   }
+
+  async worksMgr(){
+    const ctx = this.ctx;
+    await ctx.render('backend/worksMgr.html', {
+
+    });
+  }
 }
 
 module.exports = HomeController;

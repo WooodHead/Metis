@@ -15,8 +15,8 @@ var uploadWork = new Vue({
 			participantNameLabel:"姓名",
 			participantIdNumberText:"身份证或护照号",
 			idNamePlaceholder:"请输入身份证或护照号",
+			id:"",
 			formItem:{
-				id:"",
 				userId:"1",
 				participant_type:"1",		//参与者类型
 				participant_name:"",			//参与者姓名
@@ -90,7 +90,6 @@ var uploadWork = new Vue({
         	this.current = 0;
         },
         goStep2:function(){
-			console.log(this.formItem);
         	if(this.formItem.participant_name && this.formItem.participant_id_number  && this.formItem.participant_brief){
             	this.step = "2";
             	this.current = 1;
@@ -99,7 +98,6 @@ var uploadWork = new Vue({
         	}
         },
         goStep3:function(){
-			console.log(this.formItem);
         	if(this.formItem.title && this.formItem.content){
             	this.step = "3";
             	this.current = 2;
@@ -113,6 +111,7 @@ var uploadWork = new Vue({
             let file = files.target.files[0];
             let fileName = calculate_object_name(files.target.files[0].name);
             this.$Notice.success({title:'上传中···'});
+			this.$Loading.start();
 			$.ajax({
                 url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.productPath),
                 type: 'GET',
@@ -135,13 +134,14 @@ var uploadWork = new Vue({
                                 data:{objectPath:objectPath},
                                 success:function(res){
 									that.$Notice.success({title:'上传成功！'});
+									that.$Loading.finish();
 									that.imgUrl_1 = res;
 			        				that.fileName_1 = fileName;
-									console.log(res,that.imgUrl_1,that.fileName_1);
                                 }
                             })
                     	});
                     } else {
+						that.$Loading.error();
                         that.$Notice.error({
                             title:"上传出现异常，请刷新界面重试！"
                         })
@@ -155,6 +155,7 @@ var uploadWork = new Vue({
 	            let file = files.target.files[0];
 	            let fileName = calculate_object_name(files.target.files[0].name);
 	            this.$Notice.success({title:'上传中···'});
+				this.$Loading.start();
 				$.ajax({
 	                url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.productPath),
 	                type: 'GET',
@@ -177,9 +178,9 @@ var uploadWork = new Vue({
 	                                data:{objectPath:objectPath},
 	                                success:function(res){
 										that.$Notice.success({title:'上传成功！'});
+										that.$Loading.finish();
 										that.imgUrl_2 = res;
 				        				that.fileName_2 = fileName;
-										console.log(res,that.imgUrl_1,that.fileName_1);
 	                                }
 	                            })
 	                    	});
@@ -191,6 +192,7 @@ var uploadWork = new Vue({
 	                }
 	            })
         	}else{
+				that.$Loading.error();
         		this.$Notice.error({title:"请按照正常顺序上传作品"});
         	}
         },
@@ -200,6 +202,7 @@ var uploadWork = new Vue({
 	            let file = files.target.files[0];
 	            let fileName = calculate_object_name(files.target.files[0].name);
 	            this.$Notice.success({title:'上传中···'});
+				this.$Loading.start();
 				$.ajax({
 	                url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.productPath),
 	                type: 'GET',
@@ -222,13 +225,14 @@ var uploadWork = new Vue({
 	                                data:{objectPath:objectPath},
 	                                success:function(res){
 										that.$Notice.success({title:'上传成功！'});
+										that.$Loading.finish();
 										that.imgUrl_3 = res;
 				        				that.fileName_3 = fileName;
-										console.log(res,that.imgUrl_1,that.fileName_1);
 	                                }
 	                            })
 	                    	});
 	                    } else {
+							that.$Loading.error();
 	                        that.$Notice.error({
 	                            title:"上传出现异常，请刷新界面重试！"
 	                        })
@@ -245,6 +249,7 @@ var uploadWork = new Vue({
 			let fileTrueName = files.target.files[0].name;
 			let fileName = calculate_object_name(files.target.files[0].name);
 			this.$Notice.success({title:'上传中···'});
+			this.$Loading.start();
             $.ajax({
                 url:config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.attachmentPath),
                 type: 'GET',
@@ -261,10 +266,12 @@ var uploadWork = new Vue({
                     		progress: attachFilePercent
                     	}).then(function (res) {
                             that.$Notice.success({title:'上传成功！'});
+							that.$Loading.finish();
 							that.formItem.attach_file = fileName;
 							that.attachFileName = fileTrueName;
                     	});
                     } else {
+						that.$Loading.error();
                         that.$Notice.error({
                             title:"上传出现异常，请刷新界面重试！"
                         })
@@ -276,60 +283,93 @@ var uploadWork = new Vue({
         	var that = this;
         	pimageConcat(this);
     		this.$Loading.start();
-			console.log(this.formItem);
-        	$.ajax({
-                url:this.submitUrl,
-                type:"POST",
-                dataType:"json",
-                contentType :"application/json; charset=UTF-8",
-                data:JSON.stringify(this.formItem),
-                success:function(res){
-                    if(res.status == 200){
-                        if(that.redirectUrl){
-                        	that.$Notice.success({ title: res.data,duration:2,
-                            	onClose:function(){
-                            		that.$Loading.finish();
-                                	window.location.href = that.redirectUrl;
-                                }
-                            });
-                        }
-                    }else{
-                    	that.$Loading.error();
-                    	that.$Notice.error({ title: res.data,duration:3});
-                    }
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown){
-                	if(textStatus == "parsererror"){
-                   	 that.$Loading.error();
-                   	 that.$Notice.error({ title: "登陆会话超时，请重新登陆",duration:3});
-                    }
-                }
-            });
+			if(this.id > 0){
+				$.ajax({
+				    url:this.submitUrl,
+				    type:"PUT",
+				    dataType:"json",
+				    contentType :"application/json; charset=UTF-8",
+				    data:JSON.stringify(this.formItem),
+				    success:function(res){
+				        if(res.status == 200){
+				            if(that.redirectUrl){
+				            	that.$Notice.success({ title: res.data,duration:2,
+				                	onClose:function(){
+				                		that.$Loading.finish();
+				                    	// window.location.href = that.redirectUrl;
+				                    }
+				                });
+				            }
+				        }else{
+				        	that.$Loading.error();
+				        	that.$Notice.error({ title: res.data,duration:3});
+				        }
+				    },
+				    error:function(XMLHttpRequest, textStatus, errorThrown){
+				    	if(textStatus == "parsererror"){
+				       	 that.$Loading.error();
+				       	 that.$Notice.error({ title: "登陆会话超时，请重新登陆",duration:3});
+				        }
+				    }
+				});
+			}else{
+	        	$.ajax({
+	                url:this.submitUrl,
+	                type:"POST",
+	                dataType:"json",
+	                contentType :"application/json; charset=UTF-8",
+	                data:JSON.stringify(this.formItem),
+	                success:function(res){
+	                    if(res.status == 200){
+	                        if(that.redirectUrl){
+	                        	that.$Notice.success({ title: res.data,duration:2,
+	                            	onClose:function(){
+	                            		that.$Loading.finish();
+	                                	// window.location.href = that.redirectUrl;
+	                                }
+	                            });
+	                        }
+	                    }else{
+	                    	that.$Loading.error();
+	                    	that.$Notice.error({ title: res.data,duration:3});
+	                    }
+	                },
+	                error:function(XMLHttpRequest, textStatus, errorThrown){
+	                	if(textStatus == "parsererror"){
+	                   	 that.$Loading.error();
+	                   	 that.$Notice.error({ title: "登陆会话超时，请重新登陆",duration:3});
+	                    }
+	                }
+	            });
+			}
         }
 	},
 	created:function(){
 		this.uploadWorkStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 110 + "px";
 		var that = this;
-		this.formItem.id =  window.location.href.split("uploadWork/")[1];
-	    if (this.formItem.id > 0) {
-	        this.submitUrl = config.ajaxUrls.workUpdate;
+		this.$Loading.start();
+		this.id =  window.location.href.split("uploadWork/")[1];
+	    if (this.id > 0) {
+	        this.submitUrl = config.ajaxUrls.workUpdate.replace(":id", this.id);
 	        $.ajax({
-	        	url:config.ajaxUrls.workDetail.replace(":id", this.formItem.id),
+	        	url:config.ajaxUrls.workDetail.replace(":id", this.id),
 	        	type:"GET",
 	        	success:function(res){
-					console.log(res);
-	        		that.formItem = res.object;
-	        		that.formItem.participant_type = res.object.participant_type.toString();
-	        		that.formItem.groupNum = res.object.groupNum.toString();
-	        		that.formItem.subGroupNum = res.object.subGroupNum.toString();
-	        		if(res.object.attach_file){
+					that.$Loading.finish();
+	        		that.formItem = res.data;
+	        		that.formItem.participant_type = res.data.participant_type.toString();
+	        		that.formItem.groupNum = res.data.groupNum.toString();
+	        		that.formItem.subGroupNum = res.data.subGroupNum.toString();
+	        		if(res.data.attach_file){
+						that.formItem.attach_file = res.data.attach_file.split("?")[0].split("attachment/")[1];
 	        			that.attachFilePercent = 100;
 	        		}
-	        		var pimageArr = res.object.pImage.split(",");
-	            	 initProductImg(pimageArr,that);
+	        		var pimageArr = res.data.pImage.split(",");
+	            	initProductImg(pimageArr,that);
 	        	}
 	        })
 	    }else{
+			that.$Loading.finish();
 			this.submitUrl = config.ajaxUrls.workCreate;
 		}
 	}
@@ -344,17 +384,17 @@ $(document).ready(function(){
 function initProductImg(pimageArr,that){
 	if(pimageArr[0]){
 		that.imgUrl_1 = pimageArr[0];
-		that.fileName_1 = pimageArr[0];
+		that.fileName_1 = pimageArr[0].split("?")[0].split("product/")[1];
 		that.progressPercent_1 = 100;
 	}
 	if(pimageArr[1]){
 		that.imgUrl_2 = pimageArr[1];
-		that.fileName_2 = pimageArr[1];
+		that.fileName_2 = pimageArr[1].split("?")[0].split("product/")[1];;
 		that.progressPercent_2 = 100;
 	}
 	if(pimageArr[2]){
 		that.imgUrl_3 = pimageArr[2];
-		that.fileName_3 = pimageArr[2];
+		that.fileName_3 = pimageArr[2].split("?")[0].split("product/")[1];;
 		that.progressPercent_3 = 100;
 	}
 }
@@ -387,34 +427,15 @@ var attachFilePercent = function (p) {
 };
 
 function pimageConcat(that){
-	var pimage_1 = "",pimage_2 = "",pimage_3 = "";
 	var arr = new Array();
 	if(that.fileName_1){
-		if(that.fileName_1.indexOf("?") >= 0){
-			pimage_1 = that.fileName_1.split("product/")[1].split("?")[0];
-			arr = arr.concat(pimage_1);
-		}else{
-			pimage_1 = that.fileName_1;
-			arr = arr.concat(pimage_1);
-		}
+		arr = arr.concat(that.fileName_1);
 	}
 	if(that.fileName_2){
-		if(that.fileName_2.indexOf("?") >= 0){
-			pimage_2 = that.fileName_2.split("product/")[1].split("?")[0];
-			arr = arr.concat(pimage_2);
-		}else{
-			pimage_2 = that.fileName_2;
-			arr = arr.concat(pimage_2);
-		}
+		arr = arr.concat(that.fileName_2);
 	}
 	if(that.fileName_3){
-		if(that.fileName_3.indexOf("?") >= 0){
-			pimage_3 = that.fileName_3.split("product/")[1].split("?")[0];
-			arr = arr.concat(pimage_3);
-		}else{
-			pimage_3 = that.fileName_3;
-			arr = arr.concat(pimage_3);
-		}
+		arr = arr.concat(that.fileName_3);
 	}
 	that.formItem.pImage = arr.join(",");
 }
