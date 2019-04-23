@@ -284,20 +284,19 @@ var uploadWork = new Vue({
                 contentType :"application/json; charset=UTF-8",
                 data:JSON.stringify(this.formItem),
                 success:function(res){
-					console.log(res);
-                    // if(res.success){
-                    //     if(that.redirectUrl){
-                    //     	that.$Notice.success({ title: config.messages.optSuccRedirect,duration:3,
-                    //         	onClose:function(){
-                    //         		that.$Loading.finish();
-                    //             	window.location.href = that.redirectUrl;
-                    //             }
-                    //         });
-                    //     }
-                    // }else{
-                    // 	that.$Loading.error();
-                    // 	that.$Notice.error({ title: res.message,duration:3});
-                    // }
+                    if(res.status == 200){
+                        if(that.redirectUrl){
+                        	that.$Notice.success({ title: res.data,duration:2,
+                            	onClose:function(){
+                            		that.$Loading.finish();
+                                	window.location.href = that.redirectUrl;
+                                }
+                            });
+                        }
+                    }else{
+                    	that.$Loading.error();
+                    	that.$Notice.error({ title: res.data,duration:3});
+                    }
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){
                 	if(textStatus == "parsererror"){
@@ -318,6 +317,7 @@ var uploadWork = new Vue({
 	        	url:config.ajaxUrls.workDetail.replace(":id", this.formItem.id),
 	        	type:"GET",
 	        	success:function(res){
+					console.log(res);
 	        		that.formItem = res.object;
 	        		that.formItem.participant_type = res.object.participant_type.toString();
 	        		that.formItem.groupNum = res.object.groupNum.toString();
@@ -388,7 +388,7 @@ var attachFilePercent = function (p) {
 
 function pimageConcat(that){
 	var pimage_1 = "",pimage_2 = "",pimage_3 = "";
-	var arr = [];
+	var arr = new Array();
 	if(that.fileName_1){
 		if(that.fileName_1.indexOf("?") >= 0){
 			pimage_1 = that.fileName_1.split("product/")[1].split("?")[0];

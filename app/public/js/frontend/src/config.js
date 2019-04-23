@@ -51,7 +51,7 @@ var config = {
         resetPwd: "user/resetLoginUserPwd",
         workCreate: "/website/production",
         workUpdate: "/website/production/:id",
-        workDetail: "production/getProductionDetailById/:id",
+        workDetail: "/website/production/:id",
         workRemove: "production/deleteProduction/:id",
         worksGetByPage: "production/getProductionPageByCondition",
         //attachUpload: "/file/uploadMultiFile",			//服务器端路径********需要更改************
