@@ -1,0 +1,54 @@
+[v-cloak] {
+  display: none;
+}
+body{
+	padding-top:180px;
+}
+.uploadWork{
+	/* width:100%;
+	min-height:600px;
+	margin-top:30px;
+    flex: 1 0 auto; */
+}
+.rules{
+	margin:20px;
+}
+.uploadRuleTitle{
+	text-align: center;
+}
+.uploadRule_1{
+	width:100%;
+	margin-top:20px;
+	line-height:30px;
+}
+.uploadRule_2{
+	width:100%;
+	margin-top:20px;
+	line-height:30px;
+}
+
+.uploadRuleText{
+	color:#656464;
+	line-height: 19px;
+}
+
+.uploadRuleText span{
+	color:#47a8a9;
+	font-weight: bold;
+}
+
+.uploadRuleSubTitle{
+	color: #47a8a9; margin: 30px 0px 0px 0px;
+}
+
+.improtentText{
+	color: #47a8a9;
+}
+
+.userInfo{
+	margin-top:40px;
+}
+
+.preview{
+	text-align:center;
+}

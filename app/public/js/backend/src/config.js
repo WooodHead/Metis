@@ -60,7 +60,7 @@ var config={
 
         judgeRoundDetail:"/website/roundJudge/:id",
         judgeRoundCreate:"/website/roundJudge",
-        judgeRoundUpdate:"/website/roundJudge/:id",
+        judgeRoundUpdate:"/website/roundJudge/updateBindJudge/:id",
         judgeRoundBindJudge:"/website/roundJudge/bindJudge/:id",
         judgeRoundRemove:"roundJudge/deleteRoundJudge/:id",
         judgeRoundGetByPage:"/website/roundJudge",

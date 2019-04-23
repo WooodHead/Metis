@@ -23,19 +23,15 @@ var config = {
             uploadDomain: "http://qiniu-plupload.qiniudn.com/",
             bucketDomain: "http://7xplk9.com1.z0.glb.clouddn.com/"
         },
-        aLiYun: {
-            getSignatureUrl: "#",
-            host: "",
-            policy: "",
-            accessKey: "",
-            signature: "",
-            expire: 0
+        aLiYun:{
+            region:"oss-cn-shanghai"
         },
         fileType: {
-            others: 100,
-            attachFile: 1,
-            newsImageFile: 2,
-            productionFile: 3
+            productPath:1,
+            attachmentPath:2,
+            judgesPath:3,
+            newsPath:4,
+            othersPath:5
         }
     },
     perLoadCounts:{
@@ -73,8 +69,10 @@ var config = {
         vertifyCode:"/website/sms/vertifySms",
         getCaptcha:"/getCaptcha",
         checkCaptcha:"/checkCaptcha",
-        createUser:"/website/user/createUser"
+        createUser:"/website/user/createUser",
 
+        getSTSSignature:"/getSTSSignature/:fileType",       //附件上传
+        getUrlSignature:"/getUrlSignature"
     },
     viewUrls: {
         login: "login",

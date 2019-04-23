@@ -9,6 +9,7 @@ module.exports = app => {
   router.get('/login', controller.home.login);
   router.get('/register', controller.home.register);
   router.get('/relogin', controller.home.relogin);
+  router.get('/uploadWork/:id', controller.home.uploadWork);
 
   router.get('/judgeMgr', controller.home.judgeMgr);
   router.get('/judgeCOU/:id', controller.home.judgeCOU);
@@ -37,7 +38,7 @@ module.exports = app => {
   router.put('/website/production/updateStatus/:id', controller.website.production.updateStatus);
   router.put('/website/roundJudge/bindJudge/:id', controller.website.roundJudge.bindJudge);
   router.put('/website/roundJudge/updateBindJudge/:id', controller.website.roundJudge.updateBindJudge);
-  
+
   router.resources('/website/user',controller.website.user);
   router.resources('/website/judge',controller.website.judge);
   router.resources('/website/roundJudge',controller.website.roundJudge);

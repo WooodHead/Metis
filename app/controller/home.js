@@ -22,6 +22,13 @@ class HomeController extends Controller {
     });
   }
 
+  async uploadWork() {
+    const ctx = this.ctx;
+    await ctx.render('frontend/uploadWork.html', {
+
+    });
+  }
+
   async relogin(){
     const ctx = this.ctx;
     await ctx.render('frontend/login.html', {
