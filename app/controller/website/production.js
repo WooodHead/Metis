@@ -37,6 +37,7 @@ class ProductionController extends BaseController{
     const ctx = this.ctx;
     try{
       let data = ctx.request.body;
+      data.userId =  ctx.user.Id;
       await ctx.service.production.createProduction(data);
       super.success(ctx.__('createdSuccess'));
 
@@ -52,7 +53,7 @@ class ProductionController extends BaseController{
     const ctx = this.ctx;
     const id = ctx.params.id;
     const updates = {
-      userId: ctx.request.body.userId,
+      userId: ctx.user.Id,
       title: ctx.request.body.title,
       title_en: ctx.request.body.title_en,
       pImage: ctx.request.body.pImage,
@@ -102,7 +103,7 @@ class ProductionController extends BaseController{
     const round = ctx.helper.parseInt(ctx.query.round);
     try{
       await ctx.service.production.updateScore({Id,averageScore,round});
-      super.success(ctx.__('deletedSuccessful'));
+      super.success(ctx.__('updateSuccessful'));
     }
     catch(e){
       ctx.logger.error(e.message);
@@ -116,7 +117,25 @@ class ProductionController extends BaseController{
     const status = ctx.helper.parseInt(ctx.query.status);
     try{
       await ctx.service.production.updateStatus(Id, status);
-      super.success(ctx.__('deletedSuccessful'));
+      super.success(ctx.__('updateSuccessful'));
+    }
+    catch(e){
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
+  }
+
+  async listProductionByUserId() {
+    const ctx = this.ctx;
+    const query = {
+      limit: ctx.helper.parseInt(ctx.query.limit),
+      offset: ctx.helper.parseInt(ctx.query.offset),
+      userId: ctx.user.Id,
+    };
+
+    try{
+      const result = await ctx.service.production.listProductionByUserId(query);
+      super.success(result);
     }
     catch(e){
       ctx.logger.error(e.message);

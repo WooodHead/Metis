@@ -72,6 +72,10 @@ module.exports = app => {
       type: FLOAT,
       allowNull: true,
     },
+    round: {
+      type: INTEGER,
+      allowNull: true,
+    },
     attach_file: {
       type: STRING,
       allowNull: true,
