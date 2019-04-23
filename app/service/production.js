@@ -5,20 +5,21 @@ const Service = require('egg').Service;
 class ProductionService extends Service {
 
   async createProduction(production){
-    return this.ctx.model.Production.createProduction(production);
+    return await this.ctx.model.Production.createProduction(production);
   }
 
   async updateProduction({id,updates}){
-    return this.ctx.model.Production.updateProduction({id,updates});
+    return await this.ctx.model.Production.updateProduction({id,updates});
   }
 
   async delProductionById(){
-    return this.ctx.model.Production.delProductionById(id);
+    return await this.ctx.model.Production.delProductionById(id);
   }
 
   async listProduction({offset = 0, limit = 10, groupNum = 0, subGroupNum = 0, status = 0}){
-    let resultObj =  this.ctx.model.Production.listProduction({offset, limit, groupNum, subGroupNum, status});
+    let resultObj =  await this.ctx.model.Production.listProduction({offset, limit, groupNum, subGroupNum, status});
     const helper = this.ctx.helper;
+
     resultObj.rows.forEach((element, index)=>{
       let pImageArray = element.pImage.split(',');
       if (pImageArray[0]){
@@ -29,7 +30,7 @@ class ProductionService extends Service {
   }
 
   async listProductionByUserId({offset = 0, limit = 10, userId = 0}){
-    let resultObj =  this.ctx.model.Production.listProduction({offset, limit, userId});
+    let resultObj =  await this.ctx.model.Production.listProduction({offset, limit, userId});
     const helper = this.ctx.helper;
     resultObj.rows.forEach((element, index)=>{
       let pImageArray = element.pImage.split(',');
@@ -56,11 +57,11 @@ class ProductionService extends Service {
   }
 
   async updateScore({Id, averageScore, round}){
-    return this.ctx.model.Production.updateScore({Id, averageScore, round});
+    return await this.ctx.model.Production.updateScore({Id, averageScore, round});
   }
 
   async updateStatus(Id,status){
-    return this.ctx.model.Production.updateStatus(Id,status);
+    return await this.ctx.model.Production.updateStatus(Id,status);
   }
 }
 
