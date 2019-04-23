@@ -33,8 +33,9 @@ module.exports = app => {
   router.post('/website/user/createUser', controller.website.user.createUser);
   router.get('/website/user/updateAcviveByActiveCodeAndEmail', controller.website.user.updateAcviveByActiveCodeAndEmail);
 
-  router.put('/website/production/updateScore/:Id', controller.website.production.updateScore);
-  router.put('/website/production/updateStatus/:Id', controller.website.production.updateStatus);
+  router.put('/website/production/updateScore/:id', controller.website.production.updateScore);
+  router.put('/website/production/updateStatus/:id', controller.website.production.updateStatus);
+  router.put('/website/roundJudge/bindJudge/:id', controller.website.roundJudge.bindJudge);
 
   router.resources('/website/user',controller.website.user);
   router.resources('/website/judge',controller.website.judge);

@@ -266,7 +266,7 @@ var vm = new Vue({
 	        $.ajax({
                 "dataType":'json',
                 "type":"PUT",
-                "url":config.ajaxUrls.judgeRoundUpdate.replace(":id",this.dataList[this.index].Id),
+                "url":config.ajaxUrls.judgeRoundBindJudge.replace(":id",this.dataList[this.index].Id),
                 "data":urlData,
                 "success": function (response) {
 					console.log(response);

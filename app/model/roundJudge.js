@@ -43,7 +43,7 @@ module.exports = app => {
   }
 
   RoundJudge.updateRoundJudge = async function({ id, updates }){
-    const roundJudge = await this.findById(id);
+    const roundJudge = await this.findByPk(id);
     if (!roundJudge) {
       throw new Error('roundJudge not found');
     }
@@ -51,7 +51,7 @@ module.exports = app => {
   }
 
   RoundJudge.deleteRoundJudge = async function(id){
-    const roundJudge = await this.findById(id);
+    const roundJudge = await this.findByPk(id);
     if (!roundJudge) {
       throw new Error('roundJudge not found');
     }
