@@ -16,22 +16,28 @@ class ProductionService extends Service {
     return this.ctx.model.Production.delProductionById(id);
   }
 
-  async listProduction({offset = 0, limit = 10, groupNum = 0, subGroupNum = 0}){
-    let resultObj =  this.ctx.model.Production.listProduction({offset, limit, groupNum, subGroupNum});
+  async listProduction({offset = 0, limit = 10, groupNum = 0, subGroupNum = 0, status = 0}){
+    let resultObj =  this.ctx.model.Production.listProduction({offset, limit, groupNum, subGroupNum, status});
     const helper = this.ctx.helper;
     resultObj.rows.forEach((element, index)=>{
       let pImageArray = element.pImage.split(',');
-      let imageStr = '';
-      for (let image of pImageArray){
-        imageStr += helper.signatureUrl(helper.productPath + image, "thumb-792-1120");
+      if (pImageArray[0]){
+        element.pImage += helper.signatureUrl(helper.productPath + pImageArray[0], "thumb-594-840");
       }
-      element.pImage = imageStr;
     });
     return resultObj;
   }
 
   async listProductionByUserId({offset = 0, limit = 10, userId = 0}){
-    return this.ctx.model.Production.listProduction({offset, limit, userId});
+    let resultObj =  this.ctx.model.Production.listProduction({offset, limit, userId});
+    const helper = this.ctx.helper;
+    resultObj.rows.forEach((element, index)=>{
+      let pImageArray = element.pImage.split(',');
+      if (pImageArray[0]){
+        element.pImage += helper.signatureUrl(helper.productPath + pImageArray[0], "thumb-594-840");
+      }
+    });
+    return resultObj;
   }
 
   async getDetailById(id){
@@ -42,7 +48,9 @@ class ProductionService extends Service {
       imageStr += helper.signatureUrl(helper.productPath + image, "thumb-792-1120");
     }
     resultObj.pImage = imageStr;
-
+    if(resultObj.attach_file){
+      resultObj.attach_file = helper.signatureUrl(helper.attachmentPath + resultObj.attach_file);
+    }
     return resultObj;
   }
 

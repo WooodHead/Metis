@@ -125,7 +125,7 @@ module.exports = app => {
     return production.destroy();
   }
 
-  Production.listProduction = async function ({offset = 0, limit = 10, groupNum = 0, subGroupNum = 0}){
+  Production.listProduction = async function ({offset = 0, limit = 10, groupNum = 0, subGroupNum = 0, status = 0}){
     let condition = {
       offset,
       limit,
@@ -135,6 +135,10 @@ module.exports = app => {
       }
     };
 
+    if (status != 0){
+      condition.where.status = status;
+    }
+    
     if (groupNum != 0 && subGroupNum == 0){
       condition.where.groupNum = groupNum;
     }
