@@ -156,9 +156,9 @@
 		<div v-show="step === '3'" style="padding-bottom: 20px;">
 			<row type="flex" justify="center" align="top">
 		        <i-col class="preview" span="20">
-		        	<h1>标题：{{formItem.title}}</h1>
-		        	<h2>作者：{{formItem.participant_name}}</h2>
-		        	<p>简介：{{formItem.content}}</p>
+		        	<h1 v-html="'标题：' + formItem.title"></h1>
+		        	<h2 v-html="'作者：' + formItem.participant_name"></h2>
+		        	<p v-html="'简介：' + formItem.content"></p>
 		        	<img v-show="imgUrl_1" :src="imgUrl_1" style="width:60%;height:auto;margin:5px auto;"><br>
 		        	<img v-show="imgUrl_2" :src="imgUrl_2" style="width:60%;height:auto;margin:5px auto;"><br>
 		        	<img v-show="imgUrl_3" :src="imgUrl_3" style="width:60%;height:auto;margin:5px auto;"><br>

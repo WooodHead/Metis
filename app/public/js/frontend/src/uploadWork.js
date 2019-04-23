@@ -35,7 +35,6 @@ var uploadWork = new Vue({
 				pImage:"",					//作品图片(多作品用逗号连接)
 				status:"1",
 				attach_file:"",
-				score:""
 			},
 			attachFileName:"",
 			ruleformItem:{
@@ -91,6 +90,7 @@ var uploadWork = new Vue({
         	this.current = 0;
         },
         goStep2:function(){
+			console.log(this.formItem);
         	if(this.formItem.participant_name && this.formItem.participant_id_number  && this.formItem.participant_brief){
             	this.step = "2";
             	this.current = 1;
@@ -99,6 +99,7 @@ var uploadWork = new Vue({
         	}
         },
         goStep3:function(){
+			console.log(this.formItem);
         	if(this.formItem.title && this.formItem.content){
             	this.step = "3";
             	this.current = 2;
@@ -275,6 +276,7 @@ var uploadWork = new Vue({
         	var that = this;
         	pimageConcat(this);
     		this.$Loading.start();
+			console.log(this.formItem);
         	$.ajax({
                 url:this.submitUrl,
                 type:"POST",
