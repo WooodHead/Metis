@@ -102,7 +102,7 @@ module.exports = app => {
       foreignKey: 'userId'
     });
 
-    app.model.Production.belongsTo(app.model.Review, {foreignKey: 'productionId',targetKey: 'Id'});
+    app.model.Production.belongsTo(app.model.Review, {foreignKey: 'Id',targetKey: 'productionId'});
   };
 
   Production.createProduction = async function (production) {
@@ -167,7 +167,7 @@ module.exports = app => {
   }
 
   Production.getDetailById = async function(id){
-    return await this.findById(id);
+    return await this.findByPk(id);
   }
 
   Production.updateScore = async function({Id, averageScore, round}){

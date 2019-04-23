@@ -41,7 +41,7 @@ module.exports = app => {
   });
 
   Review.associate = function(){
-    app.model.Review.hasOne(app.model.Production, {foreignKey: 'productionId',sourceKey: 'Id'});
+    app.model.Review.hasOne(app.model.Production, {foreignKey: 'Id',sourceKey: 'productionId'});
 
   };
 

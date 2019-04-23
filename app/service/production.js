@@ -41,11 +41,12 @@ class ProductionService extends Service {
   }
 
   async getDetailById(id){
-    let resultObj =  this.ctx.model.Production.getDetailById(id);
+    let resultObj =  await this.ctx.model.Production.getDetailById(id);
+    const helper = this.ctx.helper;
     let pImageArray = resultObj.pImage.split(',');
     let imageStr = '';
     for (let image of pImageArray){
-      imageStr += helper.signatureUrl(helper.productPath + image, "thumb-792-1120");
+      imageStr += helper.signatureUrl(helper.productPath + image, "thumb-792-1120") + ',';
     }
     resultObj.pImage = imageStr;
     if(resultObj.attach_file){
