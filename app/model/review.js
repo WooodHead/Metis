@@ -22,7 +22,7 @@ module.exports = app => {
     },
     score:{
       type: INTEGER,
-      allowNull: false
+      allowNull: true
     },
     round:{
       type: INTEGER,
