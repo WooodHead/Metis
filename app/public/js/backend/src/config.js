@@ -45,11 +45,11 @@ var config={
         manageNews:"news/findManageNewsByPage",
         userGetByPage:"user/getDataTableUserByPage",
         userActiveAction:"user/resetUserValid",
-        
+
         worksGetByPage:"/website/production",
         workGetById:"production/getProductionDetailById/:id",
         workRemove:"production/deleteProduction/:id",
-        workSetStatus:"production/updateProductionStatus",
+        workSetStatus:"/website/production/updateStatus/:id",
         workSetRound:"review/bindProductAndRound",
         workComputeScore:"production/updateProductionScore",
 

@@ -1,16 +1,5 @@
-'use strict';
-
-var appServer = 'http://localhost:8080/dcpro/sigUploadKey/1';
-var bucket = 'dc-sys-pro';
-var region = 'oss-cn-hangzhou';
-
-var urllib = OSS.urllib;
-var Buffer = OSS.Buffer;
-var OSS = OSS.Wrapper;
-var STS = OSS.STS;
-
 $(document).click(function(){
-	$("#scoreTable").addClass("hidden");
+	vm.scoreStyle.display = "none";
 });
 
 function initData(url, aoData, dataList, totalPage){
@@ -34,11 +23,15 @@ var vm = new Vue({
 	el:".worksMgr",
 	data:function(){
 		return{
+			scoreStyle:{
+				display:"none",
+				marginLeft:"0px",
+				top:"0px",width:"200px",position:"absolute"
+			},
 			groupModel:"",
 			subGroupModel:"",
-			roundModel:"0",
 			statusModel:"",
-			totalPage:"",
+			totalPage:0,
 			GroupList:[{value:"0",label:"全部"},{value:"1",label:"概念设计组"},{value:"2",label:"产品创新组"}],
 			SubGroupList:[{value:"0",label:"全部"},{value:"1",label:"精准农业类 "},{value:"2",label:"非遗文创类"},{value:"3",label:"文旅休闲类"},{value:"4",label:"品牌农业类"}],
 			JudgeRoundList: [{value: '0',label: '全部'}],				//顶部轮次筛选
@@ -52,12 +45,12 @@ var vm = new Vue({
             ],
             roundTypes:[],												//轮次选择库
             columns: [
-                  { title: 'ID',key: 'id', align: 'center'},
-                  { title: '缩略图',key: 'pimage', align: 'center',
-               	   render: (h, params) => {
+                  { title: 'ID',key: 'Id', align: 'center'},
+                  { title: '缩略图',key: 'pImage', align: 'center',
+               	   	render: (h, params) => {
                           return h('img', {
-                   	   		domProps: { type: 'primary', size: 'small', src: vm.productImgArr[params.index] },
-                              style: { width: '99px', height:"99px", margin:"10px auto" },
+                   	   		domProps: { type: 'primary', size: 'small', src: this.dataList[params.index].pImage},
+                            style: { width: '60px', height:"60px", margin:"10px auto" },
                           })
                       }
                	  },
@@ -91,22 +84,22 @@ var vm = new Vue({
                 	    }
                   },
                   { title: '所在评审轮次',key: 'round', align: 'center',
-                	  render: (h, params) => {
-              	        return h('i-select', {
-								props:{ value: this.dataList[params.index].round,   },
-								on: {  'on-change':(value) => {
-										this.changeRound(params.index, value);
-									}
-		          	            }
-              	        },this.roundTypes.map(function(type){
-	          	            return h('i-option', {
-	          	                props: { value: type.value, label: type.label }
-	          	            }, type);
-	          	        })
-              	        );
-              	    }
+							render: (h, params) => {
+							  return h('i-select', {
+									props:{ value: this.dataList[params.index].round,   },
+									on: {  'on-change':(value) => {
+											this.changeRound(params.index, value);
+										}
+									         }
+									  },this.roundTypes.map(function(type){
+									      return h('i-option', {
+									          props: { value: type.value, label: type.label }
+									      }, type);
+									  })
+							  );
+							}
                   },
-                  { title: '更新时间',key: 'createTime', align: 'center'},
+                  { title: '更新时间',key: 'createAt', align: 'center'},
                   { title: '操作',key: 'opt', align: 'center',
                	   	render: (h, params) => {
                           return h('a', {
@@ -135,20 +128,18 @@ var vm = new Vue({
 		changeStatus:function(index, value){
 			this.$Loading.start();
 			var that = this;
-			this.setstatusList.id = this.dataList[index].id;
-			this.setstatusList.status = value;
 			$.ajax({
 	            "dataType":'json',
-	            "type":"get",
-	            "url":config.ajaxUrls.workSetStatus,
-	            "data":that.setstatusList,
+	            "type":"put",
+	            "url":config.ajaxUrls.workSetStatus.replace(":id",this.dataList[index].Id),
+	            "data":{status:value},
 	            "success": function (response) {
-	                if(response.success===false){
+	                if(response.status == 200){
+						that.$Loading.finish();
+						that.$Notice.success({title:config.messages.optSuccess});
+	                }else{
 	                	that.$Notice.error({title:response.message});
 	                	getPageData(that);
-	                }else{
-	                	that.$Loading.finish();
-	                	that.$Notice.success({title:config.messages.optSuccess});
 	                }
 	            }
 	        });
@@ -164,12 +155,12 @@ var vm = new Vue({
 	            "url":config.ajaxUrls.workSetRound,
 	            "data":that.setRoundList,
 	            "success": function (response) {
-	                if(response.success===false){
-	                	that.$Loading.error();
+	                if(response.status == 200){
+						that.$Notice.success({title:config.messages.optSuccess});
+	                }else{
+						that.$Loading.error();
 	                	that.$Notice.error({title:"修改出错",desc:"1.作品状态无法选择评审轮次,	2.可能该轮次未绑定评委, 3.分数已更新为本轮次,无法修改"});
 	                	getPageData(that);
-	                }else{
-	                	that.$Notice.success({title:config.messages.optSuccess});
 	                }
 	            }
 	        });
@@ -213,14 +204,15 @@ var vm = new Vue({
 	            "url":config.ajaxUrls.getRoundScoreBean,
 	            "data":{productionId:this.dataList[index].id},
 	            "success": function (response) {
-	                if(response.success===false){
-	                	that.$Notice.error({title:response.message});
+	                if(response.status == 200){
+						that.$Loading.finish();
+						that.RoundScroeList = response.object;
+						var poptipClientX = event.clientX  - 165, poptipClientY = event.clientY - 105 ;
+						that.scoreStyle.display = "inline";
+						that.scoreStyle.marginLeft = poptipClientX+"px";
+						that.scoreStyle.top = poptipClientY+"px";
 	                }else{
-	                	that.$Loading.finish();
-	        			var poptipClientX = event.clientX  - 165, poptipClientY = event.clientY - 105 ;
-	                	that.RoundScroeList = response.object;
-	                	$("#scoreTable").removeClass("hidden");
-		        			$("#scoreTable").css({"margin-left": poptipClientX+"px","top": poptipClientY + "px"});
+	                	that.$Notice.error({title:response.message});
 	                }
 	            }
 	        });
@@ -228,7 +220,6 @@ var vm = new Vue({
 	},
 	created:function(){
     	this.$Loading.start();
-    	$("#scoreTable").addClass("hidden");
 		var that = this;
 		this.subGroupModel = "0",
 		this.groupModel = "0",
@@ -239,8 +230,7 @@ var vm = new Vue({
             "url":config.ajaxUrls.judgeRoundGetByPage,
             "data":this.aoData2,
             "success": function (response) {
-				console.log("评委",response);
-                if(response.success == 200){
+                if(response.status == 200){
 					that.$Loading.finish();
 					for(var i=0;i<response.data.rows.length;i++){
 						var roundBox = {};
@@ -261,26 +251,16 @@ var vm = new Vue({
 })
 function getPageData(that){
 	$.ajax({
-        "dataType":'json',
-        "type":"GET",
-        "url":config.ajaxUrls.worksGetByPage,
-        "data":that.aoData1,
-        "success": function (response) {
-			console.log(response);
-            if(response.success == 200){
+		dataType:'json',
+        type:"GET",
+        url:config.ajaxUrls.worksGetByPage,
+        data:that.aoData1,
+        success: function (response) {
+            if(response.status == 200){
+				console.log(response);
 				that.$Loading.finish();
-            	that.dataList = [];
-            	var arr = response.data;
-    	  		for(var j = 0;j<arr.length;j++){
-        	  		var pimg = arr[j].pimage;
-        	  		if(pimg.indexOf(",") >= 0){
-        	  			that.productImgArr[j] = pimg.split(",")[0];
-        	  		}else{
-        	  			that.productImgArr[j] = pimg;
-        	  		}
-    	  		}
-            	that.totalPage = response.iTotalRecords;
-    	  		that.dataList = response.aaData;
+            	that.totalPage = response.data.count;
+    	  		that.dataList = response.data.rows;
             }else{
 				that.$Notice.error({title:response.message});
             }

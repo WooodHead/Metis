@@ -17,29 +17,23 @@
 			<div style="display:inline-block;margin-left:60px;">
 				<label>组别：</label>
 				<i-select v-model="groupModel" style="width:200px" @on-change="groupCheck">
-			        <i-option v-for="Groupitem in GroupList" :value="Groupitem.value" :key="Groupitem.value" >{{ Groupitem.label }}</i-option>
+			        <i-option v-for="Groupitem in GroupList" :value="Groupitem.value" :key="Groupitem.value" :label="Groupitem.label"></i-option>
 			    </i-select>
 			</div>
 			<div style="display:inline-block;margin-left:60px;">
 				<label>作品类型：</label>
 				<i-select v-model="subGroupModel" style="width:200px" @on-change="subGroupCheck">
-			        <i-option v-for="SubGroupitem in SubGroupList" :value="SubGroupitem.value" :key="SubGroupitem.value" >{{ SubGroupitem.label }}</i-option>
-			    </i-select>
-			</div>
-			<div style="display:inline-block;margin-left:60px;">
-				<label>评分轮次：</label>
-				<i-select v-model="roundModel" style="width:200px" @on-change="roundCheck">
-			        <i-option v-for="Rounditem in JudgeRoundList" :value="Rounditem.value" :key="Rounditem.value" >{{ Rounditem.label }}</i-option>
+			        <i-option v-for="SubGroupitem in SubGroupList" :value="SubGroupitem.value" :key="SubGroupitem.value" :label="SubGroupitem.label"></i-option>
 			    </i-select>
 			</div>
 			<div style="display:inline-block;margin-left:60px;">
 			    <label>状态：</label>
 				<i-select v-model="statusModel" style="width:200px" @on-change="statusCheck">
-			        <i-option v-for="Statusitem in StatusList" :value="Statusitem.value" :key="Statusitem.value" >{{ Statusitem.label }}</i-option>
+			        <i-option v-for="Statusitem in StatusList" :value="Statusitem.value" :key="Statusitem.value" :label="Statusitem.label"></i-option>
 			    </i-select>
 		    </div>
 		    <i-table :columns="columns" :data="dataList" style="margin-top:20px;" ></i-table>
-		    <i-table id="scoreTable" :columns="Scroecolumns" :data="RoundScroeList" style="width:200px;position:absolute;"></i-table>
+		    <i-table id="scoreTable" :style="scoreStyle" :columns="Scroecolumns" :data="RoundScroeList"></i-table>
 		    <page v-model="totalPage" :current="1" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page>
 		</div>
 	</div>
