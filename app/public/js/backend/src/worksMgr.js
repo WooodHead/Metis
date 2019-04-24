@@ -130,7 +130,7 @@ var vm = new Vue({
 	            dataType:'json',
 	            type:"post",
 	            url:config.ajaxUrls.workSetRound,
-	            data:{productId:this.dataList[index].Id,round : value},
+	            data:{productionId:this.dataList[index].Id,round : value},
 	            success: function (response) {
 	                if(response.status == 200){
 						that.$Loading.finish();
