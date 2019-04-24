@@ -45,8 +45,10 @@ module.exports = app => {
 
   };
 
-  Review.createReview = async function(review){
-    return this.create(review);
+  Review.createReview = async function(review,transaction){
+    return this.create(review,{
+      transaction:transaction
+    });
   }
 
   Review.updateReview = async function({ id, updates }){

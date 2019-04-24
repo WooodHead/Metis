@@ -38,7 +38,7 @@ module.exports = app => {
     },
     status: {
       type: INTEGER, ////1.已提交、2.审核未通过、3.审核已通过、4.初选入围、5.初选未入围、6.复选入围、7复选未入围
-      allowNull: false,
+      allowNull: true,
     },
     participant_type: {
       type: INTEGER,

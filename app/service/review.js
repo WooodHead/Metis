@@ -5,7 +5,25 @@ const Service = require('egg').Service;
 class ReviewService extends Service {
 
   async createReview(review){
-    return await this.ctx.model.Review.createReview(review);
+    let transaction;
+    try {
+      transaction = await this.ctx.model.transaction();
+      let roundJudge = await this.ctx.model.RoundJudge.getRoundJudgeById(review.round);
+      if(roundJudge){
+        let judges = roundJudge.split(',');
+        for (let judgeId of judges){
+          review.userId = judgeId;
+          await this.ctx.model.Review.createReview(review, transaction);
+        }
+      }
+
+      await transaction.commit();
+      return true
+    } catch (e) {
+      await transaction.rollback();
+      this.ctx.logger.error(e.message);
+      return false
+    }
   }
 
   async updateReview(){

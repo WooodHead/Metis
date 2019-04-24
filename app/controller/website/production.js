@@ -99,8 +99,8 @@ class ProductionController extends BaseController{
   async updateScore() {
     const ctx = this.ctx;
     const Id = ctx.helper.parseInt(ctx.params.id);
-    const averageScore = ctx.query.averageScore;
-    const round = ctx.helper.parseInt(ctx.query.round);
+    const averageScore = ctx.request.body.averageScore;
+    const round = ctx.helper.parseInt(ctx.request.body.round);
     try{
       await ctx.service.production.updateScore({Id,averageScore,round});
       super.success(ctx.__('updateSuccessful'));
@@ -114,7 +114,7 @@ class ProductionController extends BaseController{
   async updateStatus() {
     const ctx = this.ctx;
     const Id = ctx.helper.parseInt(ctx.params.id);
-    const status = ctx.helper.parseInt(ctx.query.status);
+    const status = ctx.helper.parseInt(ctx.request.body.status);
     try{
       await ctx.service.production.updateStatus(Id, status);
       super.success(ctx.__('updateSuccessful'));
