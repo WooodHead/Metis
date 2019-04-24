@@ -185,6 +185,17 @@ module.exports = app => {
     });
   }
 
+  Production.updateRound = async function(Id, round, transaction){
+    return await this.update({
+      round:round
+    },{
+      transaction:transaction,
+      where:{
+        Id:Id
+      }
+    });
+  }
+
   Production.updateStatus = async function(Id,status){
     return await this.update({
       status:status

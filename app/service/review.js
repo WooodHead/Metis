@@ -9,6 +9,7 @@ class ReviewService extends Service {
     try {
       transaction = await this.ctx.model.transaction();
       let roundJudge = await this.ctx.model.RoundJudge.getRoundJudgeById(review.round);
+      await this.ctx.model.Production.updateRound(review.productionId, review.round, transaction);
       if(roundJudge){
         let judges = roundJudge.split(',');
         for (let judgeId of judges){
