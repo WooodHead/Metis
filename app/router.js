@@ -46,4 +46,5 @@ module.exports = app => {
   router.resources('/website/roundJudge',controller.website.roundJudge);
   router.resources('/website/news',controller.website.news);
   router.resources('/website/production',controller.website.production);
+  router.resources('/website/review',controller.website.review);
 };
