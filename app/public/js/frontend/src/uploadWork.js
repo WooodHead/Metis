@@ -17,7 +17,7 @@ var uploadWork = new Vue({
 			idNamePlaceholder:"请输入身份证或护照号",
 			id:"",
 			formItem:{
-				userId:"1",
+				id:"",
 				participant_type:"1",		//参与者类型
 				participant_name:"",			//参与者姓名
 				participant_id_number:"",		//身份证号码
@@ -348,6 +348,7 @@ var uploadWork = new Vue({
 		this.uploadWorkStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 110 + "px";
 		var that = this;
 		this.$Loading.start();
+		this.formItem.id =  window.location.href.split("uploadWork/")[1];
 		this.id =  window.location.href.split("uploadWork/")[1];
 	    if (this.id > 0) {
 	        this.submitUrl = config.ajaxUrls.workUpdate.replace(":id", this.id);

@@ -1,24 +1,6 @@
 $(document).click(function(){
 	vm.scoreStyle.display = "none";
 });
-
-function initData(url, aoData, dataList, totalPage){
-	var that = this;
-	$.ajax({
-      "dataType":'json',
-      "type":"post",
-      "url":url,
-      "data":aoData,
-      "success": function (response) {
-          if(response.success===false){
-          	that.$Notice.error({title:response.message});
-          }else{
-          	dataList = response.aaData;
-          	totalPage = response.iTotalRecords;
-          }
-      }
-  });
-}
 var vm = new Vue({
 	el:".worksMgr",
 	data:function(){
@@ -112,11 +94,8 @@ var vm = new Vue({
               ],
               aoData1:{offset: 0,limit: 10,status: 0,groupNum: 0,subGroupNum: 0},
          	  aoData2:{offset: 0,limit: 1000},
-           	  setstatusList:{id:"",status:""},
-           	  setRoundList:{productId:"",round:""},
          	  dataList:[],
          	  productImgArr:[],
-
          	  Scroecolumns: [						//table列选项
                   { title: '评审轮次',key: 'round', align: 'center'},
                   { title: '得分',key: 'averageScore', align: 'center'}
@@ -147,20 +126,19 @@ var vm = new Vue({
 		changeRound:function(index, value){
         	this.$Loading.start();
 			var that = this;
-			this.setRoundList.productId = this.dataList[index].id;
-			this.setRoundList.round = value;
 			$.ajax({
-	            "dataType":'json',
-	            "type":"post",
-	            "url":config.ajaxUrls.workSetRound,
-	            "data":that.setRoundList,
-	            "success": function (response) {
+	            dataType:'json',
+	            type:"post",
+	            url:config.ajaxUrls.workSetRound,
+	            data:{productId:this.dataList[index].Id,round : value},
+	            success: function (response) {
 	                if(response.status == 200){
-						that.$Notice.success({title:config.messages.optSuccess});
+						that.$Loading.finish();
+						that.$Notice.success({title:response.data});
+	                	getPageData(that);
 	                }else{
 						that.$Loading.error();
 	                	that.$Notice.error({title:"修改出错",desc:"1.作品状态无法选择评审轮次,	2.可能该轮次未绑定评委, 3.分数已更新为本轮次,无法修改"});
-	                	getPageData(that);
 	                }
 	            }
 	        });

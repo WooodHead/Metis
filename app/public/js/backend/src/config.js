@@ -50,7 +50,7 @@ var config={
         workGetById:"production/getProductionDetailById/:id",
         workRemove:"production/deleteProduction/:id",
         workSetStatus:"/website/production/updateStatus/:id",
-        workSetRound:"review/bindProductAndRound",
+        workSetRound:"/website/review",
         workComputeScore:"production/updateProductionScore",
 
         judgeGetByPage:"/website/judge",
