@@ -1,0 +1,37 @@
+{% extends "backend/parent.html" %}
+
+{% block cssfolder %}
+<link href="../public/css/backend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/backend/src/main.css" type="text/css" rel="stylesheet">
+<link href="../public/css/backend/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../public/css/backend/src/workDetail.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div class="right">
+	<div class="workDetail">
+		<h3 class="backTitle" v-text="title"></h3>
+		<span v-text="participant_name"></span>
+		<p class="backText" v-text="'证件号码：'+participant_id_number"></p>
+		<p class="backText" v-text="'个人/团队 简介：'+participant_brief"></p>
+		<p class="backText" v-text="'设计介绍：'+content"></p>
+		<div class="backText" v-show="attach_file">
+			附件下载:&nbsp;&nbsp;<a :href="attachFileDownload" target="_blank">{{attach_file}}</a>
+		</div>
+		<div class="produceImg">
+			<img :src="productImg_1" style="margin:10px auto;"/>
+			<img :src="productImg_2" style="margin:10px auto;"/>
+			<img :src="productImg_3" style="margin:10px auto;"/>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="../public/js/backend/lib/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../public/js/backend/lib/vue.min.js"></script>
+<script type="text/javascript" src="../public/js/backend/lib/iview.min.js"></script>
+<script src="../public/js/backend/lib/bootstrap.min.js"></script>
+<script src="../public/js/backend/src/config.js"></script>
+<script src="../public/js/backend/src/workDetail.js"></script>
+{% endblock %}
