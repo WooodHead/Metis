@@ -52,8 +52,8 @@ module.exports = app => {
   router.resources('/website/production',controller.website.production);
   router.resources('/website/review',controller.website.review);
 
-  router.all('/ueditor', ueditor(['app/public','public']，{
-  	"imageAllowFiles": [".png", ".jpg", ".jpeg"]
-  	"imagePathFormat": "/upload/ueditor/image/{yyyy}{mm}{dd}/{filename}"  // 保存为原文件名
+  router.all('/ueditor', ueditor(['app/public','public'],{
+  	"imageAllowFiles": [".png", ".jpg", ".jpeg"],
+  	"imagePathFormat": "/upload/ueditor/image/{yyyy}{mm}{dd}/{time}{rand:6}"  // 保存为原文件名
   }))
 };
