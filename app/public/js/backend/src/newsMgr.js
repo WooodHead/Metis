@@ -1,5 +1,6 @@
-var Component = new Vue({
-	el:".newsMgr",
+var pageName = "news";
+var index = new Vue({
+	el:".index",
 	data () {
         return {
         	aoData1:{offset: 0,limit: 10,language:0},

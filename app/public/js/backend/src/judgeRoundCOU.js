@@ -1,5 +1,6 @@
+var pageName = "judgeRound";
 var vm = new Vue({
-	el:".judgeRoundCOU",
+	el:".index",
 	data:function(){
 		return{
 			dataSourse:{

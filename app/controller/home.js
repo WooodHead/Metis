@@ -107,6 +107,13 @@ class HomeController extends Controller {
 
     });
   }
+
+  async userMgr(){
+    const ctx = this.ctx;
+    await ctx.render('backend/userMgr.html', {
+
+    });
+  }
 }
 
 module.exports = HomeController;

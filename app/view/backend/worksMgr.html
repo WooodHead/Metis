@@ -1,49 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "backend/parent.html" %}
 
+{% block cssfolder %}
 <link href="public/css/backend/src/main.css" type="text/css" rel="stylesheet">
-<!-- vue和iview引用文件 -->
 <link rel="stylesheet" type="text/css" href="public/css/backend/lib/iview.css">
+{% endblock %}
+
+{% block container %}
+<div class="right">
+	<div class="worksMgr">
+		<i-col span="24">作品管理</i-col>
+		<div style="display:inline-block;margin-left:60px;">
+			<label>组别：</label>
+			<i-select v-model="groupModel" style="width:200px" @on-change="groupCheck">
+				<i-option v-for="Groupitem in GroupList" :value="Groupitem.value" :key="Groupitem.value" :label="Groupitem.label"></i-option>
+			</i-select>
+		</div>
+		<div style="display:inline-block;margin-left:60px;">
+			<label>作品类型：</label>
+			<i-select v-model="subGroupModel" style="width:200px" @on-change="subGroupCheck">
+				<i-option v-for="SubGroupitem in SubGroupList" :value="SubGroupitem.value" :key="SubGroupitem.value" :label="SubGroupitem.label"></i-option>
+			</i-select>
+		</div>
+		<div style="display:inline-block;margin-left:60px;">
+			<label>状态：</label>
+			<i-select v-model="statusModel" style="width:200px" @on-change="statusCheck">
+				<i-option v-for="Statusitem in StatusList" :value="Statusitem.value" :key="Statusitem.value" :label="Statusitem.label"></i-option>
+			</i-select>
+		</div>
+		<i-table :columns="columns" :data="dataList" style="margin-top:20px;" ></i-table>
+		<i-table id="scoreTable" :style="scoreStyle" :columns="Scroecolumns" :data="RoundScroeList"></i-table>
+		<page v-model="totalPage" :current="1" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page>
+	</div>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
 <script type="text/javascript" src="public/js/backend/lib/vue.min.js"></script>
 <script type="text/javascript" src="public/js/backend/lib/iview.min.js"></script>
 <script src="public/js/backend/lib/promise.js"></script>
 <script type="text/javascript" src="public/js/backend/lib/aliyun-oss-sdk.min.js"></script>
-</head>
-<body>
-	<div class="right">
-		<div class="worksMgr" v-cloak>
-			<i-col span="24">作品管理</i-col>
-			<div style="display:inline-block;margin-left:60px;">
-				<label>组别：</label>
-				<i-select v-model="groupModel" style="width:200px" @on-change="groupCheck">
-			        <i-option v-for="Groupitem in GroupList" :value="Groupitem.value" :key="Groupitem.value" :label="Groupitem.label"></i-option>
-			    </i-select>
-			</div>
-			<div style="display:inline-block;margin-left:60px;">
-				<label>作品类型：</label>
-				<i-select v-model="subGroupModel" style="width:200px" @on-change="subGroupCheck">
-			        <i-option v-for="SubGroupitem in SubGroupList" :value="SubGroupitem.value" :key="SubGroupitem.value" :label="SubGroupitem.label"></i-option>
-			    </i-select>
-			</div>
-			<div style="display:inline-block;margin-left:60px;">
-			    <label>状态：</label>
-				<i-select v-model="statusModel" style="width:200px" @on-change="statusCheck">
-			        <i-option v-for="Statusitem in StatusList" :value="Statusitem.value" :key="Statusitem.value" :label="Statusitem.label"></i-option>
-			    </i-select>
-		    </div>
-		    <i-table :columns="columns" :data="dataList" style="margin-top:20px;" ></i-table>
-		    <i-table id="scoreTable" :style="scoreStyle" :columns="Scroecolumns" :data="RoundScroeList"></i-table>
-		    <page v-model="totalPage" :current="1" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page>
-		</div>
-	</div>
-	<script>
-		var pageName = "worksMgr";
-	</script>
-	<script src="public/js/backend/lib/jquery-1.10.2.min.js"></script>
-	<script src="public/js/backend/lib/bootstrap.min.js"></script>
-	<script src="public/js/backend/src/config.js"></script>
-	<script src="public/js/backend/src/worksMgr.js"></script>
-
-</body>
-</html>
+<script src="public/js/backend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/backend/lib/bootstrap.min.js"></script>
+<script src="public/js/backend/src/config.js"></script>
+<script src="public/js/backend/src/worksMgr.js"></script>
+{% endblock %}

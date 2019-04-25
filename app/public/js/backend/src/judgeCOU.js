@@ -1,5 +1,7 @@
 'use strict';
 
+var pageName = "judge";
+
 var bucket = 'dc-metis';
 var urllib = OSS.urllib;
 var Buffer = OSS.Buffer;
@@ -7,7 +9,7 @@ var OSS = OSS.Wrapper;
 var STS = OSS.STS;
 
 var judgeCOU = new Vue({
-	el:".judgeCOU",
+	el:".index",
 	data:{
 //      图片上传
 		imgUrl:"",

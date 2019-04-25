@@ -1,3 +1,4 @@
+var pageName = "judgeRound";
 //清空相关的数组
 function initOtherData(lengthArray, checkAllGroup, dataL, oldJudgeData) {
     for (var i = 0; i < lengthArray.length; i++) {
@@ -83,7 +84,7 @@ function screenRoundJudge(that, checkAllGroup, oldJudgeData, dataL) {
 }
 
 var vm = new Vue({
-    el: ".judgeRoundMgr",
+    el: ".index",
     data: function() {
         return {
             setModal: false,

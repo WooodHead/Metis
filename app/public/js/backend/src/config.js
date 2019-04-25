@@ -44,7 +44,8 @@ var config={
         newsRemove:"/website/news/:id",
         newsDetail:"/website/news/:id",
         manageNews:"/website/news",
-        userGetByPage:"user/getDataTableUserByPage",
+
+        userGetByPage:"/website/user",
         userActiveAction:"user/resetUserValid",
 
         worksGetByPage:"/website/production",

@@ -1,8 +1,9 @@
+var pageName = "worksMgr";
 $(document).click(function(){
 	vm.scoreStyle.display = "none";
 });
 var vm = new Vue({
-	el:".worksMgr",
+	el:".index",
 	data:function(){
 		return{
 			scoreStyle:{

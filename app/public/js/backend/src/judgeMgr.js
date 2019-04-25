@@ -1,5 +1,6 @@
+var pageName = "judge";
 var Component = new Vue({
-	el:".judgeMgr",
+	el:".index",
 	data :function() {
         return {
         	aoData1:{offset: 0,limit: 10, language:0},
@@ -56,7 +57,7 @@ var Component = new Vue({
            ],
            dataList: [],
            productImgArr:[],
-           totalPage:"",
+           totalPage:0,
            deleteModal:false,
            index:"",
            judgeTitle:""
@@ -92,7 +93,6 @@ var Component = new Vue({
                 "url":config.ajaxUrls.judgeRemove.replace(":id",id),
                 "success": function (response) {
                     if(response.status == 200){
-						console.log(response);
                     	that.$Notice.success({title:config.messages.optSuccess});
                     	getPageData(that);
                     }else{
@@ -110,7 +110,6 @@ function getPageData(that){
         "url":config.ajaxUrls.judgeGetByPage,
         "data":that.aoData1,
         "success": function (response) {
-			console.log(response);
             if(response.status == 200){
 				for(var j = 0;j<response.data.rows.length;j++){
 					that.productImgArr[j] = response.data.rows[j].headicon;

@@ -1,38 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "backend/parent.html" %}
+
+{% block cssfolder %}
 <link href="public/css/backend/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
 <link href="public/css/backend/src/main.css" type="text/css" rel="stylesheet">
-<!-- vue和iview引用文件 -->
-<link rel="stylesheet" type="text/css" href="public/css/backend/lib/iview.css">
-<script type="text/javascript" src="public/js/backend/lib/vue.min.js"></script>
-<script type="text/javascript" src="public/js/backend/lib/iview.min.js"></script>
-</head>
-<body>
-	<div class="right">
-		<!-- 采用iview插件 -->
-		<div class="newsMgr" v-cloak>
-	        <i-col span="24">新闻</i-col>
-	        <modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
-		        <p style="color:#ed3f14;text-align:center">
-		            <Icon type="information-circled"></Icon>
-		            <span style="font-size: 15px;">确定删除新闻:{{newsTitle}}?</span>
-		        </p>
-		    </modal>
-			<!-- <i-button type="primary" icon="plus" @click="createNews">新建</i-button> -->
-			<a class="btn btn-primary" href="newsCOU/0"> <span class="glyphicon glyphicon-plus"></span>新建</a>
-			<i-table :columns="columns" :data="dataList" style="margin-top:20px;"></i-table>
-			<page v-model="totalPage" :current="1" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page>
-		</div>
-	</div>
+<link href="public/css/backend/lib/iview.css" rel="stylesheet" type="text/css">
+{% endblock %}
 
-	<script>
-		var pageName = "news";
-	</script>
-	<script src="public/js/backend/lib/jquery-1.10.2.min.js"></script>
-	<script src="public/js/backend/lib/bootstrap.min.js"></script>
-	<script src="public/js/backend/src/config.js"></script>
-	<!-- iview插件生成的js文件 -->
-	<script src="public/js/backend/src/newsMgr.js"></script>
-</body>
-</html>
+{% block container %}
+<div class="right">
+	<div class="newsMgr">
+		<i-col span="24">新闻</i-col>
+		<modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
+			<p style="color:#ed3f14;text-align:center">
+				<Icon type="information-circled"></Icon>
+				<span style="font-size: 15px;">确定删除新闻:{{newsTitle}}?</span>
+			</p>
+		</modal>
+		<a class="btn btn-primary" href="newsCOU/0"> <span class="glyphicon glyphicon-plus"></span>新建</a>
+		<i-table :columns="columns" :data="dataList" style="margin-top:20px;"></i-table>
+		<page v-model="totalPage" :current="1" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page>
+	</div>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="public/js/backend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/backend/lib/vue.min.js"></script>
+<script src="public/js/backend/lib/iview.min.js"></script>
+<script src="public/js/backend/lib/bootstrap.min.js"></script>
+<script src="public/js/backend/src/config.js"></script>
+<script src="public/js/backend/src/newsMgr.js"></script>
+{% endblock %}

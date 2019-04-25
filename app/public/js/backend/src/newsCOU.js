@@ -1,5 +1,7 @@
 'use strict';
 
+var pageName = "news";
+
 var urllib = OSS.urllib;
 var Buffer = OSS.Buffer;
 var OSS = OSS.Wrapper;
@@ -8,7 +10,7 @@ var STS = OSS.STS;
 var ue = UE.getEditor('content');
 
 var newsCOU = new Vue({
-	el:".newsCOU",
+	el:".index",
 	data:{
         dataSourse:{
         	id:"",

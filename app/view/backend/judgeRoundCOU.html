@@ -1,43 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link href="../public/css/backend/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
-<link href="../public/css/backend/src/main.css" type="text/css" rel="stylesheet">
+{% extends "backend/parent.html" %}
 
-<link rel="stylesheet" type="text/css" href="../public/css/backend/lib/iview.css">
+{% block cssfolder %}
+<link href="../public/css/backend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="../public/css/backend/src/main.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<section class="right">
+	<div class="judgeRoundCOU">
+		<i-col span="24">新建/修改评审轮次</i-col>
+		<div>
+			<i-form :model="dataSourse" :rules="ruleDataSourse" :label-width="180" style="width:80%;" v-cloak>
+				<form-item label="名称*" prop="roundName">
+					<i-input v-model="dataSourse.roundName"></i-input>
+				</form-item>
+				<form-item label="描述">
+					<i-input type="textarea" v-model="dataSourse.describes" :rows="6"></i-input>
+				</form-item>
+				<form-item>
+					<i-button type="primary" v-on:click="submit" long>确定</i-button>
+				</form-item>
+			 </i-form>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="../public/js/backend/lib/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="../public/js/backend/lib/vue.min.js"></script>
 <script type="text/javascript" src="../public/js/backend/lib/iview.min.js"></script>
-
-</head>
-<body>
-	<section class="right">
-		<div class="judgeRoundCOU">
-			<i-col span="24">新建/修改评审轮次</i-col>
-			<div>
-				<i-form :model="dataSourse" :rules="ruleDataSourse" :label-width="180" style="width:80%;" v-cloak>
-					<form-item label="名称*" prop="roundName">
-			            <i-input v-model="dataSourse.roundName"></i-input>
-			        </form-item>
-			        <form-item label="描述">
-			            <i-input type="textarea" v-model="dataSourse.describes" :rows="6"></i-input>
-			        </form-item>
-			        <form-item>
-			        	<i-button type="primary" v-on:click="submit" long>确定</i-button>
-			        </form-item>
-				 </i-form>
-			</div>
-		</div>
-	</section>
-	<script>
-		var pageName = "judgeRound";
-	</script>
-	<script src="../public/js/backend/lib/jquery-1.10.2.min.js"></script>
-	<script src="../public/js/backend/lib/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../public/js/backend/lib/promise.js"></script>
-	<script type="text/javascript" src="../public/js/backend/lib/aliyun-oss-sdk.min.js"></script>
-	<script type="text/javascript" src="../public/js/backend/lib/plupload.full.min.js"></script>
-	<script src="../public/js/backend/src/config.js"></script>
-	<script src="../public/js/backend/src/judgeRoundCOU.js"></script>
-
-</body>
-</html>
+<script src="../public/js/backend/src/config.js"></script>
+<script src="../public/js/backend/src/judgeRoundCOU.js"></script>
+{% endblock %}
