@@ -35,7 +35,7 @@ var vm = new Vue({
 	        			    },config.emailStatus[this.dataList[params.index].activesign])
 		              }
 			      },
-		          { title: '更新时间',key: 'createtime', align: 'center'},
+		          { title: '更新时间',key: 'createAt', align: 'center'},
 		          { title: '操作',key: 'valid', align: 'center',
 		       	   render: (h, params) => {
 		       		if (this.dataList[params.index].valid == 1) {
@@ -77,11 +77,7 @@ var vm = new Vue({
 			aoData1:[
 	  	        {name: "offset", value: 0},
 	  	        {name: "limit", value: 10}
-	      	],
-	      	aoData2:[
-	  	        {name: "email", value: ""},
-	  	        {name: "valid", value: 0}
-		    ],
+	      	]
 		}
 	 },
 	 methods:{
@@ -89,73 +85,65 @@ var vm = new Vue({
 		 	this.aoData1[0].value = (index-1)*10;
     		this.dataList = [];
     		var that = this;
-    		$.ajax({
-                "dataType":'json',
-                "type":"post",
-                "url":config.ajaxUrls.userGetByPage,
-                "data":this.aoData1,
-                "success": function (response) {
-                	that.dataList = response.aaData;
-                    if(response.success===false){
-	            		that.$Notice.error({title:response.message});
-                    }else{
-//	                    	清空数据盒，装新数据
-                    	that.dataList = response.aaData;
-                    }
-                }
-            });
+			$.ajax({
+				dataType:'json',
+				type:"get",
+				url:config.ajaxUrls.userGetByPage,
+				data:that.aoData1,
+				success: function (response) {
+					if(response.status == 200){
+						that.dataList = response.data.rows;
+						that.totalPage = response.data.count;
+					}else{
+						that.$Notice.error({title:response.data});
+					}
+				}
+			});
 		 },
 		 statusChange:function(index){
 			 var that = this;
-			 this.aoData2[0].value = this.dataList[index].email;
-			 if(this.dataList[index].valid == 0){
-				 this.aoData2[1].value = 1;
-			 }else{
-				 this.aoData2[1].value = 0;
-			 }
 	        $.ajax({
-	            "dataType":'json',
-	            "type":"post",
-	            "url":config.ajaxUrls.userActiveAction,
-	            "data":this.aoData2,
-	            "success": function (response) {
-	            	if(response.success===false){
-	            		that.$Notice.error({title:response.message});
+	            dataType:'json',
+	            type:"put",
+	            url:config.ajaxUrls.userActiveAction.replace(":id",this.dataList[index].Id),
+	            data:{valid : this.dataList[index].valid == 0 ? 1 : 0},
+	            success: function (response) {
+	            	if(response.status == 200){
+						that.$Notice.success({title:response.data});
+						$.ajax({
+							dataType:'json',
+							type:"get",
+							url:config.ajaxUrls.userGetByPage,
+							data:that.aoData1,
+							success: function (response) {
+								if(response.status == 200){
+									that.dataList = response.data.rows;
+									that.totalPage = response.data.count;
+								}else{
+									that.$Notice.error({title:response.data});
+								}
+							}
+						});
 	                }else{
-	                	that.$Notice.success({title:config.messages.optSuccess});
-	                	$.ajax({
-	                        "dataType":'json',
-	                        "type":"post",
-	                        "url":config.ajaxUrls.userGetByPage,
-	                        "data":that.aoData1,
-	                        "success": function (response) {
-	                        	if(response.success===false){
-	        	            		that.$Notice.error({title:response.message});
-	                            }else{
-	                            	that.dataList = response.aaData;
-	                            	that.totalPage = response.iTotalRecords;
-	                            }
-	                        }
-	                    });
+	            		that.$Notice.error({title:response.data});
 	                }
 	            }
 	        });
 		 }
 	 },
 	 created:function(){
-		 var that = this;
-		 $.ajax({
+		var that = this;
+		$.ajax({
             dataType:'json',
             type:"get",
             url:config.ajaxUrls.userGetByPage,
             data:this.aoData1,
             success: function (response) {
-				console.log(response);
             	if(response.status == 200){
 					that.dataList = response.data.rows;
 					that.totalPage = response.data.count;
                 }else{
-            		that.$Notice.error({title:response.message});
+            		that.$Notice.error({title:response.data});
                 }
             }
         });

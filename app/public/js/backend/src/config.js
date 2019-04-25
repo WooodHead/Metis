@@ -46,7 +46,7 @@ var config={
         manageNews:"/website/news",
 
         userGetByPage:"/website/user",
-        userActiveAction:"user/resetUserValid",
+        userActiveAction:"/website/user/updateValidByUserId/:id",
 
         worksGetByPage:"/website/production",
         workGetById:"production/getProductionDetailById/:id",
