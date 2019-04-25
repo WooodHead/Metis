@@ -1,5 +1,7 @@
 'use strict';
 
+const ueditor = require('egg-ueditor')
+
 /**
  * @param {Egg.Application} app - egg application
  */
@@ -48,4 +50,9 @@ module.exports = app => {
   router.resources('/website/news',controller.website.news);
   router.resources('/website/production',controller.website.production);
   router.resources('/website/review',controller.website.review);
+
+  router.all('/ueditor', ueditor(['app/public','public']，{
+  	"imageAllowFiles": [".png", ".jpg", ".jpeg"]
+  	"imagePathFormat": "/upload/ueditor/image/{yyyy}{mm}{dd}/{filename}"  // 保存为原文件名
+  }))
 };
