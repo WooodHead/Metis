@@ -34,7 +34,7 @@
 			     	<form-item label="头像">
 						<img :src="imgUrl ? imgUrl : '../public/images/defaultPeopleImage.jpg'" style="width:120px;height:120px;"><br>
 						<input type="file" @change="doUpload" ref="inputFile" accept="image/*"/></input>
-						<i-progress :percent="progressPercent" />
+						<i-progress :percent="progressPercent" /><span v-text="progressPercent + '%'"></span>
 					</form-item>
 			        <form-item label="姓名*">
 			            <i-input v-model="dataSourse.name" placeholder="请输入姓名"></i-input>

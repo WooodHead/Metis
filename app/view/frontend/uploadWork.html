@@ -122,24 +122,24 @@
 								<form-item label="图幅一" prop="fileName_1">
 									<img v-show="imgUrl_1.length" :src="imgUrl_1" style="width:120px;height:120px;"><br>
 									<input type="file" @change="doUpload_1" ref="inputFile" accept="image/*"/></input>
-									<i-progress :percent="progressPercent_1" />
+									<i-progress :percent="progressPercent_1" /><span v-text="progressPercent_1 + '%'"></span>
 								</form-item>
 								<form-item label="图幅二">
 									<img v-show="imgUrl_2.length" :src="imgUrl_2" style="width:120px;height:120px;"><br>
 									<input type="file" @change="doUpload_2" ref="inputFile" accept="image/*"/></input>
-									<i-progress :percent="progressPercent_2" />
+									<i-progress :percent="progressPercent_2" /><span v-text="progressPercent_2 + '%'"></span>
 								</form-item>
 								<form-item label="图幅三">
 									<img v-show="imgUrl_3.length" :src="imgUrl_3" style="width:120px;height:120px;"><br>
 									<input type="file" @change="doUpload_3" ref="inputFile" accept="image/*"/></input>
-									<i-progress :percent="progressPercent_3" />
+									<i-progress :percent="progressPercent_3" /><span v-text="progressPercent_3 + '%'"></span>
 								</form-item>
 								<form-item label="附件">
 				           			<label>请上传zip、rar格式压缩文件</label><br/>
 									<i-button icon="ios-book" id="step2_upload_ZIP_btn">附件(ZIP)</i-button>
 									<input type="file" @change="step2_upload_ZIP_change" id="step2_upload_ZIP_btninput" accept="application/x-zip-compressed" style="display:none;"/>
 									<p v-text="attachFileName"></p>
-									<i-progress :percent="attachFilePercent" />
+									<i-progress :percent="attachFilePercent" /><span v-text="attachFilePercent + '%'"></span>
 								</form-item>
 								<form-item>
 									<i-button type="primary" @click="goStep1">上一步</i-button>

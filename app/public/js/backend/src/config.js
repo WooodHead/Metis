@@ -24,7 +24,8 @@ var config={
             bucketDomain:"http://7xplk9.com1.z0.glb.clouddn.com/"
         },
         aLiYun:{
-            region:"oss-cn-shanghai"
+            region:"oss-cn-shanghai",
+            bucket:"dc-metis"
         },
         fileType:{
             productPath:1,

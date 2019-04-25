@@ -84,7 +84,7 @@ var judgeCOU = new Vue({
                       		accessKeyId: res.credentials.AccessKeyId,
                       		accessKeySecret: res.credentials.AccessKeySecret,
                       		stsToken: res.credentials.SecurityToken,
-                          	bucket:bucket
+                          	bucket:config.uploader.aLiYun.bucket
                     	});
                         client.multipartUpload('judges/'+ fileName, file, {
                     		progress: progress

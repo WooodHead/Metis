@@ -23,13 +23,13 @@
 			        <form-item label="封面图*">
 						<img v-show="imgUrl.length" :src="imgUrl" style="width:120px;height:120px;"><br>
 						<input type="file" @change="doUpload" ref="inputFile" accept="image/*"/></input>
-						<i-progress :percent="progressPercent" />
+						<i-progress :percent="progressPercent" /><span v-text="progressPercent + '%'"></span>
 					</form-item>
 			        <form-item label="标题*" prop="title">
 			            <i-input v-model="dataSourse.title" placeholder="请输入标题..." name="title">{{dataSourse.title}}</i-input>
 			        </form-item>
-			        <form-item label="摘要*" prop="newsAbstract">
-			            <i-input v-model="dataSourse.newsAbstract" placeholder="请输入摘要..." name="newsAbstract">{{dataSourse.newsAbstract}}</i-input>
+			        <form-item label="摘要*" prop="news_abstract">
+			            <i-input v-model="dataSourse.news_abstract" placeholder="请输入摘要..." name="news_abstract">{{dataSourse.news_abstract}}</i-input>
 			        </form-item>
 			         <form-item label="内容*" prop="content">
 			            <textarea v-model="dataSourse.content" name="content" id="content">{{dataSourse.content}}</textarea>
@@ -46,9 +46,9 @@
 	<script>
 		var pageName = "news";
 	</script>
-	<script id="container" name="content" type="text/plain">
+	<!-- <script id="container" name="content" type="text/plain">
 	        这里写你的初始化内容
-	    </script>
+	    </script> -->
 	<script src="../public/js/backend/lib/jquery-1.10.2.min.js"></script>
 	<!-- <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=your_API_key"></script> -->
 	<script src="../public/js/backend/lib/vue.min.js"></script>
@@ -60,9 +60,9 @@
 	<script src="../public/js/backend/lib/tinyMCE/tinymce.min.js"></script>
 	<script src="../public/ueditor/ueditor.config.js"></script>
 	<script src="../public/ueditor/ueditor.all.min.js"></script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 			 var ue = UE.getEditor('container');
-	 </script>
+	 </script> -->
 	<script src="../public/js/backend/src/config.js"></script>
 	<script src="../public/js/backend/src/newsCOU.js"></script>
 
