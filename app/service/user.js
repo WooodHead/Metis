@@ -11,7 +11,7 @@ class User extends Service {
     offset = 0,
     limit = 10
   }) {
-    return this.ctx.model.User.listUser({
+    return this.ctx.model.User.listUsers({
       offset,
       limit
     });
