@@ -76,7 +76,6 @@ module.exports = app => {
 
   News.getNewsById = async function(id){
     return this.findOne({
-      limit,
       where:{
         Id:id
       }

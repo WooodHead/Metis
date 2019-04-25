@@ -26,6 +26,7 @@ class NewsController extends BaseController{
       super.success(result);
     }
     catch(e){
+      console.log(e);
       ctx.logger.error(e.message);
       super.failure(e.message);
     }
