@@ -41,6 +41,7 @@ module.exports = app => {
   router.get('/website/user/updateAcviveByActiveCodeAndEmail', controller.website.user.updateAcviveByActiveCodeAndEmail);
   router.post('/website/file/uploadFile/:fileType',controller.website.file.uploadFile);
   router.get('/website/news/getTopNews',controller.website.news.getTopNews);
+  router.put('/website/user/updateValidByUserId/:id', controller.website.user.updateValidByUserId);
 
   router.put('/website/production/listProductionByUserId', controller.website.production.listProductionByUserId);
   router.put('/website/production/updateScore/:id', controller.website.production.updateScore);

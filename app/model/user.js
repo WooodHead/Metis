@@ -140,6 +140,7 @@ module.exports = app => {
       where:{
         mobile:mobile,
         activesign:1,
+        valid:0,
       },
       include:[
         {
@@ -159,6 +160,7 @@ module.exports = app => {
       where:{
         email:email,
         activesign:1,
+        valid:0,
       },
       include:[
         {
@@ -176,6 +178,16 @@ module.exports = app => {
   User.updateAcviveByUserId = async function(userId,active){
     return await this.update({
       activesign:active
+    },{
+      where:{
+        Id:userId
+      }
+    });
+  }
+
+  User.updateValidByUserId = async function(userId,valid){
+    return await this.update({
+      valid:valid
     },{
       where:{
         Id:userId

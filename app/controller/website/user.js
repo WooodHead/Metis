@@ -100,6 +100,20 @@ class UsersController extends BaseController{
     }
   }
 
+  async updateValidByUserId(){
+    const ctx = this.ctx;
+    const userId = ctx.helper.parseInt(ctx.params.id);
+    const valid = ctx.helper.parseInt(ctx.query.valid);
+    try{
+      await ctx.service.user.updateValidByUserId(userId,valid);
+      super.success(ctx.__('updateSuccessful'));
+    }
+    catch(e){
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
+  }
+
   async getCaptcha(){
     let codeConfig = {
         size: 5,// 验证码长度

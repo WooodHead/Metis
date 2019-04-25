@@ -165,7 +165,10 @@ class User extends Service {
       this.ctx.logger.error(e.message);
       return false;
     }
+  }
 
+  async updateValidByUserId(userId,valid){
+    await this.ctx.model.User.updateValidByUserId(userId, valid);
   }
 
   async updatePwdWithMobileAndSmsCode(mobile, smsCode, newPwd) {
