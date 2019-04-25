@@ -41,9 +41,9 @@ var config={
         newsGetByPage:"news/findNewsByPage",
         newsCreate:"/website/news",
         newsUpdate:"news/updateNews",
-        newsRemove:"news/deleteNews/:id",
-        newsDetail:"news/findNewsById/:id",
-        manageNews:"news/findManageNewsByPage",
+        newsRemove:"/website/news/:id",
+        newsDetail:"/website/news/:id",
+        manageNews:"/website/news",
         userGetByPage:"user/getDataTableUserByPage",
         userActiveAction:"user/resetUserValid",
 
@@ -75,8 +75,8 @@ var config={
         getUrlSignature:"/getUrlSignature"
     },
     viewUrls:{
-        newsMgr:"news/newsMgr",
-        newsUpdate:"news/newsCOU/:id",
+        newsMgr:"/newsMgr",
+        newsUpdate:"newsCOU/:id",
         judgeMgr:"/judgeMgr",
         judgeUpdate:"judgeCOU/:id",
         judgeRoundMgr:"/judgeRoundMgr",

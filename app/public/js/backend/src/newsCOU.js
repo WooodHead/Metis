@@ -32,17 +32,17 @@ var newsCOU = new Vue({
         progressPercent:0
     },
     created: function(){
-    	this.dataSourse.id = window.location.href.split("news/newsCOU/")[1];
-    	if(this.dataSourse.id){			//修改
+    	this.dataSourse.id = window.location.href.split("newsCOU/")[1];
+    	if(this.dataSourse.id > 0){			//修改
     		var that = this;
-    		var url = config.ajaxUrls.newsDetail.replace(":id",this.dataSourse.id);
     		$.ajax({
                 dataType:"json",
                 type:"get",
-                url:url,
+                url:config.ajaxUrls.newsDetail.replace(":id",this.dataSourse.id),
                 data:{id:that.dataSourse.id},
                 success:function(response){
-                    if(response.success){
+					console.log(response);
+                    if(response.status == 200){
                     	that.imgUrl = response.object.thumb;
             	  		that.fileName = response.object.thumb;
             	  		that.progressPercent = 100;
@@ -154,17 +154,17 @@ var newsCOU = new Vue({
 	    	        data:JSON.stringify(that.dataSourse),
 	    	        success:function(response){
 	    	        	console.log(response);
-	    	            if(response.success){
-	    	                // if(that.redirectUrl){
-	    	                // 	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccRedirect});
-	    	                //     setTimeout(function(){
-	        	            //         window.location.href=that.redirectUrl;
-	    	                //     },3000);
-	    	                // }else{
-	    	                // 	that.$Notice.success({title:that.successMessage?that.successMessage:config.messages.optSuccess});
-	    	                // }
+	    	            if(response.status == 200){
+	    	                if(that.redirectUrl){
+	    	                	that.$Notice.success({title:response.data});
+	    	                    setTimeout(function(){
+	        	                    window.location.href = that.redirectUrl;
+	    	                    },3000);
+	    	                }else{
+	    	                	that.$Notice.success({title:response.data});
+	    	                }
 	    	            }else{
-	    	            	that.$Notice.error({title:response.message});
+	    	            	that.$Notice.error({title:response.data});
 	    	            }
 	    	        },
 	    	        error:function(){

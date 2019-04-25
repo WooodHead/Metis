@@ -94,6 +94,13 @@ class HomeController extends Controller {
     });
   }
 
+  async newsMgr(){
+    const ctx = this.ctx;
+    await ctx.render('backend/newsMgr.html', {
+
+    });
+  }
+
   async newsCOU(){
     const ctx = this.ctx;
     await ctx.render('backend/newsCOU.html', {
