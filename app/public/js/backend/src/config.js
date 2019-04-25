@@ -38,7 +38,7 @@ var config={
         imageGet:"file/image",
         newsGetAll:"news/findNewsByPage",
         newsGetByPage:"news/findNewsByPage",
-        newsCreate:"news/createNews",
+        newsCreate:"/website/news",
         newsUpdate:"news/updateNews",
         newsRemove:"news/deleteNews/:id",
         newsDetail:"news/findNewsById/:id",
