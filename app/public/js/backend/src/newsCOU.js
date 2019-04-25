@@ -14,7 +14,6 @@ var newsCOU = new Vue({
         	id:"",
         	language:"0",
         	title:"",
-            publishTime:"",
             news_abstract:"",
             content:"",
             thumb: ""
@@ -23,7 +22,6 @@ var newsCOU = new Vue({
         	title:[{ required: true,max: 50, message: '请字数控制在50以内', trigger: 'blur' }],
         	news_abstract:[{ required: true,max: 225, message: '请字数控制在225以内', trigger: 'blur' }]
         },
-        imgShow:false,
         submitUrl: "",
         redirectUrl:config.viewUrls.newsMgr,
 
@@ -39,38 +37,20 @@ var newsCOU = new Vue({
                 dataType:"json",
                 type:"get",
                 url:config.ajaxUrls.newsDetail.replace(":id",this.dataSourse.id),
-                data:{id:that.dataSourse.id},
                 success:function(response){
-					console.log(response);
                     if(response.status == 200){
-                    	that.imgUrl = response.object.thumb;
-            	  		that.fileName = response.object.thumb;
+                    	that.imgUrl = response.data.thumb;
+            	  		that.fileName = response.data.thumb.split("?")[0].split("news/")[1];
             	  		that.progressPercent = 100;
-                    	that.dataSourse.title = response.object.title;
-                    	that.dataSourse.publishTime = response.object.publishTime;
-                    	that.dataSourse.news_abstract = response.object.news_abstract;
-                    	var contentArr = "",
-                    		str = "";
-                    	contentArr = response.object.content.split("../");
-                    	for(var i=0; i<contentArr.length;i++){
-                    		if(contentArr[i] != ""){
-                        		if(i != contentArr.length -1){
-                            		str = str + contentArr[i] + "../../";
-                        		}else{
-                        			str = str + contentArr[i];
-                        		}
-                    		}
-                    	}
-                    	that.dataSourse.content = str;
-                    	that.dataSourse.id = response.object.id;
-                    	if(response.object.language){
+                    	that.dataSourse.title = response.data.title;
+                    	that.dataSourse.news_abstract = response.data.news_abstract;
+                    	that.dataSourse.content = response.data.content;
+                    	if(response.data.language){
                     		that.dataSourse.language = "1";
                     	}else{
                     		that.dataSourse.language = "0";
                     	}
-                    	that.imgShow = true;
-                    	that.submitUrl = config.ajaxUrls.newsUpdate;
-                    	console.log(that.submitUrl);
+                    	that.submitUrl = config.ajaxUrls.newsUpdate.replace(":id",that.dataSourse.id);
                     }else{
                     	that.$Notice.error({title:response.message});
                     }
@@ -144,7 +124,30 @@ var newsCOU = new Vue({
     		this.dataSourse.thumb = this.fileName;
 			this.dataSourse.content = ue.getContent();
 			if(this.dataSourse.id > 0){
-
+				$.ajax({
+	    	        url:that.submitUrl,
+	    	        type:"put",
+	    	        dataType:"json",
+	    	        contentType :"application/json; charset=UTF-8",
+	    	        data:JSON.stringify(that.dataSourse),
+	    	        success:function(response){
+	    	            if(response.status == 200){
+	    	                if(that.redirectUrl){
+	    	                	that.$Notice.success({title:response.data});
+	    	                    setTimeout(function(){
+	        	                    window.location.href = that.redirectUrl;
+	    	                    },2000);
+	    	                }else{
+	    	                	that.$Notice.success({title:response.data});
+	    	                }
+	    	            }else{
+	    	            	that.$Notice.error({title:response.data});
+	    	            }
+	    	        },
+	    	        error:function(){
+	    	        	that.$Notice.error({title:config.messages.networkError});
+	    	        }
+	    	    });
 			}else{
 				$.ajax({
 	    	        url:that.submitUrl,
@@ -153,13 +156,12 @@ var newsCOU = new Vue({
 	    	        contentType :"application/json; charset=UTF-8",
 	    	        data:JSON.stringify(that.dataSourse),
 	    	        success:function(response){
-	    	        	console.log(response);
 	    	            if(response.status == 200){
 	    	                if(that.redirectUrl){
 	    	                	that.$Notice.success({title:response.data});
 	    	                    setTimeout(function(){
 	        	                    window.location.href = that.redirectUrl;
-	    	                    },3000);
+	    	                    },2000);
 	    	                }else{
 	    	                	that.$Notice.success({title:response.data});
 	    	                }

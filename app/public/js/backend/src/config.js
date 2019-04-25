@@ -40,7 +40,7 @@ var config={
         newsGetAll:"news/findNewsByPage",
         newsGetByPage:"news/findNewsByPage",
         newsCreate:"/website/news",
-        newsUpdate:"news/updateNews",
+        newsUpdate:"/website/news/:id",
         newsRemove:"/website/news/:id",
         newsDetail:"/website/news/:id",
         manageNews:"/website/news",
