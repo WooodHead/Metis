@@ -103,7 +103,7 @@ class UsersController extends BaseController{
   async updateValidByUserId(){
     const ctx = this.ctx;
     const userId = ctx.helper.parseInt(ctx.params.id);
-    const valid = ctx.helper.parseInt(ctx.query.valid);
+    const valid = ctx.helper.parseInt(ctx.request.body.valid);
     try{
       await ctx.service.user.updateValidByUserId(userId,valid);
       super.success(ctx.__('updateSuccessful'));
