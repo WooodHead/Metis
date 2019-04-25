@@ -26,7 +26,6 @@ class NewsController extends BaseController{
       super.success(result);
     }
     catch(e){
-      console.log(e);
       ctx.logger.error(e.message);
       super.failure(e.message);
     }
@@ -41,7 +40,6 @@ class NewsController extends BaseController{
 
     }
     catch(e){
-      console.log(e);
       ctx.logger.error(e.message);
       super.failure(e.message);
     }
@@ -75,6 +73,23 @@ class NewsController extends BaseController{
     try{
       await ctx.service.news.delNewsById(id);
       super.success(ctx.__('deletedSuccessful'));
+    }
+    catch(e){
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
+  }
+
+  async getTopNews() {
+    const ctx = this.ctx;
+    const query = {
+      limit: ctx.helper.parseInt(ctx.query.limit),
+      language: ctx.helper.parseInt(ctx.query.language),
+    };
+
+    try{
+      const result = await ctx.service.news.getTopNews(query);
+      super.success(result);
     }
     catch(e){
       ctx.logger.error(e.message);
