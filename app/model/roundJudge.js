@@ -79,5 +79,9 @@ module.exports = app => {
     });
   }
 
+  RoundJudge.getAllRoundJudge = async function(){
+    return this.findAll();
+  }
+
   return RoundJudge;
 };

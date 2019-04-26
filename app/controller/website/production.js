@@ -96,13 +96,11 @@ class ProductionController extends BaseController{
     }
   }
 
-  async updateScore() {
+  async updateAverageScore() {
     const ctx = this.ctx;
-    const Id = ctx.helper.parseInt(ctx.params.id);
-    const averageScore = ctx.request.body.averageScore;
     const round = ctx.helper.parseInt(ctx.request.body.round);
     try{
-      await ctx.service.production.updateScore({Id,averageScore,round});
+      await ctx.service.production.updateScore(round);
       super.success(ctx.__('updateSuccessful'));
     }
     catch(e){
@@ -118,6 +116,19 @@ class ProductionController extends BaseController{
     try{
       await ctx.service.production.updateStatus(Id, status);
       super.success(ctx.__('updateSuccessful'));
+    }
+    catch(e){
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
+  }
+
+  async getScoreDetailById(){
+    const ctx = this.ctx;
+    const id = ctx.helper.parseInt(ctx.params.id);
+    try{
+      let result = await ctx.service.production.getScoreDetailById(id);
+      super.success(result);
     }
     catch(e){
       ctx.logger.error(e.message);

@@ -76,5 +76,16 @@ module.exports = app => {
       }
     });
   }
+
+  Review.getScoreByRoundAndProductionId = async function(round,productionId){
+    return await this.findAll({
+      where:{
+        round:round,
+        productionId:productionId
+      },
+      attributes:['score']
+    });
+  }
+  
   return Review;
 };

@@ -51,7 +51,9 @@ module.exports = app => {
   router.put('/website/user/updatePwd', controller.website.user.updatePwd);
 
   router.get('/website/production/listProductionByUserId', controller.website.production.listProductionByUserId);
-  router.put('/website/production/updateScore/:id', controller.website.production.updateScore);
+  router.put('/website/production/updateAverageScore', controller.website.production.updateAverageScore);
+  router.get('/website/production/getScoreDetailById/:id', controller.website.production.getScoreDetailById);
+
   router.put('/website/production/updateStatus/:id', controller.website.production.updateStatus);
   router.put('/website/roundJudge/bindJudge/:id', controller.website.roundJudge.bindJudge);
   router.put('/website/roundJudge/updateBindJudge/:id', controller.website.roundJudge.updateBindJudge);
