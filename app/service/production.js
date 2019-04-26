@@ -12,7 +12,7 @@ class ProductionService extends Service {
     return await this.ctx.model.Production.updateProduction({id,updates});
   }
 
-  async delProductionById(){
+  async delProductionById(id){
     return await this.ctx.model.Production.delProductionById(id);
   }
 
