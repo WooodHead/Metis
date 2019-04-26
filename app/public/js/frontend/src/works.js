@@ -1,5 +1,6 @@
+var pageName = "works";
 var works = new Vue({
-	el:".works",
+	el:".index",
 	data:function(){
 		return{
 			index:"",			//作品序列
@@ -7,7 +8,7 @@ var works = new Vue({
 			productTitle:"",	//作品标题
 			total:0,
 			columns: [
-			    {title:"ID",key:"id",align: 'center'},
+			    {title:"ID",key:"Id",align: 'center'},
 			    {title:"标题",key:"title",align: 'center'},
 			    {title:"简介",key:"content",align: 'center'},
 			    {title:"状态",key:"status",align: 'center',
@@ -51,10 +52,10 @@ var works = new Vue({
 	                       ]);
 				    	}else{
 				    		return h('div', [
-	                           h('Button', { 
+	                           h('Button', {
 	                        	   props: { type: 'primary', size: 'small' },
 	                               style: { marginRight: '5px' },
-	                               on: { 
+	                               on: {
 	                            	   click: () => {
 	                                       this.check(params.index)
 	                                   }
@@ -62,7 +63,7 @@ var works = new Vue({
 	                           }, '查看')
 	                       ]);
 				    	}
-	                       
+
 	                 }
 			    }
 			],
@@ -73,42 +74,42 @@ var works = new Vue({
         		width:"80%"
             },
             urlData:{
-                groupNum: 0,
-                subGroupNum: 0,
-                status: 0,
-                userId: 0,
-                round:0,
-                iDisplayStart: 0,
-                iDisplayLength: 10,
-                sEcho: "zy"
+                limit: 10,
+                offset: 0
             }
 		}
 	},
 	methods:{
 		pageChange:function(page){
-			console.log("pageChange",page);
-			this.urlData.iDisplayStart = (page-1)*10;
+			this.urlData.offset = (page-1)*10;
     		var that = this;
-    		$.ajax({
-    	          url: config.ajaxUrls.worksGetByPage,
-    	          type: "get",
-    	          data: this.urlData,
-    	          success: function (res) {
-    	              that.$Loading.finish();
-    	              that.dataList = res.aaData;
-    	              that.total = res.iTotalRecords;
-    	          },
-    	          error: function () {
-    	        	  that.$Loading.error();
-    	        	  that.$Notice.error({title:res.message});
-    	          }
-    	      })
+			that.$Loading.start();
+			$.ajax({
+				url: config.ajaxUrls.worksGetByPage,
+	          	type: "get",
+	          	data: this.urlData,
+	          	success: function (res) {
+					if(res.status == 200){
+						console.log(res);
+		              	that.$Loading.finish();
+		              	that.dataList = res.data.rows;
+		              	that.total = res.data.count;
+					}else{
+		        	  	that.$Loading.error();
+		        	  	that.$Notice.error({title:res.data});
+					}
+	          	},
+	          	error: function () {
+	        	  	that.$Loading.error();
+	        	  	that.$Notice.error({title:res.data});
+	          	}
+			})
 		},
 		check:function(index){
-			window.location.href = "production/workDetail/" + this.dataList[index].id;
+			window.location.href = "production/workDetail/" + this.dataList[index].Id;
 		},
 		change:function(index){
-			window.location.href = "production/uploadWork/" + this.dataList[index].id;
+			window.location.href = "uploadWork/" + this.dataList[index].Id;
 		},
 		remove:function(index){
 			this.index = index;
@@ -119,30 +120,34 @@ var works = new Vue({
 			var that = this;
 			this.$Loading.start();
 			$.ajax({
-              url: config.ajaxUrls.workRemove.replace(":id", this.dataList[this.index].id),
-              type: "get",
+              url: config.ajaxUrls.workRemove.replace(":id", this.dataList[this.index].Id),
+              type: "delete",
               dataType: "json",
               success: function (res) {
-                  if (res.success) {
+				  console.log(res);
+                  if (res.status == 200) {
                      that.$Notice.success({title:config.messages.optSuccess});
-                     $.ajax({
-                         url: config.ajaxUrls.worksGetByPage,
-                         type: "get",
-                         data: that.urlData,
-                         success: function (res) {
-                             that.$Loading.finish();
-                             that.dataList = res.aaData;
-                             that.total = res.iTotalRecords;
-                         },
-                         error: function () {
-	                       	 that.$Loading.error();
-	                       	 that.$Notice.error({title:res.message});
-                         }
-                     })
-                  } else {
-                      that.$Notice.error({title:res.message});
-                      that.$Loading.error();
-                  }
+					 $.ajax({
+ 						url: config.ajaxUrls.worksGetByPage,
+ 			          	type: "get",
+ 			          	data: that.urlData,
+ 			          	success: function (res) {
+ 							if(res.status == 200){
+ 								console.log(res);
+ 				              	that.$Loading.finish();
+ 				              	that.dataList = res.data.rows;
+ 				              	that.total = res.data.count;
+ 							}else{
+ 				        	  	that.$Loading.error();
+ 				        	  	that.$Notice.error({title:res.data});
+ 							}
+ 			          	},
+ 			          	error: function () {
+ 			        	  	that.$Loading.error();
+ 			        	  	that.$Notice.error({title:res.data});
+ 			          	}
+ 					})
+				}
 
               }
           });
@@ -157,13 +162,19 @@ var works = new Vue({
           	type: "get",
           	data: this.urlData,
           	success: function (res) {
-              	that.$Loading.finish();
-              	that.dataList = res.aaData;
-              	that.total = res.iTotalRecords;
+				if(res.status == 200){
+					console.log(res);
+	              	that.$Loading.finish();
+	              	that.dataList = res.data.rows;
+	              	that.total = res.data.count;
+				}else{
+	        	  	that.$Loading.error();
+	        	  	that.$Notice.error({title:res.data});
+				}
           	},
           	error: function () {
         	  	that.$Loading.error();
-        	  	that.$Notice.error({title:res.message});
+        	  	that.$Notice.error({title:res.data});
           	}
 		})
 	}

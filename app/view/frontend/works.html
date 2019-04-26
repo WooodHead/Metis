@@ -1,34 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- <link href="public/css/frontend/src/JMCSS/Header.css" type="text/css" rel="stylesheet">
-<link href="public/css/frontend/src/JMCSS/pageMenu.css" type="text/css" rel="stylesheet"> -->
-<link href="public/css/frontend/JMCSS/works.css" type="text/css" rel="stylesheet">
+{% extends "frontend/parent.html" %}
 
-<!-- vue和iview引用文件 -->
-<link rel="stylesheet" type="text/css" href="public/css/frontend/lib/iview.css">
-<script type="text/javascript" src="public/js/frontend/lib/vue.min.js"></script>
-<script type="text/javascript" src="public/js/frontend/lib/iview.min.js"></script>
-</head>
-<body style="max-width:none;">
-	<div class="works" :style="workStyle" v-cloak>
-		<modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
-	        <p style="color:#ed3f14;text-align:center">
-	            <Icon type="information-circled"></Icon>
-	            <span style="font-size: 15px;">确定删除作品:{{productTitle}}？</span>
-	        </p>
-	    </modal>
-		<i-table :columns="columns" :data="dataList"></i-table>
-		<page class="page" :total="total" @on-change="pageChange"></page>
-	</div>
+{% block cssfolder %}
+<link href="public/css/frontend/lib/iview.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/pageMenu.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/works.css" type="text/css" rel="stylesheet">
+{% endblock %}
 
-	<script>
-		var pageName = "works";
-	</script>
+{% block menu %}
+<ul class="zyPageMenu">
+	<li class="zyItem"><a class="zyLink" href="/works" data-page-name="works">作品管理</a></li>
+	<li class="zyItem"><a class="zyLink" href="/uploadWork/0" data-page-name="uploadWork">作品上传</a></li>
+	<li class="zyItem"><a class="zyLink" href="/resetInfo" data-page-name="setting">信息修改</a></li>
+</ul>
+{% endblock %}
 
+{% block container %}
+<div class="works" :style="workStyle" v-cloak>
+	<modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
+		<p style="color:#ed3f14;text-align:center">
+			<Icon type="information-circled"></Icon>
+			<span style="font-size: 15px;">确定删除作品:{{productTitle}}？</span>
+		</p>
+	</modal>
+	<i-table :columns="columns" :data="dataList"></i-table>
+	<page class="page" :total="total" @on-change="pageChange"></page>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
 	<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+	<script src="public/js/frontend/lib/vue.min.js"></script>
+	<script src="public/js/frontend/lib/iview.min.js"></script>
 	<script src="public/js/frontend/src/config.js"></script>
 	<script src="public/js/frontend/src/works.js"></script>
 	<script src="public/js/frontend/src/header.js"></script>
-</body>
-</html>
+{% endblock %}

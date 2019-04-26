@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>dc-metis</title>
+
+    <!-- css文件引用 -->
+    {% block cssfolder %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+    <!-- 头部 -->
+    {% block header %}
+    <div class="JMHeader">
+        <div class="JMLogo">
+            <a href=""><img alt="" src="resources/frontend/images/app/Logo.png"></a>
+        </div>
+        <div class="JMNoticeBoard">
+            <div class="JMNoticeBoardLeft">
+                <a href="login">
+                    <spring:message code="sign_up" /></a>
+            </div>
+            <div class="JMNoticeBoardRight">
+                <div class="JMItem">
+                    <span id="countDown" class="countDown"></span>征稿剩余天数
+                </div>
+            </div>
+        </div>
+        <div class="JMTopNav">
+            <ul class="JMMenu">
+                <li class="JMItem"><a class="JMLink" href="judge/judge" data-page-name="judge">评委</a></li>
+                <li class="JMItem"><a class="JMLink" href="rule/rules" data-page-name="rule">章程</a></li>
+                <li class="JMItem"><a class="JMLink" href="news/news/1" data-page-name="news">新闻</a></li>
+                <li class="JMItem"><a class="JMLink" href="index" data-page-name="index">首页</a></li>
+            </ul>
+            <div>
+                <a href="${pageContext.request.contextPath}/index?locale=zh" data-page-name="zh">中文</a>
+                <a href="${pageContext.request.contextPath}/index?locale=en" data-page-name="en">英文</a>
+            </div>
+            <ul class="JMUserMenu">
+                <c:if test="${!empty sessionScope.userId}">
+                    <li class="JMItem"><a href="production/works" class="JMLink JM20C7BE">[ ${sessionScope.realname} ]</a></li>
+                    <li class="JMItem"><a class="JMLink" href="logout">
+                            <spring:message code="logout" />
+                            <fmt:message key="logout" /></a></li>
+                </c:if>
+                <c:if test="${empty sessionScope.userId}">
+                    <li style="position: absolute;top: 15px;border-left: solid 2px #6d6d6d;height: 23px;"></li>
+                    <li class="JMItem" style="width: 33px;margin-left: 33px;margin-right: 30px;"><a class="JMLink JMIconUser" href="login"> </a></li>
+                </c:if>
+            </ul>
+        </div>
+    </div>
+    {% endblock %}
+
+    <!-- 注册用户菜单 -->
+    {% block menu %}
+
+    {% endblock %}
+
+    <!-- 内容 -->
+    <div class="index" v-cloak>
+        {% block container %}
+
+        {% endblock %}
+    </div>
+
+    <!-- 底部信息 -->
+    {% block footer %}
+    <div class="JMFooter">
+    	<div class="JMFooter">
+    		<span style="margin-top: 20px;display: inline-block;">	&copy;湖南省康复辅具技术指导中心</span><br>
+    		<span style="margin-top: 6px;display: inline-block;">网站版权所有 2018 湘ICP备14018746号-1</span>
+    	</div>
+    </div>
+    {% endblock %}
+
+    <!-- js文件引用 -->
+    {% block jsfolder %}
+
+    {% endblock %}
+</body>
+
+</html>

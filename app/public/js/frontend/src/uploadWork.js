@@ -1,5 +1,5 @@
 'use strict';
-
+var pageName = "uploadWork";
 var bucket = 'dc-metis';
 var urllib = OSS.urllib;
 var Buffer = OSS.Buffer;
@@ -7,7 +7,7 @@ var OSS = OSS.Wrapper;
 var STS = OSS.STS;
 
 var uploadWork = new Vue({
-	el:".uploadWork",
+	el:".index",
 	data:function(){
 		return{
 			current:0,
