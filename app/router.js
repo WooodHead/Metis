@@ -9,6 +9,7 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
   router.get('/login', controller.home.login);
+  router.get('/logout', controller.home.logout);
   router.get('/register', controller.home.register);
   router.get('/relogin', controller.home.relogin);
   router.get('/uploadWork/:id', controller.home.uploadWork);

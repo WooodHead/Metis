@@ -16,6 +16,12 @@ class HomeController extends Controller {
     //console.log(this.ctx.cookies.get('locale', { httpOnly: false, signed: false }));
   }
 
+  async logout(){
+    const ctx = this.ctx;
+    ctx.logout();
+    await ctx.render('frontend/index.html');
+  }
+
   async register() {
     const ctx = this.ctx;
     await ctx.render('frontend/register.html', {
@@ -58,10 +64,10 @@ class HomeController extends Controller {
           ctx.redirect('/newsMgr');
         }
         else if (ctx.user.roles[0].rolename == 'judge'){
-          ctx.redirect('/login');
+          ctx.redirect('/judge');
         }
         else{
-          ctx.redirect('/login');
+          ctx.redirect('/works');
         }
       }
       else{

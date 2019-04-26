@@ -27,7 +27,7 @@ module.exports = app => {
     else{
       existsUser = await ctx.service.user.loginFindByUserWithMobile(user.username);
     }
-    
+
     if (existsUser) {
 
       if (ctx.helper.cryptoPwd(ctx.helper.cryptoPwd(user.password)) == existsUser.password){
