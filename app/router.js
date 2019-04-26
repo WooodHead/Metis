@@ -48,6 +48,7 @@ module.exports = app => {
   router.post('/website/file/uploadFile/:fileType',controller.website.file.uploadFile);
   router.get('/website/news/getTopNews',controller.website.news.getTopNews);
   router.put('/website/user/updateValidByUserId/:id', controller.website.user.updateValidByUserId);
+  router.put('/website/user/updatePwd', controller.website.user.updatePwd);
 
   router.get('/website/production/listProductionByUserId', controller.website.production.listProductionByUserId);
   router.put('/website/production/updateScore/:id', controller.website.production.updateScore);
