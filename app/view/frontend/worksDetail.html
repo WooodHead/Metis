@@ -7,8 +7,16 @@
 <link href="../public/css/frontend/src/worksDetail.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
+{% block menu %}
+<ul class="zyPageMenu">
+	<li class="zyItem"><a class="zyLink" href="/works" data-page-name="works">作品管理</a></li>
+	<li class="zyItem"><a class="zyLink" href="/uploadWork/0" data-page-name="uploadWork">作品上传</a></li>
+	<li class="zyItem"><a class="zyLink" href="/resetInfo" data-page-name="setting">信息修改</a></li>
+</ul>
+{% endblock %}
+
 {% block container %}
-<div class="workDetail">
+<div class="workDetail" :style="worksDetailStyle">
 	<h2 class="title" v-text="'标题：'+title"></h2>
 	<p class="content" v-text="'简介：'+content"></p>
 	<div class="attachFile" v-show="attach_file">

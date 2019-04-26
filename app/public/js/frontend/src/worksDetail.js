@@ -1,6 +1,6 @@
 
 'use strict';
-var pageName = "xxx";
+var pageName = "works";
 
 // var appServer = 'http://localhost:8080/dcpro/sigUploadKey/1';
 // var bucket = 'dc-sys-pro';
@@ -15,6 +15,12 @@ var workDetail = new Vue({
 	el:".index",
 	data:function(){
 		return{
+			worksDetailStyle:{
+				width:"60%",
+				margin:"30px auto",
+				minHeight:"",
+				textAlign:"center",
+			},
 			productionId:"",
 			participant_name:"",
 			participant_id_number:"",
@@ -31,7 +37,8 @@ var workDetail = new Vue({
 	},
 	created:function(){
 		let that = this;
-		this.productionId = window.location.href.split("workDetail/")[1];
+		this.worksDetailStyle.minHeight = (document.documentElement.clientHeight - 300 ) + "px";
+		this.productionId = window.location.href.split("worksDetail/")[1];
 		$.ajax({
           url: config.ajaxUrls.workDetail.replace(":id",this.productionId),
           type: "get",

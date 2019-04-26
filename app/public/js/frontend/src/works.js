@@ -168,9 +168,9 @@ var works = new Vue({
 	        	  	that.$Notice.error({title:res.data});
 				}
           	},
-          	error: function () {
+          	error: function (e) {
         	  	that.$Loading.error();
-        	  	that.$Notice.error({title:res.data});
+        	  	that.$Notice.error({title:config.messages.loadDataError});
           	}
 		})
 	}

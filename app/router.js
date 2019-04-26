@@ -15,6 +15,7 @@ module.exports = app => {
   router.get('/uploadWork/:id', controller.home.uploadWork);
   router.get('/works', controller.home.works);
   router.get('/worksDetail/:id', controller.home.worksDetail);
+  router.get('/resetInfo', controller.home.resetInfo);
   router.get('/judge', controller.home.judge);
 
   router.get('/judgeMgr', controller.home.judgeMgr);

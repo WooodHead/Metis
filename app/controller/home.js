@@ -50,6 +50,13 @@ class HomeController extends Controller {
     });
   }
 
+  async resetInfo() {
+    const ctx = this.ctx;
+    await ctx.render('frontend/resetInfo.html', {
+
+    });
+  }
+
   async judge() {
     const ctx = this.ctx;
     await ctx.render('frontend/judge.html', {
