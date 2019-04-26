@@ -41,7 +41,7 @@ class HomeController extends Controller {
     if(ctx.isAuthenticated()){
       if(ctx.user.roles && ctx.user.roles.length > 0){
         if (ctx.user.roles[0].rolename == 'admin'){
-          ctx.redirect('/login');
+          ctx.redirect('/newsMgr');
         }
         else if (ctx.user.roles[0].rolename == 'judge'){
           ctx.redirect('/login');
