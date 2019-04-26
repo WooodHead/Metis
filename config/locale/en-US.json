@@ -1,4 +1,6 @@
 {
+  "closed":"closed",
+  "hiEgg":"hi egg",
   "updateSuccessful":"update successful",
   "updateFailed": "update failed",
   "successfulOperation": "successful operation",
