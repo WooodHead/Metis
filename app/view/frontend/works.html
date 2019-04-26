@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <link href="public/css/frontend/src/JMCSS/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/JMCSS/pageMenu.css" type="text/css" rel="stylesheet"> -->
+<link href="public/css/frontend/JMCSS/works.css" type="text/css" rel="stylesheet">
+
+<!-- vue和iview引用文件 -->
+<link rel="stylesheet" type="text/css" href="public/css/frontend/lib/iview.css">
+<script type="text/javascript" src="public/js/frontend/lib/vue.min.js"></script>
+<script type="text/javascript" src="public/js/frontend/lib/iview.min.js"></script>
+</head>
+<body style="max-width:none;">
+	<div class="works" :style="workStyle" v-cloak>
+		<modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
+	        <p style="color:#ed3f14;text-align:center">
+	            <Icon type="information-circled"></Icon>
+	            <span style="font-size: 15px;">确定删除作品:{{productTitle}}？</span>
+	        </p>
+	    </modal>
+		<i-table :columns="columns" :data="dataList"></i-table>
+		<page class="page" :total="total" @on-change="pageChange"></page>
+	</div>
+
+	<script>
+		var pageName = "works";
+	</script>
+
+	<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+	<script src="public/js/frontend/src/config.js"></script>
+	<script src="public/js/frontend/src/works.js"></script>
+	<script src="public/js/frontend/src/header.js"></script>
+</body>
+</html>
