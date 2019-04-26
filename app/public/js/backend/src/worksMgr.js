@@ -87,7 +87,7 @@ var vm = new Vue({
                	   	render: (h, params) => {
                           return h('a', {
                                   props: { type: 'primary', size: 'small' },
-                                  attrs :{ href:	config.viewUrls.manageWorkDetail.replace(":id",this.dataList[params.index].id), target:"_blank" },
+                                  attrs :{ href:	config.viewUrls.manageWorkDetail.replace(":id",this.dataList[params.index].Id)},
                                   style: { marginRight: '5px' }
                               }, "详情")
                       }

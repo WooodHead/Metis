@@ -50,6 +50,7 @@ var config={
 
         worksGetByPage:"/website/production",
         workGetById:"production/getProductionDetailById/:id",
+        workDetail:"/website/production/:id",
         workRemove:"production/deleteProduction/:id",
         workSetStatus:"/website/production/updateStatus/:id",
         workSetRound:"/website/review",
@@ -82,7 +83,7 @@ var config={
         judgeUpdate:"judgeCOU/:id",
         judgeRoundMgr:"/judgeRoundMgr",
         judgeRoundUpdate:"/judgeRoundCOU/:id",
-        manageWorkDetail:"production/manageWorkDetail/:id"
+        manageWorkDetail:"/workDetail/:id"
     },
     dataTable:{
         langUrl:"resources/backend/lang/de_DE.txt"

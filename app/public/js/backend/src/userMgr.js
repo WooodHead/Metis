@@ -22,7 +22,7 @@ var vm = new Vue({
 	        			    },config.userStatus[this.dataList[params.index].valid])
 		              }
 		          },
-		          { title: '邮箱状态',key: 'activesign', align: 'center',
+		          { title: '账号状态',key: 'activesign', align: 'center',
 		        	  render: (h, params) => {
 	        			    return h('div',{
 	        			    	props: {
@@ -41,7 +41,7 @@ var vm = new Vue({
 		       		if (this.dataList[params.index].valid == 1) {
 	        			    return h('Button',{
 	        			    	props: {
-		                              type: 'primary',
+		                              type: 'success',
 		                              size: 'small'
 		                          },
 		                          style: {
@@ -56,7 +56,7 @@ var vm = new Vue({
 	        			  } else {
 	        				  return h('Button',{
 	        					  props: {
-		                              type: 'primary',
+		                              type: 'error',
 		                              size: 'small'
 		                          },
 		                          style: {
@@ -74,22 +74,22 @@ var vm = new Vue({
 		      ],
 		    dataList:[],
 			totalPage:0,
-			aoData1:[
-	  	        {name: "offset", value: 0},
-	  	        {name: "limit", value: 10}
-	      	]
+			aoData:{
+				limit:10,
+				offset:0
+			}
 		}
 	 },
 	 methods:{
 		 pageChange:function(index){
-		 	this.aoData1[0].value = (index-1)*10;
+		 	this.aoData.offset = (index-1)*10;
     		this.dataList = [];
     		var that = this;
 			$.ajax({
 				dataType:'json',
 				type:"get",
 				url:config.ajaxUrls.userGetByPage,
-				data:that.aoData1,
+				data:that.aoData,
 				success: function (response) {
 					if(response.status == 200){
 						that.dataList = response.data.rows;
@@ -114,7 +114,7 @@ var vm = new Vue({
 							dataType:'json',
 							type:"get",
 							url:config.ajaxUrls.userGetByPage,
-							data:that.aoData1,
+							data:that.aoData,
 							success: function (response) {
 								if(response.status == 200){
 									that.dataList = response.data.rows;
@@ -137,7 +137,7 @@ var vm = new Vue({
             dataType:'json',
             type:"get",
             url:config.ajaxUrls.userGetByPage,
-            data:this.aoData1,
+            data:this.aoData,
             success: function (response) {
             	if(response.status == 200){
 					that.dataList = response.data.rows;

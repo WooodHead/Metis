@@ -18,6 +18,7 @@ module.exports = app => {
   router.get('/judgeRoundMgr', controller.home.judgeRoundMgr);
   router.get('/judgeRoundCOU/:id', controller.home.judgeRoundCOU);
   router.get('/worksMgr', controller.home.worksMgr);
+  router.get('/workDetail/:id', controller.home.workDetail);
   router.get('/newsMgr', controller.home.newsMgr);
   router.get('/newsCOU/:id', controller.home.newsCOU);
   router.get('/userMgr', controller.home.userMgr);
