@@ -2,15 +2,6 @@
 'use strict';
 var pageName = "works";
 
-// var appServer = 'http://localhost:8080/dcpro/sigUploadKey/1';
-// var bucket = 'dc-sys-pro';
-// var region = 'oss-cn-hangzhou';
-//
-// var urllib = OSS.urllib;
-// var Buffer = OSS.Buffer;
-// var OSS = OSS.Wrapper;
-// var STS = OSS.STS;
-
 var workDetail = new Vue({
 	el:".index",
 	data:function(){
@@ -72,7 +63,7 @@ var workDetail = new Vue({
             		  }
             	  }
               } else {
-				  that.$Notice.error({title:response.data});
+				  that.$Notice.error({title:config.messages.loadDataError});
               }
           }
       })

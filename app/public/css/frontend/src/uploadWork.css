@@ -1,15 +1,6 @@
 [v-cloak] {
   display: none;
 }
-body{
-	padding-top:180px;
-}
-.uploadWork{
-	/* width:100%;
-	min-height:600px;
-	margin-top:30px;
-    flex: 1 0 auto; */
-}
 .rules{
 	margin:20px;
 }

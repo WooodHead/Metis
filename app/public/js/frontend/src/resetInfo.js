@@ -1,96 +1,97 @@
 var pageName = "setting";
 var resetInfo = new Vue({
-	el:".resetInfo",
-	data:function(){
-		return{
-			formInfo:{
-				realname:realname,
-				mobile:mobile,
-				address:address
-			},
-			formPwd:{
-        		password:"",
-        		confirmPwd:""
-        	},
-        	ruleDataSourse:{
-        		realname:[{ required: true, max: 8, message: '请字数控制在8以内', trigger: 'blur' }],
-        		mobile:[{ required: true, len:11, message: '请字数控制在11', trigger: 'blur' }],
-        		address:[{ required: true, max: 32, message: '请字数控制在32以内', trigger: 'blur' }],
-
-        		password:[{ required: true, min: 6, message: '请字数控制在6以上', trigger: 'blur' }],
-    			confirmPwd:[{ required: true, min:6, message: '请字数控制在6以上', trigger: 'blur' }]
-        	},
-        	resetInfoStyle:{
-        		width:"40%",
-	        	minHeight:"",
-	        	margin:"20px auto"
-        	},
-        	pwdRuleDataSourse:"",
-        	newPwd:"",
-        	showPwdError:false
-		}
-	},
-	methods:{
-		submitInfo:function(){
+    el: ".index",
+    data: function() {
+        return {
+            formPwd: {
+                oldPwd: "",
+                password: "",
+                confirmPwd: ""
+            },
+            ruleDataSourse: {
+                oldPwd: [{
+                    required: true,
+                    min: 6,
+                    message: '请字数控制在6以上',
+                    trigger: 'blur'
+                }],
+                password: [{
+                    required: true,
+                    min: 6,
+                    message: '请字数控制在6以上',
+                    trigger: 'blur'
+                }],
+                confirmPwd: [{
+                    required: true,
+                    min: 6,
+                    message: '请字数控制在6以上',
+                    trigger: 'blur'
+                }]
+            },
+            resetInfoStyle: {
+                width: "40%",
+                minHeight: "",
+                margin: "20px auto"
+            },
+            showPwdError: false,
+			errorTitle:"",
+        }
+    },
+    methods: {
+        submitPwd: function() {
 			var that = this;
-    		this.$Loading.start();
-    		$.ajax({
-    	          url: config.ajaxUrls.resetInfo,
-    	          type:"post",
-    	          dataType:"json",
-    	          contentType :"application/json; charset=UTF-8",
-    	          data:JSON.stringify(this.formInfo),
-    	          success: function (response) {
-    	              if (response.success) {
-    	            	  that.$Loading.finish();
-    	            	  that.$Notice.success({title:config.messages.optSuccess});
-    	              } else {
-    	            	  that.$Loading.error();
-    	            	  that.$Notice.error({title:response.message});
-    	              }
-    	          },
-    	          error: function () {
-    	        	  that.$Notice.error({title:config.messages.networkError});
-    	          }
-    	      })
-		},
-		submitPwd:function(){
-			if(this.formPwd.password === this.formPwd.confirmPwd){
-    			this.showPwdError = false;
-    			this.newPwd = this.formPwd.password;
-    			var that = this;
-        		this.$Loading.start();
-        		$.ajax({
-        	          url: config.ajaxUrls.resetPwd,
-        	          type:"post",
-        	          dataType:"json",
-        	          data: {newPwd:this.newPwd},
-        	          success: function (response) {
-        	              if (response.success) {
-        	            	  that.$Loading.finish();
-        	            	  that.$Notice.success({title:config.messages.optSuccess});
-        	              } else {
-        	            	  that.$Loading.error();
-        	            	  that.$Notice.error({title:response.message});
-        	              }
-        	          },
-        	          error: function () {
-        	        	  that.$Notice.error({title:config.messages.networkError});
-        	          }
-        	      })
-    		}else{
-    			this.showPwdError = true;
-    		}
-		},
-		checkPwd:function(){
-    		if(this.formPwd.password === this.formPwd.confirmPwd){
-    			this.showPwdError = false;
-    		}else{
-    			this.showPwdError = true;
-    		}
-    	}
-	},
-	created:function(){
-		this.resetInfoStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 120 + "px";
-	}
+            if (this.formPwd.password === this.formPwd.confirmPwd) {
+				if(this.formPwd.oldPwd != ""){
+					this.showPwdError = false;
+	                this.$Loading.start();
+	                $.ajax({
+	                    url: config.ajaxUrls.resetPwd,
+	                    type: "put",
+	                    dataType: "json",
+	                    data: {
+	                        newPwd: this.formPwd.password,
+	                        password: this.formPwd.oldPwd
+	                    },
+	                    success: function(response) {
+	                        if (response.status == 200) {
+	                            that.$Loading.finish();
+	                            that.$Notice.success({
+	                                title: response.data
+	                            });
+								that.formPwd.oldPwd = "";
+								that.formPwd.password = "";
+								that.formPwd.confirmPwd = "";
+	                        } else {
+	                            that.$Loading.error();
+	                            that.$Notice.error({
+	                                title: response.data
+	                            });
+	                        }
+	                    },
+	                    error: function() {
+	                        that.$Notice.error({
+	                            title: config.messages.networkError
+	                        });
+	                    }
+	                })
+				}else{
+	                this.showPwdError = true;
+					this.errorTitle = "请输入旧密码！";
+				}
+            } else {
+                this.showPwdError = true;
+				this.errorTitle = "两次输入密码不一致，请重新输入！";
+            }
+        },
+        checkPwd: function() {
+            if (this.formPwd.password === this.formPwd.confirmPwd) {
+                this.showPwdError = false;
+            } else {
+                this.showPwdError = true;
+            }
+        }
+    },
+    created: function() {
+        this.resetInfoStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 114 + "px";
+    }
 })
