@@ -206,6 +206,14 @@ module.exports = app => {
     });
   }
 
+  Production.getProductionIdByRound = async function(roundId){
+    return await this.findAll({
+      where:{
+        round:roundId
+      },
+      attributes:['Id']
+    });
+  }
 
   return Production;
 };

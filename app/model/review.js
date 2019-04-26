@@ -67,5 +67,14 @@ module.exports = app => {
     return review.destroy();
   }
 
+  Review.deleteByRoundIdAndJudgeId = async function(roundId, judgeId, transaction){
+    return this.destroy({
+      transaction:transaction,
+      where:{
+        round : roundId,
+        userId : judgeId,
+      }
+    });
+  }
   return Review;
 };

@@ -68,7 +68,7 @@ module.exports = app => {
     return roundJudge;
   }
 
-  RoundJudge.updateRoundJudge = async function(id, judge, transaction){
+  RoundJudge.updateBindJudge = async function(id, judge, transaction){
     return roundJudge.update({
       judge:judge
     },{
