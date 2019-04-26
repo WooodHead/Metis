@@ -43,6 +43,13 @@ class HomeController extends Controller {
     });
   }
 
+  async worksDetail() {
+    const ctx = this.ctx;
+    await ctx.render('frontend/worksDetail.html', {
+
+    });
+  }
+
   async judge() {
     const ctx = this.ctx;
     await ctx.render('frontend/judge.html', {

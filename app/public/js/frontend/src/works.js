@@ -90,7 +90,6 @@ var works = new Vue({
 	          	data: this.urlData,
 	          	success: function (res) {
 					if(res.status == 200){
-						console.log(res);
 		              	that.$Loading.finish();
 		              	that.dataList = res.data.rows;
 		              	that.total = res.data.count;
@@ -106,7 +105,7 @@ var works = new Vue({
 			})
 		},
 		check:function(index){
-			window.location.href = "production/workDetail/" + this.dataList[index].Id;
+			window.location.href = "worksDetail/" + this.dataList[index].Id;
 		},
 		change:function(index){
 			window.location.href = "uploadWork/" + this.dataList[index].Id;
@@ -124,7 +123,6 @@ var works = new Vue({
               type: "delete",
               dataType: "json",
               success: function (res) {
-				  console.log(res);
                   if (res.status == 200) {
                      that.$Notice.success({title:config.messages.optSuccess});
 					 $.ajax({
@@ -133,7 +131,6 @@ var works = new Vue({
  			          	data: that.urlData,
  			          	success: function (res) {
  							if(res.status == 200){
- 								console.log(res);
  				              	that.$Loading.finish();
  				              	that.dataList = res.data.rows;
  				              	that.total = res.data.count;
@@ -163,7 +160,6 @@ var works = new Vue({
           	data: this.urlData,
           	success: function (res) {
 				if(res.status == 200){
-					console.log(res);
 	              	that.$Loading.finish();
 	              	that.dataList = res.data.rows;
 	              	that.total = res.data.count;
