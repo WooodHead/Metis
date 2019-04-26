@@ -67,7 +67,8 @@ class ProductionService extends Service {
           scoreCount += review.score;
         }
         let averageScore = (parseFloat(scoreCount) / parseFloat(judgeCount)).toFixed(2);
-        await this.ctx.model.Production.updateScore({production.Id,averageScore,round});
+        let productionId = production.Id;
+        await this.ctx.model.Production.updateScore({productionId,averageScore,round});
       }
     }
     return await this.ctx.model.Production.updateScore({Id, averageScore, round});
