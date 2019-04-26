@@ -5,8 +5,7 @@ body{
 	margin:0 auto;
 }
 .workDetail{
-	width:60%;
-	margin:180px auto 20px;
+	margin:30px auto;
 	min-height:550px;
 	text-align:center;
 }
@@ -22,7 +21,9 @@ body{
 .workDetail .attachFile{
 	margin:20px auto;
 }
-
+.workDetail img{
+	margin:20px auto;
+}
 .backTitle{
 	text-align: center;
     font-size: 24px;
@@ -33,6 +34,6 @@ body{
 	text-indent: 2em;
     font-size: 15px;
     line-height: 1.5em;
-    color:#6d6d6d; 
+    color:#6d6d6d;
     text-align: left;
 }

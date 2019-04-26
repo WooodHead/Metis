@@ -1,5 +1,5 @@
-var pageName = "worksMgr";
-var workDetail = new Vue({
+let pageName = "works";
+let workDetail = new Vue({
 	el:".index",
 	data:function(){
 		return{
@@ -19,7 +19,7 @@ var workDetail = new Vue({
 		}
 	},
 	created:function(){
-		var that = this;
+		let that = this;
 		this.productionId = window.location.href.split("workDetail/")[1];
 		$.ajax({
           url: config.ajaxUrls.workDetail.replace(":id",this.productionId),
@@ -33,15 +33,15 @@ var workDetail = new Vue({
             	  that.participant_id_number = response.data.participant_id_number;
             	  that.participant_brief = response.data.participant_brief;
             	  that.attachFileDownload = response.data.attach_file;
-            	  var pimageArr = new Array();
+            	  let pimageArr = new Array();
 				  pimageArr = response.data.pImage.split(",");
-            	  for(var i = 0;i < pimageArr.length;i++){
+            	  for(let i = 0;i < pimageArr.length;i++){
             		  if(pimageArr[i] == ""){
             			  pimageArr.splice(i,1);
             		      i = i - 1;
             		  }
             	  }
-            	  for(var j = 0;j < pimageArr.length;j++){
+            	  for(let j = 0;j < pimageArr.length;j++){
             		  if(j == 0){
             			  that.productImg_1 = pimageArr[0];
             		  }
@@ -53,7 +53,7 @@ var workDetail = new Vue({
             		  }
             	  }
               } else {
-                  functions.ajaxReturnErrorHandler(response.data);
+				  that.$Notice.error({title:response.data});
               }
           }
       })

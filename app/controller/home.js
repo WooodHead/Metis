@@ -30,6 +30,20 @@ class HomeController extends Controller {
     });
   }
 
+  async works() {
+    const ctx = this.ctx;
+    await ctx.render('frontend/works.html', {
+
+    });
+  }
+
+  async judge() {
+    const ctx = this.ctx;
+    await ctx.render('frontend/judge.html', {
+
+    });
+  }
+
   async relogin(){
     const ctx = this.ctx;
     await ctx.render('frontend/login.html', {

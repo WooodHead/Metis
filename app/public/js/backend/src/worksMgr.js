@@ -1,4 +1,4 @@
-var pageName = "worksMgr";
+var pageName = "works";
 $(document).click(function(){
 	vm.scoreStyle.display = "none";
 });
