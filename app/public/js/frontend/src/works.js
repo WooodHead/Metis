@@ -141,7 +141,7 @@ var works = new Vue({
  			          	},
  			          	error: function () {
  			        	  	that.$Loading.error();
- 			        	  	that.$Notice.error({title:res.data});
+ 			        	  	that.$Notice.error({title:config.messages.loadDataError});
  			          	}
  					})
 				}
@@ -151,7 +151,7 @@ var works = new Vue({
 		}
 	},
 	created:function(){
-		this.workStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 140 + "px";
+		this.workStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 130 + "px";
 		var that = this;
 		this.$Loading.start();
 		$.ajax({

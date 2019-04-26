@@ -48,7 +48,7 @@ var config = {
         setPwd: "user/resetYourPwd",
         register: "user/register",
         resetInfo: "user/update",
-        resetPwd: "user/resetLoginUserPwd",
+        resetPwd: "/website/user/updatePwd",
         workCreate: "/website/production",
         workUpdate: "/website/production/:id",
         workDetail: "/website/production/:id",
