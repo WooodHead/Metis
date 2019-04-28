@@ -144,9 +144,6 @@ class User extends Service {
       transaction = await this.ctx.model.transaction();
       await this.ctx.model.User.delUserById(id, transaction);
       await this.ctx.model.UserRole.delUserRoleByUserId(id, transaction);
-      await this.ctx.model.Artifacts.delArtifactById(id, transaction);
-      await this.ctx.model.ArtifactAssets.delAssetsByArtifactId(id, transaction);
-      await this.ctx.model.ArtifactAssets.delCommentByArtifactId(id, transaction);
       await transaction.commit();
       return true
     } catch (e) {

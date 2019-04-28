@@ -39,5 +39,7 @@
   "noMobile": "mobile is not exist",
   "noEmail": "email can not empty",
   "userExist": "user is exist",
-  "mobileNotEmpty":"mobile can not empty"
+  "mobileNotEmpty":"mobile can not empty",
+  "mobileVertifyfailure":"mobile vertify code is lose efficacy",
+  "mobileVertifyIsNotCorrect":"mobile vertify code is not correct"
 }
