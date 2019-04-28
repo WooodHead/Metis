@@ -33,8 +33,9 @@ module.exports = app => {
      return await this.create(userRole);
   }
 
-  UserRole.delUserRoleByUserId = async function(userId) {
+  UserRole.delUserRoleByUserId = async function(userId,transaction) {
     return await this.destroy({
+      transaction:transaction,
       where:{
         userId:userId
       }

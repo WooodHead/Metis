@@ -105,12 +105,14 @@ module.exports = app => {
     return user.update(updates);
   }
 
-  User.delUserById = async function (id) {
+  User.delUserById = async function (id,transaction) {
     const user = await this.findById(id);
     if (!user) {
       throw new Error('user not found');
     }
-    return user.destroy();
+    return user.destroy({
+      transaction:transaction
+    });
   }
 
   User.findByUserWithMobile = async function (mobile){
