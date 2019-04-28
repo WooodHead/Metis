@@ -82,8 +82,8 @@ var forgetPwd = new Vue({
                     dataType:"json",
                     type:"get",
                     url:config.ajaxUrls.sendGetBackPwdSms,
-					dat:{mobile:this.formItem.mobile}
-                    success:function(res){
+					dat:{mobile:this.formItem.mobile},
+                    success(res){
 						console.log(res);
                         if(res.status == 200){
                     		that.$Loading.finish();
@@ -94,7 +94,7 @@ var forgetPwd = new Vue({
                         	that.$Notice.error({title:res.data, duration:3});
                         }
                     },
-                    error:function(){
+                    error(){
                 		that.$Loading.error();
                     	that.$Notice.error({title:config.messages.networkError, duration:3});
                     }
@@ -208,7 +208,7 @@ var forgetPwd = new Vue({
 		}
 	},
 	created:function(){
-		this.forgetPwdStyle.minHeight = document.documentElement.clientHeight - 80 - 160 - 40 + "px";
+		this.forgetPwdStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.footHeight - config.cssHeight.headHeight - 226 + "px";
 	}
 })
 
