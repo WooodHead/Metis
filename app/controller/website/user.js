@@ -295,6 +295,20 @@ class UsersController extends BaseController{
       super.failure('修改失败');
     }
   }
+
+  async createUserByAdmin() {
+    const ctx = this.ctx;
+    try{
+      let data = ctx.request.body;
+      const user = await ctx.service.user.createUserByAdmin(data, ctx.request.body.role);
+      super.success(ctx.__('createdSuccess'));
+    }
+    catch(e){
+      console.log(e);
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
+  }
 }
 
 module.exports = UsersController;

@@ -32,6 +32,10 @@ module.exports = app => {
       type: INTEGER,
       allowNull: false
     },
+    currentRound: {
+      type: INTEGER,
+      allowNull: true
+    },
     language:{
       type: INTEGER,
       allowNull: false
@@ -58,7 +62,7 @@ module.exports = app => {
       limit,
       order: [[ 'createAt', 'desc' ], [ 'Id', 'desc' ]],
       where:{
-        
+
       }
     };
 

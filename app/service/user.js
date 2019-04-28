@@ -23,6 +23,35 @@ class User extends Service {
     return user;
   }
 
+  async createUserByAdmin(user,role){
+    if (user.email == '' || user.email == null) {
+      throw new Error('邮箱地址不能为空');
+    } else {
+      const userObj = await this.ctx.model.User.findUserByEmail(user.email);
+      if (userObj){
+        throw new Error('用户已经存在');
+      }
+      else{
+        let transaction;
+        try {
+          transaction = await this.ctx.model.transaction();
+          const helper = this.ctx.helper;
+          user.password = helper.cryptoPwd(helper.cryptoPwd(user.password));
+          user.valid = 0;
+          user.activesign = 1;
+          const createUserObj = await this.ctx.model.User.createUser(user,transaction);
+          await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, role, transaction);
+          await transaction.commit();
+          return createUserObj;
+        } catch (e) {
+          this.ctx.logger.error(e.message);
+          await transaction.rollback();
+          return false;
+        }
+      }
+    }
+  }
+
   async createUser(user) {
     if (user.mobileOrEmail == 1){
       if (user.mobile == '' || user.mobile == null) {

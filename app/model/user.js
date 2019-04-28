@@ -37,10 +37,6 @@ module.exports = app => {
       type: INTEGER,
       allowNull: true
     },
-    currentRound: {
-      type: INTEGER,
-      allowNull: true
-    },
     activecode: {
       type: STRING(40),
       allowNull: true
