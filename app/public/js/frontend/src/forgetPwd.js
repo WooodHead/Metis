@@ -82,7 +82,7 @@ var forgetPwd = new Vue({
                     dataType:"json",
                     type:"get",
                     url:config.ajaxUrls.sendGetBackPwdSms,
-					dat:{mobile:this.formItem.mobile},
+					data:{mobile:this.formItem.mobile},
                     success(res){
 						console.log(res);
                         if(res.status == 200){

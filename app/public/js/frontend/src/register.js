@@ -169,7 +169,7 @@ var register = new Vue({
 	                            that.$Notice.success({ title: config.messages.optSuccRedirect,duration:3,
 	                            	onClose:function(){
 	                            		that.$Loading.finish();
-	                                	// window.location.href = config.viewUrls.login;
+	                                	window.location.href = config.viewUrls.login;
 	                                }
 	                            });
 	                        }else{
