@@ -49,7 +49,7 @@ class User extends Service {
                 user.activeCode = UUID.v1();
                 user.activesign = 1;
                 const createUserObj = await this.ctx.model.User.createUser(user, transaction);
-                await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, 1, transaction);
+                await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, 3, transaction);
                 await transaction.commit();
 
                 return createUserObj;
@@ -83,7 +83,7 @@ class User extends Service {
             user.password = helper.cryptoPwd(helper.cryptoPwd(user.password));
             user.activeCode =  UUID.v1();
             const createUserObj = await this.ctx.model.User.createUser(user,transaction);
-            await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, 1, transaction);
+            await this.ctx.model.UserRole.creteUserRole(createUserObj.Id, 3, transaction);
             await this.ctx.service.emailService.sendActiveEmail(user.email, user.activeCode);
             await transaction.commit();
             return createUserObj;

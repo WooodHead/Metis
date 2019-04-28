@@ -54,6 +54,7 @@ module.exports = app => {
   router.put('/website/user/updatePwd', controller.website.user.updatePwd);
   router.get('/website/user/getBackPwdWithEmail', controller.website.user.getBackPwdWithEmail);
   router.put('/website/user/updatePwdWithEmailAndActiveCode', controller.website.user.updatePwdWithEmailAndActiveCode);
+  router.put('/website/user/updatePwdWithMobileAndSmsCode', controller.website.user.updatePwdWithMobileAndSmsCode);
 
   router.get('/website/production/listProductionByUserId', controller.website.production.listProductionByUserId);
   router.put('/website/production/updateAverageScore', controller.website.production.updateAverageScore);

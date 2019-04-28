@@ -30,7 +30,7 @@ class SmsMessageController extends BaseController{
     const query = {
       mobile: ctx.query.mobile,
     };
-
+    
     try{
       const result = await ctx.service.smsMessage.sendGetBackPwdSms(query);
       if(result.success){
