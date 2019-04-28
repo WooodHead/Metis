@@ -271,14 +271,14 @@ class UsersController extends BaseController{
     if (userObj){
       const result = await ctx.service.user.getBackPwdWithEmail(email);
       if(result){
-        super.success('邮件发送成功,请点开邮箱链接更改密码!');
+        super.success(ctx.__('sendEmailSuccess'));
       }
       else{
-        super.failure('邮件发送失败');
+        super.failure(ctx.__('sendEmailFailure'));
       }
     }
     else{
-      super.failure('邮箱不存在!');
+      super.failure(ctx.__('emailIsNotExist'));
     }
   }
 
@@ -289,10 +289,10 @@ class UsersController extends BaseController{
     const newPwd = ctx.request.body.newPwd;
     const result = await ctx.service.user.updatePwdWithEmailAndActiveCode(email, activeCode, newPwd);
     if (result){
-      super.success('修改成功');
+      super.success(ctx.__('updateSuccessful'));
     }
     else{
-      super.failure('修改失败');
+      super.failure(ctx.__('updateFailed'));
     }
   }
 

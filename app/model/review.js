@@ -86,6 +86,20 @@ module.exports = app => {
       attributes:['score']
     });
   }
-  
+
+  Review.getReviewDataByJudgeUserIdAndRound = async function({ offset = 0, limit = 10, judgeUserId = 0, round = 0 }){
+    return this.findAndCountAll({
+      offset,
+      limit,
+      where:{
+        userId : judgeUserId,
+        round : round,
+      },
+      order: [[ 'createAt', 'desc' ], [ 'Id', 'desc' ]],
+      include:[
+        app.model.Production
+      ]
+    });
+  }
   return Review;
 };

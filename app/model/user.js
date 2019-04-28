@@ -177,7 +177,7 @@ module.exports = app => {
           attributes:['Id','rolename']
         }
       ],
-      attributes:['Id','mobile','realname','password']
+      attributes:['Id','mobile','email','realname','password']
     });
   }
 
@@ -197,7 +197,7 @@ module.exports = app => {
           attributes:['Id','rolename']
         }
       ],
-      attributes:['Id','mobile','realname','password']
+      attributes:['Id','mobile','email','realname','password']
     });
   }
 

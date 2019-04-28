@@ -41,5 +41,8 @@
   "userExist": "user is exist",
   "mobileNotEmpty":"mobile can not empty",
   "mobileVertifyfailure":"mobile vertify code is lose efficacy",
-  "mobileVertifyIsNotCorrect":"mobile vertify code is not correct"
+  "mobileVertifyIsNotCorrect":"mobile vertify code is not correct",
+  "emailIsNotExist":"email is not exist",
+  "sendEmailFailure":"email send failure",
+  "sendEmailSuccess":"send email success and please check email",
 }

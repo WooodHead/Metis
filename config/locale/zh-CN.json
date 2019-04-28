@@ -41,5 +41,8 @@
   "userExist": "用户已经存在",
   "mobileNotEmpty":"用户电话号码不能为空",
   "mobileVertifyfailure":"手机验证码失效",
-  "mobileVertifyIsNotCorrect":"手机验证码不正确"
+  "mobileVertifyIsNotCorrect":"手机验证码不正确",
+  "emailIsNotExist":"email 不存在",
+  "sendEmailFailure":"邮件发送失败",
+  "sendEmailSuccess":"邮件发送成功,请查看邮箱",
 }

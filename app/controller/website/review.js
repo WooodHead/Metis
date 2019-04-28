@@ -73,7 +73,20 @@ class ReviewController extends BaseController{
   }
 
   async getReviewListByUserId(){
+    const ctx = this.ctx;
+    let query = {
+      limit: ctx.helper.parseInt(ctx.query.limit),
+      offset: ctx.helper.parseInt(ctx.query.offset),
+    };
 
+    try{
+      const result = await ctx.service.review.getReviewDataByJudgeUserIdAndRound(query);
+      super.success(result);
+    }
+    catch(e){
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
   }
 
   async updateReviewScore(){

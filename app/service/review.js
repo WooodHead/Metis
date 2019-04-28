@@ -35,6 +35,22 @@ class ReviewService extends Service {
     return await this.ctx.model.Review.deleteReview(id);
   }
 
+  async getReviewDataByJudgeUserIdAndRound(query){
+
+    let judge = this.ctx.model.Judge.getJudgeByEmail(ctx.user.email);
+    let result;
+    if (judge){
+      result = await this.ctx.model.Review.getReviewDataByJudgeUserIdAndRound(
+        {
+          offset:query.offset,
+          limit:query.limit,
+          judgeUserId:judge.judgeUserId,
+          currentRound:judge.currentRound
+        }
+      );
+    }
+    return result;
+  }
 }
 
 module.exports = ReviewService;

@@ -97,5 +97,13 @@ module.exports = app => {
     return await this.findById(id);
   }
 
+  Judge.getJudgeByEmail = async function(email){
+    return await this.findOne({
+      where:{
+        email : email
+      }
+    });
+  }
+
   return Judge;
 };

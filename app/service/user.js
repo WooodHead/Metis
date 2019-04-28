@@ -24,6 +24,7 @@ class User extends Service {
   }
 
   async createUserByAdmin(user,role){
+    const ctx = this.ctx;
     if (user.email == '' || user.email == null) {
       throw new Error(ctx.__('noEmail'));
     } else {
@@ -53,6 +54,7 @@ class User extends Service {
   }
 
   async createUser(user) {
+    const ctx = this.ctx;
     if (user.mobileOrEmail == 1){
       if (user.mobile == '' || user.mobile == null) {
         throw new Error(ctx.__('mobileNotEmpty'));
@@ -198,6 +200,7 @@ class User extends Service {
   }
 
   async updatePwdWithMobileAndSmsCode(mobile, smsCode, newPwd) {
+    const ctx = this.ctx;
     try {
       const helper = this.ctx.helper;
       let curDate = new Date();
