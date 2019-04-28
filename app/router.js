@@ -37,6 +37,7 @@ module.exports = app => {
 
   router.get('/website/sms/sendMessage', controller.website.smsMessage.createSmsMessage);
   router.get('/website/sms/vertifySms', controller.website.smsMessage.vertifySms);
+  router.get('/website/sms/sendGetBackPwdSms', controller.website.smsMessage.sendGetBackPwdSms);
 
   router.get('/getCaptcha',controller.website.user.getCaptcha);
   router.get('/checkCaptcha',controller.website.user.checkCaptcha);

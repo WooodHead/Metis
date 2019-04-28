@@ -35,5 +35,6 @@
   "authError": "authorization failed",
   "bindSuccess": "bind success, please log in",
   "bindFailed": "bind failed",
-  "notActiveByEmail": "not active and please active by email"
+  "notActiveByEmail": "not active and please active by email",
+  "noMobile": "mobile is not exist"
 }
