@@ -168,6 +168,13 @@ class HomeController extends Controller {
 
     });
   }
+
+  async userCOU(){
+    const ctx = this.ctx;
+    await ctx.render('backend/userCOU.html', {
+
+    });
+  }
 }
 
 module.exports = HomeController;

@@ -101,18 +101,7 @@ var vm = new Vue({
                 {
                     title: '评委',
                     key: 'judge',
-                    align: 'center',
-                    // render: (h, params) => {
-                    //      return h('div', {
-                    //   	   		props: {
-                    //                  type: 'primary',
-                    //                  size: 'small'
-                    //              },
-                    //              style: {
-                    //                  margin:"10px auto"
-                    //              }
-                    //          },this.dataL[params.index])
-                    //  }
+                    align: 'center'
                 },
                 {
                     title: '操作',
@@ -412,19 +401,17 @@ var vm = new Vue({
                                 screenRoundJudge(that, that.checkAllGroup, that.oldJudgeData, that.dataL);
                             } else {
                                 that.$Notice.error({
-                                    title: response.message
+                                    title: response.data
                                 });
                             }
                         }
                     });
                 } else {
                     that.$Notice.error({
-                        title: response.message
+                        title: config.messages.networkError;
                     });
                 }
             }
         });
-
-
     }
 })

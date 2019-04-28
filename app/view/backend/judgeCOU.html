@@ -35,6 +35,11 @@
 				<form-item label="描述*">
 					<textarea v-model="dataSourse.description" name="content" id="description"></textarea>
 				</form-item>
+				<form-item label="评审轮次绑定*">
+					<i-select v-model="dataSourse.currentRound" style="width:200px" @on-change="changeRound">
+						<i-option v-for="item in roundList" :value="item.Id" :key="item.Id" :label="item.roundName"></i-option>
+					</i-select>
+				</form-item>
 				<form-item>
 					<i-button type="primary" v-on:click="submit" long>确定</i-button>
 				</form-item>

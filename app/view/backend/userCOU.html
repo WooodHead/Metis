@@ -1,0 +1,51 @@
+{% extends "backend/parent.html" %}
+
+{% block cssfolder %}
+<link href="../public/css/backend/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="../public/css/backend/lib/iview.css" rel="stylesheet" type="text/css" >
+<link href="../public/css/backend/src/main.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<section class="right">
+	<article class="userCOU">
+		<i-col span="24">新建/修改用户</i-col> <br /><br />
+		<div>
+			<i-form :model="dataSourse" :rules="ruleDataSourse" :label-width="180" style="width:80%;">
+                <form-item label="角色类型" prop="role">
+					<i-select v-model="dataSourse.role" style="width:200px" @on-change="changeRole">
+						<i-option v-for="item in roleList" :value="item.id" :key="item.id" :label="item.title"></i-option>
+					</i-select>
+				</form-item>
+				<form-item label="真实姓名" prop="realname">
+					<i-input v-model="dataSourse.realname" placeholder="请输入姓名"></i-input>
+				</form-item>
+				<form-item label="邮箱" prop="email">
+					<i-input v-model="dataSourse.email" placeholder="请输入邮箱"></i-input>
+				</form-item>
+				<form-item label="手机号码" prop="mobile">
+					<i-input v-model="dataSourse.mobile" placeholder="请输入手机号"></i-input>
+				</form-item>
+				<form-item label="密码" prop="password">
+					<i-input v-model="dataSourse.password" placeholder="请输入密码"></i-input>
+				</form-item>
+				<form-item>
+					<i-button type="primary" v-on:click="submit" long>确定</i-button>
+				</form-item>
+			</i-form>
+		</div>
+	</article>
+</section>
+{% endblock %}
+
+{% block jsfolder %}
+<script type="text/javascript" src="../public/js/backend/lib/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../public/js/backend/lib/vue.min.js"></script>
+<script type="text/javascript" src="../public/js/backend/lib/iview.min.js"></script>
+<script type="text/javascript" src="../public/js/backend/lib/promise.js"></script>
+<script type="text/javascript" src="../public/js/backend/lib/aliyun-oss-sdk.min.js"></script>
+<script type="text/javascript" src="../public/js/backend/lib/plupload.full.min.js"></script>
+<script type="text/javascript" src="../public/js/backend/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../public/js/backend/src/config.js"></script>
+<script type="text/javascript" src="../public/js/backend/src/userCOU.js"></script>
+{% endblock %}

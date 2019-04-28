@@ -45,6 +45,7 @@ var config={
         newsDetail:"/website/news/:id",
         manageNews:"/website/news",
 
+        createUserByAdmin:"/website/user/createUserByAdmin",
         userGetByPage:"/website/user",
         userActiveAction:"/website/user/updateValidByUserId/:id",
 
@@ -79,6 +80,7 @@ var config={
     viewUrls:{
         newsMgr:"/newsMgr",
         newsUpdate:"newsCOU/:id",
+        userMgr:"/userMgr",
         judgeMgr:"/judgeMgr",
         judgeUpdate:"judgeCOU/:id",
         judgeRoundMgr:"/judgeRoundMgr",
