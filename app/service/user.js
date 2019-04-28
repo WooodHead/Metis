@@ -296,7 +296,6 @@ class User extends Service {
 
   async updateUserByAdmin(updates){
     let user = {};
-    user.password = helper.cryptoPwd(helper.cryptoPwd(updates.password));
     user.mobile = updates.mobile;
     user.email = updates.email;
     user.realname = updates.realname;
