@@ -23,7 +23,7 @@ var forgetPwd = new Vue({
 				],
 				captchaText:[
 				    {required: true, message: '请输入验证码', trigger: 'blur'},
-				    {required: true, len:6, message: '验证码长度有误', trigger: 'blur'}
+				    {required: true, len:5, message: '验证码长度有误', trigger: 'blur'}
 				],
 				mobile:[
         	        {required: true, message: '手机号码不能为空', trigger: 'blur'},
@@ -187,15 +187,16 @@ var forgetPwd = new Vue({
 			var that = this;
 			this.$Loading.start();
 			$.ajax({
-		        url:config.ajaxUrls.updatePwdByMobile,
-		        type:"post",
+		        url:config.ajaxUrls.updatePwdWithMobileAndSmsCode,
+		        type:"put",
 		        dataType:"json",
 		        data:{
 		        	mobile:this.formItem.mobile,
-		        	password:this.formItem.password,
-		        	code:this.formItem.mobileCode,
+		        	newPwd:this.formItem.password,
+		        	smsCode:this.formItem.mobileCode,
 		        },
 		        success:function(res){
+					console.log(res);
 		            if(res.success){
 		    			that.$Loading.finish();
 		            	that.$Notice.success({title:config.messages.optSuccess});
