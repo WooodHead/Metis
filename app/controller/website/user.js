@@ -317,14 +317,13 @@ class UsersController extends BaseController{
     const updates = {
       mobile: ctx.request.body.mobile,
       email: ctx.request.body.email,
-      password: ctx.request.body.password,
       realname: ctx.request.body.realname,
       role: ctx.request.body.role,
       id: id,
     };
 
     try{
-      await ctx.service.user.updateUserByAdmin({updates });
+      await ctx.service.user.updateUserByAdmin(updates);
       super.success(ctx.__('updateSuccessful'));
     }
     catch(e){
