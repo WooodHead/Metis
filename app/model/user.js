@@ -135,7 +135,7 @@ module.exports = app => {
     });
   }
 
-  Users.findByUserWithEmail = async function (email){
+  User.findByUserWithEmail = async function (email){
     return await this.findOne({
       where:{
         email:email
@@ -153,7 +153,7 @@ module.exports = app => {
     });
   }
 
-  Users.updateUserActiveCodeByEmail = async function(email, activeCode){
+  User.updateUserActiveCodeByEmail = async function(email, activeCode){
     return await this.update({
       activecode:activeCode
     },{
