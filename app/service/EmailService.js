@@ -32,7 +32,7 @@ class Email extends Service {
 
     if (mailType == 0){
       mailOptions.text = "您好 ";
-       mailOptions.html = '<b>感谢您访问图钉墙!</b> <a href="'+ctx.helper.email_verify_address
+       mailOptions.html = '<b>感谢您访问!</b> <a href="'+ctx.helper.email_verify_address
          +'?email='+email+'&activeCode='+activeCode+'">请点击激活账号</a>';
     }
     else if (mailType == 1){
@@ -43,42 +43,6 @@ class Email extends Service {
     await transport.sendMail(mailOptions, function(error, response) {
       if (error) {
         console.log(error);
-        return false;
-      } else {
-        return true;
-      }
-      transport.close(); // 如果没用，关闭连接池
-    });
-  }
-
-  async sendWxActiveEmail(email, unionId, activeCode) {
-    const ctx = this.ctx;
-    // 开启一个 SMTP 连接池
-    var transport = nodemailer.createTransport({
-      host: ctx.helper.email_host, // 主机
-      secure: true, // 使用 SSL
-      secureConnection: true, // 使用 SSL
-      port: 465, // SMTP 端口
-      auth: {
-        user: ctx.helper.email_user, // 账号
-        pass: ctx.helper.email_pwd // 密码
-      }
-    });
-
-    // 设置邮件内容
-    var mailOptions = {
-      from: ctx.helper.email_send_address, // 发件地址
-      to: email, // 收件列表
-      subject: "微信绑定账户邮件激活", // 标题
-    }
-
-    mailOptions.text = "您好 ";
-      mailOptions.html = '<b>感谢您访问图钉墙!</b> <a href="'+ctx.helper.wx_email_verify_address
-        +'?unionId='+unionId+'&activeCode='+activeCode+'">请点击激活账号</a>';
-
-    // 发送邮件
-    await transport.sendMail(mailOptions, function(error, response) {
-      if (error) {
         return false;
       } else {
         return true;
@@ -109,7 +73,7 @@ class Email extends Service {
     }
 
     mailOptions.text = "您好 ";
-      mailOptions.html = '<b>感谢您访问图钉墙!</b> <a href="'+ctx.helper.getBackPwd_email_verify_address
+      mailOptions.html = '<b>感谢您访问!</b> <a href="'+ctx.helper.getBackPwd_email_verify_address
         +'?email='+email+'&activeCode='+activeCode+'">请点击修改该账号的密码</a>';
 
     // 发送邮件

@@ -235,6 +235,23 @@ class User extends Service {
   async updateUserAvatarUrl(data){
     return await this.ctx.model.User.updateUserAvatarUrl(data);
   }
+
+  async findByUserWithEmail(email){
+    return await this.ctx.model.User.findByUserWithEmail(email);
+  }
+
+  async getBackPwdWithEmail(email){
+    try{
+        const activeCode =  UUID.v1();
+        await this.ctx.model.User.updateUserActiveCodeByEmail(email, activeCode);
+        await this.ctx.service.emailService.sendBackPwdEmail(email, activeCode);
+        return true;
+    }
+    catch(e){
+      return false;
+    }
+  }
+
 }
 
 module.exports = User;

@@ -27,6 +27,7 @@ module.exports = app => {
   router.get('/newsMgr', controller.home.newsMgr);
   router.get('/newsCOU/:id', controller.home.newsCOU);
   router.get('/userMgr', controller.home.userMgr);
+  router.get('/updatePwd',controller.home.updatePwd);
 
   router.get('/roleIndex', controller.home.roleIndex);
 
@@ -49,6 +50,8 @@ module.exports = app => {
   router.get('/website/news/getTopNews',controller.website.news.getTopNews);
   router.put('/website/user/updateValidByUserId/:id', controller.website.user.updateValidByUserId);
   router.put('/website/user/updatePwd', controller.website.user.updatePwd);
+  router.get('/website/user/getBackPwdWithEmail', controller.website.user.getBackPwdWithEmail);
+  router.put('/website/user/updatePwdWithEmailAndActiveCode', controller.website.user.updatePwdWithEmailAndActiveCode);
 
   router.get('/website/production/listProductionByUserId', controller.website.production.listProductionByUserId);
   router.put('/website/production/updateAverageScore', controller.website.production.updateAverageScore);

@@ -135,6 +135,34 @@ module.exports = app => {
     });
   }
 
+  Users.findByUserWithEmail = async function (email){
+    return await this.findOne({
+      where:{
+        email:email
+      },
+      include:[
+        {
+          model: app.model.Roles,
+          through:{
+            attributes:['userId','roleId'],
+          },
+          attributes:['Id','name']
+        }
+      ],
+      attributes:['Id','email','realname','mobile','password']
+    });
+  }
+
+  Users.updateUserActiveCodeByEmail = async function(email, activeCode){
+    return await this.update({
+      activecode:activeCode
+    },{
+      where:{
+        email:email
+      }
+    });
+  }
+
   User.loginFindByUserWithMobile = async function (mobile){
     return await this.findOne({
       where:{
