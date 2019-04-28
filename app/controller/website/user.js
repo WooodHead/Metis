@@ -287,7 +287,7 @@ class UsersController extends BaseController{
     const email = ctx.request.body.email;
     const activeCode = ctx.request.body.activeCode;
     const newPwd = ctx.request.body.newPwd;
-    const result = await ctx.service.users.updatePwdWithEmailAndActiveCode(email, activeCode, newPwd);
+    const result = await ctx.service.user.updatePwdWithEmailAndActiveCode(email, activeCode, newPwd);
     if (result){
       super.success('修改成功');
     }

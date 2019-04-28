@@ -233,6 +233,17 @@ module.exports = app => {
     });
   }
 
+  User.updatePwdWithEmailAndActiveCode = async function(email, activeCode, newPwd){
+    return await this.update({
+      password:newPwd
+    },{
+      where:{
+        email:email,
+        activecode:activeCode,
+      }
+    });
+  }
+
   User.updateUserActiveCodeByEmail = async function(email, activecode){
     return await this.update({
       activecode:activecode

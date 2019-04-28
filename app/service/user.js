@@ -252,6 +252,18 @@ class User extends Service {
     }
   }
 
+  async updatePwdWithEmailAndActiveCode(email, activeCode, newPwd){
+    try{
+      const helper = this.ctx.helper;
+      const password = helper.cryptoPwd(helper.cryptoPwd(newPwd));
+      await this.ctx.model.User.updatePwdWithEmailAndActiveCode(email, activeCode, password);
+      return true;
+    }
+    catch(e){
+      console.log(e);
+      return false;
+    }
+  }
 }
 
 module.exports = User;
