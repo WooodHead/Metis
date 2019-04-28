@@ -46,7 +46,8 @@ class SmsMessage extends Service {
 
   async sendGetBackPwdSms(smsMessage) {
     let result = {};
-    let user = await this.ctx.model.findUserByMobile(smsMessage.mobile);
+
+    let user = await this.ctx.model.User.findUserByMobile(smsMessage.mobile);
     if (user){
       let code = this.ctx.helper.randomNumber(6);
       smsMessage.code = code;
