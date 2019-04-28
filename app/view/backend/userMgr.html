@@ -10,6 +10,7 @@
 <div class="right">
 	<div class="userMgr">
 		<i-col span="24">用户管理</i-col>
+		<a class="btn btn-primary" href="userCOU/0"> <span class="glyphicon glyphicon-plus"></span>新建用户</a>
 		<i-table :columns="columns" :data="dataList" style="margin-top:20px;width:100%;" ></i-table>
 		<page v-model="totalPage" :current="1" :total="totalPage" @on-change="pageChange" show-total style="margin-right:60px;margin-top:20px;text-align:right;"></page>
 	</div>

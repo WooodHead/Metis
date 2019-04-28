@@ -25,22 +25,42 @@ var judgeCOU = new Vue({
         	sub_title:"",
 			category:"0",
         	description:"",
+			currentRound:""
         },
         ruleDataSourse:{
         	email: [{ required: true,type:"email",message: '请输入正确格式的邮箱', trigger: 'blur' }]
         },
+		roundList:[],	//评审轮次数据
         submitUrl: "",
         redirectUrl:config.viewUrls.judgeMgr
 
     },
     created:function(){
+		var that = this;
     	this.dataSourse.id = window.location.href.split("judgeCOU/")[1];
+
+		// 获取评审轮次
+		$.ajax({
+            url: config.ajaxUrls.judgeRoundGetByPage,
+            type: "get",
+            data: {offset: 0,limit: 100},
+            success: function(response) {
+                if (response.status == 200) {
+                    that.roundList = response.data.rows;
+                } else {
+                    that.$Notice.error({
+                        title:config.messages.networkError
+                    });
+                }
+            }
+        });
+
     	if(this.dataSourse.id > 0){
-    		var that = this;
     		$.ajax({
                 type:"get",
                 url:config.ajaxUrls.judgeDetail.replace(":id",this.dataSourse.id),
                 success:function(response){
+					console.log(response);
                     if(response.status == 200){
                     	that.imgUrl = response.data.headicon;
             	  		that.fileName = response.data.headicon.split("?")[0].split("judges/")[1];
@@ -49,7 +69,8 @@ var judgeCOU = new Vue({
                     	that.dataSourse.name =response.data.name;
                     	that.dataSourse.email = response.data.email;
                     	that.dataSourse.sub_title = response.data.sub_title;
-                    	that.dataSourse.description = response.data.description;
+						that.dataSourse.description = response.data.description;
+                    	that.dataSourse.currentRound = response.data.currentRound;
                     	that.submitUrl = config.ajaxUrls.judgeUpdate;
                     }else{
 	            		that.$Notice.error({title:response.data});
@@ -119,6 +140,9 @@ var judgeCOU = new Vue({
                 }
             })
     	},
+		changeRound(value){
+			this.dataSourse.currentRound = value;
+		},
     	submit: function(){
     		this.dataSourse.headicon = this.fileName;
     		var that = this;

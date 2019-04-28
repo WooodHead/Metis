@@ -28,6 +28,7 @@ module.exports = app => {
   router.get('/newsMgr', controller.home.newsMgr);
   router.get('/newsCOU/:id', controller.home.newsCOU);
   router.get('/userMgr', controller.home.userMgr);
+  router.get('/userCOU/:id', controller.home.userCOU);
   router.get('/resetPwd',controller.home.resetPwd);
 
   router.get('/roleIndex', controller.home.roleIndex);
