@@ -181,7 +181,7 @@ class User extends Service {
         code: smsCode
       });
       if (smsObject) {
-        if (smsObject.createtime > preDate) {
+        if (smsObject.createAt > preDate) {
           const password = helper.cryptoPwd(helper.cryptoPwd(newPwd));
           await this.ctx.model.User.updatePwdWithMobileAndSmsCode(mobile, password);
           return {
