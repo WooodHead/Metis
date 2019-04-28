@@ -1,63 +1,76 @@
-var register = new Vue({
-	el:".register",
-	data(){
+var pageName = "forgetPwd";
+var forgetPwd = new Vue({
+	el:".index",
+	data:function(){
 		return{
-			showMobileCode:true,	//手机验证码显示参数
-			disableBtn:false,		//获取验证码禁止
-			disableSbt:true,		//提交按钮禁止
-			mobileCodeText:"点击获取验证码",
-			formItem: {
+			formItem:{
 				mobileOrEmail:"1",
-				email: '',			//邮箱
-				realname: '',		//用户名称
-				mobile: '',			//手机号码
-				smsCode: '',		//手机验证码
-				address: '',		//地址
-				password: '',		//密码
-				captchaText: ''		//图片验证码
-            },
-            ruleValidate:{
-            	email:[
-        	       {required: true, message: '邮箱不能为空', trigger: 'blur'},
-        	       {type:"email", message: '请输入正确邮箱格式', trigger: 'blur'}
-            	],
-            	realname:{required: true, message: '用户名不能为空', trigger: 'blur'},
-            	mobile:[
+				email:"",
+				captchaText:"",
+				mobile:"",
+				mobileCode:"",
+				password:"",
+				confirmPassword:""
+			},
+			lock:false,
+			disableBtn:false,		//获取验证码禁止
+			disableSbt:true,
+			mobileCodeText:"点击获取验证码",
+			ruleValidate:{
+				email:[
+				    {required: true, message: '请输入用户邮箱', trigger: 'blur'},
+				    {type:"email", message: '请输入正确邮箱格式', trigger: 'blur'}
+				],
+				captchaText:[
+				    {required: true, message: '请输入验证码', trigger: 'blur'},
+				    {required: true, len:6, message: '验证码长度有误', trigger: 'blur'}
+				],
+				mobile:[
         	        {required: true, message: '手机号码不能为空', trigger: 'blur'},
         	        {required: true, len:11, message: '请输入正确手机号码格式', trigger: 'blur'}
             	],
-            	smsCode:[
+            	mobileCode:[
 					{required: true, message: '请输入验证码', trigger: 'blur'},
 					{len:6, message: '验证码为6位', trigger: 'blur'}
             	],
             	password:[
-            	    {required: true, message: '请输入密码', trigger: 'blur'},
+               	    {required: true, message: '请输入密码', trigger: 'blur'},
               	    {min:6, message: '密码至少为6位', trigger: 'blur'}
             	],
             	confirmPassword:[
             	    {required: true, message: '请输入密码', trigger: 'blur'},
               	    {min:6, message: '密码至少为6位', trigger: 'blur'}
-            	],
-            	captchaText:{required: true, message: '验证码不能为空', trigger: 'blur'}
-            },
-            registerStyle:{
-            	width:"40%",
-            	margin:"0 auto",
-            	marginTop:config.cssHeight.headHeight + 40 + "px",
-            	minHeight:""
-            }
+            	]
+			},
+			forgetPwdStyle:{
+				minHeight:"",
+				margin:"0 auto",
+			  	marginTop: config.cssHeight.headHeight + 40 + "px",
+			  	width:"45%"
+			}
 		}
 	},
-    methods:{
-    	//验证方式选择
-    	radioChange(value){
+	methods:{
+		//验证方式选择
+    	radioChange:function(value){
     		if(value == "0"){				//  email
-    			this.showMobileCode = false;
-    			this.disableSbt = false;
-    			this.formItem.smsCode = "";
+    			this.lock = false;
+    			this.formItem.email = "";
+    			this.formItem.captchaText = "";
+				$.ajax({
+					url: config.ajaxUrls.getCaptcha,
+					type: 'GET',
+					success(res){
+						document.getElementsByTagName("object")[0].innerHTML = res;
+					}
+				});
     		}else if(value == "1"){			//  mobile
-    			this.showMobileCode = true;
+    			this.formItem.mobile = "";
+    			this.formItem.mobileCode = "";
+    			this.formItem.password = "";
+    			this.formItem.confirmPassword = "";
     			this.disableSbt = true;
+    			this.lock = false;
     		}
     	},
     	//发送手机验证短信
@@ -65,13 +78,14 @@ var register = new Vue({
     		var that = this;
     		this.$Loading.start();
     		if(this.formItem.mobile.length == 11){
-    			var url = config.ajaxUrls.sendMobileCode + this.formItem.mobile;
     			$.ajax({
                     dataType:"json",
                     type:"get",
-                    url:url,
+                    url:config.ajaxUrls.sendGetBackPwdSms,
+					dat:{mobile:this.formItem.mobile}
                     success:function(res){
-                        if(res.success){
+						console.log(res);
+                        if(res.status == 200){
                     		that.$Loading.finish();
                         	that.$Notice.success({title:res.data, duration:3});
                         	clock(that);
@@ -91,7 +105,7 @@ var register = new Vue({
     		}
     	},
     	//验证手机验证码
-    	checkMobileCode(event){
+    	checkMobileCode:function(event){
 			var that = this,
 			url = config.ajaxUrls.vertifyCode;
 			if(event.target.value.length == 6){
@@ -99,12 +113,12 @@ var register = new Vue({
 	                dataType:"json",
 	                type:"GET",
 	                url:url,
-	                data:{mobile:this.formItem.mobile,code:this.formItem.smsCode},
+	                data:{mobile:this.formItem.mobile,code:this.formItem.mobileCode},
 	                success:function(res){
-						console.log(res);
-	                    if(res.success){
+	                    if(res.status == 200){
 	                    	that.$Notice.success({title:res.data, duration:3});
-	                    	that.disableSbt = false;
+	                    	that.lock = true;
+                        	that.disableSbt = false;
 	                    }else{
 	                    	that.$Notice.error({title:res.data, duration:3});
 	                    }
@@ -116,12 +130,31 @@ var register = new Vue({
 			}
     	},
     	//验证两次密码输入
-    	conPwdBlur(){
+    	conPwdBlur:function(){
     		if(this.formItem.password && this.formItem.confirmPassword != this.formItem.password){
     			this.$Notice.error({ title: '输入的密码不一致', duration:3});
     		}
     	},
-    	//刷新图片验证码内容
+    	sendEmail:function(){
+			var that = this;
+			this.$Loading.start();
+			$.ajax({
+		        url:config.ajaxUrls.forgetPwd,
+		        type:"post",
+		        dataType:"json",
+		        data:this.formItem,
+		        success:function(response){
+		            if(response.success){
+		    			that.$Loading.finish();
+		            	that.$Notice.success({title:config.messages.optSuccess});
+		            }else{
+		    			that.$Loading.error();
+		            	that.$Notice.success({title:response.message});
+		            }
+		        }
+		    });
+		},
+		//刷新图片验证码内容
     	tapClick(eve){
 			let that = this;
             $.ajax({
@@ -150,58 +183,35 @@ var register = new Vue({
                 });
             }
         },
-        //提交
-        submit(name){
-        	this.$Loading.start();
-        	this.$refs[name].validate((valid) => {
-                if (valid) {
-					console.log(this.formItem);
-                	var that = this,
-            		dataUrl = config.ajaxUrls.createUser;
-	            	$.ajax({
-	                    url:dataUrl,
-	                    type:"POST",
-	                    dataType:"json",
-	                    contentType :"application/json; charset=UTF-8",
-	                    data:JSON.stringify(this.formItem),
-	                    success:function(res){
-	                        if(res.success){
-	                            that.$Notice.success({ title: config.messages.optSuccRedirect,duration:3,
-	                            	onClose:function(){
-	                            		that.$Loading.finish();
-	                                	// window.location.href = config.viewUrls.login;
-	                                }
-	                            });
-	                        }else{
-	                        	that.$Loading.error();
-	                        	that.$Notice.error({ title: res.message,duration:3});
-	                        }
-	                    },
-	                    error:function(XMLHttpRequest, textStatus, errorThrown){
-	                         if(textStatus == "parsererror"){
-	                        	 that.$Loading.error();
-	                        	 that.$Notice.error({ title: "登陆会话超时，请重新登陆",duration:3});
-	                         }
-	                    }
-	                });
-                } else {
-                	this.$Loading.error();
-                    this.$Message.error('请填写相应信息!');
-                }
-            })
-        }
-    },
-    created(){
-    	this.registerStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.footHeight - config.cssHeight.headHeight - 40 + "px";
-		$.ajax({
-            url: config.ajaxUrls.getCaptcha,
-            type: 'GET',
-            success(res){
-                document.getElementsByTagName("object")[0].innerHTML = res;
-            }
-        });
-    }
+		changePwd(){
+			var that = this;
+			this.$Loading.start();
+			$.ajax({
+		        url:config.ajaxUrls.updatePwdByMobile,
+		        type:"post",
+		        dataType:"json",
+		        data:{
+		        	mobile:this.formItem.mobile,
+		        	password:this.formItem.password,
+		        	code:this.formItem.mobileCode,
+		        },
+		        success:function(res){
+		            if(res.success){
+		    			that.$Loading.finish();
+		            	that.$Notice.success({title:config.messages.optSuccess});
+		            }else{
+		    			that.$Loading.error();
+		            	that.$Notice.success({title:res.message});
+		            }
+		        }
+		    });
+		}
+	},
+	created:function(){
+		this.forgetPwdStyle.minHeight = document.documentElement.clientHeight - 80 - 160 - 40 + "px";
+	}
 })
+
 function clock(that){
 	var num = 60;
 	var int = setInterval(function(){

@@ -67,6 +67,7 @@ var config = {
         // register 界面
         sendMobileCode:"/website/sms/sendMessage?mobile=",
         vertifyCode:"/website/sms/vertifySms",
+        sendGetBackPwdSms:"/website/sms/sendGetBackPwdSms",     //找回密码：发送短信
         getCaptcha:"/getCaptcha",
         checkCaptcha:"/checkCaptcha",
         createUser:"/website/user/createUser",

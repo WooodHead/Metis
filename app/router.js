@@ -17,6 +17,7 @@ module.exports = app => {
   router.get('/worksDetail/:id', controller.home.worksDetail);
   router.get('/resetInfo', controller.home.resetInfo);
   router.get('/judge', controller.home.judge);
+  router.get('/forgetPwd', controller.home.forgetPwd);
 
   router.get('/judgeMgr', controller.home.judgeMgr);
   router.get('/judgeCOU/:id', controller.home.judgeCOU);
