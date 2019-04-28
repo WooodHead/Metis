@@ -25,11 +25,11 @@ class User extends Service {
 
   async createUserByAdmin(user,role){
     if (user.email == '' || user.email == null) {
-      throw new Error('邮箱地址不能为空');
+      throw new Error(ctx.__('noEmail'));
     } else {
       const userObj = await this.ctx.model.User.findUserByEmail(user.email);
       if (userObj){
-        throw new Error('用户已经存在');
+        throw new Error(ctx.__('userExist'));
       }
       else{
         let transaction;
@@ -55,11 +55,11 @@ class User extends Service {
   async createUser(user) {
     if (user.mobileOrEmail == 1){
       if (user.mobile == '' || user.mobile == null) {
-        throw new Error('用户电话号码不能为空');
+        throw new Error(ctx.__('mobileNotEmpty'));
       } else {
         const userObj = await this.ctx.model.User.findUserByMobile(user.mobile);
         if (userObj) {
-          throw new Error('用户已经存在');
+          throw new Error(ctx.__('userExist'));
         } else {
           //判断短信验证码是否正确
           let curDate = new Date();
@@ -88,21 +88,21 @@ class User extends Service {
                 return false;
               }
             } else {
-              throw new Error('手机验证码失效');
+              throw new Error(ctx.__('mobileVertifyfailure'));
             }
           } else {
-            throw new Error('手机验证码不正确');
+            throw new Error(ctx.__('mobileVertifyIsNotCorrect'));
           }
         }
       }
     }
     else{
       if (user.email == '' || user.email == null) {
-        throw new Error('邮箱地址不能为空');
+        throw new Error(ctx.__('noEmail'));
       } else {
         const userObj = await this.ctx.model.User.findUserByEmail(user.email);
         if (userObj){
-          throw new Error('用户已经存在');
+          throw new Error(ctx.__('userExist'));
         }
         else{
           let transaction;
@@ -215,18 +215,18 @@ class User extends Service {
           await this.ctx.model.User.updatePwdWithMobileAndSmsCode(mobile, password);
           return {
             success: true,
-            message: '修改成功!'
+            message: ctx.__('updateSuccessful')
           };
         } else {
           return {
             success: false,
-            message: '验证码超时!'
+            message: ctx.__('mobileVertifyfailure')
           };
         }
       } else {
         return {
           success: false,
-          message: '验证码错误!'
+          message: ctx.__('mobileVertifyIsNotCorrect')
         };
       }
 

@@ -36,5 +36,8 @@
   "bindSuccess": "bind success, please log in",
   "bindFailed": "bind failed",
   "notActiveByEmail": "not active and please active by email",
-  "noMobile": "mobile is not exist"
+  "noMobile": "mobile is not exist",
+  "noEmail": "email can not empty",
+  "userExist": "user is exist",
+  "mobileNotEmpty":"mobile can not empty"
 }

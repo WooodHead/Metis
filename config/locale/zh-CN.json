@@ -36,5 +36,10 @@
   "bindSuccess": "绑定成功，请登录!",
   "bindFailed": "绑定失败!",
   "notActiveByEmail": "未激活，请先进入邮箱激活，或者重发邮件激活",
-  "noMobile": "手机号码不存在"
+  "noMobile": "手机号码不存在",
+  "noEmail": "邮箱地址不能为空",
+  "userExist": "用户已经存在",
+  "mobileNotEmpty":"用户电话号码不能为空",
+  "mobileVertifyfailure":"手机验证码失效",
+  "mobileVertifyIsNotCorrect":"手机验证码不正确",
 }
