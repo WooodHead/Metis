@@ -176,7 +176,7 @@ class User extends Service {
       const helper = this.ctx.helper;
       let curDate = new Date();
       let preDate = moment(new Date(curDate.getTime() - 30 * 60 * 1000)).format('YYYY-MM-DD HH:mm:ss');
-      let smsObject = await this.ctx.model.SmsMessage.getDataByCondition({
+      let smsObject = await this.ctx.model.SmsMessage.vertifyCode({
         mobile: mobile,
         code: smsCode
       });
