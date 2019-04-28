@@ -352,10 +352,10 @@ module.exports = app => {
 
   User.updateUserByAdmin = async function (user,transaction) {
     return await this.update({
-      password : user.password;
-      mobile : user.mobile;
-      email : user.email;
-      realname : user.realname;
+      password : user.password,
+      mobile : user.mobile,
+      email : user.email,
+      realname : user.realname,
     },{
       transaction:transaction,
       where:{
