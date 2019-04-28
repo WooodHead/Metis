@@ -142,11 +142,11 @@ module.exports = app => {
       },
       include:[
         {
-          model: app.model.Roles,
+          model: app.model.Role,
           through:{
             attributes:['userId','roleId'],
           },
-          attributes:['Id','name']
+          attributes:['Id','rolename']
         }
       ],
       attributes:['Id','email','realname','mobile','password']

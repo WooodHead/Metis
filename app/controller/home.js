@@ -43,9 +43,9 @@ class HomeController extends Controller {
     });
   }
 
-  async updatePwd(){
+  async resetPwd(){
     const ctx = this.ctx;
-    await ctx.render('frontend/updatePwd.html');
+    await ctx.render('frontend/resetPwd.html');
   }
 
   async works() {
