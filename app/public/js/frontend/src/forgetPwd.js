@@ -139,17 +139,20 @@ var forgetPwd = new Vue({
 			var that = this;
 			this.$Loading.start();
 			$.ajax({
-		        url:config.ajaxUrls.forgetPwd,
-		        type:"post",
+		        url:config.ajaxUrls.getBackPwdWithEmail,
+		        type:"get",
 		        dataType:"json",
-		        data:this.formItem,
+		        data:{
+					email:this.formItem.email
+				},
 		        success:function(response){
-		            if(response.success){
+					console.log(response);
+		            if(response.status == 200){
 		    			that.$Loading.finish();
-		            	that.$Notice.success({title:config.messages.optSuccess});
+		            	that.$Notice.success({title:response.data});
 		            }else{
 		    			that.$Loading.error();
-		            	that.$Notice.success({title:response.message});
+		            	that.$Notice.success({title:response.data});
 		            }
 		        }
 		    });

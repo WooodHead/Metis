@@ -44,7 +44,6 @@ var config = {
     ajaxUrls: {
         imageGet: "file/image",
         fileGet: "file/downloadFile",
-        forgetPwd: "user/findYourPwd",
         setPwd: "user/resetYourPwd",
         register: "user/register",
         resetInfo: "user/update",
@@ -58,7 +57,9 @@ var config = {
         attachUpload: "/dcpro/file/uploadMultiFile",		//附件上传路径问题解决方案/DesignYL/+
         judgeToScoreList:"review/getReviewListByUserId",
         judgeScore:"review/updateReviewScore",
+        getBackPwdWithEmail:"/website/user/getBackPwdWithEmail",
         updatePwdWithMobileAndSmsCode:"/website/user/updatePwdWithMobileAndSmsCode",
+        updatePwdWithEmailAndActiveCode: "/website/user/updatePwdWithEmailAndActiveCode",
 
         manageNews:"news/findManageNewsByPage",
         judgeGetByPage:"judge/getAllJudge",
