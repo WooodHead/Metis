@@ -88,7 +88,7 @@ module.exports = app => {
   }
 
   Review.getReviewDataByJudgeUserIdAndRound = async function({ offset = 0, limit = 10, judgeUserId = 0, round = 0 }){
-    return this.findAndCountAll({
+    return await this.findAndCountAll({
       offset,
       limit,
       where:{
