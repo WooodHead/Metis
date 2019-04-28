@@ -293,6 +293,28 @@ class User extends Service {
       return false;
     }
   }
+
+  async updateUserByAdmin(updates){
+    let user = {};
+    user.password = helper.cryptoPwd(helper.cryptoPwd(updates.password));
+    user.mobile = updates.mobile;
+    user.email = updates.email;
+    user.realname = updates.realname;
+    user.id = updates.id;
+
+    let transaction;
+    try {
+      transaction = await this.ctx.model.transaction();
+      await this.ctx.model.User.updateUserByAdmin(user, transaction);
+      await this.ctx.model.UserRole.updateUserRole(updates.id, updates.role, transaction);
+      await transaction.commit();
+      return true
+    } catch (e) {
+      await transaction.rollback();
+      this.ctx.logger.error(e.message);
+      return false
+    }
+  }
 }
 
 module.exports = User;

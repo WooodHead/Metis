@@ -60,6 +60,7 @@ class UsersController extends BaseController{
     const id = ctx.params.id;
     const updates = {
       mobile: ctx.request.body.mobile,
+      email: ctx.request.body.email,
     };
 
     try{
@@ -305,6 +306,28 @@ class UsersController extends BaseController{
     }
     catch(e){
       console.log(e);
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
+  }
+
+  async updateUserByAdmin() {
+    const ctx = this.ctx;
+    const id = ctx.params.id;
+    const updates = {
+      mobile: ctx.request.body.mobile,
+      email: ctx.request.body.email,
+      password: ctx.request.body.password,
+      realname: ctx.request.body.realname,
+      role: ctx.request.body.role,
+      id: id,
+    };
+
+    try{
+      await ctx.service.user.updateUserByAdmin({updates });
+      super.success(ctx.__('updateSuccessful'));
+    }
+    catch(e){
       ctx.logger.error(e.message);
       super.failure(e.message);
     }

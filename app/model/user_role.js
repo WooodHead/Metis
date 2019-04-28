@@ -50,7 +50,7 @@ module.exports = app => {
     });
   }
 
-  UserRole.updateUserRole = async function(userId, operation){
+  UserRole.updateUserRole = async function(userId, operation, transaction){
     let roleId = 1;
     if (operation == 'user'){
       roleId = 3;
@@ -64,6 +64,7 @@ module.exports = app => {
     return await this.update({
       roleId:roleId
     },{
+      transaction: transaction,
       where:{
         userId:userId
       }
