@@ -202,7 +202,7 @@ var forgetPwd = new Vue({
 		            	that.$Notice.success({title:config.messages.optSuccess});
 		            }else{
 		    			that.$Loading.error();
-		            	that.$Notice.success({title:res.message});
+		            	that.$Notice.error({title:res.data});
 		            }
 		        }
 		    });
