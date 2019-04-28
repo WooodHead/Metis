@@ -27,7 +27,7 @@
 					<i-input v-model="dataSourse.mobile" placeholder="请输入手机号"></i-input>
 				</form-item>
 				<form-item label="密码" prop="password">
-					<i-input v-model="dataSourse.password" placeholder="请输入密码"></i-input>
+					<i-input v-model="dataSourse.password" :disabled="pwdDisable" placeholder="请输入密码"></i-input>
 				</form-item>
 				<form-item>
 					<i-button type="primary" v-on:click="submit" long>确定</i-button>

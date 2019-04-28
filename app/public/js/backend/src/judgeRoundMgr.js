@@ -408,7 +408,7 @@ var vm = new Vue({
                     });
                 } else {
                     that.$Notice.error({
-                        title: config.messages.networkError;
+                        title: config.messages.networkError
                     });
                 }
             }

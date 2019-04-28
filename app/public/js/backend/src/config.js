@@ -45,7 +45,9 @@ var config={
         newsDetail:"/website/news/:id",
         manageNews:"/website/news",
 
+        getUserDetail:"/website/user/:id",
         createUserByAdmin:"/website/user/createUserByAdmin",
+        updateUserByAdmin:"/website/user/updateUserByAdmin/:id",
         userGetByPage:"/website/user",
         userActiveAction:"/website/user/updateValidByUserId/:id",
 
@@ -79,10 +81,11 @@ var config={
     },
     viewUrls:{
         newsMgr:"/newsMgr",
-        newsUpdate:"newsCOU/:id",
+        newsUpdate:"/newsCOU/:id",
         userMgr:"/userMgr",
+        userUpdate:"/userCOU/:id",
         judgeMgr:"/judgeMgr",
-        judgeUpdate:"judgeCOU/:id",
+        judgeUpdate:"/judgeCOU/:id",
         judgeRoundMgr:"/judgeRoundMgr",
         judgeRoundUpdate:"/judgeRoundCOU/:id",
         manageWorkDetail:"/workDetail/:id"
