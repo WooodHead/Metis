@@ -58,6 +58,7 @@ class JudgeController extends BaseController{
       category: ctx.request.body.category,
       language: ctx.request.body.language,
       description: ctx.request.body.description,
+      currentRound: ctx.request.body.currentRound,
     };
 
     try{
