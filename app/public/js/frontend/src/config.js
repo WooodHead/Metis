@@ -58,7 +58,7 @@ var config = {
         attachUpload: "/dcpro/file/uploadMultiFile",		//附件上传路径问题解决方案/DesignYL/+
         judgeToScoreList:"review/getReviewListByUserId",
         judgeScore:"review/updateReviewScore",
-        updatePwdByMobile:"user/updatePwdByMobile",
+        updatePwdWithMobileAndSmsCode:"/website/user/updatePwdWithMobileAndSmsCode",
 
         manageNews:"news/findManageNewsByPage",
         judgeGetByPage:"judge/getAllJudge",
