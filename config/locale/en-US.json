@@ -44,5 +44,5 @@
   "mobileVertifyIsNotCorrect":"mobile vertify code is not correct",
   "emailIsNotExist":"email is not exist",
   "sendEmailFailure":"email send failure",
-  "sendEmailSuccess":"send email success and please check email",
+  "sendEmailSuccess":"send email success and please check email"
 }
