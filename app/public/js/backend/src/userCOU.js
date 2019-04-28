@@ -3,14 +3,15 @@ var judgeCOU = new Vue({
 	el:".index",
 	data:{
 //      需要的数据
-        id:"",
         dataSourse:{
+            id:"",
 			role:"",
         	realname: "",
         	password:"",
             mobile:"",
         	email:"",
         },
+        pwdDisable:false,
         ruleDataSourse:{
             role:[{required: true, message: '类型不能为空', trigger: 'blur'}],
             realname:[{required: true, message: '用户名不能为空', trigger: 'blur'}],
@@ -34,41 +35,21 @@ var judgeCOU = new Vue({
     },
     created:function(){
 		var that = this;
-    	this.id = window.location.href.split("userCOU/")[1];
+    	this.dataSourse.id = window.location.href.split("userCOU/")[1];
 
-		// 获取评审轮次
-		$.ajax({
-            url: config.ajaxUrls.judgeRoundGetByPage,
-            type: "get",
-            data: {offset: 0,limit: 100},
-            success: function(response) {
-                if (response.status == 200) {
-                    that.roundList = response.data.rows;
-                } else {
-                    that.$Notice.error({
-                        title:config.messages.networkError
-                    });
-                }
-            }
-        });
-
-    	if(this.id > 0){
+    	if(this.dataSourse.id > 0){
+            this.pwdDisable = true;
     		$.ajax({
                 type:"get",
-                url:config.ajaxUrls.judgeDetail.replace(":id",this.id),
+                url:config.ajaxUrls.getUserDetail.replace(":id",this.dataSourse.id),
                 success:function(response){
 					console.log(response);
                     if(response.status == 200){
-                    	that.imgUrl = response.data.headicon;
-            	  		that.fileName = response.data.headicon.split("?")[0].split("judges/")[1];
-            	  		that.progressPercent = 100;
-						that.dataSourse.language = response.data.language.toString();
-                    	that.dataSourse.name =response.data.name;
-                    	that.dataSourse.email = response.data.email;
-                    	that.dataSourse.sub_title = response.data.sub_title;
-						that.dataSourse.description = response.data.description;
-                    	that.dataSourse.currentRound = response.data.currentRound;
-                    	that.submitUrl = config.ajaxUrls.judgeUpdate;
+						that.dataSourse.role = response.data.roles[0].Id;
+                    	that.dataSourse.realname =response.data.realname;
+                    	that.dataSourse.mobile = response.data.mobile;
+						that.dataSourse.email = response.data.email;
+                        that.submitUrl = config.ajaxUrls.updateUserByAdmin;
                     }else{
 	            		that.$Notice.error({title:response.data});
                     }
@@ -78,6 +59,7 @@ var judgeCOU = new Vue({
                 }
             })
     	}else{
+            this.pwdDisable = false;
     		this.submitUrl = config.ajaxUrls.createUserByAdmin;
     	}
     },
@@ -85,36 +67,37 @@ var judgeCOU = new Vue({
 		changeRole(value){
 			this.dataSourse.role = value;
 		},
-    	submit: function(){
+    	submit(){
     		var that = this;
-            if(this.dataSourse.mobile){
-
-            }
-			if(this.id > 0){
-				// $.ajax({
-	    	    //     url:that.submitUrl.replace(":id",this.id),
-	    	    //     type:"put",
-	    	    //     dataType:"json",
-	    	    //     contentType :"application/json; charset=UTF-8",
-	    	    //     data:JSON.stringify(that.dataSourse),
-	    	    //     success:function(response){
-	    	    //         if(response.status == 200){
-	    	    //             if(that.redirectUrl){
-	    	    //             	that.$Notice.success({title:response.data});
-	    	    //                 setTimeout(function(){
-	        	//                     window.location.href = that.redirectUrl;
-	    	    //                 },3000);
-	    	    //             }else{
-	    	    //             	that.$Notice.warning({title:response.data});
-	    	    //             }
-	    	    //         }else{
-	    	    //         	that.$Notice.error({title:response.data});
-	    	    //         }
-	    	    //     },
-	    	    //     error:function(){
-	    	    //     	that.$Notice.error({title:config.messages.networkError});
-	    	    //     }
-	    	    // });
+            this.$Loading.start();
+			if(this.dataSourse.id > 0){
+				$.ajax({
+	    	        url:that.submitUrl.replace(":id",this.dataSourse.id),
+	    	        type:"put",
+	    	        dataType:"json",
+	    	        data:that.dataSourse,
+	    	        success:function(response){
+	    	            if(response.status == 200){
+	    	                if(that.redirectUrl){
+	    	                	that.$Notice.success({title:response.data});
+                                that.$Loading.finish();
+	    	                    setTimeout(function(){
+	        	                    window.location.href = that.redirectUrl;
+	    	                    },3000);
+	    	                }else{
+                                that.$Loading.error();
+	    	                	that.$Notice.warning({title:response.data});
+	    	                }
+	    	            }else{
+                            that.$Loading.error();
+	    	            	that.$Notice.error({title:response.data});
+	    	            }
+	    	        },
+	    	        error:function(){
+                        that.$Loading.error();
+	    	        	that.$Notice.error({title:config.messages.networkError});
+	    	        }
+	    	    });
 			}else{
 				$.ajax({
 	    	        url:that.submitUrl,
@@ -125,17 +108,21 @@ var judgeCOU = new Vue({
 	    	            if(response.status == 200){
 	    	                if(that.redirectUrl){
 	    	                	that.$Notice.success({title:response.data});
+                                that.$Loading.finish();
 	    	                    setTimeout(function(){
 	        	                    window.location.href = that.redirectUrl;
 	    	                    },3000);
 	    	                }else{
+                                that.$Loading.error();
 	    	                	that.$Notice.warning({title:response.data});
 	    	                }
 	    	            }else{
+                            that.$Loading.error();
 	    	            	that.$Notice.error({title:response.data});
 	    	            }
 	    	        },
 	    	        error:function(){
+                        that.$Loading.error();
 	    	        	that.$Notice.error({title:config.messages.networkError});
 	    	        }
 	    	    });

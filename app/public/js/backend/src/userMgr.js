@@ -36,7 +36,7 @@ var vm = new Vue({
 		              }
 			      },
 		          { title: '更新时间',key: 'createAt', align: 'center'},
-		          { title: '操作',key: 'valid', align: 'center',
+				  { title: '操作',key: 'valid', align: 'center',
 		       	   render: (h, params) => {
 		       		if (this.dataList[params.index].valid == 1) {
 	        			    return h('Button',{
@@ -70,8 +70,26 @@ var vm = new Vue({
 	        				  },"禁用")
 	        			  }
 		              }
-		          }
-		      ],
+		          },
+		        { title: '用户修改',key: 'valid', align: 'center',
+		       	   	render: (h, params) => {
+        			    return h('Button',{
+        			    	props: {
+	                              type: 'primary',
+	                              size: 'small'
+	                          },
+	                          style: {
+	                              marginRight: '5px'
+	                          },
+	                          on: {
+                                   click: () => {
+                                       this.userUpdate(params.index)
+                                   }
+                               }
+        			    },"修改")
+        			}
+		        }
+		    ],
 		    dataList:[],
 			totalPage:0,
 			aoData:{
@@ -129,7 +147,11 @@ var vm = new Vue({
 	                }
 	            }
 	        });
-		 }
+		},
+		userUpdate(index){
+			var id = this.dataList[index].Id;
+            window.location.href = config.viewUrls.userUpdate.replace(":id", id);
+		}
 	 },
 	 created:function(){
 		var that = this;
