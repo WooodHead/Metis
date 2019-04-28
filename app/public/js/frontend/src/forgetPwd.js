@@ -45,7 +45,7 @@ var forgetPwd = new Vue({
 			forgetPwdStyle:{
 				minHeight:"",
 				margin:"0 auto",
-			  	marginTop: config.cssHeight.headHeight + 40 + "px",
+			  	marginTop: "60px",
 			  	width:"45%"
 			}
 		}
@@ -84,7 +84,6 @@ var forgetPwd = new Vue({
                     url:config.ajaxUrls.sendGetBackPwdSms,
 					data:{mobile:this.formItem.mobile},
                     success(res){
-						console.log(res);
                         if(res.status == 200){
                     		that.$Loading.finish();
                         	that.$Notice.success({title:res.data, duration:3});
@@ -146,10 +145,11 @@ var forgetPwd = new Vue({
 					email:this.formItem.email
 				},
 		        success:function(response){
-					console.log(response);
 		            if(response.status == 200){
 		    			that.$Loading.finish();
 		            	that.$Notice.success({title:response.data});
+						this.formItem.email = '';
+						this.formItem.captchaText = '';
 		            }else{
 		    			that.$Loading.error();
 		            	that.$Notice.success({title:response.data});
@@ -199,10 +199,13 @@ var forgetPwd = new Vue({
 		        	smsCode:this.formItem.mobileCode,
 		        },
 		        success:function(res){
-					console.log(res);
 		            if(res.success){
 		    			that.$Loading.finish();
 		            	that.$Notice.success({title:res.data});
+						this.formItem.mobile = '';
+						this.formItem.password = '';
+						this.formItem.confirmPassword = '';
+						this.formItem.mobileCode = '';
 		            }else{
 		    			that.$Loading.error();
 		            	that.$Notice.error({title:res.data});
@@ -212,7 +215,7 @@ var forgetPwd = new Vue({
 		}
 	},
 	created:function(){
-		this.forgetPwdStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.footHeight - config.cssHeight.headHeight - 226 + "px";
+		this.forgetPwdStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.footHeight - config.cssHeight.headHeight - 84 + "px";
 	}
 })
 

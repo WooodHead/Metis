@@ -1,0 +1,35 @@
+{% extends "frontend/parent.html" %}
+
+{% block cssfolder %}
+<link href="public/css/frontend/lib/iview.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/pageMenu.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/main.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div class="resetPwd" :style="resetPwdStyle">
+   <i-form :model="formPwd" :label-width="100" :rules="ruleDataSourse">
+		<h2 class="JMPanelTitle">密码</h2>
+		<form-item label="新密码" prop="password">
+			<i-input v-model="formPwd.password" name="password" type="password" placeholder="请输入新密码" clearable></i-input>
+		</form-item>
+		<form-item label="确认新密码" prop="confirmPwd">
+			<i-input v-model="formPwd.confirmPwd" name="confirmPwd" type="password" placeholder="请重新输入新密码" clearable @on-blur="checkPwd"></i-input>
+			<span style="color:#ed3f14;" v-if="showPwdError" v-text="errorTitle"></span>
+		</form-item>
+		<form-item>
+			<i-button type="primary" long @click="submitPwd">保存</i-button>
+		</form-item>
+   </i-form>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+	<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+	<script src="public/js/frontend/lib/vue.min.js"></script>
+	<script src="public/js/frontend/lib/iview.min.js"></script>
+	<script src="public/js/frontend/src/config.js"></script>
+	<script src="public/js/frontend/src/resetPwd.js"></script>
+	<script src="public/js/frontend/src/header.js"></script>
+{% endblock %}
