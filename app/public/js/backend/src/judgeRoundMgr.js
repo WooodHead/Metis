@@ -223,13 +223,13 @@ var vm = new Vue({
                         if (response.status == 200) {
                             that.$Loading.finish();
                             that.$Notice.success({ title: response.data });
-                            this.chooseJudgeIdArray = [];
-                            this.chooseJudgeNameArray = [];
+                            that.chooseJudgeIdArray = [];
+                            that.chooseJudgeNameArray = [];
 
                         } else {
                             that.$Notice.error({ title: response.data });
-                            this.chooseJudgeIdArray = [];
-                            this.chooseJudgeNameArray = [];
+                            that.chooseJudgeIdArray = [];
+                            that.chooseJudgeNameArray = [];
                         }
                     }
                 });
@@ -251,12 +251,12 @@ var vm = new Vue({
                         if (response.status == 200) {
                             that.$Loading.finish();
                             that.$Notice.success({ title: response.data });
-                            this.chooseJudgeIdArray = [];
-                            this.chooseJudgeNameArray = [];
+                            that.chooseJudgeIdArray = [];
+                            that.chooseJudgeNameArray = [];
 
                         } else {
-                            this.chooseJudgeIdArray = [];
-                            this.chooseJudgeNameArray = [];
+                            that.chooseJudgeIdArray = [];
+                            that.chooseJudgeNameArray = [];
                             that.$Notice.error({ title: response.data });
                         }
                     }
