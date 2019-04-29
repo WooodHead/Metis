@@ -14,7 +14,7 @@ var newsCOU = new Vue({
 	data:{
         dataSourse:{
         	id:"",
-        	language:"0",
+        	language:"1",
         	title:"",
             news_abstract:"",
             content:"",
@@ -47,11 +47,7 @@ var newsCOU = new Vue({
                     	that.dataSourse.title = response.data.title;
                     	that.dataSourse.news_abstract = response.data.news_abstract;
                     	that.dataSourse.content = response.data.content;
-                    	if(response.data.language){
-                    		that.dataSourse.language = "1";
-                    	}else{
-                    		that.dataSourse.language = "0";
-                    	}
+						that.dataSourse.language = response.data.language.toString();
                     	that.submitUrl = config.ajaxUrls.newsUpdate.replace(":id",that.dataSourse.id);
                     }else{
                     	that.$Notice.error({title:response.message});
@@ -67,10 +63,10 @@ var newsCOU = new Vue({
     },
     methods:{
     	radioChange:function(value){
-            if(value == "0"){				//  zh
-                this.dataSourse.language = "0";
-    		}else if(value == "1"){			//  en
+            if(value == "1"){				//  zh
                 this.dataSourse.language = "1";
+    		}else if(value == "2"){			//  en
+                this.dataSourse.language = "2";
     		}
         },
 		doUpload:function(files){

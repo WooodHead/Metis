@@ -44,6 +44,7 @@ var vm = new Vue({
 	methods:{
 		submit:function(){
 			var that = this;
+			this.$Loading.start();
 			if (this.dataSourse.id > 0) {
 				$.ajax({
 	    	        url:that.submitUrl.replace(":id",this.dataSourse.id),
@@ -54,18 +55,22 @@ var vm = new Vue({
 	    	        success:function(response){
 	    	            if(response.status == 200){
 	    	                if(that.redirectUrl){
+								that.$Loading.finish();
 	    	                    that.$Notice.success({title:response.data});
 	    	                    setTimeout(function(){
 	        	                    window.location.href = that.redirectUrl;
 	    	                    },3000);
 	    	                }else{
+								that.$Loading.error();
 	    	                	that.$Notice.error({title:response.data});
 	    	                }
 	    	            }else{
+							that.$Loading.error();
 	    	            	that.$Notice.error({title:response.data});
 	    	            }
 	    	        },
 	    	        error:function(){
+						that.$Loading.error();
 	    	        	that.$Notice.error({title:config.messages.networkError});
 	    	        }
 	    	    });
@@ -79,18 +84,22 @@ var vm = new Vue({
 	    	        success:function(response){
 	    	            if(response.status == 200){
 	    	                if(that.redirectUrl){
+								that.$Loading.finish();
 	    	                    that.$Notice.success({title:response.data});
 	    	                    setTimeout(function(){
 	        	                    window.location.href = that.redirectUrl;
 	    	                    },3000);
 	    	                }else{
+								that.$Loading.error();
 	    	                	that.$Notice.success({title:response.data});
 	    	                }
 	    	            }else{
+							that.$Loading.error();
 	    	            	that.$Notice.error({title:response.data});
 	    	            }
 	    	        },
 	    	        error:function(){
+						that.$Loading.error();
 	    	        	that.$Notice.error({title:config.messages.networkError});
 	    	        }
 	    	    });

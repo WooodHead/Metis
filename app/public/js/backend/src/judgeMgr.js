@@ -6,7 +6,11 @@ var Component = new Vue({
         	aoData1:{offset: 0,limit: 10, language:0},
         	columns: [
 				{ title: 'ID',key: 'Id', align: 'center'},
-        	    { title: '语言',key: 'language', align: 'center'},
+        	    { title: '语言',key: 'language', align: 'center',
+					render: (h, params) => {
+						return h('p',this.dataList[params.index].language == "1" ? "中文" : "英文")
+					},
+				},
                 { title: '头像',key: 'headicon', align: 'center',
             	   render: (h, params) => {
                        return h('img', {

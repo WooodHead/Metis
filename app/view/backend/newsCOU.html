@@ -14,13 +14,13 @@
 			<i-form :model="dataSourse" :rules="ruleDataSourse" :label-width="180" style="width:80%;" id="myForm">
 				<form-item label="语言*">
 					<radio-group v-model="dataSourse.language" type="button">
-						<radio label="0" value="0">中文</radio>
-						<radio label="1" value="1">英文</radio>
+						<radio label="1" value="1">中文</radio>
+						<radio label="2" value="2">英文</radio>
 					</radio-group>
 				</form-item>
 				<form-item label="封面图*">
 					<img v-show="imgUrl.length" :src="imgUrl" style="width:120px;height:120px;"><br>
-					<input type="file" @change="doUpload" ref="inputFile" accept="image/*" /></input>
+					<input type="file" @change="doUpload" ref="inputFile" accept="image/*" />
 					<i-progress :percent="progressPercent" /><span v-text="progressPercent + '%'"></span>
 				</form-item>
 				<form-item label="标题*" prop="title">

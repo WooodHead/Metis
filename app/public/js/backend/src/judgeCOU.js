@@ -17,7 +17,7 @@ var judgeCOU = new Vue({
         progressPercent:0,
 //      需要的数据
         dataSourse:{
-			language:"0",	//语言： 0 中文
+			language:"1",	//语言： 1 中文
         	headicon: "",
         	id:"",
         	name:"",
@@ -25,7 +25,7 @@ var judgeCOU = new Vue({
         	sub_title:"",
 			category:"0",
         	description:"",
-			currentRound:""
+			currentRound:"0"
         },
         ruleDataSourse:{
         	email: [{ required: true,type:"email",message: '请输入正确格式的邮箱', trigger: 'blur' }]
@@ -70,7 +70,7 @@ var judgeCOU = new Vue({
                     	that.dataSourse.email = response.data.email;
                     	that.dataSourse.sub_title = response.data.sub_title;
 						that.dataSourse.description = response.data.description;
-                    	that.dataSourse.currentRound = response.data.currentRound;
+                    	that.dataSourse.currentRound = response.data.currentRound ? response.data.currentRound : "0";
                     	that.submitUrl = config.ajaxUrls.judgeUpdate;
                     }else{
 	            		that.$Notice.error({title:response.data});
@@ -86,10 +86,10 @@ var judgeCOU = new Vue({
     },
     methods:{
 		radioChange:function(value){
-            if(value == "0"){				//  zh
-                this.dataSourse.language = "0";
-    		}else if(value == "1"){			//  en
+            if(value == "1"){				//  zh
                 this.dataSourse.language = "1";
+    		}else if(value == "2"){			//  en
+                this.dataSourse.language = "2";
     		}
         },
     	doUpload:function(files){
@@ -145,6 +145,7 @@ var judgeCOU = new Vue({
 		},
     	submit: function(){
     		this.dataSourse.headicon = this.fileName;
+			this.$Loading.start();
     		var that = this;
 			if(this.dataSourse.id > 0){
 				$.ajax({
@@ -155,19 +156,23 @@ var judgeCOU = new Vue({
 	    	        data:JSON.stringify(that.dataSourse),
 	    	        success:function(response){
 	    	            if(response.status == 200){
+							that.$Loading.finish();
 	    	                if(that.redirectUrl){
 	    	                	that.$Notice.success({title:response.data});
 	    	                    setTimeout(function(){
 	        	                    window.location.href = that.redirectUrl;
 	    	                    },3000);
 	    	                }else{
+								that.$Loading.error();
 	    	                	that.$Notice.warning({title:response.data});
 	    	                }
 	    	            }else{
+							that.$Loading.error();
 	    	            	that.$Notice.error({title:response.data});
 	    	            }
 	    	        },
 	    	        error:function(){
+						that.$Loading.error();
 	    	        	that.$Notice.error({title:config.messages.networkError});
 	    	        }
 	    	    });
@@ -181,14 +186,17 @@ var judgeCOU = new Vue({
 	    	        success:function(response){
 	    	            if(response.status == 200){
 	    	                if(that.redirectUrl){
+								that.$Loading.finish();
 	    	                	that.$Notice.success({title:response.data});
 	    	                    setTimeout(function(){
 	        	                    window.location.href = that.redirectUrl;
 	    	                    },3000);
 	    	                }else{
+								that.$Loading.error();
 	    	                	that.$Notice.warning({title:response.data});
 	    	                }
 	    	            }else{
+							that.$Loading.error();
 	    	            	that.$Notice.error({title:response.data});
 	    	            }
 	    	        },

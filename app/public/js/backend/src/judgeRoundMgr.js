@@ -75,7 +75,8 @@ function screenRoundJudge(that, checkAllGroup, oldJudgeData, dataL) {
                 }
             }
         }
-        that.dataList[i].judge = judgeBox;
+        // that.dataList[i].judge = judgeBox;
+  		dataL[i].judgeBox = judgeBox;
         /*
 		=============强行改变datalist中judge的值，由id变为name=====================
   		dataL[i].judgeBox = judgeBox;
@@ -93,60 +94,44 @@ var vm = new Vue({
             dataL: [],
             judgeBox: [],
             columns: [ //table列选项
-                {
-                    title: '名称',
-                    key: 'roundName',
-                    align: 'center'
-                },
-                {
-                    title: '评委',
-                    key: 'judge',
-                    align: 'center'
-                },
-                {
-                    title: '操作',
-                    key: 'opt',
-                    align: 'center',
+                { title: '名称', key: 'roundName', align: 'center' },
+                { title: '评委', key: 'judge', align: 'center',
                     render: (h, params) => {
+                       return h('div', {
+                            props: {
+                                type: 'primary',
+                                size: 'small'
+                            },
+                            style: {
+                                margin:"10px auto"
+                            },
+                        // },this.dataL[params.index].judgeBox)thisRoundNameArr
+                        },this.thisRoundNameArr[params.index])
+                    }
+                },
+                { title: '操作', key: 'opt', align: 'center', render: (h, params) => {
                         return h('div', [
                             h('Button', {
-                                props: {
-                                    type: 'primary',
-                                    size: 'small'
-                                },
-                                style: {
-                                    marginRight: '5px'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.setJudge(params.index)
+                                props: { type: 'primary', size: 'small' },
+                                style: { marginRight: '5px' },
+                                on: { click: () => {
+                                        // this.setJudge(params.index)
+                                        this.setThisRoundJudges(params.index)
                                     }
                                 }
                             }, '设置评委'),
                             h('Button', {
-                                props: {
-                                    type: 'primary',
-                                    size: 'small'
-                                },
-                                style: {
-                                    marginRight: '5px'
-                                },
-                                on: {
-                                    click: () => {
+                                props: { type: 'primary', size: 'small' },
+                                style: { marginRight: '5px' },
+                                on: { click: () => {
                                         this.changeRound(params.index)
                                     }
                                 }
                             }, '修改'),
                             h('Button', {
-                                props: {
-                                    type: 'error',
-                                    size: 'small'
-                                },
-                                style: {
-                                    marginRight: '5px'
-                                },
-                                on: {
-                                    click: () => {
+                                props: { type: 'error', size: 'small' },
+                                style: { marginRight: '5px' },
+                                on: { click: () => {
                                         this.removeRound(params.index)
                                     }
                                 }
@@ -180,10 +165,128 @@ var vm = new Vue({
             setJudgeData1: {
                 id: 0, //轮次id		0
                 judges: ""
-            }
+            },
+
+
+            chooseJudgeNameArray:[],        //  该伦次所选中的评委名数组
+            chooseJudgeIdArray:[],          //  该伦次所选中的评委id数组
+            oldThisRoundJudgeIdArray:[],    //  该伦次已经确定的评委id数组
+            oldThisRoundJudgeNameArray:[],  //  该伦次已经确定的评委name数组
+            allJudgeWithRoundsNameArray:[], //  所有轮次对应评委name数组
+            thisRoundNameArr:[],
+            deleteJudgesArr:[],
+            addJudgesArr:[],
+            formItem:{
+                judges:"",
+                deleteJudges:"",
+                addJudges:""
+            },
+            addJudgesArr:[],                //该伦次添加评委id数组
+            delJudgesArr:[],
         }
     },
     methods: {
+        // chooseJudgeEvent(data){
+        //     console.log(data);
+        //     console.log(this.chooseJudgeArray);
+        // },
+        chooseJudgeOk(){
+            let that = this;
+            if(this.oldThisRoundJudgeIdArray[0] != ""){   // 有
+                console.log("111");
+                for(let i = 0;i < this.chooseJudgeNameArray.length; i++){
+                    for(let j = 0;j < this.judgeList.length; j++){
+                        if(this.chooseJudgeNameArray[i] == this.judgeList[j].name){
+                            this.chooseJudgeIdArray.push(this.judgeList[j].Id);
+                        }
+                    }
+                }
+                for(let i = 0;i < this.chooseJudgeIdArray.length; i++){
+                    if(!this.oldThisRoundJudgeIdArray.includes(this.chooseJudgeIdArray[i])){
+                        this.delJudgesArr.push(this.chooseJudgeIdArray[i]);
+                    }
+                }
+                for (let j = 0;j < this.oldThisRoundJudgeIdArray.length; j++) {
+                    if(!this.chooseJudgeIdArray.includes(this.oldThisRoundJudgeIdArray[j])){
+                        this.addJudgesArr.push(this.oldThisRoundJudgeIdArray[j]);
+                    }
+                }
+                $.ajax({
+                    type: "put",
+                    url: config.ajaxUrls.updateBindJudge.replace(":id", this.dataList[this.index].Id),
+                    data: {
+                        judges:this.chooseJudgeIdArray.join(","),
+                        deleteJudges:this.delJudgesArr.join(","),
+                        addJudges:this.addJudgesArr.join(","),
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            that.$Loading.finish();
+                            that.$Notice.success({ title: response.data });
+                            this.chooseJudgeIdArray = [];
+                            this.chooseJudgeNameArray = [];
+
+                        } else {
+                            that.$Notice.error({ title: response.data });
+                            this.chooseJudgeIdArray = [];
+                            this.chooseJudgeNameArray = [];
+                        }
+                    }
+                });
+            }else {                                 // 无
+                for(let i = 0;i < this.chooseJudgeNameArray.length; i++){
+                    for(let j = 0;j < this.judgeList.length; j++){
+                        if(this.chooseJudgeNameArray[i] == this.judgeList[j].name){
+                            this.chooseJudgeIdArray.push(this.judgeList[j].Id);
+                        }
+                    }
+                }
+                $.ajax({
+                    type: "put",
+                    url: config.ajaxUrls.bindJudge.replace(":id", this.dataList[this.index].Id),
+                    data: {
+                        judges:this.chooseJudgeIdArray.join(",")
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            that.$Loading.finish();
+                            that.$Notice.success({ title: response.data });
+                            this.chooseJudgeIdArray = [];
+                            this.chooseJudgeNameArray = [];
+
+                        } else {
+                            this.chooseJudgeIdArray = [];
+                            this.chooseJudgeNameArray = [];
+                            that.$Notice.error({ title: response.data });
+                        }
+                    }
+                });
+            }
+        },
+        chooseJudgeCancel(){
+
+        },
+        setThisRoundJudges(index){
+            this.index = index;
+            this.roundTitle = this.dataList[index].roundName;
+            this.chooseJudgeNameArray = [];
+            this.setModal = true;
+            this.oldThisRoundJudgeIdArray = this.dataList[index].judge.split(",");
+            for(let i = 0;i < this.oldThisRoundJudgeIdArray.length; i++){
+                for(let j = 0;j < this.judgeList.length; j++){
+                    if(this.oldThisRoundJudgeIdArray[i] == this.judgeList[j].Id){
+                        this.chooseJudgeNameArray.push(this.judgeList[j].name);
+                    }
+                }
+            }
+        },
+        choosejudgeChange(data){
+
+        },
+
+
+
+
         setJudge: function(index) {
             this.setModal = true;
             this.setJudgeData.roundId = this.dataList[index].Id;
@@ -305,7 +408,7 @@ var vm = new Vue({
                                         data: { limit: 100, offset: 0, language: 1 },
                                         success: function(response) {
                                             if (response.status == 200) {
-                                                //	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
+                                                //筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
                                                 that.judgeList = response.data.rows;
                                                 screenRoundJudge(that, that.checkAllGroup, that.oldJudgeData, that.dataL);
                                             } else {
@@ -409,9 +512,27 @@ var vm = new Vue({
                         data: { limit: 100, offset: 0, language: 1 },
                         success: function(response) {
                             if (response.status == 200) {
-                                //	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
+                                //筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
                                 that.judgeList = response.data.rows;
-                                screenRoundJudge(that, that.checkAllGroup, that.oldJudgeData, that.dataL);
+                                // screenRoundJudge(that, that.checkAllGroup, that.oldJudgeData, that.dataL);
+                                let thisRoundIdArr = new Array();
+                                let thisRoundNameArr = new Array();
+                                for(let i=0;i<that.dataList.length;i++){
+                                    thisRoundIdArr[i] = that.dataList[i].judge.split(",");
+                                    thisRoundNameArr[i] = "";
+                                    for(let j = 0;j<thisRoundIdArr[i].length;j++){
+                                        for(let k = 0;k < that.judgeList.length;k++){
+                                            if(that.judgeList[k].Id == thisRoundIdArr[i][j]){
+                                                if(thisRoundNameArr[i] == ''){
+                                                    thisRoundNameArr[i] = that.judgeList[k].name;
+                                                }else{
+                                                    thisRoundNameArr[i] = that.judgeList[k].name + "," + thisRoundNameArr[i];
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                that.thisRoundNameArr = thisRoundNameArr;
                             } else {
                                 that.$Notice.error({ title: response.data });
                             }

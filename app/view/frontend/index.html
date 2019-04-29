@@ -1,0 +1,46 @@
+{% extends "frontend/parent.html" %}
+
+{% block cssfolder %}
+<link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/lib/swiper.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/scr/Home.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div class="index">
+	<row type="flex" justify="center"> <i-col span="18"> <img
+		src="resources/frontend/images/app/topShow.jpg"
+		style="margin-top: 160px;"> <img
+		src="resources/frontend/images/app/schedule_later.jpg">
+	<div style="width: 100%; background-color: #f7f7f7">
+		<section
+			style="color: #5c5c5c; font-size: 32pt; padding-top: 35px; margin-left: 50px">NEWS | 新闻动态</section>
+		<ul class="zyList">
+			<li class="zyItem" v-for="item in dataList"><a class="zyLink"
+				:href="'news/newsDetail/' + item.id" target="_blank"> <img
+					class="zyThumb" :src="item.thumb">
+					<h3 class="zyTitle">{{item.title}}</h3> <span class="zyDate">{{item.publishTime}}</span>
+			</a></li>
+		</ul>
+
+		<div id="JMTCenter">
+			<a id="JMBtn" style="margin-top: 86px; margin-bottom: 48px;"
+				href="news/news/1">查看更多</a>
+		</div>
+	</div>
+	</i-col> </row>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/frontend/lib/vue.min.js"></script>
+<script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/lib/promise.js"></script>
+<script src="public/js/frontend/lib/aliyun-oss-sdk.min.js"></script>
+<script src="public/js/frontend/lib/swiper.js"></script>
+<script src="public/js/frontend/src/config.js"></script>
+<script src="public/js/frontend/src/header.js"></script>
+<script src="public/js/frontend/src/index.js"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+
+/*
+ 	澶ц禌鐩爣鐨勪竴涓猟iv
+ */
+.zyList{
+    font-size: 0px;
+    padding: 50px 20px 20px 20px;
+}
+.zyList .zyItem{
+    width: 31%;
+    margin: 1.1%;
+}
+.zyList .zyItem .zyThumb{
+	    width: 90%;
+    margin: 0 auto;
+}
+.zyList .zyItem .zyTitle{
+    margin: 10px 20px;
+    font-size: 18px;
+    color: #6d6d6d;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.zyList .zyItem .zyDate{
+	    margin-left: 20px;
+    color: #6d6d6d;
+    font-size: 14px;
+}
+#JMList {
+	font-size: 0px;
+	padding: 50px;
+}
+
+#JMList #JMItem {
+	width: 31%;
+	margin: 1.1%;
+}
+
+#JMTCenter{
+    text-align: center!important;
+}
+#JMBtn{
+	     width: 130px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    background: #47a8a9;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+    border: none;
+}
