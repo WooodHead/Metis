@@ -54,7 +54,7 @@ var vm = new Vue({
                   { title: '状态',key: 'status', align: 'center',
                 	  render: (h, params) => {
                 	        return h('i-select', {
-                	            props:{   value: this.dataList[params.index].status},
+                	            props:{   value: this.dataList[params.index].status,transfer:true},
                 	            on: {
                 	                'on-change':(value) => {  this.changeStatus(params.index, value); }
                 	            }
@@ -69,7 +69,7 @@ var vm = new Vue({
                   { title: '所在评审轮次',key: 'round', align: 'center',
 							render: (h, params) => {
 							  return h('i-select', {
-									props:{ value: this.dataList[params.index].round,   },
+									props:{ value: this.dataList[params.index].round,transfer:true},
 									on: {  'on-change':(value) => {
 											this.changeRound(params.index, value);
 										}
@@ -109,16 +109,16 @@ var vm = new Vue({
 			this.$Loading.start();
 			var that = this;
 			$.ajax({
-	            "dataType":'json',
-	            "type":"put",
-	            "url":config.ajaxUrls.workSetStatus.replace(":id",this.dataList[index].Id),
-	            "data":{status:value},
-	            "success": function (response) {
+	            dataType:'json',
+	            type:"put",
+	            url:config.ajaxUrls.workSetStatus.replace(":id",this.dataList[index].Id),
+	            data:{status:value},
+	            success: function (response) {
 	                if(response.status == 200){
 						that.$Loading.finish();
-						that.$Notice.success({title:config.messages.optSuccess});
+						that.$Notice.success({title:response.data});
 	                }else{
-	                	that.$Notice.error({title:response.message});
+	                	that.$Notice.error({title:response.data});
 	                	getPageData(that);
 	                }
 	            }
@@ -178,11 +178,11 @@ var vm = new Vue({
 		getRoundScore:function(index,event){
 			var that = this;
 			$.ajax({
-	            "dataType":'json',
-	            "type":"post",
-	            "url":config.ajaxUrls.getRoundScoreBean,
-	            "data":{productionId:this.dataList[index].id},
-	            "success": function (response) {
+	            dataType:'json',
+	            type:"post",
+	            url:config.ajaxUrls.getRoundScoreBean,
+	            data:{productionId:this.dataList[index].id},
+	            success: function (response) {
 	                if(response.status == 200){
 						that.$Loading.finish();
 						that.RoundScroeList = response.object;
@@ -191,7 +191,7 @@ var vm = new Vue({
 						that.scoreStyle.marginLeft = poptipClientX+"px";
 						that.scoreStyle.top = poptipClientY+"px";
 	                }else{
-	                	that.$Notice.error({title:response.message});
+	                	that.$Notice.error({title:response.data});
 	                }
 	            }
 	        });
@@ -204,11 +204,11 @@ var vm = new Vue({
 		this.groupModel = "0",
 		this.statusModel = "0",
 		$.ajax({
-            "dataType":'json',
-            "type":"get",
-            "url":config.ajaxUrls.judgeRoundGetByPage,
-            "data":this.aoData2,
-            "success": function (response) {
+            dataType:'json',
+            type:"get",
+            url:config.ajaxUrls.judgeRoundGetByPage,
+            data:this.aoData2,
+            success: function (response) {
                 if(response.status == 200){
 					that.$Loading.finish();
 					for(var i=0;i<response.data.rows.length;i++){
@@ -219,7 +219,7 @@ var vm = new Vue({
 						that.roundTypes.push(roundBox);
 					}
                 }else{
-                	that.$Notice.error({title:response.message});
+                	that.$Notice.error({title:config.messages.loadDataError});
                 }
             }
         });
@@ -236,12 +236,11 @@ function getPageData(that){
         data:that.aoData1,
         success: function (response) {
             if(response.status == 200){
-				console.log(response);
 				that.$Loading.finish();
             	that.totalPage = response.data.count;
     	  		that.dataList = response.data.rows;
             }else{
-				that.$Notice.error({title:response.message});
+				that.$Notice.error({title:response.data});
             }
         }
     });

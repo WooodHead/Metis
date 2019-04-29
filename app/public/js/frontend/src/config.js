@@ -55,7 +55,7 @@ var config = {
         worksGetByPage: "/website/production/listProductionByUserId",
         //attachUpload: "/file/uploadMultiFile",			//服务器端路径********需要更改************
         attachUpload: "/dcpro/file/uploadMultiFile",		//附件上传路径问题解决方案/DesignYL/+
-        judgeToScoreList:"review/getReviewListByUserId",
+        judgeToScoreList:"/website/review/getReviewListByJudgeId",
         judgeScore:"review/updateReviewScore",
         getBackPwdWithEmail:"/website/user/getBackPwdWithEmail",
         updatePwdWithMobileAndSmsCode:"/website/user/updatePwdWithMobileAndSmsCode",

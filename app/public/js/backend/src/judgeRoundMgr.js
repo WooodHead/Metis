@@ -60,7 +60,6 @@ var vm = new Vue({
                 limit: 100
             },
             chooseJudgeNameArray:[],        //  该伦次所选中的评委名数组
-            // chooseJudgeIdArray:[],          //  该伦次所选中的评委id数组
             oldThisRoundJudgeIdArray:[],    //  该伦次已经确定的评委id数组
             oldThisRoundJudgeNameArray:[],  //  该伦次已经确定的评委name数组
             allJudgeWithRoundsNameArray:[], //  所有轮次对应评委name数组
@@ -70,8 +69,6 @@ var vm = new Vue({
                 deleteJudges:"",
                 addJudges:""
             },
-            // addJudgesArr:[],                //该伦次添加评委id数组
-            // delJudgesArr:[],
         }
     },
     methods: {
