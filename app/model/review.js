@@ -88,8 +88,8 @@ module.exports = app => {
     });
   }
 
-  Review.getReviewDataByJudgeUserIdAndRound = async function({ offset = 0, limit = 10, judgeUserId = 0, round = 0 }){
-    return await this.findAndCountAll({
+  Review.getReviewDataByJudgeUserIdAndRound = async function({ offset = 0, limit = 10, judgeUserId = 0, round = 0, scoreSign =0 }){
+    let condition = {
       offset,
       limit,
       where:{
@@ -100,7 +100,16 @@ module.exports = app => {
       include:[
         app.model.Production
       ]
-    });
+    };
+
+    if (scoreSign == 1){
+      condition.where.score > 0;
+    }
+    else if (scoreSign == 2){
+      condition.where.score == 0;
+    }
+    
+    return await this.findAndCountAll(condition);
   }
 
   Review.getProductionIdByRound = async function(roundId){

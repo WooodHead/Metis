@@ -45,7 +45,8 @@ class ReviewService extends Service {
           offset:query.offset,
           limit:query.limit,
           judgeUserId:judge.Id,
-          round:judge.currentRound
+          round:judge.currentRound,
+          scoreSign:query.scoreSign,
         }
       );
 

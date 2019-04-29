@@ -77,6 +77,7 @@ class ReviewController extends BaseController{
     let query = {
       limit: ctx.helper.parseInt(ctx.query.limit),
       offset: ctx.helper.parseInt(ctx.query.offset),
+      scoreSign:ctx.helper.parseInt(ctx.query.scoreSign),
     };
 
     try{
