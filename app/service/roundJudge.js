@@ -13,7 +13,46 @@ class RoundJudgeService extends Service {
   }
 
   async updateRoundJudge({ id, updates }){
-    return await this.ctx.model.RoundJudge.updateRoundJudge({ id, updates });
+    let productionList = await this.ctx.model.Production.getProductionIdByRound(id);
+    if(productionList.length > 0){
+      if (updates.judge != ''){
+        let addJudges = updates.judge;
+        let judgeIds = addJudges.split(',');
+        if(judgeIds.length > 0 && productionList.length > 0){
+          let transaction;
+          try {
+            transaction = await this.ctx.model.transaction();
+            await this.ctx.model.RoundJudge.updateBindJudge(id, updates.judge, transaction);
+            for (let element of productionList){
+              for (let judgeId of judgeIds){
+                let review = {
+                  productionId:element.Id,
+                  userId:judgeId,
+                  round:id,
+                };
+                await this.ctx.model.Review.createReview(review,transaction);
+              }
+            }
+            await transaction.commit();
+            return true;
+          } catch (e) {
+            await transaction.rollback();
+            this.ctx.logger.error(e.message);
+            return false;
+          }
+        }
+        else{
+          return true;
+        }
+      }
+      else{
+        return true;
+      }
+    }
+    else{
+      return await this.ctx.model.RoundJudge.updateRoundJudge({ id, updates });
+    }
+
   }
 
   async deleteRoundJudge(id){
@@ -26,6 +65,7 @@ class RoundJudgeService extends Service {
 
   async updateBindJudge({id,updates}){
     let productionList = await this.ctx.model.Review.getProductionIdByRound(id);
+
     let transaction;
     try {
       transaction = await this.ctx.model.transaction();
@@ -40,16 +80,15 @@ class RoundJudgeService extends Service {
           }
         }
       }
-      
+
       if (updates.addJudges != ''){
         let addJudges = updates.addJudges;
         let judgeIds = addJudges.split(',');
         if(judgeIds.length > 0 && productionList.length > 0){
           for (let element of productionList){
-            let productionId = element.productionId;
             for (let judgeId of judgeIds){
               let review = {
-                productionId:productionId,
+                productionId:element.productionId,
                 userId:judgeId,
                 round:id,
               };
