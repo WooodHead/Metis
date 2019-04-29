@@ -12,29 +12,19 @@
 		<i-col span="24">评审轮次管理</i-col>
 		<a class="btn btn-primary" href="judgeRoundCOU/0"> <span class="glyphicon glyphicon-plus"></span>新建</a>
 		<i-table :columns="columns" :data="dataList" style="margin-top:20px;width:100%;" ></i-table>
-		<!-- <modal v-model="setModal" @on-ok="ok" @on-cancel="cancel">
-			<p slot="header" style="color:#f60;text-align:center">
-				<i-con type="information-circled"></Icon>
-				<span>{{roundTitle}}</span>
-			</p>
-			<checkbox :indeterminate="indeterminate" v-model="checkAll" @click.prevent.native="handleCheckAll">全选</checkbox>
-			<checkbox-group v-model="checkAllGroup[index]" @on-change="checkAllGroupChange" v-for="item in judgeList">
-				<checkbox :label="item.name"></checkbox>
-			</checkbox-group>
-		</modal> -->
-		<modal v-model="setModal" @on-ok="chooseJudgeOk" @on-cancel="chooseJudgeCancel">
+		<modal v-model="setModal" @on-ok="chooseJudgeOk">
 			<p slot="header" style="color:#f60;text-align:center">
 				<i-con type="information-circled"></Icon>
 				<span v-text="roundTitle"></span>
 			</p>
-			<checkbox-group v-model="chooseJudgeNameArray" @on-change="choosejudgeChange" v-for="item in judgeList">
+			<checkbox-group v-model="chooseJudgeNameArray" v-for="item in judgeList">
 				<checkbox :label="item.name"></checkbox>
 			</checkbox-group>
 		</modal>
 		<modal v-model="deleteModal" @on-ok="deleteOK" title="警告！！！">
 			<p style="color:#ed3f14;text-align:center">
 				<Icon type="information-circled"></Icon>
-				<span>确定删除评审轮次:{{judgeRoundTitle}}？</span>
+				<span v-text="'确定删除评审轮次:'+judgeRoundTitle+'？'"></span>
 			</p>
 		</modal>
 	</div>
