@@ -18,6 +18,7 @@ module.exports = app => {
   router.get('/', controller.home.index);
   router.get('/login', controller.home.login);
   router.get('/logout', pageAuthCheck, controller.home.logout);
+  router.get('/index', controller.home.index);
   router.get('/register', controller.home.register);
   router.get('/relogin', controller.home.relogin);
   router.get('/uploadWork/:id', pageAuthCheck, controller.home.uploadWork);

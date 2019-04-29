@@ -22,6 +22,13 @@ class HomeController extends Controller {
     await ctx.render('frontend/index.html');
   }
 
+  async index(){
+      const ctx = this.ctx;
+      await ctx.render('frontend/index.html', {
+
+      });
+  }
+
   async register() {
     const ctx = this.ctx;
     await ctx.render('frontend/register.html', {
