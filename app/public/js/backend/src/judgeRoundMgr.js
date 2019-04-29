@@ -203,12 +203,12 @@ var vm = new Vue({
                 }
                 for(let i = 0;i < this.chooseJudgeIdArray.length; i++){
                     if(!this.oldThisRoundJudgeIdArray.includes(this.chooseJudgeIdArray[i])){
-                        this.delJudgesArr.push(this.chooseJudgeIdArray[i]);
+                        this.addJudgesArr.push(this.chooseJudgeIdArray[i]);
                     }
                 }
                 for (let j = 0;j < this.oldThisRoundJudgeIdArray.length; j++) {
                     if(!this.chooseJudgeIdArray.includes(this.oldThisRoundJudgeIdArray[j])){
-                        this.addJudgesArr.push(this.oldThisRoundJudgeIdArray[j]);
+                        this.delJudgesArr.push(this.oldThisRoundJudgeIdArray[j]);
                     }
                 }
                 $.ajax({
