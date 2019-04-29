@@ -102,5 +102,15 @@ module.exports = app => {
       ]
     });
   }
+
+  Review.getProductionIdByRound = async function(roundId){
+    return await this.findAll({
+      where:{
+        round:roundId
+      },
+      attributes:[[app.Sequelize.literal('distinct `productionId`'),'productionId']]
+    });
+  }
+
   return Review;
 };

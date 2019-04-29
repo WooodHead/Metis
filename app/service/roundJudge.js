@@ -25,38 +25,44 @@ class RoundJudgeService extends Service {
   }
 
   async updateBindJudge({id,updates}){
-    let productionList = await this.ctx.model.Production.getProductionIdByRound(id);
+    let productionList = await this.ctx.model.Review.getProductionIdByRound(id);
     let transaction;
     try {
       transaction = await this.ctx.model.transaction();
       await this.ctx.model.RoundJudge.updateBindJudge(id, updates.judge, transaction);
 
-      let deleteJudges = updates.deleteJudges;
-      let deleteJudgesArray = deleteJudges.split(',');
-      if (deleteJudgesArray.length > 0){
-        for (let judgeId of deleteJudgesArray){
-          await this.ctx.model.Review.deleteByRoundIdAndJudgeId(id,judgeId,transaction);
-        }
-      }
-
-      let addJudges = updates.addJudges;
-      let judgeIds = addJudges.split(',');
-      if(judgeIds.length > 0 && productionList.length > 0){
-        for (let element of productionList){
-          let productionId = element.Id;
-          for (let judgeId of judgeIds){
-            let review = {
-              productionId:productionId,
-              userId:element,
-              round:id,
-            };
-            await this.ctx.model.Review.createReview(review,transaction);
+      if (updates.deleteJudges != ''){
+        let deleteJudges = updates.deleteJudges;
+        let deleteJudgesArray = deleteJudges.split(',');
+        if (deleteJudgesArray.length > 0){
+          for (let judgeId of deleteJudgesArray){
+            await this.ctx.model.Review.deleteByRoundIdAndJudgeId(id,judgeId,transaction);
           }
         }
       }
+      
+      if (updates.addJudges != ''){
+        let addJudges = updates.addJudges;
+        let judgeIds = addJudges.split(',');
+        if(judgeIds.length > 0 && productionList.length > 0){
+          for (let element of productionList){
+            let productionId = element.productionId;
+            for (let judgeId of judgeIds){
+              let review = {
+                productionId:productionId,
+                userId:judgeId,
+                round:id,
+              };
+              await this.ctx.model.Review.createReview(review,transaction);
+            }
+          }
+        }
+      }
+
       await transaction.commit();
       return true
     } catch (e) {
+      console.log(e);
       await transaction.rollback();
       this.ctx.logger.error(e.message);
       return false
