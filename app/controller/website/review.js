@@ -72,7 +72,7 @@ class ReviewController extends BaseController{
 
   }
 
-  async getReviewListByUserId(){
+  async getReviewListByJudgeId(){
     const ctx = this.ctx;
     let query = {
       limit: ctx.helper.parseInt(ctx.query.limit),

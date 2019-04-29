@@ -106,7 +106,7 @@ module.exports = app => {
       foreignKey: 'userId'
     });
 
-    app.model.Production.belongsTo(app.model.Review, {foreignKey: 'Id',targetKey: 'productionId'});
+    app.model.Production.hasMany(app.model.Review, {sourceKey: 'Id',foreignKey: 'productionId'});
   };
 
   Production.createProduction = async function (production) {

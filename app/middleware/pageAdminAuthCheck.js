@@ -3,6 +3,7 @@ module.exports = () => {
     if (ctx.isAuthenticated() ){
 
         if(ctx.user.roles && ctx.user.roles.length > 0){
+          
           if (ctx.user.roles[0].rolename == 'admin'){
             await  next();
           }

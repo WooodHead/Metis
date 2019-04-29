@@ -37,7 +37,7 @@ class ReviewService extends Service {
 
   async getReviewDataByJudgeUserIdAndRound(query){
 
-    let judge = this.ctx.model.Judge.getJudgeByEmail(ctx.user.email);
+    let judge = await this.ctx.model.Judge.getJudgeByEmail(this.ctx.user.email);
     let result;
     if (judge){
       result = await this.ctx.model.Review.getReviewDataByJudgeUserIdAndRound(
@@ -45,9 +45,19 @@ class ReviewService extends Service {
           offset:query.offset,
           limit:query.limit,
           judgeUserId:judge.Id,
-          currentRound:judge.currentRound
+          round:judge.currentRound
         }
       );
+
+      const helper = this.ctx.helper;
+
+      result.rows.forEach((element, index)=>{
+        let pImageArray = element.production.pImage.split(',');
+        if (pImageArray[0]){
+          element.production.pImage = helper.signatureUrl(helper.productPath + pImageArray[0], "thumb-594-840");
+        }
+      });
+
     }
     return result;
   }
