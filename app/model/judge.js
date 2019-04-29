@@ -100,7 +100,8 @@ module.exports = app => {
   Judge.getJudgeByEmail = async function(email){
     return await this.findOne({
       where:{
-        email : email
+        email : email,
+        language : 1,
       }
     });
   }
