@@ -69,7 +69,7 @@ var config={
         judgeRoundCreate:"/website/roundJudge",
         judgeRoundUpdate:"/website/roundJudge/updateBindJudge/:id",
         judgeRoundBindJudge:"/website/roundJudge/bindJudge/:id",
-        judgeRoundRemove:"roundJudge/deleteRoundJudge/:id",
+        judgeRoundRemove:"/website/roundJudge/:id",
         judgeRoundGetByPage:"/website/roundJudge",
         judgeRoundSetJudge:"roundJudge/bindingRoundJudge",
         judgeRoundChange:"roundJudge/updateBindRoundJudge",//评审轮次评委的修改接口

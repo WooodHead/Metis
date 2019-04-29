@@ -212,40 +212,44 @@ var vm = new Vue({
         },
         deleteOK: function() {
             this.deleteModal = false;
-            var id = this.dataList[this.index].id;
+            var id = this.dataList[this.index].Id;
             var that = this;
             $.ajax({
-                "dataType": 'json',
-                "type": "post",
-                "url": config.ajaxUrls.judgeRoundRemove.replace(":id", id),
-                "success": function(response) {
-                    if (response.success === false) {
-                        that.$Notice.error({
-                            title: response.message
+                dataType: 'json',
+                type: "delete",
+                url: config.ajaxUrls.judgeRoundRemove.replace(":id", id),
+                success: function(response) {
+                    if (response.status == 200)  {
+                        that.$Notice.success({title: response.data});
+                        $.ajax({
+                            url: config.ajaxUrls.judgeRoundGetByPage,
+                            type: "get",
+                            data: that.aoData1,
+                            success: function(response) {
+                                if (response.status == 200) {
+                                    that.dataList = response.data.rows;
+                                    initOtherData(response.data.rows, that.checkAllGroup, that.dataL, that.oldJudgeData);
+                                    $.ajax({
+                                        url: config.ajaxUrls.judgeGetByPage,
+                                        type: "get",
+                                        data: { limit: 100, offset: 0, language: 1 },
+                                        success: function(response) {
+                                            if (response.status == 200) {
+                                                //	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
+                                                that.judgeList = response.data.rows;
+                                                screenRoundJudge(that, that.checkAllGroup, that.oldJudgeData, that.dataL);
+                                            } else {
+                                                that.$Notice.error({ title: response.data });
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    that.$Notice.error({ title: config.messages.networkError });
+                                }
+                            }
                         });
-                    } else {
-                        that.$Notice.success({
-                            title: config.messages.optSuccess
-                        });
-                        //                     	$.ajax({
-                        //                             "dataType":'json',
-                        //                             "type":"get",
-                        //                             "url":config.ajaxUrls.judgeRoundGetByPage,
-                        //                             "data":that.aoData1,
-                        //                             "success": function (response) {
-                        //                             	if(response.success===false){
-                        //                             		that.$Notice.error({title:response.message});
-                        //                                 }else{
-                        //                                 	that.dataList = response.aaData.rjList;
-                        //                                 	initOtherData(response.aaData.rjList, that.checkAllGroup, that.dataL, that.oldJudgeData);
-                        //                 	               	initJudgeData(that.setJudgeData, that.setJudgeData1);
-                        // //                	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
-                        //                                 	screenRoundJudge(that, response, that.checkAllGroup, that.oldJudgeData, that.dataL);
-                        // //                	               	所有评委数据
-                        //                 	               	that.judgeList = response.aaData.jList;
-                        //                                 }
-                        //                             }
-                        //                         });
+                    }else{
+                        that.$Notice.error({ title: response.data });
                     }
                 }
             });
@@ -278,6 +282,7 @@ var vm = new Vue({
                 this.setJudgeUrl = config.ajaxUrls.judgeRoundBindJudge.replace(":id", this.dataList[this.index].Id);
                 urlData = this.setJudgeData1;
             }
+            console.log(this.setJudgeUrl, urlData);
             $.ajax({
                 type: "put",
                 url: that.setJudgeUrl,
@@ -285,32 +290,36 @@ var vm = new Vue({
                 success: function(response) {
                     if (response.status == 200) {
                         that.$Loading.finish();
-                        that.$Notice.success({
-                            title: config.messages.optSuccess
+                        that.$Notice.success({ title: response.data });
+                        $.ajax({
+                            url: config.ajaxUrls.judgeRoundGetByPage,
+                            type: "get",
+                            data: that.aoData1,
+                            success: function(response) {
+                                if (response.status == 200) {
+                                    that.dataList = response.data.rows;
+                                    initOtherData(response.data.rows, that.checkAllGroup, that.dataL, that.oldJudgeData);
+                                    $.ajax({
+                                        url: config.ajaxUrls.judgeGetByPage,
+                                        type: "get",
+                                        data: { limit: 100, offset: 0, language: 1 },
+                                        success: function(response) {
+                                            if (response.status == 200) {
+                                                //	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
+                                                that.judgeList = response.data.rows;
+                                                screenRoundJudge(that, that.checkAllGroup, that.oldJudgeData, that.dataL);
+                                            } else {
+                                                that.$Notice.error({ title: response.data });
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    that.$Notice.error({ title: config.messages.networkError });
+                                }
+                            }
                         });
-                        // 	                    	$.ajax({
-                        // 	                            "dataType":'json',
-                        // 	                            "type":"get",
-                        // 	                            "url":config.ajaxUrls.judgeRoundGetByPage,
-                        // 	                            "data":that.aoData1,
-                        // 	                            "success": function (response) {
-                        // 	                            	if(response.success===false){
-                        // 	                            		that.$Notice.error({title:response.message});
-                        // 	                                }else{
-                        // 	                                	that.dataList = response.aaData.rjList;
-                        // 	                	               	initJudgeData(that.setJudgeData, that.setJudgeData1);
-                        // 	                                	initOtherData(response.aaData.rjList, that.checkAllGroup, that.dataL, that.oldJudgeData);
-                        // //	                	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
-                        // 	                                	screenRoundJudge(that, response, that.checkAllGroup, that.oldJudgeData, that.dataL);
-                        // //	                	               	所有评委数据
-                        // 	                	               	that.judgeList = response.aaData.jList;
-                        // 	                                }
-                        // 	                            }
-                        // 	                        });
                     } else {
-                        that.$Notice.error({
-                            title: response.message
-                        });
+                        that.$Notice.error({ title: response.data });
                     }
                 }
             });
@@ -318,25 +327,33 @@ var vm = new Vue({
         cancel: function() {
             this.setModal = false;
             var that = this;
-            // 			$.ajax({
-            //                 "dataType":'json',
-            //                 "type":"get",
-            //                 "url":config.ajaxUrls.judgeRoundGetByPage,
-            //                 "data":that.aoData1,
-            //                 "success": function (response) {
-            //                 	if(response.success===false){
-            //                 		that.$Notice.error({title:response.message});
-            //                     }else{
-            //                     	that.dataList = response.aaData.rjList;
-            //                     	initOtherData(response.aaData.rjList, that.checkAllGroup, that.dataL, that.oldJudgeData);
-            //     	               	initJudgeData(that.setJudgeData, that.setJudgeData1);
-            // //    	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
-            //                     	screenRoundJudge(that, response, that.checkAllGroup, that.oldJudgeData, that.dataL);
-            // //    	               	所有评委数据
-            //     	               	that.judgeList = response.aaData.jList;
-            //                     }
-            //                 }
-            //             });
+            $.ajax({
+                url: config.ajaxUrls.judgeRoundGetByPage,
+                type: "get",
+                data: that.aoData1,
+                success: function(response) {
+                    if (response.status == 200) {
+                        that.dataList = response.data.rows;
+                        initOtherData(response.data.rows, that.checkAllGroup, that.dataL, that.oldJudgeData);
+                        $.ajax({
+                            url: config.ajaxUrls.judgeGetByPage,
+                            type: "get",
+                            data: { limit: 100, offset: 0, language: 1 },
+                            success: function(response) {
+                                if (response.status == 200) {
+                                    //	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
+                                    that.judgeList = response.data.rows;
+                                    screenRoundJudge(that, that.checkAllGroup, that.oldJudgeData, that.dataL);
+                                } else {
+                                    that.$Notice.error({ title: response.data });
+                                }
+                            }
+                        });
+                    } else {
+                        that.$Notice.error({ title: config.messages.networkError });
+                    }
+                }
+            });
         },
         handleCheckAll: function() { //是否全选
             this.newJudgeData = [];
@@ -389,27 +406,19 @@ var vm = new Vue({
                     $.ajax({
                         url: config.ajaxUrls.judgeGetByPage,
                         type: "get",
-                        data: {
-                            limit: 100,
-                            offset: 0,
-                            language: 1
-                        },
+                        data: { limit: 100, offset: 0, language: 1 },
                         success: function(response) {
                             if (response.status == 200) {
                                 //	               	筛选出该轮次有哪些评委,并将id转为name 放在that.dataL中
                                 that.judgeList = response.data.rows;
                                 screenRoundJudge(that, that.checkAllGroup, that.oldJudgeData, that.dataL);
                             } else {
-                                that.$Notice.error({
-                                    title: response.data
-                                });
+                                that.$Notice.error({ title: response.data });
                             }
                         }
                     });
                 } else {
-                    that.$Notice.error({
-                        title: config.messages.networkError
-                    });
+                    that.$Notice.error({ title: config.messages.networkError });
                 }
             }
         });
