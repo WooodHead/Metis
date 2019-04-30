@@ -88,6 +88,17 @@ module.exports = app => {
     });
   }
 
+  Review.getScoreByRoundProductionIdAndJudgeId = async function(round,productionId,judgeId){
+    return await this.findAll({
+      where:{
+        round:round,
+        productionId:productionId,
+        userId : judgeId,
+      },
+      attributes:['score']
+    });
+  }
+
   Review.getReviewDataByJudgeUserIdAndRound = async function({ offset = 0, limit = 10, judgeUserId = 0, round = 0, scoreSign =0 }){
     let condition = {
       offset,

@@ -99,6 +99,25 @@ class ProductionService extends Service {
   async updateStatus(Id,status){
     return await this.ctx.model.Production.updateStatus(Id,status);
   }
+
+  async getDetailByIdForJudge(id){
+    let resultObj =  await this.ctx.model.Production.getDetailById(id);
+    const helper = this.ctx.helper;
+    let pImageArray = resultObj.pImage.split(',');
+    let imageStr = '';
+    for (let image of pImageArray){
+      imageStr += helper.signatureUrl(helper.productPath + image, "thumb-792-1120") + ',';
+    }
+    resultObj.pImage = imageStr;
+    if(resultObj.attach_file){
+      resultObj.attach_file = helper.signatureUrl(helper.attachmentPath + resultObj.attach_file);
+    }
+
+    let judge = await this.ctx.model.Judge.getJudgeByEmail(this.ctx.user.email);
+    let review = await this.ctx.model.Review.getScoreByRoundProductionIdAndJudgeId(judge.currentRound,id,judge.Id);
+    resultObj.score = review.score;
+    return resultObj;
+  }
 }
 
 module.exports = ProductionService;
