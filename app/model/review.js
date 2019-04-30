@@ -139,7 +139,7 @@ module.exports = app => {
       score:updates.score
     },{
       where:{
-        Id:id;
+        Id:id
       }
     });
   }
