@@ -71,7 +71,6 @@ class ProductionService extends Service {
         await this.ctx.model.Production.updateScore({productionId,averageScore,round});
       }
     }
-    return await this.ctx.model.Production.updateScore({Id, averageScore, round});
   }
 
   async getScoreDetailById(id){
