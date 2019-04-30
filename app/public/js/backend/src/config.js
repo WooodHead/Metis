@@ -57,7 +57,7 @@ var config={
         workRemove:"production/deleteProduction/:id",
         workSetStatus:"/website/production/updateStatus/:id",
         workSetRound:"/website/review",
-        workComputeScore:"production/updateProductionScore",
+        workComputeScore:"/website/production/updateAverageScore",
 
         judgeGetByPage:"/website/judge",
         judgeRemove:"/website/judge/:id",

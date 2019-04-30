@@ -182,6 +182,13 @@ class HomeController extends Controller {
 
     });
   }
+
+  async scoreMgr(){
+    const ctx = this.ctx;
+    await ctx.render('backend/scoreMgr.html', {
+
+    });
+  }
 }
 
 module.exports = HomeController;

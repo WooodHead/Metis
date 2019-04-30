@@ -1,0 +1,36 @@
+{% extends "backend/parent.html" %}
+
+{% block cssfolder %}
+<link href="public/css/backend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/backend/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="public/css/backend/src/main.css" type="text/css" rel="stylesheet">
+
+{% endblock %}
+
+{% block container %}
+<section class="right">
+	<article class="main">
+		<i-col span="24">评审管理</i-col>
+		 <i-form :model="formItem" :label-width="180" style="width:80%;" id="myForm" v-cloak>
+			<form-item label="轮次*">
+				<i-select :value="roundModel" @on-change="roundCheck" >
+					<i-option v-for="Rounditem in JudgeRoundList" :value="Rounditem.Id" :label="Rounditem.roundName"></i-option>
+				</i-select>
+			</form-item>
+			<form-item>
+				<i-button type="primary" v-on:click="submit"  long>计算本轮次作品分数</i-button>
+			</form-item>
+		</i-form>
+	</article>
+
+</section>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="public/js/backend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/backend/lib/vue.min.js"></script>
+<script src="public/js/backend/lib/iview.min.js"></script>
+<script src="public/js/backend/lib/bootstrap.min.js"></script>
+<script src="public/js/backend/src/config.js"></script>
+<script src="public/js/backend/src/scoreMgr.js"></script>
+{% endblock %}

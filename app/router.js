@@ -39,6 +39,7 @@ module.exports = app => {
   router.get('/newsCOU/:id', pageAdminAuthCheck, controller.home.newsCOU);
   router.get('/userMgr', pageAdminAuthCheck, controller.home.userMgr);
   router.get('/userCOU/:id', pageAdminAuthCheck, controller.home.userCOU);
+  router.get('/scoreMgr', pageAdminAuthCheck, controller.home.scoreMgr);
 
   router.get('/roleIndex', controller.home.roleIndex);
 
