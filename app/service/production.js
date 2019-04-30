@@ -115,11 +115,9 @@ class ProductionService extends Service {
 
     let judge = await this.ctx.model.Judge.getJudgeByEmail(this.ctx.user.email);
     let review = await this.ctx.model.Review.getScoreByRoundProductionIdAndJudgeId(judge.currentRound,id,judge.Id);
-    let result = {
-      production:resultObj,
-      score:review.score,
-    };
-    return result;
+  
+    resultObj.score = review.score;
+    return resultObj;
   }
 }
 
