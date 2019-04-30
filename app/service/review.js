@@ -63,7 +63,7 @@ class ReviewService extends Service {
     return result;
   }
 
-  async updateReviewScore(){
+  async updateReviewScore({ id, updates }){
     return await this.ctx.model.Review.updateReviewScore({ id, updates });
   }
 }

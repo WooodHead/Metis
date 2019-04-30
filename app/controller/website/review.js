@@ -92,7 +92,7 @@ class ReviewController extends BaseController{
 
   async updateReviewScore(){
     const ctx = this.ctx;
-    const id = ctx.params.id;
+    const id = ctx.helper.parseInt(ctx.params.id);
     const updates = {
       score: ctx.request.body.score
     };
@@ -102,6 +102,7 @@ class ReviewController extends BaseController{
       super.success(ctx.__('updateSuccessful'));
     }
     catch(e){
+      console.log(e);
       ctx.logger.error(e.message);
       super.failure(e.message);
     }
