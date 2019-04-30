@@ -19,6 +19,11 @@ module.exports = app => {
   router.get('/login', controller.home.login);
   router.get('/logout', pageAuthCheck, controller.home.logout);
   router.get('/index', controller.home.index);
+  router.get('/news', controller.home.news);
+  router.get('/newsDetail/:id', controller.home.newsDetail);
+  router.get('/rule', controller.home.rule);
+  router.get('/judges', controller.home.judges);
+  router.get('/judgeDetail/:id', controller.home.judgeDetail);
   router.get('/register', controller.home.register);
   router.get('/relogin', controller.home.relogin);
   router.get('/uploadWork/:id', pageAuthCheck, controller.home.uploadWork);

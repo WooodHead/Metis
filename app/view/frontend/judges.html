@@ -1,0 +1,37 @@
+{% extends "frontend/parent.html" %}
+
+{% block cssfolder %}
+<link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/judges.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div id="judge" class="JMJudge" :style="judgeStyle">
+	<row>
+		<i-col span="14" push="5">
+			<ul class="JMList2">
+				<li class="JMItem" v-for="item in dataList">
+					<a class="JMLink" :href="'judgeDetail/' + item.Id">
+						<img class="JMThumb" :src="item.headicon">
+						<div class="JMInfo">
+							<h3 class="JMTitle" v-text="item.name"></h3>
+							<div class="JMExcerpt" v-text="item.description"></div>
+						</div>
+						<hr class="JMJudgeLine">
+					</a>
+				</li>
+			</ul>
+		</i-col>
+	</row>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/frontend/lib/vue.min.js"></script>
+<script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/src/header.js"></script>
+<script src="public/js/frontend/src/config.js"></script>
+<script src="public/js/frontend/src/judges.js"></script>
+{% endblock %}

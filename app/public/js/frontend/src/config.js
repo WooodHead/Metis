@@ -62,9 +62,10 @@ var config = {
         updatePwdWithMobileAndSmsCode:"/website/user/updatePwdWithMobileAndSmsCode",
         updatePwdWithEmailAndActiveCode: "/website/user/updatePwdWithEmailAndActiveCode",
 
-        manageNews:"news/findManageNewsByPage",
-        judgeGetByPage:"judge/getAllJudge",
-        judgeDetail:"judge/findJudgeById/:id",
+        manageNews:"/website/news",
+        newsDetail:"/website/news/:id",
+        judgeGetByPage:"/website/judge",
+        judgeDetail:"/website/judge/:id",
 
         // register 界面
         sendMobileCode:"/website/sms/sendMessage?mobile=",
@@ -191,11 +192,11 @@ $(document).ready(function () {
 
 	$(".JMIconUser").hover(function(){
 		$(".JMIconUser").parent().css("background","#47a8a9");
-    	$(".JMIconUser").css("background-image","url(resources/frontend/images/JMImages/iconUser.png)");
+    	$(".JMIconUser").css("background-image","url(../../../../public/images/iconUser.png)");
     })
     $(".JMIconUser").mouseleave(function(){
 		$(".JMIconUser").parent().css("background","white");
-    	$(".JMIconUser").css("background-image","url(resources/frontend/images/app/iconUser.png)");
+    	$(".JMIconUser").css("background-image","url(../../../../public/images/iconUser.png)");
     })
 
     //zySelect控件

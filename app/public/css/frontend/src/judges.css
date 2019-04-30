@@ -1,0 +1,47 @@
+/* 评委部分 */
+
+/* #JMJudge{
+    max-width: 1280px;
+    margin:0 auto;
+  	width: 90%;
+} */
+.JMJudge hr{
+    width: 78%;
+    height: 2px;
+    background-color: #47a8a9;
+    margin-top: 30px;
+    border: 0px;
+    margin-left: 21%;
+}
+.JMList2{
+    margin: 20px auto;
+}
+.JMList2 .JMItem{
+	width:100%;
+    margin: 10px auto;
+    position: relative;
+}
+.JMList2 .JMItem .JMThumb{
+   	width: 150px;
+    border: 2px solid #FFFFFF;
+}
+.JMList2 .JMItem .JMInfo{
+   	position: absolute;
+    left:21%;
+    top:0px;
+    bottom:0px;
+    right: 0px;
+    overflow: hidden; 
+}
+.JMList2 .JMItem .JMTitle{
+   font-size: 21px;
+    color: #47a8a9;
+    margin-top: 5px;
+}
+.JMList2 .JMItem .JMExcerpt{
+    font-size: 16px;
+    font-weight: bold;
+    color: #656464;
+    margin: 10px 0px;
+    line-height:30px; 
+}

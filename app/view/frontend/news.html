@@ -1,0 +1,34 @@
+{% extends "frontend/parent.html" %}
+
+{% block cssfolder %}
+<link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/News.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div id="news" class="JMNewsList" :style="newsStyle">
+	<row> <i-col span="16" push="4">
+	<ul class="JMNewsListUl">
+		<li class="JMNews" v-for="item in dataList">
+			<img :src="item.thumb" />
+				<a class="JMNewsTextBox" :href="'newsDetail/'+item.Id" target="_blank">
+					<span class="JMNewsText_date" v-text="item.createAt"></span>
+					<h3 class="JMNewsText_title" v-text="item.title"></h3>
+					<p class="JMNewsText_content" v-text="item.news_abstract"></p>
+				</a>
+			<hr>
+		</li>
+	</ul>
+	<Page :total="total" @on-change="pageOnChange" style="margin:40px auto;text-align: center;"></Page> </i-col> </row>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/frontend/lib/vue.min.js"></script>
+<script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/src/header.js"></script>
+<script src="public/js/frontend/src/config.js"></script>
+<script src="public/js/frontend/src/news.js"></script>
+{% endblock %}

@@ -18,12 +18,11 @@
     {% block header %}
     <div class="JMHeader">
         <div class="JMLogo">
-            <a href=""><img alt="" src="resources/frontend/images/app/Logo.png"></a>
+            <a href=""><img alt="" src="public/images/Logo.png"></a>
         </div>
         <div class="JMNoticeBoard">
             <div class="JMNoticeBoardLeft">
-                <a href="login">
-                    <spring:message code="sign_up" /></a>
+                <a href="login">点击参赛</a>
             </div>
             <div class="JMNoticeBoardRight">
                 <div class="JMItem">
@@ -33,26 +32,24 @@
         </div>
         <div class="JMTopNav">
             <ul class="JMMenu">
-                <li class="JMItem"><a class="JMLink" href="judge/judge" data-page-name="judge">评委</a></li>
-                <li class="JMItem"><a class="JMLink" href="rule/rules" data-page-name="rule">章程</a></li>
-                <li class="JMItem"><a class="JMLink" href="news/news/1" data-page-name="news">新闻</a></li>
-                <li class="JMItem"><a class="JMLink" href="index" data-page-name="index">首页</a></li>
+                <li class="JMItem"><a class="JMLink" href="/judges" data-page-name="judges">评委</a></li>
+                <li class="JMItem"><a class="JMLink" href="/rule" data-page-name="rule">章程</a></li>
+                <li class="JMItem"><a class="JMLink" href="/news" data-page-name="news">新闻</a></li>
+                <li class="JMItem"><a class="JMLink" href="/index" data-page-name="index">首页</a></li>
             </ul>
-            <div>
+            <!-- <div>
                 <a href="${pageContext.request.contextPath}/index?locale=zh" data-page-name="zh">中文</a>
                 <a href="${pageContext.request.contextPath}/index?locale=en" data-page-name="en">英文</a>
-            </div>
+            </div> -->
             <ul class="JMUserMenu">
-                <c:if test="${!empty sessionScope.userId}">
-                    <li class="JMItem"><a href="production/works" class="JMLink JM20C7BE">[ ${sessionScope.realname} ]</a></li>
-                    <li class="JMItem"><a class="JMLink" href="logout">
-                            <spring:message code="logout" />
-                            <fmt:message key="logout" /></a></li>
-                </c:if>
-                <c:if test="${empty sessionScope.userId}">
+                <!-- <p>{{user.Id}}</p> -->
+                {% if user %}
+                    <li class="JMItem"><a href="/works" class="JMLink JM20C7BE">{{user.realname}}</a></li>
+                    <li class="JMItem"><a class="JMLink" href="logout">退出</a></li>
+                {% else %}
                     <li style="position: absolute;top: 15px;border-left: solid 2px #6d6d6d;height: 23px;"></li>
                     <li class="JMItem" style="width: 33px;margin-left: 33px;margin-right: 30px;"><a class="JMLink JMIconUser" href="/login"> </a></li>
-                </c:if>
+                {% endif %}
             </ul>
         </div>
     </div>

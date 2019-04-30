@@ -1,11 +1,11 @@
 $(document).ready(function() {
 	$.ajax({
 		type : 'get',
-		url : 'countDown',
+		url : '/getCountDownDay',
 		cache : true,
 		dataType : 'json',
-		success : function(data) {
-			$("#countDown").html(data.object)
+		success : function(res) {
+			$("#countDown").html(res)
 		}
 	});
 });
