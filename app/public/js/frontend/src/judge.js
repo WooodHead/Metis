@@ -62,7 +62,6 @@ var judge = new Vue({
                 type: "get",
                 data: this.aoData,
                 success: function(response) {
-                    console.log(response);
                     if (response.status == 200) {
                         if (that.aoData.scoreSign == 2 && response.data.rows.length == 0) {
                             that.unrated = true;
@@ -88,7 +87,6 @@ var judge = new Vue({
                 url: config.ajaxUrls.getDetailByIdForJudge.replace(":id", workId),
                 type: 'GET',
                 success(res) {
-                    console.log(res);
                     that.content = res.data.content;
                     that.attachFile = res.data.attach_file;
                     if (res.data.attach_file == "" || res.data.attach_file == null) {
@@ -222,9 +220,8 @@ var judge = new Vue({
                     success: function(response) {
                         if (response.status == 200) {
                             for (var i = 0; i < that.list.length; i++) {
-                                console.log(that.list[i].production.Id );
                                 if (that.list[i].production.Id == that.productionId) {
-                                    that.list[i].production.score = that.score;
+                                    that.list[i].score = that.score;
                                     break;
                                 }
                             }
