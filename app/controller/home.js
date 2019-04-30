@@ -3,10 +3,6 @@
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
-  async index() {
-    const { ctx } = this;
-    ctx.body = ctx.__('hiEgg');
-  }
 
   async login() {
     const ctx = this.ctx;
@@ -25,7 +21,7 @@ class HomeController extends Controller {
   async index(){
       const ctx = this.ctx;
       await ctx.render('frontend/index.html', {
-
+        user : ctx.user
       });
   }
 
