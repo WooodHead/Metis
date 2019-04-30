@@ -57,6 +57,7 @@ module.exports = app => {
   router.get('/getSTSSignature/:fileType', ajaxAuthCheck, controller.website.alioss.getSTSSignature);
   router.get('/getUrlSignature', ajaxAuthCheck, controller.website.alioss.getUrlSignature);
 
+  router.get('/getCountDownDay',controller.website.user.getCountDownDay);
   router.post('/website/user/createUser', controller.website.user.createUser);
   router.get('/website/user/updateAcviveByActiveCodeAndEmail', controller.website.user.updateAcviveByActiveCodeAndEmail);
   router.post('/website/file/uploadFile/:fileType', ajaxAuthCheck, controller.website.file.uploadFile);

@@ -331,6 +331,11 @@ class UsersController extends BaseController{
       super.failure(e.message);
     }
   }
+
+  async getCountDownDay(){
+    const ctx = this.ctx;
+    ctx.body = ctx.helper.getCountDownDay();
+  }
 }
 
 module.exports = UsersController;
