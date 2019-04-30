@@ -89,7 +89,7 @@ module.exports = app => {
   }
 
   Review.getScoreByRoundProductionIdAndJudgeId = async function(round,productionId,judgeId){
-    return await this.findAll({
+    return await this.findOne({
       where:{
         round:round,
         productionId:productionId,
