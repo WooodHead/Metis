@@ -103,12 +103,14 @@ module.exports = app => {
     };
 
     if (scoreSign == 1){
-      condition.where.score > 0;
+      condition.where.score = {
+        [app.Sequelize.Op.gt]: 0,
+      };
     }
     else if (scoreSign == 2){
-      condition.where.score == 0;
+      condition.where.score = 0;
     }
-    
+
     return await this.findAndCountAll(condition);
   }
 
