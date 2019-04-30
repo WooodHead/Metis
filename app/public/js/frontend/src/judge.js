@@ -1,15 +1,6 @@
-'use strict';
-
-var appServer = 'http://localhost:8080/dcpro/sigUploadKey/1';
-var bucket = 'dc-sys-pro';
-var region = 'oss-cn-hangzhou';
-
-var urllib = OSS.urllib;
-var Buffer = OSS.Buffer;
-var OSS = OSS.Wrapper;
-var STS = OSS.STS;
-
 var pageName = "judge";
+const sliderFinalWidth = 400;
+const maxQuickWidth = 1200;
 
 var judge = new Vue({
     el: '.index',
@@ -38,22 +29,23 @@ var judge = new Vue({
             modelImg: "",
             unrated: false, //当出现未打分时，显示未打分图片
 
-			aoData:{
-				offset:0,
-				limit:12,
-				scoreSign:0
-			}
+            aoData: {
+                offset: 0,
+                limit: 12,
+                scoreSign: 0
+            },
+            reviewId:"",
+            imgList: [],
         }
     },
     created: function() {
-		let that = this;
+        let that = this;
         this.productListStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight + "px";
         this.loadData(1);
 
     },
     methods: {
         menuSelect: function(name) {
-			console.log(name);
             if (name == 1) {
                 this.aoData.scoreSign = 0;
             } else if (name == 2) {
@@ -65,44 +57,55 @@ var judge = new Vue({
         },
         loadData: function(pageNum) {
             var that = this;
-			$.ajax({
-				url: config.ajaxUrls.judgeToScoreList,
-				type: "get",
-				data: this.aoData,
-				success: function(response) {
-					console.log(response);
-					if (response.status == 200) {
-						if (that.aoData.scoreSign == 2 && response.data.rows.length == 0) {
-							that.unrated = true;
-						} else {
-							that.unrated = false;
-						}
-						var results = response.data.rows;
-						that.list = results;
-						that.total = response.data.count;
-						console.log(that.list);
-					}
-				}
-			})
+            $.ajax({
+                url: config.ajaxUrls.judgeToScoreList,
+                type: "get",
+                data: this.aoData,
+                success: function(response) {
+                    console.log(response);
+                    if (response.status == 200) {
+                        if (that.aoData.scoreSign == 2 && response.data.rows.length == 0) {
+                            that.unrated = true;
+                        } else {
+                            that.unrated = false;
+                        }
+                        var results = response.data.rows;
+                        that.list = results;
+                        that.total = response.data.count;
+                    }
+                }
+            })
         },
-        openDetail: function(event) {
-            var that = this;
-            $(".JMHeader .JMNoticeBoard").css("opacity", "0.1");
-            var slectedImageUrl = "";
+        openDetail: function(workId,reviewId) {
+            let that = this;
             var title = '';
             var content = '';
             var score = '';
-            var list = this.list;
-            for (var j = 0; j < list.length; j++) {
-                if (list[j].id == event.target.id) {
+            let list = [];
+            this.reviewId = reviewId;
+            $(".JMHeader .JMNoticeBoard").css("opacity", "0.1");
+            $.ajax({
+                url: config.ajaxUrls.getDetailByIdForJudge.replace(":id", workId),
+                type: 'GET',
+                success(res) {
+                    console.log(res);
+                    that.content = res.data.content;
+                    that.attachFile = res.data.attach_file;
+                    if (res.data.attach_file == "" || res.data.attach_file == null) {
+                        that.attachFileShow = false;
+                    } else {
+                        that.attachFileShow = true;
+                    }
+                    that.score = res.data.score;
+                    that.title = res.data.title;
+                    that.productionId = res.data.Id;
+                    list = res.data.pImage.split(",");
+                    list.pop();
                     $(".selected").empty();
-                    $(".selected").append("<div class='swiper-container' > <div class='swiper-wrapper'></div><div class='swiper-pagination'>" +
-                        "</div><div class='swiper-button-prev'></div><div class='swiper-button-next'></div></div>");
-                    slectedImageUrl = list[j].pimageArr[1];
-
+                    $(".selected").append("<div class='swiper-container'> <div class='swiper-wrapper'></div><div class='swiper-pagination'>" + "</div><div class='swiper-button-prev'></div><div class='swiper-button-next'></div></div>");
                     //swiper图片加载
-                    for (var imgItem = 1; imgItem < list[j].pimageArr.length; imgItem++) {
-                        var imgSrc = list[j].pimageArr[imgItem];
+                    for (var imgItem = 0; imgItem < list.length; imgItem++) {
+                        var imgSrc = list[imgItem];
                         $(".swiper-wrapper").append("<div class='swiper-slide'><img id='productImage' src=" + imgSrc + "></div>");
                     }
                     //初始化swiper
@@ -125,43 +128,15 @@ var judge = new Vue({
                     $("img[id='productImage']").each(function(index) {
                         $(this).click(function() {
                             that.previewModal = true;
-                            that.modelImg = list[j].pimageArr[index + 1];
+                            that.modelImg = list[index];
                         })
                     })
 
-                    var selectedImage = $("#" + event.target.id);
+                    var selectedImage = $("#" + workId);
                     $('body').addClass('overlay-layer');
-                    that.animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
-                    that.updateQuickView(slectedImageUrl);
-
-                    that.content = list[j].content;
-                    that.attachFile = "file/downloadFile?filePath=" + list[j].attachFile;
-                    if (list[j].attachFile.length == 0) {
-                        that.attachFileShow = false;
-                    } else {
-                        that.attachFileShow = true;
-                    }
-                    that.score = list[j].score;
-                    that.title = list[j].title;
-                    that.productionId = list[j].id;
-                    break;
+                        that.animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
                 }
-            }
-
-        },
-        updateQuickView: function(url) {
-            $('.cd-quick-view .cd-slider li').removeClass('selected')
-            this.imgBox = url;
-            $('#productImage').attr('src', url);
-            $('.cd-quick-view .cd-slider li').addClass('selected');
-        },
-        resizeQuickView: function() {
-            var quickViewLeft = ($(window).width() - $('.cd-quick-view').width()) / 2,
-                quickViewTop = ($(window).height() - $('.cd-quick-view').height()) / 2;
-            $('.cd-quick-view').css({
-                "top": quickViewTop,
-                "left": quickViewLeft,
-            });
+            })
         },
         closeQuickView: function(finalWidth, maxQuickWidth) {
             $(".JMHeader .JMNoticeBoard").css("opacity", "1");
@@ -239,26 +214,24 @@ var judge = new Vue({
             var that = this;
             if (reg.test(this.score)) {
                 $.ajax({
-                    url: config.ajaxUrls.judgeScore,
-                    type: "post",
+                    url: config.ajaxUrls.judgeScore.replace(":id",this.reviewId),
+                    type: "put",
                     data: {
-                        score: parseInt(this.score),
-                        userId: judgeId,
-                        round: round,
-                        productionId: this.productionId
+                        score: parseInt(this.score)
                     },
                     success: function(response) {
-                        if (response.success) {
+                        if (response.status == 200) {
                             for (var i = 0; i < that.list.length; i++) {
-                                if (that.list[i].id == that.productionId) {
-                                    that.list[i].score = that.score;
+                                console.log(that.list[i].production.Id );
+                                if (that.list[i].production.Id == that.productionId) {
+                                    that.list[i].production.score = that.score;
                                     break;
                                 }
                             }
                             that.closeQuickView();
                         } else {
                             that.$Notice.error({
-                                title: response.message
+                                title: response.data
                             });
                         }
                     }
