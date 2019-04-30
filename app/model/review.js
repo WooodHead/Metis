@@ -134,5 +134,15 @@ module.exports = app => {
     });
   }
 
+  Review.updateReviewScore = async function({ id, updates }){
+    return await this.update({
+      score:updates.score
+    },{
+      where:{
+        Id:id;
+      }
+    });
+  }
+
   return Review;
 };

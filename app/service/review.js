@@ -62,6 +62,10 @@ class ReviewService extends Service {
     }
     return result;
   }
+
+  async updateReviewScore(){
+    return await this.ctx.model.Review.updateReviewScore({ id, updates });
+  }
 }
 
 module.exports = ReviewService;

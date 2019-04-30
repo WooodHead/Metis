@@ -74,6 +74,7 @@ module.exports = app => {
   router.get('/website/production/getDetailByIdForJudge/:id', ajaxJudgeAuthCheck, controller.website.production.getDetailByIdForJudge);
 
   router.get('/website/review/getReviewListByJudgeId', ajaxJudgeAuthCheck, controller.website.review.getReviewListByJudgeId);
+  router.put('/website/review/updateReviewScore/:id', ajaxJudgeAuthCheck, controller.website.review.updateReviewScore);
 
   router.put('/website/production/updateStatus/:id', ajaxAdminAuthCheck, controller.website.production.updateStatus);
   router.put('/website/roundJudge/bindJudge/:id', ajaxAdminAuthCheck, controller.website.roundJudge.bindJudge);

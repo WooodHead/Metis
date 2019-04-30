@@ -91,7 +91,20 @@ class ReviewController extends BaseController{
   }
 
   async updateReviewScore(){
+    const ctx = this.ctx;
+    const id = ctx.params.id;
+    const updates = {
+      score: ctx.request.body.score
+    };
 
+    try{
+      await ctx.service.review.updateReviewScore({ id, updates });
+      super.success(ctx.__('updateSuccessful'));
+    }
+    catch(e){
+      ctx.logger.error(e.message);
+      super.failure(e.message);
+    }
   }
 
   async getScoreByProductId(){
