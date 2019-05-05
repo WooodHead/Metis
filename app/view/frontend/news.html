@@ -2,25 +2,33 @@
 
 {% block cssfolder %}
 <link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/src/News.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block container %}
-<div id="news" class="JMNewsList" :style="newsStyle">
-	<row> <i-col span="16" push="4">
-	<ul class="JMNewsListUl">
-		<li class="JMNews" v-for="item in dataList">
-			<img :src="item.thumb" />
-				<a class="JMNewsTextBox" :href="'newsDetail/'+item.Id" target="_blank">
-					<span class="JMNewsText_date" v-text="item.createAt"></span>
-					<h3 class="JMNewsText_title" v-text="item.title"></h3>
-					<p class="JMNewsText_content" v-text="item.news_abstract"></p>
-				</a>
-			<hr>
-		</li>
-	</ul>
-	<Page :total="total" @on-change="pageOnChange" show-total style="margin:40px auto;text-align: center;"></Page> </i-col> </row>
+<div id="news" class="col-md-8 col-md-offset-2 news" :style="newsStyle">
+        <div class="row">
+			<div class="header">
+		        新闻
+		    </div>
+			<ul class="JMNewsListUl">
+				<li class="JMNews col-md-8 col-xs-12" v-for="item in dataList">
+						<div class="col-md-4 col-xs-5">
+    						<img :src="item.thumb" />
+						</div>
+						<div class="col-md-4 col-xs-7">
+    						<span class="JMNewsText_date" v-text="item.createAt"></span>
+    						<p class="JMNewsText_title" v-text="item.title"></p>
+    						<p class="JMNewsText_content" v-text="item.news_abstract"></p>
+							<a class="btn btn-default" :href="'newsDetail/'+item.Id" role="button">more</a>
+						</div>
+
+					<hr>
+				</li>
+			</ul>
+        </div>
 </div>
 {% endblock %}
 
@@ -28,6 +36,7 @@
 <script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
 <script src="public/js/frontend/lib/vue.min.js"></script>
 <script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/lib/bootstrap.min.js"></script>
 <script src="public/js/frontend/src/header.js"></script>
 <script src="public/js/frontend/src/config.js"></script>
 <script src="public/js/frontend/src/news.js"></script>

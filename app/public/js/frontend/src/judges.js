@@ -8,7 +8,13 @@ var judges = new Vue({
 			language:"0",
 			judgeStyle:{
 				minHeight:"",
-			  	marginTop: config.cssHeight.headHeight + "px"
+				marginTop: "30px",
+                marginBottom: "30px",
+                background: "#fff",
+                padding:"20px 20px",
+                border: "1px solid #dcdcdc",
+                borderRadius: "10px",
+                borderBottom: "1px solid #adadad"
 			},
 			aoData1:{offset: 0,limit: 10, language:0}
 		}
@@ -25,7 +31,6 @@ var judges = new Vue({
 	        data:that.aoData1,
 	        success: function (response) {
 	            if(response.status == 200){
-					console.log(response);
 					that.dataList = response.data.rows;
 					that.totalPage = response.data.count;
 	            }else{

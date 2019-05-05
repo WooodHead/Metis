@@ -2,21 +2,27 @@
 
 {% block cssfolder %}
 <link href="../public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="../public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
 <link href="../public/css/frontend/src/judgeDetail.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block container %}
-<div class="judgeDetail" :style="judgeDetailStyle" v-cloak>
-	<row type="flex" justify="center">
-		<i-col span="3">
-			<img class="zyThumb" :src="judgeHeadicon">
-		</i-col>
-		<i-col span="7">
-			<label class="zyTip" v-text="name"></label>
-			<div class="description" v-text="description"></div>
-		</i-col>
-	</row>
+<div id="judgeDetail" class="col-md-8 col-md-offset-2 judgeDetail" :style="judgeDetailStyle">
+	<div class="row">
+		<div class="header">
+			新闻详情
+		</div>
+		<div class="content">
+			<div class="col-md-3 col-md-offset-2 col-xs-3 col-xs-offset-2">
+				<img :src="judgeHeadicon">
+			</div>
+			<div class="col-md-7 col-xs-7">
+				<label class="zyTip" v-text="name"></label>
+				<div class="description" v-text="description"></div>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock %}
 
@@ -24,6 +30,7 @@
 <script src="../public/js/frontend/lib/jquery-1.10.2.min.js"></script>
 <script src="../public/js/frontend/lib/vue.min.js"></script>
 <script src="../public/js/frontend/lib/iview.min.js"></script>
+<script src="../public/js/frontend/lib/bootstrap.min.js"></script>
 <script src="../public/js/frontend/src/header.js"></script>
 <script src="../public/js/frontend/src/config.js"></script>
 <script src="../public/js/frontend/src/judgeDetail.js"></script>

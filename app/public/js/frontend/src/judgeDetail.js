@@ -5,8 +5,15 @@ var judgeDetail = new Vue({
     data:function(){
         return{
             judgeDetailStyle:{
+                paddingTop:"60px",
                 minHeight:"",
-                paddingTop:"60px"
+                marginTop: "30px",
+                marginBottom: "30px",
+                background: "#fff",
+                padding:"20px 20px",
+                border: "1px solid #dcdcdc",
+                borderRadius: "10px",
+                borderBottom: "1px solid #adadad"
             },
             language:"0",
             name:"",
@@ -23,7 +30,6 @@ var judgeDetail = new Vue({
             type:"get",
             url:config.ajaxUrls.judgeDetail.replace(":id",id),
             success:function(response){
-                console.log(response);
                 if(response.status == 200){
                     that.judgeHeadicon = response.data.headicon;
                     that.name =response.data.name;

@@ -39,3 +39,19 @@ $(document).ready(
         );
     }
 );
+let index = new Vue({
+    el:".index",
+    data(){
+        return{
+            ruleStyle:{
+				marginTop: "30px",
+                marginBottom: "30px",
+                background: "#fff",
+                padding:"20px 20px",
+                border: "1px solid #dcdcdc",
+                borderRadius: "10px",
+                borderBottom: "1px solid #adadad"
+            }
+        }
+    }
+})

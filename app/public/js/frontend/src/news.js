@@ -5,7 +5,14 @@ var news = new Vue({
 	data(){
 		return{
 			newsStyle:{
-				minHeight:""
+				minHeight:"",
+				marginTop: "30px",
+                marginBottom: "30px",
+                background: "#fff",
+                padding:"20px 20px",
+                border: "1px solid #dcdcdc",
+                borderRadius: "10px",
+                borderBottom: "1px solid #adadad"
 			},
 			total:0,
 			aoData:{offset: 0,limit: 10,language:0},

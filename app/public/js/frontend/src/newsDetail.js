@@ -4,7 +4,14 @@ var newsDetail = new Vue({
     data:function(){
         return{
             newsDetailStyle:{
-                minHeight:""
+                minHeight:"",
+                marginTop: "30px",
+                marginBottom: "30px",
+                background: "#fff",
+                padding:"20px 20px",
+                border: "1px solid #dcdcdc",
+                borderRadius: "10px",
+                borderBottom: "1px solid #adadad"
             },
             newsDetail:""
         }
@@ -13,7 +20,6 @@ var newsDetail = new Vue({
         let that = this;
         this.newsDetailStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight + "px";
         let id = window.location.href.split("newsDetail/")[1];
-        console.log(id);
 
         $.ajax({
             dataType:"json",

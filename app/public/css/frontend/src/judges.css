@@ -1,47 +1,33 @@
-/* 评委部分 */
-
-/* #JMJudge{
-    max-width: 1280px;
-    margin:0 auto;
-  	width: 90%;
-} */
-.JMJudge hr{
-    width: 78%;
-    height: 2px;
-    background-color: #47a8a9;
-    margin-top: 30px;
-    border: 0px;
-    margin-left: 21%;
+[ v-cloak]{
+   display:none;
 }
-.JMList2{
-    margin: 20px auto;
+.JMJudge .header{
+   width: 70%;
+   margin: 0 auto;
+   text-align: center;
+   font-size: 20px;
+   font-weight: 900;
+   padding: 20px 0px;
+   border-bottom: solid 1px #CFCFCF;
 }
-.JMList2 .JMItem{
-	width:100%;
-    margin: 10px auto;
-    position: relative;
+.JMJudgesListUl{
+   display: flex;
+   flex-direction: column;
 }
-.JMList2 .JMItem .JMThumb{
-   	width: 150px;
-    border: 2px solid #FFFFFF;
+.JMJudgesListUl .JMItem{
+   display: flex;
+   flex-direction: row;
+   margin:20px auto;
 }
-.JMList2 .JMItem .JMInfo{
-   	position: absolute;
-    left:21%;
-    top:0px;
-    bottom:0px;
-    right: 0px;
-    overflow: hidden; 
+.JMJudgesListUl .JMItem .JMTitle{
+    font-size: 21px;
+     color: #47a8a9;
+     margin-top: 5px;
 }
-.JMList2 .JMItem .JMTitle{
-   font-size: 21px;
-    color: #47a8a9;
-    margin-top: 5px;
-}
-.JMList2 .JMItem .JMExcerpt{
+.JMJudgesListUl .JMItem .JMExcerpt{
     font-size: 16px;
     font-weight: bold;
     color: #656464;
     margin: 10px 0px;
-    line-height:30px; 
+    line-height:30px;
 }
