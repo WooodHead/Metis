@@ -16,7 +16,7 @@
 		<div class="content">
 			<h3 class="title" v-text="newsDetail.title"></h3>
 			<p class="date" v-text="newsDetail.createAt"></p>
-			<div class="des" v-text="newsDetail.news_abstract"></div>
+			<div class="des" v-html="newsDetail.content"></div>
 		</div>
 	</div>
 </div>
