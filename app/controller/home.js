@@ -71,7 +71,7 @@ class HomeController extends Controller {
   async uploadWork() {
     const ctx = this.ctx;
     await ctx.render('frontend/uploadWork.html', {
-
+      user : ctx.user
     });
   }
 
@@ -90,21 +90,21 @@ class HomeController extends Controller {
   async works() {
     const ctx = this.ctx;
     await ctx.render('frontend/works.html', {
-
+      user : ctx.user
     });
   }
 
   async worksDetail() {
     const ctx = this.ctx;
     await ctx.render('frontend/worksDetail.html', {
-
+      user : ctx.user
     });
   }
 
   async resetInfo() {
     const ctx = this.ctx;
     await ctx.render('frontend/resetInfo.html', {
-
+      user : ctx.user
     });
   }
 
