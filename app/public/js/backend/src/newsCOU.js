@@ -50,7 +50,7 @@ var newsCOU = new Vue({
 						that.dataSourse.language = response.data.language.toString();
                     	that.submitUrl = config.ajaxUrls.newsUpdate.replace(":id",that.dataSourse.id);
                     }else{
-                    	that.$Notice.error({title:response.message});
+                    	that.$Notice.error({title:response.data});
                     }
                 },
                 error:function(){

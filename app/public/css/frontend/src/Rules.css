@@ -1,0 +1,99 @@
+	
+.JMRuleTip{
+    position: fixed;
+    right: 10%;
+    top:180px;
+    border-left:1px solid #6d6d6d;
+    padding: 30px 0px;
+}
+.JMRuleTip .JMItem{
+    display: block;
+    list-style: square;
+    margin: 20px 0px;
+    padding-left: 30px;
+    position: relative;
+    cursor: pointer;
+}
+.JMRuleTip .JMItem:before{
+    content: "";
+    border:1px solid #6d6d6d;
+    background: #fff;
+    border-radius: 20px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left:-6.5px;
+    top:5px;
+}
+.JMRuleTip .JMItem .JMLink{
+    color: #6d6d6d;
+}
+.JMRuleTip .JMItem.JMActive .JMLink{
+    color: #47a8a9;
+    font-weight: bold;
+}
+
+.JMRuleTip .JMItem.JMActive:before{
+    border:2px solid #47a8a9;
+}
+
+/*正文文本*/
+.JMRuleDetail{
+	
+    max-width: 1280px;
+    margin: 60px auto;
+}
+.JMRuleDetail .JMSection{
+	margin-right: 20%;
+    padding: 40px 10% 40px 60px;
+}
+.JMRuleDetail .JMTitle{
+
+}
+.JMRuleDetail .JMTitle .JMNum{
+    font-size: 45px;
+    color: #47a8a9;
+    vertical-align: top;
+    line-height: 45px;
+    margin-right: 20px;
+}
+.JMRuleDetail .JMTitle .JMText{
+    font-size: 24px;
+    color: #47a8a9;
+    position: relative;
+}
+.JMRuleDetail .JMTitle .JMText:before{
+    content: "";
+    position: absolute;
+    bottom:-10px;
+    left:0px;
+    width: 50px;
+    /*border-bottom: 2px solid #47a8a9;*/
+}
+.JMRuleDetail .JMContent{
+    margin-left:80px;
+    font-size: 14px;
+    line-height: 1.5em;
+}
+.JMRuleDetail .JMContent .JMText{
+	padding-left: 30px;
+    color:#656564;
+}
+.JMRuleDetail .JMContent .JMSubTitle{
+    border-left:2px solid #47a8a9;
+    color: #47a8a9;
+    font-weight: bold;
+    padding-left: 30px;
+    font-size: 14px;
+    margin: 20px 0px;
+}
+.JMRuleDetail .JMContent .JMSubTitle+.JMText{
+    padding-left: 30px;
+}
+.JMRuleDetail hr{
+    width: 60%;
+    height: 2px;
+    background: #47a8a9;
+    margin-left: 10%;
+    border: 0px;
+}

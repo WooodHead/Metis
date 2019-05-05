@@ -1,0 +1,28 @@
+{% extends "frontend/parent.html" %}
+
+{% block cssfolder %}
+<link href="../public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="../public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="../public/css/frontend/src/newsDetail.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div class="newsDetail" :style="newsDetailStyle">
+	<row>
+		<i-col span="14" push="5">
+			<h3 class="zyTitle" v-text="newsDetail.title"></h3>
+			<p class="zyDate" v-text="newsDetail.createAt"></p>
+			<div class="zyContent" v-text="newsDetail.news_abstract"></div>
+		</i-col>
+	</row>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="../public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+<script src="../public/js/frontend/lib/vue.min.js"></script>
+<script src="../public/js/frontend/lib/iview.min.js"></script>
+<script src="../public/js/frontend/src/header.js"></script>
+<script src="../public/js/frontend/src/config.js"></script>
+<script src="../public/js/frontend/src/newsDetail.js"></script>
+{% endblock %}

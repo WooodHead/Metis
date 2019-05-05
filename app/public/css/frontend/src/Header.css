@@ -211,7 +211,7 @@ img{
 	background-size: 60%;
 }
 .JMIconUser {
-	background-image:url(../../../images/app/iconUser.png);
+	background-image:url(../../../../public/images/iconUser.png);
 	background-position:center center;
 	background-repeat: no-repeat;
 }

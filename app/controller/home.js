@@ -25,6 +25,41 @@ class HomeController extends Controller {
       });
   }
 
+  async news(){
+      const ctx = this.ctx;
+      await ctx.render('frontend/news.html', {
+        user : ctx.user
+      });
+  }
+
+  async newsDetail(){
+      const ctx = this.ctx;
+      await ctx.render('frontend/newsDetail.html', {
+        user : ctx.user
+      });
+  }
+
+  async rule(){
+      const ctx = this.ctx;
+      await ctx.render('frontend/rule.html', {
+        user : ctx.user
+      });
+  }
+
+  async judges(){
+      const ctx = this.ctx;
+      await ctx.render('frontend/judges.html', {
+        user : ctx.user
+      });
+  }
+
+  async judgeDetail(){
+      const ctx = this.ctx;
+      await ctx.render('frontend/judgeDetail.html', {
+        user : ctx.user
+      });
+  }
+
   async register() {
     const ctx = this.ctx;
     await ctx.render('frontend/register.html', {
@@ -75,7 +110,7 @@ class HomeController extends Controller {
   async judge() {
     const ctx = this.ctx;
     await ctx.render('frontend/judge.html', {
-
+        user : ctx.user
     });
   }
 

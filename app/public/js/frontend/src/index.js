@@ -50,7 +50,8 @@ var index = new Vue({
 		return{
 			aoData:{
 				limit:3,
-				offset:0
+				offset:0,
+				language:0
 			},
 			dataList:[]
 		}
@@ -58,18 +59,17 @@ var index = new Vue({
 	created:function(){
 		var that = this;
 		$.ajax({
-            "dataType":'json',
-            "type":"post",
-            "data":this.aoData,
-            "url":config.ajaxUrls.manageNews,
-            "success": function (res) {
-                if(res.success===false){
-                	that.$Notice.error({title:res.message});
+            dataType:'json',
+            type:"get",
+            data:this.aoData,
+            url:config.ajaxUrls.manageNews,
+            success(res) {
+				console.log(res);
+                if(res.status == 200){
+        	  		that.dataList = res.data.rows;
+                	that.total = res.data.count;
                 }else{
-        	  		for(var j = 0;j<res.aaData.length;j++){
-        	  			res.aaData[j].thumb = res.aaData[j].thumb;
-        	  		}
-        	  		that.dataList = res.aaData;
+					that.$Notice.error({title:res.data});
                 }
             }
         });

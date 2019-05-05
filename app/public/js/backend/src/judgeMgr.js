@@ -109,11 +109,11 @@ var Component = new Vue({
 })
 function getPageData(that){
 	$.ajax({
-        "dataType":'json',
-        "type":"get",
-        "url":config.ajaxUrls.judgeGetByPage,
-        "data":that.aoData1,
-        "success": function (response) {
+        dataType:'json',
+        type:"get",
+        url:config.ajaxUrls.judgeGetByPage,
+        data:that.aoData1,
+        success: function (response) {
             if(response.status == 200){
 				for(var j = 0;j<response.data.rows.length;j++){
 					that.productImgArr[j] = response.data.rows[j].headicon;
