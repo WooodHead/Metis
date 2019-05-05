@@ -121,6 +121,7 @@ class ProductionService extends Service {
 
   async listProductionByIds(ids) {
     let resultObj;
+    const helper = this.ctx.helper;
     let idArray = ids.split(',');
     if(idArray.length > 0){
       resultObj = await this.ctx.model.Production.listProductionByIds(idArray);

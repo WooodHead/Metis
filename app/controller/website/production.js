@@ -169,9 +169,7 @@ class ProductionController extends BaseController{
 
   async listProductionByIds() {
     const ctx = this.ctx;
-    const query = {
-      ids: ctx.query.ids,
-    };
+    const ids = ctx.query.ids;
 
     try{
       const result = await ctx.service.production.listProductionByIds(ids);
