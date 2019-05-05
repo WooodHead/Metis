@@ -32,6 +32,7 @@ class HomeController extends Controller {
       });
   }
 
+
   async newsDetail(){
       const ctx = this.ctx;
       await ctx.render('frontend/newsDetail.html', {
