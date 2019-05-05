@@ -8,7 +8,7 @@ class ReviewService extends Service {
     let result = {};
     let production = await this.ctx.model.Production.getDetailById(review.productionId);
     if(production && production.status == 3){
-      let reviews = await this.ctx.model.Production.Review.getDataByRoundAndProductionId(review.round,review.productionId);
+      let reviews = await this.ctx.model.Review.getDataByRoundAndProductionId(review.round,review.productionId);
 
       if(reviews.length > 0){
         result.success = false;
