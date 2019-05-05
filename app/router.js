@@ -33,6 +33,9 @@ module.exports = app => {
   router.get('/judge', controller.home.judge);
   router.get('/forgetPwd', controller.home.forgetPwd);
   router.get('/resetPwd',controller.home.resetPwd);
+  router.get('/contact',controller.home.contact);
+  router.get('/legal',controller.home.legal);
+  router.get('/sitemap',controller.home.sitemap);
 
   router.get('/judgeMgr', pageAdminAuthCheck, controller.home.judgeMgr);
   router.get('/judgeCOU/:id', pageAdminAuthCheck, controller.home.judgeCOU);
@@ -80,7 +83,7 @@ module.exports = app => {
   router.get('/website/production/getScoreDetailById/:id', ajaxAdminAuthCheck, controller.website.production.getScoreDetailById);
   router.get('/website/production/getDetailByIdForJudge/:id', ajaxJudgeAuthCheck, controller.website.production.getDetailByIdForJudge);
   router.get('/website/production/listProductionByIds', controller.website.production.listProductionByIds);
-  
+
   router.get('/website/review/getReviewListByJudgeId', ajaxJudgeAuthCheck, controller.website.review.getReviewListByJudgeId);
   router.put('/website/review/updateReviewScore/:id', ajaxJudgeAuthCheck, controller.website.review.updateReviewScore);
 

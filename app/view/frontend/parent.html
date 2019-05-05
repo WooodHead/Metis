@@ -42,10 +42,9 @@
                 <a href="${pageContext.request.contextPath}/index?locale=en" data-page-name="en">英文</a>
             </div> -->
             <ul class="JMUserMenu">
-                <!-- <p>{{user.Id}}</p> -->
                 {% if user %}
-                    <li class="JMItem"><a href="/works" class="JMLink JM20C7BE">{{user.realname}}</a></li>
-                    <li class="JMItem"><a class="JMLink" href="logout">退出</a></li>
+                    <li class="JMItem"><a href="/works" class="JMLink JM20C7BE">[ {{user.realname}} ]</a></li>
+                    <li class="JMItem"><a class="JMLink" href="/logout">退出</a></li>
                 {% else %}
                     <li style="position: absolute;top: 15px;border-left: solid 2px #6d6d6d;height: 23px;"></li>
                     <li class="JMItem" style="width: 33px;margin-left: 33px;margin-right: 30px;"><a class="JMLink JMIconUser" href="/login"> </a></li>

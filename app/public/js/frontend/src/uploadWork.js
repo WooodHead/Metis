@@ -296,7 +296,7 @@ var uploadWork = new Vue({
 				            	that.$Notice.success({ title: res.data,duration:2,
 				                	onClose:function(){
 				                		that.$Loading.finish();
-				                    	// window.location.href = that.redirectUrl;
+				                    	window.location.href = that.redirectUrl;
 				                    }
 				                });
 				            }
@@ -325,7 +325,7 @@ var uploadWork = new Vue({
 	                        	that.$Notice.success({ title: res.data,duration:2,
 	                            	onClose:function(){
 	                            		that.$Loading.finish();
-	                                	// window.location.href = that.redirectUrl;
+	                                	window.location.href = that.redirectUrl;
 	                                }
 	                            });
 	                        }

@@ -1,0 +1,10 @@
+.legal .header{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    padding: 20px 0px;
+    border-bottom: solid 1px #CFCFCF;
+}
+.legal .content{
+    margin-top: 40px;
+}

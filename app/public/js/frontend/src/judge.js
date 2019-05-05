@@ -57,6 +57,7 @@ var judge = new Vue({
         },
         loadData: function(pageNum) {
             var that = this;
+            this.aoData.offset = (pageNum - 1) * 12;
             $.ajax({
                 url: config.ajaxUrls.judgeToScoreList,
                 type: "get",

@@ -1,0 +1,48 @@
+{% extends "frontend/parent.html" %}
+
+{% block cssfolder %}
+<link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/sitemap.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div id="sitemap" class="col-lg-6 col-lg-offset-3 sitemap" :style="sitemapStyle">
+    <div class="header">
+        网站地图
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12" id="link_box">
+                <a class="link" href="/index">首页</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="link_box">
+                <a class="link" href="/news">新闻</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="link_box">
+                <a class="link" href="/rule">章程</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="link_box">
+                <a class="link" href="/judges">评委</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/frontend/lib/vue.min.js"></script>
+<script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/lib/bootstrap.min.js"></script>
+<script src="public/js/frontend/src/header.js"></script>
+<script src="public/js/frontend/src/config.js"></script>
+<script src="public/js/frontend/src/sitemap.js"></script>
+{% endblock %}

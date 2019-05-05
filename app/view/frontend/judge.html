@@ -40,7 +40,7 @@
 				<p v-if="unrated" style="margin: 10px auto;text-align: center;color:#868686;font-size:18pt;">您还没有评分哟~~</p>
 			</ul>
 			<div style="text-align: center; margin-bottom: 30px;">
-				<page :total="total" :page-size="pageSize" @on-change="loadData"></page>
+				<page :total="total" :page-size="pageSize" show-total @on-change="loadData"></page>
 			</div>
 
 			<div class="cd-quick-view">

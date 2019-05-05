@@ -1,0 +1,39 @@
+{% extends "frontend/parent.html" %}
+
+{% block cssfolder %}
+<link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/contact.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div id="contact" class="col-lg-6 col-lg-offset-3 contact" :style="contactStyle">
+    <div class="header">
+        联系我们
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6" id="img_box">
+                <img class="img" src="../../public/ueditor/dialogs/image/images/image.png">
+            </div>
+            <div class="col-md-5" id="content_info">
+                <p>电话 : 0571-87200196</p>
+                <p>邮箱 : info@di-award.org</p>
+                <p>地址 : 中国杭州西湖区象山路352号中国美术学院象山校区17号楼202中国设计智造大奖委员会</p>
+                <p>邮编 : 310024</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/frontend/lib/vue.min.js"></script>
+<script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/lib/bootstrap.min.js"></script>
+<script src="public/js/frontend/src/header.js"></script>
+<script src="public/js/frontend/src/config.js"></script>
+<script src="public/js/frontend/src/contact.js"></script>
+{% endblock %}

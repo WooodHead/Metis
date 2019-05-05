@@ -1,0 +1,56 @@
+{% extends "frontend/parent.html" %}
+
+{% block cssfolder %}
+<link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/legal.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+<div id="legal" class="col-lg-6 col-lg-offset-3 legal" :style="legalStyle">
+    <div class="header">
+        网站法律声明
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <b>一、版权声明</b><br><br>
+                <p>1、本网站所使用的www.di-award.org、中国设计智造大奖、智造大奖以及本网站的其他注册域名、商标标识及专有名称均受相关法律保护,未经智造大奖组委会同意,任何单位及个人均不得将上述域名、商标及专有名称进行容易引起混淆或歧义的使用。本网站所使用的网站标识、图案、中英文名称为中国设计智造大奖专有标识,未经大奖组委会许可,任何人不得使用。</p>
+                <p>2、本网所有内容,包括但不限于所有文字、图片和音视频资料,版权均属中国设计智造大奖组委会所有,本网站的内容受《中华人民共和国著作权法》及其它相关法律的保护。任何媒体、网站或个人将本网站提供的内容与服务用于商业、盈利、广告性等目的时,需征得中国设计智造大奖组委会的书面许可;将本网站提供的内容与服务用于非商业用途时,应遵守著作权法以及其他相关法律的规定,不得侵犯网站所有者及相关权利人的权益。</p>
+                <p>3、转载或引用本网内容必须是以新闻性或资料性公共免费信息为使用目的的合理、善意引用,不得对本网内容原意进行曲解、修改,同时必须保留本网注明的"稿件来源",并自负版权等法律责任。</p>
+                <p>4、对于不当转载或引用本网内容而引起的民事纷争、行政处理或其他损失,本网不承担责任。</p>
+                <p>5、对不遵守本声明或其他违法、恶意使用本网内容者,本网保留追究其法律责任的权利。</p>
+
+                <b>二、隐私权保护声明</b><br><br>
+
+                <p>隐私权保护声明系本网站保护参赛者个人隐私的承诺。鉴于网络的特性,本网站将无可避免地与您产生直接或间接的互动关系,故特此说明本网站对用户个人信息所采取的收集、使用和保护政策,请您务必仔细阅读;</p>
+                <p>1、我们将通过您的IP地址来收集非个人化的信息,例如您的浏览器性质、操作系统种类等。通过收集上述信息,我们亦进行客流量统计,从而改进网站的管理和服务。</p>
+                <p>2、当您在中国设计智造大奖网站进行用户注册登记、提交参赛作品等各种活动时,在您的同意及确认下,本网站将通过注册表格等形式要求您提供一些个人资料。本网站不会将您所提供的资料用于其它目的。</p>
+                <p>本网站将对您所提供的资料进行严格的管理及保护,本网站将使用相应的技术,防止您的个人资料丢失、被盗用或遭篡改。</p>
+
+                <b>三、免责声明</b><br><br>
+
+                <p>1、由于您将用户密码告知他人或与他人共享注册帐户,由此导致的任何个人资料泄露,我们对此概不负责,亦不承担任何法律责任。</p>
+                <p>2、任何由于黑客攻击,计算机病毒侵入或发作、因政府管制而造成的暂时性关闭等影响不可抗力、意外事件而造成的个人资料泄露、丢失、被盗用或被篡改等,我们对此不承担任何法律责任。</p>
+                <p>3、对由于与本网站链接的其它网站所造成之个人资料泄露及由此而导致的任何法律争议和后果,也不承担任何法律责任。</p>
+                <p>4、任何单位或个人认为,本网站网页内容可能涉嫌侵犯知识产权,须向我们提出书面权利通知,并提供身份证明、权属证明及详细侵权情况证明。未提供上述法律文件的,我们不承担任何法律责任。我们收到上述法律文件后,在三个工作日内通知参赛者,要求参赛者做出情况说明。参赛者拒绝或迟延作出情况说明,或参赛作品存在明显的权利瑕疵或权利纠纷,我们有权采取措施撤销相关作品,防止损失扩大或侵权行为延续。</p>
+                <p>5、如参赛作品存在权利瑕疵或权利纠纷被从网站撤除的,或不能参与评奖的,或被撤销获奖资格的,我们对于参赛方不承担任何法律责任。</p>
+
+                <p>本网站之版权声明和保护隐私声明的修改及更新权均属于中国设计智造大奖组委会</p>
+                <p>联络方式为: info@di-award.org</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block jsfolder %}
+<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
+<script src="public/js/frontend/lib/vue.min.js"></script>
+<script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/lib/bootstrap.min.js"></script>
+<script src="public/js/frontend/src/header.js"></script>
+<script src="public/js/frontend/src/config.js"></script>
+<script src="public/js/frontend/src/legal.js"></script>
+{% endblock %}

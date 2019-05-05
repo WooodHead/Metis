@@ -123,6 +123,27 @@ class HomeController extends Controller {
     });
   }
 
+  async contact() {
+    const ctx = this.ctx;
+    await ctx.render('frontend/contact.html', {
+        user : ctx.user
+    });
+  }
+
+  async legal() {
+    const ctx = this.ctx;
+    await ctx.render('frontend/legal.html', {
+        user : ctx.user
+    });
+  }
+
+  async sitemap() {
+    const ctx = this.ctx;
+    await ctx.render('frontend/sitemap.html', {
+        user : ctx.user
+    });
+  }
+
   async relogin(){
     const ctx = this.ctx;
     await ctx.render('frontend/login.html', {

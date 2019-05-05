@@ -1,5 +1,6 @@
+var pageName = "register";
 var register = new Vue({
-	el:".register",
+	el:".index",
 	data(){
 		return{
 			showMobileCode:true,	//手机验证码显示参数
@@ -42,8 +43,7 @@ var register = new Vue({
             },
             registerStyle:{
             	width:"40%",
-            	margin:"0 auto",
-            	marginTop:config.cssHeight.headHeight + 40 + "px",
+            	margin:"30px auto",
             	minHeight:""
             }
 		}
@@ -192,7 +192,7 @@ var register = new Vue({
         }
     },
     created(){
-    	this.registerStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.footHeight - config.cssHeight.headHeight - 40 + "px";
+    	this.registerStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.footHeight - config.cssHeight.headHeight - 60 + "px";
 		$.ajax({
             url: config.ajaxUrls.getCaptcha,
             type: 'GET',

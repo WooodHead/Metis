@@ -70,7 +70,7 @@ var works = new Vue({
             dataList: [],
             workStyle:{
             	minHeight:"",
-        		margin:"30px auto",
+        		margin:"27px auto 26px",
         		width:"80%"
             },
             urlData:{

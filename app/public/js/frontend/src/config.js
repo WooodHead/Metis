@@ -80,7 +80,7 @@ var config = {
     },
     viewUrls: {
         login: "login",
-        works: "production/works",
+        works: "/works",
         judgeIndex:"review/judgeIndex/:round"
     },
     workGroup: {

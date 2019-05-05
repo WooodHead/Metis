@@ -2,7 +2,7 @@
  * 澶撮儴
  *
  */
- body,html{
+ body,html,ul,li,a,input,img,div{
 	margin:0;
 	padding:0;
 }
@@ -23,10 +23,6 @@ body{
     display: flex;
     min-height: 83vh;
     flex-direction: column;
-}
-ul{
-    margin: 0px;
-    padding: 0px;
 }
 li{
     list-style: none;
