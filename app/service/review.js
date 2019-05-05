@@ -8,26 +8,34 @@ class ReviewService extends Service {
     let result = {};
     let production = await this.ctx.model.Production.getDetailById(review.productionId);
     if(production && production.status == 3){
-      let transaction;
-      try {
-        transaction = await this.ctx.model.transaction();
-        let roundJudge = await this.ctx.model.RoundJudge.getRoundJudgeById(review.round);
-        await this.ctx.model.Production.updateRound(review.productionId, review.round, transaction);
-        if(roundJudge){
-          let judges = roundJudge.judge.split(',');
-          for (let judgeId of judges){
-            review.userId = judgeId;
-            await this.ctx.model.Review.createReview(review, transaction);
-          }
-        }
+      let reviews = await this.ctx.model.Production.Review.getDataByRoundAndProductionId(review.round,review.productionId);
 
-        await transaction.commit();
-        result.success = true;
-      } catch (e) {
-        await transaction.rollback();
-        this.ctx.logger.error(e.message);
+      if(reviews.length > 0){
         result.success = false;
-        result.message = e.message;
+        result.message = "不能重复设置";
+      }
+      else{
+        let transaction;
+        try {
+          transaction = await this.ctx.model.transaction();
+          let roundJudge = await this.ctx.model.RoundJudge.getRoundJudgeById(review.round);
+          await this.ctx.model.Production.updateRound(review.productionId, review.round, transaction);
+          if(roundJudge){
+            let judges = roundJudge.judge.split(',');
+            for (let judgeId of judges){
+              review.userId = judgeId;
+              await this.ctx.model.Review.createReview(review, transaction);
+            }
+          }
+
+          await transaction.commit();
+          result.success = true;
+        } catch (e) {
+          await transaction.rollback();
+          this.ctx.logger.error(e.message);
+          result.success = false;
+          result.message = e.message;
+        }
       }
     }
     else{

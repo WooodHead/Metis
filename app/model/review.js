@@ -144,5 +144,14 @@ module.exports = app => {
     });
   }
 
+  Review.getDataByRoundAndProductionId = async function(round,productionId){
+    return await this.findAll({
+      where:{
+        round:round,
+        productionId:productionId
+      }
+    });
+  }
+
   return Review;
 };
