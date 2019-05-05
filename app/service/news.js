@@ -14,7 +14,12 @@ class NewsService extends Service {
   }
 
   async getTopNews({ limit = 10, language = 0 }){
-    return await this.ctx.model.News.getTopNews({limit,language});
+    let resultObj =  await this.ctx.model.News.getTopNews({limit,language});
+    const helper = this.ctx.helper;
+    resultObj.forEach((element, index)=>{
+      element.thumb = helper.signatureUrl(helper.newsPath + element.thumb, "thumb_300_300");
+    });
+    return resultObj;
   }
 
   async createNews(news){
