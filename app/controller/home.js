@@ -89,9 +89,17 @@ class HomeController extends Controller {
 
   async works() {
     const ctx = this.ctx;
-    await ctx.render('frontend/works.html', {
-      user : ctx.user
-    });
+    if(ctx.user.roles[0].rolename == 'judge'){
+      await ctx.render('frontend/judge.html', {
+        user : ctx.user
+      });
+    }
+    else{
+      await ctx.render('frontend/works.html', {
+        user : ctx.user
+      });
+    }
+
   }
 
   async worksDetail() {
