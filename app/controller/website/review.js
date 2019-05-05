@@ -4,15 +4,14 @@ class ReviewController extends BaseController{
 
   async create(){
     const ctx = this.ctx;
-    try{
-      let data = ctx.request.body;
-      await ctx.service.review.createReview(data);
+
+    let data = ctx.request.body;
+    let result = await ctx.service.review.createReview(data);
+    if(result.success){
       super.success(ctx.__('createdSuccess'));
     }
-    catch(e){
-      console.log(e);
-      ctx.logger.error(e.message);
-      super.failure(e.message);
+    else{
+      super.failure(result.message);
     }
   }
 
