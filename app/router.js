@@ -79,7 +79,8 @@ module.exports = app => {
   router.put('/website/production/updateAverageScore', ajaxAdminAuthCheck, controller.website.production.updateAverageScore);
   router.get('/website/production/getScoreDetailById/:id', ajaxAdminAuthCheck, controller.website.production.getScoreDetailById);
   router.get('/website/production/getDetailByIdForJudge/:id', ajaxJudgeAuthCheck, controller.website.production.getDetailByIdForJudge);
-
+  router.get('/website/production/listProductionByIds', controller.website.production.listProductionByIds);
+  
   router.get('/website/review/getReviewListByJudgeId', ajaxJudgeAuthCheck, controller.website.review.getReviewListByJudgeId);
   router.put('/website/review/updateReviewScore/:id', ajaxJudgeAuthCheck, controller.website.review.updateReviewScore);
 

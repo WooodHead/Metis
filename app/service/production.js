@@ -118,6 +118,21 @@ class ProductionService extends Service {
     resultObj.score = review.score;
     return resultObj;
   }
+
+  async listProductionByIds(ids) {
+    let resultObj;
+    let idArray = ids.split(',');
+    if(idArray.length > 0){
+      resultObj = await this.ctx.model.Production.listProductionByIds(idArray);
+      resultObj.forEach((element, index)=>{
+        let pImageArray = element.pImage.split(',');
+        if (pImageArray[0]){
+          element.pImage = helper.signatureUrl(helper.productPath + pImageArray[0], "thumb-594-840");
+        }
+      });
+    }
+    return resultObj;
+  }
 }
 
 module.exports = ProductionService;

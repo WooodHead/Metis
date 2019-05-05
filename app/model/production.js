@@ -215,5 +215,13 @@ module.exports = app => {
     });
   }
 
+  Production.listProductionByIds = async function(idArray){
+    return await this.findAll({
+      where:{
+        Id:idArray
+      },
+    });
+  }
+
   return Production;
 };
