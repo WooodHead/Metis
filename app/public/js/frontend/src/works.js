@@ -105,7 +105,7 @@ var works = new Vue({
 			})
 		},
 		check:function(index){
-			window.location.href = "worksDetail/" + this.dataList[index].Id;
+			window.open("worksDetail/" + this.dataList[index].Id);
 		},
 		change:function(index){
 			window.location.href = "uploadWork/" + this.dataList[index].Id;

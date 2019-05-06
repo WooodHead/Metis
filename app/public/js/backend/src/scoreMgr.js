@@ -37,7 +37,6 @@ var vm = new Vue({
 		    });
 		},
 		roundCheck:function(index){
-			console.log(index);
 			this.roundModel = index;
 			this.dataSourse.round = index;
 		}
@@ -51,7 +50,6 @@ var vm = new Vue({
 	        contentType :"application/json; charset=UTF-8",
 	        data:that.aoData,
 	        success:function(response){
-				console.log(response);
 	            if(response.success){
 	                that.JudgeRoundList = response.data.rows;
 	            }else{

@@ -34,7 +34,6 @@ var workDetail = new Vue({
           url: config.ajaxUrls.workDetail.replace(":id",this.productionId),
           type: "get",
           success: function (response) {
-			  console.log(response);
               if (response.status == 200) {
             	  that.title = response.data.title;
             	  that.content = response.data.content;

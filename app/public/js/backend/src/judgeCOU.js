@@ -60,7 +60,6 @@ var judgeCOU = new Vue({
                 type:"get",
                 url:config.ajaxUrls.judgeDetail.replace(":id",this.dataSourse.id),
                 success:function(response){
-					console.log(response);
                     if(response.status == 200){
                     	that.imgUrl = response.data.headicon;
             	  		that.fileName = response.data.headicon.split("?")[0].split("judges/")[1];

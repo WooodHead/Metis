@@ -64,7 +64,6 @@ var index = new Vue({
             data:this.aoData,
             url:config.ajaxUrls.manageNews,
             success(res) {
-				console.log(res);
                 if(res.status == 200){
         	  		that.dataList = res.data.rows;
                 	that.total = res.data.count;

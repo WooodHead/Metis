@@ -74,7 +74,7 @@ var config={
         judgeRoundSetJudge:"roundJudge/bindingRoundJudge",
         judgeRoundChange:"roundJudge/updateBindRoundJudge",//评审轮次评委的修改接口
         sendEmail:"review/sendReviewEmail",
-        getRoundScoreBean:"review/getScoreByProductId",
+        getRoundScoreBean:"/website/production/getScoreDetailById/:id",
 
         getSTSSignature:"/getSTSSignature/:fileType",       //附件上传
         getUrlSignature:"/getUrlSignature"

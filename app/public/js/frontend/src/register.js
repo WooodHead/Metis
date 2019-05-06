@@ -101,7 +101,6 @@ var register = new Vue({
 	                url:url,
 	                data:{mobile:this.formItem.mobile,code:this.formItem.smsCode},
 	                success:function(res){
-						console.log(res);
 	                    if(res.success){
 	                    	that.$Notice.success({title:res.data, duration:3});
 	                    	that.disableSbt = false;
@@ -155,7 +154,6 @@ var register = new Vue({
         	this.$Loading.start();
         	this.$refs[name].validate((valid) => {
                 if (valid) {
-					console.log(this.formItem);
                 	var that = this,
             		dataUrl = config.ajaxUrls.createUser;
 	            	$.ajax({

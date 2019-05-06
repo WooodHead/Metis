@@ -6,13 +6,6 @@
 <link href="../public/css/frontend/src/worksDetail.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
-{% block menu %}
-<ul class="zyPageMenu">
-	<li class="zyItem"><a class="zyLink" href="/works" data-page-name="works">作品管理</a></li>
-	<li class="zyItem"><a class="zyLink" href="/uploadWork/0" data-page-name="uploadWork">作品上传</a></li>
-	<li class="zyItem"><a class="zyLink" href="/resetInfo" data-page-name="setting">信息修改</a></li>
-</ul>
-{% endblock %}
 
 {% block container %}
 <div class="workDetail" :style="worksDetailStyle">

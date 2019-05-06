@@ -43,7 +43,6 @@ var judgeCOU = new Vue({
                 type:"get",
                 url:config.ajaxUrls.getUserDetail.replace(":id",this.dataSourse.id),
                 success:function(response){
-					console.log(response);
                     if(response.status == 200){
 						that.dataSourse.role = response.data.roles[0].Id;
                     	that.dataSourse.realname =response.data.realname;

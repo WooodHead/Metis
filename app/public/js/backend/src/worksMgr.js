@@ -8,8 +8,9 @@ var vm = new Vue({
 		return{
 			scoreStyle:{
 				display:"none",
+				position:"fixed",
 				marginLeft:"0px",
-				top:"0px",width:"200px",position:"absolute"
+				top:"0px",width:"200px"
 			},
 			groupModel:"",
 			subGroupModel:"",
@@ -87,7 +88,9 @@ var vm = new Vue({
                	   	render: (h, params) => {
                           return h('a', {
                                   props: { type: 'primary', size: 'small' },
-                                  attrs :{ href:	config.viewUrls.manageWorkDetail.replace(":id",this.dataList[params.index].Id)},
+                                  attrs :{
+									  target:"_blank",
+									  href:	config.viewUrls.manageWorkDetail.replace(":id",this.dataList[params.index].Id)},
                                   style: { marginRight: '5px' }
                               }, "详情")
                       }
@@ -98,7 +101,7 @@ var vm = new Vue({
          	  dataList:[],
          	  productImgArr:[],
          	  Scroecolumns: [						//table列选项
-                  { title: '评审轮次',key: 'round', align: 'center'},
+                  { title: '评审轮次',key: 'roundName', align: 'center'},
                   { title: '得分',key: 'averageScore', align: 'center'}
               ],
          	  RoundScroeList:[]		//分数显示数据（轮次）
@@ -179,14 +182,14 @@ var vm = new Vue({
 			var that = this;
 			$.ajax({
 	            dataType:'json',
-	            type:"post",
-	            url:config.ajaxUrls.getRoundScoreBean,
-	            data:{productionId:this.dataList[index].id},
+	            type:"get",
+	            url:config.ajaxUrls.getRoundScoreBean.replace(":id",this.dataList[index].Id),
 	            success: function (response) {
+					console.log(event);
 	                if(response.status == 200){
 						that.$Loading.finish();
-						that.RoundScroeList = response.object;
-						var poptipClientX = event.clientX  - 165, poptipClientY = event.clientY - 105 ;
+						that.RoundScroeList = response.data;
+						var poptipClientX = event.clientX  - 165, poptipClientY = event.clientY - 40 ;
 						that.scoreStyle.display = "inline";
 						that.scoreStyle.marginLeft = poptipClientX+"px";
 						that.scoreStyle.top = poptipClientY+"px";
