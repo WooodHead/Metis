@@ -185,7 +185,6 @@ var vm = new Vue({
 	            type:"get",
 	            url:config.ajaxUrls.getRoundScoreBean.replace(":id",this.dataList[index].Id),
 	            success: function (response) {
-					console.log(event);
 	                if(response.status == 200){
 						that.$Loading.finish();
 						that.RoundScroeList = response.data;
