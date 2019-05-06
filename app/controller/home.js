@@ -6,9 +6,17 @@ class HomeController extends Controller {
 
   async login() {
     const ctx = this.ctx;
-    await ctx.render('frontend/login.html', {
+    if (ctx.isAuthenticated()){
+      await ctx.render('frontend/works.html', {
+        user : ctx.user
+      });
+    }
+    else{
+      await ctx.render('frontend/login.html', {
 
-    });
+      });
+    }
+
     //console.log(this.ctx.cookies.get('locale', { httpOnly: false, signed: false }));
   }
 
