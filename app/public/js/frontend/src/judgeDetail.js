@@ -24,7 +24,7 @@ var judgeDetail = new Vue({
     },
     created:function(){
         var that = this;
-        this.judgeDetailStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight + "px";
+        this.judgeDetailStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight  - 60 + "px";
         var id = window.location.href.split("judgeDetail/")[1];
         $.ajax({
             type:"get",
