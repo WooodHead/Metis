@@ -125,17 +125,17 @@
 							</form-item>
 							<form-item label="图幅一" prop="fileName_1">
 								<img v-show="imgUrl_1.length" :src="imgUrl_1" style="width:120px;height:120px;"><br>
-								<input type="file" @change="doUpload_1" ref="inputFile" accept="image/*"/></input>
+								<input type="file" @change="doUpload_1" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_1" /><span v-text="progressPercent_1 + '%'"></span>
 							</form-item>
 							<form-item label="图幅二">
 								<img v-show="imgUrl_2.length" :src="imgUrl_2" style="width:120px;height:120px;"><br>
-								<input type="file" @change="doUpload_2" ref="inputFile" accept="image/*"/></input>
+								<input type="file" @change="doUpload_2" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_2" /><span v-text="progressPercent_2 + '%'"></span>
 							</form-item>
 							<form-item label="图幅三">
 								<img v-show="imgUrl_3.length" :src="imgUrl_3" style="width:120px;height:120px;"><br>
-								<input type="file" @change="doUpload_3" ref="inputFile" accept="image/*"/></input>
+								<input type="file" @change="doUpload_3" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_3" /><span v-text="progressPercent_3 + '%'"></span>
 							</form-item>
 							<form-item label="附件">
