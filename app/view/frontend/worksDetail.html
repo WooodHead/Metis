@@ -12,7 +12,7 @@
 	<h2 class="title" v-text="'标题：'+title"></h2>
 	<p class="content" v-text="'简介：'+content"></p>
 	<div class="attachFile" v-show="attach_file">
-		附件下载:&nbsp;&nbsp;<a :href="attachFileDownload" target="_blank"  v-text="attach_file"></a>
+		附件:&nbsp;&nbsp;<a :href="attachFileDownload" target="_blank">点击下载</a>
 	</div>
 	<div class="produceImg">
 		<img :src="productImg_1" />

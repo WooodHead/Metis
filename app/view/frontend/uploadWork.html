@@ -75,13 +75,13 @@
 							<form-item label="队员姓名" v-show="formItem.participant_type == '2'">
 								<i-input v-model="formItem.team_member" placeholder="成员姓名用中文逗号连接"></i-input>
 							</form-item>
-							<form-item :label="participantIdNumberText" prop="participantIdNumber">
+							<form-item :label="participantIdNumberText" prop="participant_id_number">
 								<i-input v-model="formItem.participant_id_number" :placeholder="idNamePlaceholder"></i-input>
 							</form-item>
 							<form-item label="所属单位" v-show="formItem.participant_type != '3'">
 								<i-input v-model="formItem.affiliatedUnit" placeholder="请输入所属单位"></i-input>
 							</form-item>
-							<form-item label="简介" prop="participantBrief">
+							<form-item label="简介" prop="participant_brief">
 								<i-input type="textarea" v-model="formItem.participant_brief" placeholder="请输入个人简介"></i-input>
 							</form-item>
 							<form-item>
@@ -107,18 +107,18 @@
 							<form-item label="指导老师">
 								<i-input v-model="formItem.adviser" placeholder="请输入指导老师"></i-input>
 							</form-item>
-							<form-item label="组别">
-								<radio-group v-model="formItem.groupNum" @on-change="userInfoChange">
+							<form-item label="组别" v-if="false">
+								<radio-group v-model="formItem.groupNum">
 									<radio label="1" value="1">概念设计组 </radio>
 									<radio label="2" value="2">产品创新组</radio>
 								</radio-group>
 							</form-item>
-							<form-item label="作品类型">
-								<radio-group v-model="formItem.subGroupNum" @on-change="userInfoChange">
-									<radio label="1" value="1">精准农业类</radio>
-									<radio label="2" value="2">非遗文创类</radio>
-									<radio label="3" value="3">文旅休闲类 </radio>
-									<radio label="4" value="4">品牌农业类</radio>
+							<form-item label="作品类别">
+								<radio-group v-model="formItem.subGroupNum">
+									<radio label="1" value="1">精准农业</radio>
+									<radio label="2" value="2">非遗文创</radio>
+									<radio label="3" value="3">文旅融合 </radio>
+									<radio label="4" value="4">大地未来</radio>
 								</radio-group>
 							</form-item>
 							<form-item label="图幅一" prop="fileName_1">

@@ -40,7 +40,7 @@ var resetInfo = new Vue({
     methods: {
         submitPwd: function() {
 			var that = this;
-            if (this.formPwd.password === this.formPwd.confirmPwd) {
+            if (this.formPwd.password === this.formPwd.confirmPwd && this.formPwd.password) {
 				if(this.formPwd.oldPwd != ""){
 					this.showPwdError = false;
 	                this.$Loading.start();

@@ -25,7 +25,7 @@ var config={
         },
         aLiYun:{
             region:"oss-cn-shanghai",
-            bucket:"dc-metis"
+            bucket:"dc-jd"
         },
         fileType:{
             productPath:1,

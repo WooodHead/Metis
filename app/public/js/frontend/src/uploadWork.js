@@ -1,6 +1,6 @@
 'use strict';
 var pageName = "uploadWork";
-var bucket = 'dc-metis';
+var bucket = 'dc-jd';
 var urllib = OSS.urllib;
 var Buffer = OSS.Buffer;
 var OSS = OSS.Wrapper;
@@ -359,7 +359,8 @@ var uploadWork = new Vue({
 					that.$Loading.finish();
 	        		that.formItem = res.data;
 	        		that.formItem.participant_type = res.data.participant_type.toString();
-	        		that.formItem.groupNum = res.data.groupNum.toString();
+					// that.formItem.groupNum = res.data.groupNum.toString();
+	        		that.formItem.groupNum = "1";
 	        		that.formItem.subGroupNum = res.data.subGroupNum.toString();
 	        		if(res.data.attach_file){
 						that.formItem.attach_file = res.data.attach_file.split("?")[0].split("attachment/")[1];

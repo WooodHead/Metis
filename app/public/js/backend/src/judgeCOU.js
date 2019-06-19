@@ -2,7 +2,7 @@
 
 var pageName = "judge";
 
-var bucket = 'dc-metis';
+var bucket = 'dc-jd';
 var urllib = OSS.urllib;
 var Buffer = OSS.Buffer;
 var OSS = OSS.Wrapper;
