@@ -13,9 +13,9 @@
 	<div class="judgeMgr" v-cloak>
 		<i-col span="24">管理</i-col>
 		<modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
-			<p style="color:#ed3f14;text-align:center">
-				<Icon type="information-circled"></Icon>
-				<span style="font-size: 15px;">确定删除评委:{{judgeTitle}}？</span>
+			<p style="color:#ed3f14;display: flex;flex-direction: row;justify-content: center;">
+				<icon type="ios-information-circle" size="24"></icon>
+				<span style="font-size: 15px;" v-text="'确定删除评委:' + judgeTitle + '？'"></span>
 			</p>
 		</modal>
 		<a class="btn btn-primary" href="/judgeCOU/0"> <span class="glyphicon glyphicon-plus"></span>新建</a>

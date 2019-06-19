@@ -14,7 +14,7 @@
 		<i-table :columns="columns" :data="dataList" style="margin-top:20px;width:100%;" ></i-table>
 		<modal v-model="setModal" @on-ok="chooseJudgeOk">
 			<p slot="header" style="color:#f60;text-align:center">
-				<i-con type="information-circled"></Icon>
+				<icon type="ios-information-circle"></icon>
 				<span v-text="roundTitle"></span>
 			</p>
 			<checkbox-group v-model="chooseJudgeNameArray" v-for="item in judgeList">
@@ -23,7 +23,7 @@
 		</modal>
 		<modal v-model="deleteModal" @on-ok="deleteOK" title="警告！！！">
 			<p style="color:#ed3f14;text-align:center">
-				<Icon type="information-circled"></Icon>
+				<icon type="ios-information-circle"></icon>
 				<span v-text="'确定删除评审轮次:'+judgeRoundTitle+'？'"></span>
 			</p>
 		</modal>

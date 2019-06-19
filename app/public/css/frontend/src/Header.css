@@ -190,6 +190,7 @@ img{
 .JMUserMenu .JMItem .JMLink {
 	cursor: pointer;
 	line-height: 50px;
+    font-size: 12px;
 	vertical-align: middle;
 	display: block;
 	color: #6d6d6d;
