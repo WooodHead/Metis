@@ -43,8 +43,8 @@ class AliOSSController extends BaseController {
             "oss:PutObject"
             ],
             "Resource": [
-            "acs:oss:*:*:dc-metis",
-            "acs:oss:*:*:dc-metis/*"
+            "acs:oss:*:*:dc-jd",
+            "acs:oss:*:*:dc-jd/*"
             ]
         }
       ]
