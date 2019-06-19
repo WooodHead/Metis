@@ -2,6 +2,7 @@
 
 let OSS = require('ali-oss');
 const crypto = require('crypto');
+const path = require('path');
 
 module.exports = {
   parseInt(string) {
@@ -24,6 +25,9 @@ module.exports = {
 
     return alioss;
   },
+
+  basePath: path.join(__dirname, '../public/newsImages/'),
+  imagePath: 'images',
 
   attachmentPath: 'attachment/',
   productPath: 'product/',
@@ -146,6 +150,7 @@ module.exports = {
     }
   },
 
+
   getCountDownDay:()=>{
     let date1 = new Date(2019,12,1);
     let date2 = new Date();
@@ -153,5 +158,4 @@ module.exports = {
     let date = (date1.getTime() - date3.getTime()) / (1000 * 60 * 60 * 24);
     return date;
   }
-
 };

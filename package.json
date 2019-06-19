@@ -50,8 +50,8 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-Metis",
-    "stop": "egg-scripts stop --title=egg-server-Metis",
+    "start": "egg-scripts start --daemon --title=egg-server-design-jd --port=7019",
+    "stop": "egg-scripts stop --title=egg-server-design-jd",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
