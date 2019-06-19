@@ -13,23 +13,23 @@ module.exports = {
   aliConfig: () => {
     const alioss = exports = {};
 
-    alioss.region = 'oss-cn-hangzhou';
-    alioss.AccessKeyId = 'LTAIsWk7u56ncmRUG2';
-    alioss.AccessKeySecret = 'fs0sVuCJynmk5fghdF0EqzL5Rc';
-    alioss.endpoint = 'oss-cn-hangzhou.aliyuncs.com';
+    alioss.region = 'oss-cn-shanghai';
+    alioss.AccessKeyId = 'LTAIsvXXw2cmRUG2';
+    alioss.AccessKeySecret = 'fs0sVuCJm0AeQi2XduYwdF0EqzL5Rc';
+    alioss.endpoint = 'oss-cn-shanghai.aliyuncs.com';
     alioss.PolicyFile = 'policy/all_policy.txt';
     alioss.RoleArn = 'acs:ram::1455326322404332:role/cidic-oss-role';
     alioss.TokenExpireTime = '3600';
-    alioss.bucket = 'dc-metis';
+    alioss.bucket = 'dc-jd';
 
     return alioss;
   },
 
-  imagePath: 'images/',
+  attachmentPath: 'attachment/',
+  productPath: 'product/',
+  judgesPath: 'judges/',
+  newsPath: 'news/',
   othersPath: 'others/',
-  pdfPath: 'pdf/',
-  rar_zipPath: 'rar_zip/',
-  videoPath: 'video/',
 
   email_host:'smtp.exmail.qq.com',
   email_user:'d_seniors2018@cidic.cn',
@@ -37,7 +37,7 @@ module.exports = {
   email_send_address:'d_seniors2018@cidic.cn',
   email_verify_address:'http://127.0.0.1:7001/website/user/updateAcviveByActiveCodeAndEmail',
   wx_email_verify_address:'http://127.0.0.1:7001/website/user/updateWxActive',
-  getBackPwd_email_verify_address:'http://127.0.0.1:7001/updatePwd',
+  getBackPwd_email_verify_address:'http://127.0.0.1:7001/resetPwd',
 
   signatureUrl(objectPath,thumbName){
     const config = this.aliConfig();
@@ -144,6 +144,14 @@ module.exports = {
     else{
       return false;
     }
+  },
+
+  getCountDownDay:()=>{
+    let date1 = new Date(2019,12,1);
+    let date2 = new Date();
+    let date3 = new Date(date2.getFullYear(),date2.getMonth()+1,date2.getDate());
+    let date = (date1.getTime() - date3.getTime()) / (1000 * 60 * 60 * 24);
+    return date;
   }
 
 };
