@@ -40,7 +40,7 @@ var news = new Vue({
 	},
 	created(){
 		var that = this;
-		this.newsStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight + "px";
+		this.newsStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 60 + "px";
     	$.ajax({
             dataType:'json',
             type:"get",

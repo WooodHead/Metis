@@ -23,7 +23,7 @@ var judges = new Vue({
 	},
 	created:function(){
 		var that = this;
-		this.judgeStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight + "px";
+		this.judgeStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight  - 60 + "px";
 		$.ajax({
 	        dataType:'json',
 	        type:"get",
