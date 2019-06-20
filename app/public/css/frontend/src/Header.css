@@ -5,22 +5,12 @@
 	margin:0;
 	padding:0;
 }
-@font-face
-{
-    font-family: zyFont;
-    src: url('../../font/metabookce-caps.eot'),
-    url('../../font/metabookce-caps.woff'),
-    url('../../font/metabookce-caps.ttf'); /* IE9 */
-}
 body{
-	/* max-width:1280px; */
     margin: 0px auto;
     padding: 0px;
     font-size: 14px;
     font-family: "Arail","Microsoft YaHei","Heiti";
-    padding-top:160px;
     display: flex;
-    min-height: 83vh;
     flex-direction: column;
 }
 li{
@@ -28,6 +18,9 @@ li{
     display: inline-block;
 }
 a{
+    text-decoration: none;
+}
+a:hover{
     text-decoration: none;
 }
 input:focus{
@@ -40,84 +33,57 @@ img{
     border: none;
 }
 .JMHeader {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 160px;
 	z-index: 99;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
-/*
-  logo鍥剧墖璁剧疆
-
- */
-.JMHeader .JMLogo {
-	text-align: center;
+.JMHeader .top{
+    height: 130px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.JMHeader .JMLogo img{
 	width: auto;
-	height: 160px;
-	max-width: 50%;
-	display: inline-block;
-	position: absolute;
-	top: 0px;
-	left:0;
+	height: 130px;
 }
-
-.JMHeader .JMLogo img {
-	max-height: 100%;
-	max-width: 100%;
+.JMHeader .countDownBox{
+    width: 240px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
-/*鎶ュ悕鏃堕棿*/
-.JMHeader .JMNoticeBoard {
-	border: 2px solid #47a8a9;
-	background-color: #47a8a9;
+.JMHeader .countDownBox .JMNoticeBoard {
 	width: 240px;
 	height: 60px;
-	position: absolute;
-	top: 30px;
-    right: 30px;
-	    /* display: none; */
+	border: 2px solid #47a8a9;
+	background-color: #47a8a9;
+    display: flex;
+    flex-direction: row;
 }
 .JMHeader .JMNoticeBoard .JMNoticeBoardLeft {
+    width: 50%;
 	color: #47a8a9;
-	font-size: 12px;
 	margin: auto;
 	text-align: center;
-	width: 50%;
-	position: absolute;
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%)
 }
 .JMHeader .JMNoticeBoard .JMNoticeBoardLeft a {
-	display: inline-block;
 	width: 100%;
-	color: #fff;
-	line-height: 60px;
 	height: 60px;
+	line-height: 60px;
 	font-size: 18px;
+	color: #fff;
 }
 .JMHeader .JMNoticeBoard .JMNoticeBoardRight {
-	color: #e9608d;
 	background: #fff;
 	font-size: 12px;
 	text-align: center;
 	width: 50%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	right: 0;
-}
-
-.JMHeader .JMNoticeBoard .JMNoticeBoardRight .JMItem {
-	font-weight: bold;
-	color: #515151;
-	margin: 0;
-	width: 100%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .JMHeader .JMNoticeBoard .JMNoticeBoardRight .countDown {
 	color: #47a8a9;
@@ -125,85 +91,99 @@ img{
 	display: block;
 	line-height: 1em;
 }
-/*li閫夐」*/
+.JMHeader .JMNoticeBoard .JMNoticeBoardRight .title {
+    font-weight: bold;
+	color: #515151;
+}
+.JMHeader .JMNoticeBoard .JMNoticeBoardRight .title {
+    font-weight: bold;
+	color: #515151;
+}
+.langBox a{
+    display: inline-block;
+    text-align: center;
+    width: 80px;
+    height: 25px;
+    line-height: 25px;
+    background: #eee;
+    color: #fff;
+}
+.langBox a.active{
+    display: inline-block;
+    text-align: center;
+    width: 80px;
+    height: 25px;
+    line-height: 25px;
+    background: #eee;
+    color: #929292;
+}
+
+
 .JMHeader .JMTopNav{
-  	width: 40%;
-    height: 50px;
-    position: absolute;
-    right:0;
-    bottom:0;
+  	width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
     display: flex;
+    flex-direction: row;
+}
+.navItemBox{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .JMMenu{
-    height: 100%;
-    font-size: 14px;
-    /* margin-right:20px; */
-    flex: 1;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .JMMenu .JMItem{
-  width: 15%;
+    width: 100px;
 	list-style: none;
 	display: inline-block;
 }
 .JMMenu .JMItem .JMLink {
 	font-size: 14px;
 	display: block;
-	width: 100%;
 	text-align: center;
-	line-height: 50px;
+	line-height: 40px;
 	cursor: pointer;
 	color: #6d6d6d;
-	position: relative;
-	/*     left: 160px; */
+    font-weight: bold;
 }
-.JMMenu .JMItem .JMLink::before {
-	content: "";
-	width: 100%;
-	height: 0;
-	/* 閫夐」涓嬫柟棰滆壊閰嶇疆 */
-	background: #47a8a9;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	transition: all 0.2s ease-out;
+.JMMenu .JMItem .JMLink:hover,
+.JMMenu .JMItem .JMLink.JMActive {
+    font-size: 14px;
+	display: block;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+    font-weight: bold;
+	color: #47a8a9;
 }
-/*li涓嬮潰鐨勫脊鍑烘晥鏋�*/
-.JMMenu .JMItem .JMLink:hover::before,
-.JMMenu .JMItem .JMLink.JMActive::before {
-	color: #fff;
-	/* 涓庝笂鏂归厤缃竴鏍� */
-	background: #47a8a9;
-	height: 5px;
-}
-/*	鐧婚檰閮ㄥ垎	*/
 .JMUserMenu {
-	display: inline-block;
-	height: 100%;
-	line-height: 50px;
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
-.JMUserMenu .JMItem {
-	margin-right: 10px;
-	vertical-align: middle;
+.JMUserMenu .realname{
+    color: #6d6d6d;
+    font-size: 14px;
 }
 .JMUserMenu .JMItem .JMLink {
 	cursor: pointer;
-	line-height: 50px;
-    font-size: 12px;
+	line-height: 40px;
+    font-size: 14px;
 	vertical-align: middle;
 	display: block;
 	color: #6d6d6d;
-	padding: 0px 0px 0px 10px;
 }
-/* [ gansiqu ] 鏍峰紡*/
-.JM20C7BE {
-	color: #6d6d6d!important;
-}
-/*鐧婚檰鎸夐挳鏍峰紡*/
 .JMUserMenu .JMItem .JMLink.JMIconUser {
-	width: 23px;
-	height: 30px;
+	width: 36px;
+	height: 36px;
 	background-size: 60%;
 }
 .JMIconUser {
@@ -216,4 +196,61 @@ img{
 	background: #363636;
 	color: #fff;
 	text-align: center;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px){
+
+}
+@media screen and (min-width: 768px) and (max-width: 992px){
+    .JMHeader .top{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+@media screen and (max-width: 768px){
+    .JMHeader .top{
+        height: 90px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .JMHeader .JMLogo img{
+        height: 90px;
+    }
+    .JMHeader .countDownBox{
+        height: 90px;
+        justify-content: center;
+        align-items: center;
+    }
+    .JMHeader .countDownBox .JMNoticeBoard{
+        width: 160px;
+    }
+    .JMHeader .JMNoticeBoard .JMNoticeBoardLeft a {
+    	width: 100%;
+    	height: 60px;
+    	line-height: 60px;
+    	font-size: 14px;
+    	color: #fff;
+    }
+    .JMHeader .JMNoticeBoard .JMNoticeBoardRight .countDown{
+        font-size: 22px;
+    }
+    .JMMenu .JMItem {
+        width: 60px;
+        height: 40px;
+    }
+    .JMUserMenu .realname {
+        width: 60px;
+        color: #6d6d6d;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+    }
 }

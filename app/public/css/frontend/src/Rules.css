@@ -1,5 +1,5 @@
 .JMRule .header{
-	width:70%;
+	width:750px;
 	margin: 0 auto;
     text-align: center;
     font-size: 20px;
@@ -7,46 +7,9 @@
     padding: 20px 0px;
     border-bottom: solid 1px #CFCFCF;
 }
-/* .JMRuleTip{
-    position: fixed;
-    margin-right: 10%;
-    top:180px;
-    margin-top: 40px;
-    border-left:1px solid #6d6d6d;
-	padding: 30px 0px;
-}
-.JMRuleTip .JMItem{
-    display: block;
-    list-style: square;
-    margin: 20px 0px;
-    padding-left: 30px;
-    position: relative;
-    cursor: pointer;
-}
-.JMRuleTip .JMItem:before{
-    content: "";
-    border:1px solid #6d6d6d;
-    background: #fff;
-    border-radius: 20px;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    left:-6.5px;
-    top:5px;
-}
-.JMRuleTip .JMItem .JMLink{
-    color: #6d6d6d;
-}
-.JMRuleTip .JMItem.JMActive .JMLink{
-    color: #47a8a9;
-    font-weight: bold;
-}
-
-.JMRuleTip .JMItem.JMActive:before{
-    border:2px solid #47a8a9;
-} */
 .JMRuleDetail{
-	margin-top: 40px;
+	width: 750px;
+	margin: 40px auto;
 }
 .JMRuleDetail .JMTitle .JMNum{
     font-size: 45px;
@@ -90,4 +53,32 @@
     height: 2px;
     background: #47a8a9;
     border: 0px;
+}
+@media screen and (min-width: 970px) and (max-width: 1170px){
+    .JMRule .header{
+    	width: 600px;
+    }
+	.JMRuleDetail{
+		width: 600px;
+		margin: 40px auto;
+	}
+}
+@media screen and (min-width: 750px) and (max-width: 970px){
+    .JMRule .header{
+    	width: 400px;
+    }
+	.JMRuleDetail{
+		width: 400px;
+		margin: 40px auto;
+	}
+}
+@media screen and (max-width: 750px){
+    .JMRule .header{
+    	width: 100%;
+    }
+	.JMRuleDetail{
+		width: 100%;
+		margin: 20px auto;
+		padding: 0 20px;
+	}
 }

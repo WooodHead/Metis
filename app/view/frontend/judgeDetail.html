@@ -8,17 +8,17 @@
 {% endblock %}
 
 {% block container %}
-<div id="judgeDetail" class="col-md-8 col-md-offset-2 judgeDetail" :style="judgeDetailStyle">
+<div id="judgeDetail" class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 judgeDetail" :style="judgeDetailStyle">
 	<div class="row">
 		<div class="header">
-			新闻详情
+			评委详情
 		</div>
 		<div class="content">
-			<div class="col-md-3 col-md-offset-2 col-xs-3 col-xs-offset-2">
+			<div class="judgeThumb">
 				<img :src="judgeHeadicon">
 			</div>
-			<div class="col-md-7 col-xs-7">
-				<label class="zyTip" v-text="name"></label>
+			<div class="judgeInfo">
+				<label class="name" v-text="name"></label>
 				<div class="description" v-text="description"></div>
 			</div>
 		</div>

@@ -2,7 +2,7 @@
 	display:none;
 }
 .news .header{
-	width: 70%;
+	width: 750px;
 	margin: 0 auto;
     text-align: center;
     font-size: 20px;
@@ -14,29 +14,93 @@
 	display: flex;
 	flex-direction: column;
 }
-.JMNewsListUl .JMNews{
+.JMNews{
+    width: 750px;
+    height: 160px;
 	display: flex;
 	flex-direction: row;
 	margin:20px auto;
 }
 
-.JMNewsListUl .JMNews .JMNewsTextBox{
-	width: 100%;
+.newThumb{
+    width: 160px;
+    height: 160px;
 }
-.JMNewsListUl .JMNews .JMNewsText_date{
-	color:#818181;
-	font-weight: bold;
-	margin: 5px;
+.newInfo{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 20px;
 }
-.JMNewsListUl .JMNews .JMNewsText_title{
-	color: #47a8a9;
-    display: block;
-    margin: 5px;
-    font-size: 18px;
+.newInfo .title{
+    font-size: 16px;
 }
-.JMNewsListUl .JMNews .JMNewsText_content{
-	color: #818181;
-    display: block;
-    margin: 10px 5px;
-    font-size: 14px;
+.newInfo .createAt{
+    font-size: 12px;
+    color: #929292;
+    margin-top: -30px;
+}
+.newInfo .content{
+    margin-top: -20px;
+}
+.newInfo .moreBtn{
+    width: 100px;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    background: #999;
+}
+@media screen and (min-width: 970px) and (max-width: 1170px){
+    .news .header{
+    	width: 600px;
+    }
+    .JMNews{
+        width: 600px;
+    }
+}
+@media screen and (min-width: 750px) and (max-width: 970px){
+    .news .header{
+    	width: 400px;
+    }
+    .JMNews{
+        width: 400px;
+        height: 120px;
+    }
+    .newThumb{
+        width: 120px;
+        height: 120px;
+    }
+    .newInfo{
+        width: 260px;
+    }
+    .newInfo .createAt{
+        margin-top: 0px;
+    }
+    .newInfo .content{
+        margin-top: 0px;
+    }
+}
+@media screen and (max-width: 750px){
+    .news .header{
+    	width: 95%;
+    }
+    .JMNews{
+        width: 95%;
+        height: 120px;
+    }
+    .newThumb{
+        width: 120px;
+        height: 120px;
+    }
+    .newInfo{
+        width: 210px;
+        margin-left: 10px;
+    }
+    .newInfo .createAt{
+        margin-top: 0px;
+    }
+    .newInfo .content{
+        display: none;
+    }
 }

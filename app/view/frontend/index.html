@@ -2,6 +2,7 @@
 
 {% block cssfolder %}
 <link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="public/css/frontend/lib/swiper.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/scr/Home.css" type="text/css" rel="stylesheet">
@@ -16,7 +17,7 @@
 					style="color: #5c5c5c; font-size: 32pt; padding-top: 35px; margin-left: 50px">NEWS | 新闻动态</section>
 				<ul class="zyList">
 					<li class="zyItem" v-for="item in dataList"><a class="zyLink"
-						:href="'news/newsDetail/' + item.id" target="_blank"> <img
+						:href="'newsDetail/' + item.Id" target="_blank"> <img
 							class="zyThumb" :src="item.thumb">
 							<h3 class="zyTitle">{{item.title}}</h3> <span class="zyDate">{{item.publishTime}}</span>
 					</a></li>
@@ -24,7 +25,7 @@
 
 				<div id="JMTCenter">
 					<a id="JMBtn" style="margin-top: 86px; margin-bottom: 48px;"
-						href="news/news/1">查看更多</a>
+						href="news">查看更多</a>
 				</div>
 			</div>
 		</i-col>
@@ -36,6 +37,7 @@
 <script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
 <script src="public/js/frontend/lib/vue.min.js"></script>
 <script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/lib/bootstrap.min.js"></script>
 <script src="public/js/frontend/lib/promise.js"></script>
 <script src="public/js/frontend/lib/aliyun-oss-sdk.min.js"></script>
 <script src="public/js/frontend/lib/swiper.js"></script>
