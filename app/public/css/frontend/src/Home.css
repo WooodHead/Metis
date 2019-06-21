@@ -1,53 +1,43 @@
-
-/*
- 	澶ц禌鐩爣鐨勪竴涓猟iv
- */
-.zyList{
-    font-size: 0px;
-    padding: 50px 20px 20px 20px;
+.DongTai {
+    color: #5c5c5c;
+    font-size: 32px;
+    padding: 20px 0;
 }
-.zyList .zyItem{
-    width: 31%;
-    margin: 1.1%;
+.newsList{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
 }
-.zyList .zyItem .zyThumb{
-	    width: 90%;
-    margin: 0 auto;
-}
-.zyList .zyItem .zyTitle{
-    margin: 10px 20px;
-    font-size: 18px;
+.newsList .title{
+    width: 100%;
     color: #6d6d6d;
+    font-size: 16px;
+    margin: 10px auto;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
-.zyList .zyItem .zyDate{
-	    margin-left: 20px;
-    color: #6d6d6d;
-    font-size: 14px;
-}
-#JMList {
-	font-size: 0px;
-	padding: 50px;
+.moreBtn{
+    margin: 10px auto;
 }
 
-#JMList #JMItem {
-	width: 31%;
-	margin: 1.1%;
-}
+@media screen and (min-width: 992px) and (max-width: 1200px){
 
-#JMTCenter{
-    text-align: center!important;
 }
-#JMBtn{
-	     width: 130px;
-    height: 40px;
-    line-height: 40px;
-    display: inline-block;
-    background: #47a8a9;
-    font-size: 18px;
-    text-align: center;
-    color: #fff;
-    border: none;
+@media screen and (min-width: 768px) and (max-width: 992px){
+    .DongTai {
+        color: #5c5c5c;
+        font-size: 24px;
+        padding: 20px 0;
+    }
+}
+@media screen and (max-width: 768px){
+    .DongTai {
+        color: #5c5c5c;
+        font-size: 20px;
+        padding: 15px 0;
+    }
 }

@@ -38,7 +38,7 @@ var config = {
         table:12	//请求12条数据	10
     },
     cssHeight:{
-    	headHeight:160,
+    	headHeight:250,
     	footHeight:80
     },
     ajaxUrls: {

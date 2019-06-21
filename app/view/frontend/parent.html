@@ -19,12 +19,12 @@
     <div class="JMHeader">
         <div class="col-md-8 col-md-offset-2 col-sm-12 top">
             <div class="JMLogo">
-                <a href=""><img alt="" src="public/images/Logo.png"></a>
+                <a href="/"><img alt="" src="public/images/Logo.png"></a>
             </div>
             <div class="countDownBox">
                 <div class="JMNoticeBoard">
                     <div class="JMNoticeBoardLeft">
-                        <a href="login">点击参赛</a>
+                        <a href="/login">点击参赛</a>
                     </div>
                     <div class="JMNoticeBoardRight">
                         <span id="countDown" class="countDown"></span>
@@ -48,11 +48,17 @@
                 </ul>
                 <ul class="JMUserMenu">
                     {% if user %}
-                        <p v-text="{{user.roles[0].rolename}}"></p>
-                        <li class="JMItem"><a href="/works" class="realname">[ {{user.realname}} ]</a></li>
+                        <li class="JMItem">
+                            {% if user.roles[0].rolename == 'judge' %}
+                                <a href="/judge" class="realname">[ {{user.realname}} ]</a>
+                            {% else %}
+                                <a href="/works" class="realname">[ {{user.realname}} ]</a>
+                            {% endif %}
+                        </li>
                         <li class="JMItem"><a class="JMLink" href="/logout">退出</a></li>
                     {% else %}
-                        <li class="JMItem"><a class="JMLink JMIconUser" href="/login"> </a></li>
+                        <span></span>
+                        <li class="JMItem"><a class="JMLink" href="/login">登录/注册</a></li>
                     {% endif %}
                 </ul>
             </div>

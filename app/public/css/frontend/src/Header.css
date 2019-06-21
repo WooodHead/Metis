@@ -95,10 +95,6 @@ img{
     font-weight: bold;
 	color: #515151;
 }
-.JMHeader .JMNoticeBoard .JMNoticeBoardRight .title {
-    font-weight: bold;
-	color: #515151;
-}
 .langBox a{
     display: inline-block;
     text-align: center;
@@ -164,6 +160,7 @@ img{
 	color: #47a8a9;
 }
 .JMUserMenu {
+    min-width: 100px;
 	display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -220,7 +217,7 @@ img{
         justify-content: space-between;
     }
     .JMHeader .JMLogo img{
-        height: 90px;
+        height: 80px;
     }
     .JMHeader .countDownBox{
         height: 90px;
@@ -239,6 +236,9 @@ img{
     }
     .JMHeader .JMNoticeBoard .JMNoticeBoardRight .countDown{
         font-size: 22px;
+    }
+    .JMHeader .JMNoticeBoard .JMNoticeBoardRight .title{
+        font-size: 10px;
     }
     .JMMenu .JMItem {
         width: 60px;
