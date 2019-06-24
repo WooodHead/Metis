@@ -33,7 +33,7 @@
    font-size: 16px;
    color: #929292;
 }
-@media screen and (min-width: 970px) and (max-width: 1170px){
+@media screen and (min-width: 992px) and (max-width: 1200px){
    .judgeDetail .header{
        width: 600px;
    }
@@ -41,12 +41,12 @@
        width: 600px;
    }
 }
-@media screen and (min-width: 750px) and (max-width: 970px){
+@media screen and (min-width: 768px) and (max-width: 992px){
    .judgeDetail .header{
-       width: 400px;
+       width: 95%;
    }
    .judgeDetail .content{
-       width: 400px;
+       width: 95%;
        height: 120px;
    }
    .judgeThumb{
@@ -54,7 +54,7 @@
        height: 120px;
    }
 }
-@media screen and (max-width: 750px){
+@media screen and (max-width: 768px){
    .judgeDetail .header{
        width: 95%;
    }
