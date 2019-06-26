@@ -65,7 +65,7 @@ var register = new Vue({
                     type:"get",
                     url:url,
                     success:function(res){
-                        if(res.success){
+                        if(res.status == 200){
                     		that.$Loading.finish();
                         	that.$Notice.success({title:res.data, duration:3});
                         	clock(that);
