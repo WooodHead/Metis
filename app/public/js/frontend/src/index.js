@@ -38,18 +38,19 @@ var index = new Vue({
 		}
 	},
 	methods:{
-		tapMore(){
+		tapMore:function(){
 			window.location.href = "news";
 		}
 	},
 	created:function(){
 		var that = this;
+		isChorme(this);
 		$.ajax({
             dataType:'json',
             type:"get",
             data:this.aoData,
             url:config.ajaxUrls.manageNews,
-            success(res) {
+            success:function(res) {
                 if(res.status == 200){
         	  		that.dataList = res.data.rows;
                 	that.total = res.data.count;
@@ -60,3 +61,8 @@ var index = new Vue({
         });
 	}
 })
+function isChorme(that){
+	if(navigator.userAgent.toLowerCase().indexOf("chrome") == -1 && navigator.userAgent.toLowerCase().indexOf("firefox") == -1){
+		that.$Message.error({content:"为了有更好的使用体验，推荐使用谷歌或者火狐浏览器！",closable:true,duration:0});
+	}
+}
