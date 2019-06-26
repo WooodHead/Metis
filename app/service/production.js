@@ -30,7 +30,7 @@ class ProductionService extends Service {
   }
 
   async listProductionByUserId({offset = 0, limit = 10, userId = 0}){
-    let resultObj =  await this.ctx.model.Production.listProduction({offset, limit, userId});
+    let resultObj =  await this.ctx.model.Production.listProductionByUserId({offset, limit, userId});
     const helper = this.ctx.helper;
     resultObj.rows.forEach((element, index)=>{
       let pImageArray = element.pImage.split(',');
