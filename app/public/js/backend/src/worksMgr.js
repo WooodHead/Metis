@@ -17,7 +17,7 @@ var vm = new Vue({
 			statusModel:"",
 			totalPage:0,
 			GroupList:[{value:"0",label:"全部"},{value:"1",label:"概念设计组"},{value:"2",label:"产品创新组"}],
-			SubGroupList:[{value:"0",label:"全部"},{value:"1",label:"精准农业类 "},{value:"2",label:"非遗文创类"},{value:"3",label:"文旅融合类"},{value:"4",label:"大地未来类"}],
+			SubGroupList:[{value:"0",label:"全部"},{value:"1",label:"精准农业类 "},{value:"2",label:"非遗文创类"},{value:"3",label:"文旅融合类"},{value:"4",label:"生态科技类"}],
 			JudgeRoundList: [{value: '0',label: '全部'}],				//顶部轮次筛选
 			StatusList: [												//顶部状态筛选
                 {value: '0',label: '全部'},{value: '1',label: '已提交'},{value: '2',label: '审核未通过'},{value: '3', label: '审核已通过'},{value: '4',label: '初选入围'},
