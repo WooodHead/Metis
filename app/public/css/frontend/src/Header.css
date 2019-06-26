@@ -169,6 +169,7 @@ img{
 .JMUserMenu .realname{
     color: #6d6d6d;
     font-size: 14px;
+    margin-right: 15px;
 }
 .JMUserMenu .JMItem .JMLink {
 	cursor: pointer;
@@ -252,5 +253,6 @@ img{
         overflow: hidden;
         text-overflow: ellipsis;
         display: block;
+        margin-right: 0px;
     }
 }

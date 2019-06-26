@@ -148,8 +148,8 @@ var forgetPwd = new Vue({
 		            if(response.status == 200){
 		    			that.$Loading.finish();
 		            	that.$Notice.success({title:response.data});
-						this.formItem.email = '';
-						this.formItem.captchaText = '';
+						that.formItem.email = '';
+						that.formItem.captchaText = '';
 		            }else{
 		    			that.$Loading.error();
 		            	that.$Notice.success({title:response.data});
@@ -199,13 +199,14 @@ var forgetPwd = new Vue({
 		        	smsCode:this.formItem.mobileCode,
 		        },
 		        success:function(res){
-		            if(res.success){
+					console.log(res);
+		            if(res.status == 200){
 		    			that.$Loading.finish();
 		            	that.$Notice.success({title:res.data});
-						this.formItem.mobile = '';
-						this.formItem.password = '';
-						this.formItem.confirmPassword = '';
-						this.formItem.mobileCode = '';
+						that.formItem.mobile = '';
+						that.formItem.password = '';
+						that.formItem.confirmPassword = '';
+						that.formItem.mobileCode = '';
 		            }else{
 		    			that.$Loading.error();
 		            	that.$Notice.error({title:res.data});

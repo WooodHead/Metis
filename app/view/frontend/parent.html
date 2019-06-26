@@ -34,7 +34,11 @@
             <div class="countDownBox">
                 <div class="JMNoticeBoard">
                     <div class="JMNoticeBoardLeft">
-                        <a href="/login">点击参赛</a>
+                        {% if user %}
+                            <a href="/works">点击参赛</a>
+                        {% else %}
+                            <a href="/login">点击参赛</a>
+                        {% endif %}
                     </div>
                     <div class="JMNoticeBoardRight">
                         <span id="countDown" class="countDown"></span>
@@ -57,6 +61,7 @@
                     <li class="JMItem"><a class="JMLink" href="/judges" data-page-name="judges">评委</a></li>
                 </ul>
                 <ul class="JMUserMenu">
+                    <p v-text="{{user.fullname}}"></p>
                     {% if user %}
                         <li class="JMItem">
                             {% if user.roles[0].rolename == 'judge' %}

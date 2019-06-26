@@ -5,7 +5,10 @@
 	margin:20px;
 }
 .uploadRuleTitle{
+    font-size: 20px;
+    font-weight: bold;
 	text-align: center;
+    margin:0px;
 }
 .uploadRule_1{
 	width:100%;
@@ -42,4 +45,12 @@
 
 .preview{
 	text-align:center;
+}
+.uploadWork .title{
+    font-size: 22px;
+    font-weight: bold;
+}
+.uploadWork .avator{
+    font-size: 20px;
+    font-weight: bold;
 }

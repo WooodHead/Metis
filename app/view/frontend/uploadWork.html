@@ -2,6 +2,7 @@
 
 {% block cssfolder %}
 <link href="../public/css/frontend/lib/iview.css" type="text/css" rel="stylesheet">
+<link href="../public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
 <link href="../public/css/frontend/src/pageMenu.css" type="text/css" rel="stylesheet">
 <link href="../public/css/frontend/src/uploadWork.css" type="text/css" rel="stylesheet">
@@ -124,17 +125,17 @@
 								</radio-group>
 							</form-item>
 							<form-item label="图幅一" prop="fileName_1">
-								<img v-show="imgUrl_1.length" :src="imgUrl_1" style="width:120px;height:120px;"><br>
+								<img v-show="imgUrl_1.length" :src="imgUrl_1" style="width:120px;height:120px;margin-bottom:10px;">
 								<input type="file" @change="doUpload_1" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_1" /><span v-text="progressPercent_1 + '%'"></span>
 							</form-item>
 							<form-item label="图幅二">
-								<img v-show="imgUrl_2.length" :src="imgUrl_2" style="width:120px;height:120px;"><br>
+								<img v-show="imgUrl_2.length" :src="imgUrl_2" style="width:120px;height:120px;margin-bottom:10px;">
 								<input type="file" @change="doUpload_2" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_2" /><span v-text="progressPercent_2 + '%'"></span>
 							</form-item>
 							<form-item label="图幅三">
-								<img v-show="imgUrl_3.length" :src="imgUrl_3" style="width:120px;height:120px;"><br>
+								<img v-show="imgUrl_3.length" :src="imgUrl_3" style="width:120px;height:120px;margin-bottom:10px;">
 								<input type="file" @change="doUpload_3" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_3" /><span v-text="progressPercent_3 + '%'"></span>
 							</form-item>
@@ -160,8 +161,8 @@
 	<div v-show="step === '3'" style="padding-bottom: 20px;">
 		<row type="flex" justify="center" align="top">
 			<i-col class="preview" span="20">
-				<h1 v-html="'标题：' + formItem.title"></h1>
-				<h2 v-html="'作者：' + formItem.participant_name"></h2>
+				<h1 class="title" v-html="'标题：' + formItem.title"></h1>
+				<h2 class="avator" v-html="'作者：' + formItem.participant_name"></h2>
 				<p v-html="'简介：' + formItem.content"></p>
 				<img v-show="imgUrl_1" :src="imgUrl_1" style="width:60%;height:auto;margin:5px auto;"><br>
 				<img v-show="imgUrl_2" :src="imgUrl_2" style="width:60%;height:auto;margin:5px auto;"><br>
@@ -176,10 +177,11 @@
 
 {% block jsfolder %}
 <script src="../public/js/frontend/lib/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="../public/js/frontend/lib/vue.min.js"></script>
-<script type="text/javascript" src="../public/js/frontend/lib/iview.min.js"></script>
+<script src="../public/js/frontend/lib/vue.min.js"></script>
+<script src="../public/js/frontend/lib/iview.min.js"></script>
+<script src="../public/js/frontend/lib/bootstrap.min.js"></script>
 <script src="../public/js/frontend/lib/promise.js"></script>
-<script type="text/javascript" src="../public/js/frontend/lib/aliyun-oss-sdk.min.js"></script>
+<script src="../public/js/frontend/lib/aliyun-oss-sdk.min.js"></script>
 <script src="../public/js/frontend/lib/plupload.full.min.js"></script>
 <script src="../public/js/frontend/lib/plupLoad.js"></script>
 <script src="../public/js/frontend/lib/juicer-min.js"></script>
