@@ -134,7 +134,7 @@ class UsersController extends BaseController{
       super.success(this.ctx.__('verificationSuccess'));
     }
     else{
-      super.success(this.ctx.__('verificationError'));
+      super.failure(this.ctx.__('verificationError'));
     }
   }
 
