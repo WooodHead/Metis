@@ -2,6 +2,7 @@
 
 {% block cssfolder %}
 <link href="public/css/frontend/lib/iview.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="public/css/frontend/lib/animation.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/lib/swiper.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
@@ -36,8 +37,8 @@
 					<img :src="item.production.pImage" :id="item.production.Id" v-on:click="openDetail(item.production.Id,item.Id)" style="cursor: pointer;">
 					<p class="cd-trigger" v-text="item.production.title"></p>
 				</li>
-				<img v-if="unrated" style="width:180px;height:155px;margin: 0 auto;" src="public/frontend/images/12.jpg">
-				<p v-if="unrated" style="margin: 10px auto;text-align: center;color:#868686;font-size:18pt;">您还没有评分哟~~</p>
+				<img v-if="unrated" style="width:180px;height:155px;margin: 40px auto;" src="public/images/12.jpg">
+				<p v-if="unrated" style="margin: 10px auto;text-align: center;color:#868686;font-size:18pt;" v-text="'您没有要评分作品哟~~'"></p>
 			</ul>
 			<div style="text-align: center; margin-bottom: 30px;">
 				<page :total="total" :page-size="pageSize" show-total @on-change="loadData"></page>
@@ -92,6 +93,7 @@
 <script src="public/js/frontend/lib/vue.min.js"></script>
 <script src="public/js/frontend/lib/swiper.js"></script>
 <script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/lib/bootstrap.min.js"></script>
 <script src="public/js/frontend/lib/promise.js"></script>
 <script src="public/js/frontend/lib/aliyun-oss-sdk.min.js"></script>
 <script src="public/js/frontend/src/header.js"></script>

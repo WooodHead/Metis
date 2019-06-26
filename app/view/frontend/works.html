@@ -2,6 +2,7 @@
 
 {% block cssfolder %}
 <link href="public/css/frontend/lib/iview.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/src/pageMenu.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/src/works.css" type="text/css" rel="stylesheet">
@@ -19,7 +20,7 @@
 <div class="works" :style="workStyle" v-cloak>
 	<modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
 		<p style="color:#ed3f14;text-align:center">
-			<Icon type="information-circled"></Icon>
+			<icon type="ios-information-circle"></icon>
 			<span style="font-size: 15px;">确定删除作品:{{productTitle}}？</span>
 		</p>
 	</modal>
@@ -32,6 +33,7 @@
 	<script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
 	<script src="public/js/frontend/lib/vue.min.js"></script>
 	<script src="public/js/frontend/lib/iview.min.js"></script>
+	<script src="public/js/frontend/lib/bootstrap.min.js"></script>
 	<script src="public/js/frontend/src/config.js"></script>
 	<script src="public/js/frontend/src/works.js"></script>
 	<script src="public/js/frontend/src/header.js"></script>

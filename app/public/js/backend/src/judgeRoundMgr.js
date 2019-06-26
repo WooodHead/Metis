@@ -7,6 +7,7 @@ var vm = new Vue({
             deleteModal: false,
             roundTitle: "",
             columns: [ //table列选项
+                { title: 'ID', key: 'Id', align: 'center' },
                 { title: '名称', key: 'roundName', align: 'center' },
                 { title: '评委', key: 'judge', align: 'center',
                     render: (h, params) => {
@@ -77,6 +78,7 @@ var vm = new Vue({
             let chooseJudgeIdArray = [];
             let addJudgesArr = [];
             let delJudgesArr = [];
+            this.$Loading.start();
             if(this.oldThisRoundJudgeIdArray[0] != ""){   // 有
                 for(let i = 0;i < this.chooseJudgeNameArray.length; i++){
                     for(let j = 0;j < this.judgeList.length; j++){
@@ -106,7 +108,13 @@ var vm = new Vue({
                     success: function(response) {
                         if (response.status == 200) {
                             that.$Loading.finish();
-                            that.$Notice.success({ title: response.data });
+                            that.$Notice.success({
+                                title: response.data,
+                                duration:1,
+                                onClose(){
+                                    location.reload();
+                                }
+                            });
                         } else {
                             that.$Notice.error({ title: response.data });
                         }
@@ -129,7 +137,13 @@ var vm = new Vue({
                     success: function(response) {
                         if (response.status == 200) {
                             that.$Loading.finish();
-                            that.$Notice.success({ title: response.data });
+                            that.$Notice.success({
+                                title: response.data,
+                                duration:1,
+                                onClose(){
+                                    location.reload();
+                                }
+                            });
                             chooseJudgeIdArray = [];
                         } else {
                             chooseJudgeIdArray = [];
@@ -172,10 +186,13 @@ var vm = new Vue({
                 url: config.ajaxUrls.judgeRoundRemove.replace(":id", id),
                 success: function(response) {
                     if (response.status == 200)  {
-                        that.$Notice.success({title: response.data});
-
-
-
+                        that.$Notice.success({
+                            title: response.data,
+                            duration:1,
+                            onClose(){
+                                location.reload();
+                            }
+                        });
                     }else{
                         that.$Notice.error({ title: response.data });
                     }

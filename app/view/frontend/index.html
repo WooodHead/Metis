@@ -2,34 +2,32 @@
 
 {% block cssfolder %}
 <link href="public/css/frontend/lib/iview.css" rel="stylesheet" type="text/css">
+<link href="public/css/frontend/lib/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="public/css/frontend/lib/swiper.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
-<link href="public/css/frontend/scr/Home.css" type="text/css" rel="stylesheet">
+<link href="public/css/frontend/src/Home.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block container %}
-<div class="index">
-	<row type="flex" justify="center"> <i-col span="18"> <img
-		src="resources/frontend/images/app/topShow.jpg"
-		style="margin-top: 160px;"> <img
-		src="resources/frontend/images/app/schedule_later.jpg">
-	<div style="width: 100%; background-color: #f7f7f7">
-		<section
-			style="color: #5c5c5c; font-size: 32pt; padding-top: 35px; margin-left: 50px">NEWS | 新闻动态</section>
-		<ul class="zyList">
-			<li class="zyItem" v-for="item in dataList"><a class="zyLink"
-				:href="'news/newsDetail/' + item.id" target="_blank"> <img
-					class="zyThumb" :src="item.thumb">
-					<h3 class="zyTitle">{{item.title}}</h3> <span class="zyDate">{{item.publishTime}}</span>
-			</a></li>
-		</ul>
-
-		<div id="JMTCenter">
-			<a id="JMBtn" style="margin-top: 86px; margin-bottom: 48px;"
-				href="news/news/1">查看更多</a>
-		</div>
-	</div>
-	</i-col> </row>
+<div class="col-md-8 col-md-offset-2 col-sm-12 home">
+	<row type="flex" justify="center">
+		<i-col span="24">
+			<div style="width: 100%; background-color: #f7f7f7">
+				<section class="DongTai">NEWS | 新闻动态</section>
+				<ul class="newsList">
+					<li class="newsItem" v-for="item in dataList"><a class="zyLink"
+						:href="'newsDetail/' + item.Id" target="_blank">
+							<img class="zyThumb" :src="item.thumb">
+							<h3 class="title" v-text="item.title"></h3>
+							<span class="zyDate" v-text="item.publishTime"></span>
+					</a></li>
+				</ul>
+				<div style="width：100%;text-align:center;margin: 20px auto;">
+					<i-button type="default" class="moreBtn" @click="tapMore">查看更多</i-button>
+				</div>
+			</div>
+		</i-col>
+ 	</row>
 </div>
 {% endblock %}
 
@@ -37,6 +35,7 @@
 <script src="public/js/frontend/lib/jquery-1.10.2.min.js"></script>
 <script src="public/js/frontend/lib/vue.min.js"></script>
 <script src="public/js/frontend/lib/iview.min.js"></script>
+<script src="public/js/frontend/lib/bootstrap.min.js"></script>
 <script src="public/js/frontend/lib/promise.js"></script>
 <script src="public/js/frontend/lib/aliyun-oss-sdk.min.js"></script>
 <script src="public/js/frontend/lib/swiper.js"></script>

@@ -8,27 +8,27 @@
 {% endblock %}
 
 {% block container %}
-<div id="news" class="col-md-8 col-md-offset-2 news" :style="newsStyle">
-        <div class="row">
-			<div class="header">
-		        新闻
-		    </div>
-			<ul class="JMNewsListUl">
-				<li class="JMNews col-md-8 col-xs-12" v-for="item in dataList">
-						<div class="col-md-4 col-xs-5">
-    						<img :src="item.thumb" />
-						</div>
-						<div class="col-md-4 col-xs-7">
-    						<span class="JMNewsText_date" v-text="item.createAt"></span>
-    						<p class="JMNewsText_title" v-text="item.title"></p>
-    						<p class="JMNewsText_content" v-text="item.news_abstract"></p>
-							<a class="btn btn-default" :href="'newsDetail/'+item.Id" role="button">more</a>
-						</div>
+<div id="news" class="col-md-8 col-md-offset-2 col-sm-12 news" :style="newsStyle">
+    <div class="row">
+		<div class="header">
+	        新闻
+	    </div>
+		<ul class="JMNewsListUl">
+			<li class="JMNews" v-for="item in dataList">
+					<div class="newThumb">
+						<img :src="item.thumb" />
+					</div>
+					<div class="newInfo">
+                        <h5 class="title" v-text="item.title"></h5>
+						<span class="createAt" v-text="item.createAt"></span>
+						<p class="content" v-text="item.news_abstract"></p>
+						<a class="moreBtn btn btn-default"  style="width:100px;" :href="'newsDetail/'+item.Id" role="button">more</a>
+					</div>
 
-					<hr>
-				</li>
-			</ul>
-        </div>
+				<hr>
+			</li>
+		</ul>
+    </div>
 </div>
 {% endblock %}
 

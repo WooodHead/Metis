@@ -37,6 +37,11 @@ var index = new Vue({
 			dataList:[]
 		}
 	},
+	methods:{
+		tapMore(){
+			window.location.href = "news";
+		}
+	},
 	created:function(){
 		var that = this;
 		$.ajax({

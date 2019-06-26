@@ -8,20 +8,20 @@
 {% endblock %}
 
 {% block container %}
-<div id="judge" class="col-md-8 col-md-offset-2 JMJudge" :style="judgeStyle">
+<div id="judge" class="col-md-8 col-md-offset-2 col-sm-12 judges" :style="judgeStyle">
 	<div class="row">
 		<div class="header">
 			评委
 		</div>
 		<ul class="JMJudgesListUl">
-			<li class="JMItem col-md-8 col-xs-12" v-for="item in dataList">
-				<div class="col-md-4 col-xs-5">
+			<li class="JMJudges" v-for="item in dataList">
+				<div class="judgeThumb">
 					<img class="JMThumb" :src="item.headicon">
 				</div>
-				<div class="col-md-4 col-xs-7">
-					<h3 class="JMTitle" v-text="item.name"></h3>
-					<div class="JMExcerpt" v-text="item.description"></div>
-					<a class="btn btn-default" :href="'judgeDetail/' + item.Id" role="button">more</a>
+				<div class="judgeInfo">
+					<h3 class="name" v-text="item.name"></h3>
+					<div class="description" v-text="item.description"></div>
+					<a class="moreBtn btn btn-default" :href="'judgeDetail/' + item.Id" role="button">more</a>
 				</div>
 			</li>
 		</ul>

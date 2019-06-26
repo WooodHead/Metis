@@ -244,17 +244,13 @@ table.dataTable .thumb{
     margin-left: 100px;
 }
 .menu .item .link{
+    width: 100%;
     font-size: 16px;
     color: #727171;
     border-left: 1px solid #edece3;
     display: inline-block;
-    position: absolute;
-    left:34px;
-    top:0px;
-    bottom: 0px;
-    right:0px;
     height: 100%;
-    padding-left: 5px;
+    padding-left: 20px;
 }
 .menu .item:hover,.menu .item.active{
     background: #ffffff;

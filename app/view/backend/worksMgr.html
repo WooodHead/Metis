@@ -9,14 +9,14 @@
 <div class="right">
 	<div class="worksMgr">
 		<i-col span="24">作品管理</i-col>
-		<div style="display:inline-block;margin-left:60px;">
+		<!-- <div style="display:inline-block;margin-left:60px;">
 			<label>组别：</label>
 			<i-select v-model="groupModel" style="width:200px" @on-change="groupCheck">
 				<i-option v-for="Groupitem in GroupList" :value="Groupitem.value" :key="Groupitem.value" :label="Groupitem.label"></i-option>
 			</i-select>
-		</div>
+		</div> -->
 		<div style="display:inline-block;margin-left:60px;">
-			<label>作品类型：</label>
+			<label>作品类别：</label>
 			<i-select v-model="subGroupModel" style="width:200px" @on-change="subGroupCheck">
 				<i-option v-for="SubGroupitem in SubGroupList" :value="SubGroupitem.value" :key="SubGroupitem.value" :label="SubGroupitem.label"></i-option>
 			</i-select>

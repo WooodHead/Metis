@@ -11,9 +11,9 @@
 	<div class="newsMgr">
 		<i-col span="24">新闻</i-col>
 		<modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
-			<p style="color:#ed3f14;text-align:center">
-				<Icon type="information-circled"></Icon>
-				<span style="font-size: 15px;">确定删除新闻:{{newsTitle}}?</span>
+			<p style="color:#ed3f14;display: flex;flex-direction: row;justify-content: center;">
+				<icon type="ios-information-circle" size="24"></icon>
+				<span style="font-size: 15px;" v-text="'确定删除新闻:' + newsTitle + '?'"></span>
 			</p>
 		</modal>
 		<a class="btn btn-primary" href="newsCOU/0"> <span class="glyphicon glyphicon-plus"></span>新建</a>

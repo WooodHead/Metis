@@ -4,12 +4,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="keywords" content="乡村, 振兴, 设计, 创新, 大赛">
     <title>首届中国（怀化）乡村振兴设计创新大赛</title>
 
     <!-- css文件引用 -->
     {% block cssfolder %}
 
     {% endblock %}
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ba7f85f76cadc2c38cc84c798507b57c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 
 </head>
 
@@ -17,39 +27,52 @@
     <!-- 头部 -->
     {% block header %}
     <div class="JMHeader">
-        <div class="JMLogo">
-            <a href=""><img alt="" src="public/images/Logo.png"></a>
-        </div>
-        <div class="JMNoticeBoard">
-            <div class="JMNoticeBoardLeft">
-                <a href="login">点击参赛</a>
+        <div class="col-md-8 col-md-offset-2 col-sm-12 top">
+            <div class="JMLogo">
+                <a href="/"><img alt="" src="/public/images/Logo.png"></a>
             </div>
-            <div class="JMNoticeBoardRight">
-                <div class="JMItem">
-                    <span id="countDown" class="countDown"></span>征稿剩余天数
+            <div class="countDownBox">
+                <div class="JMNoticeBoard">
+                    <div class="JMNoticeBoardLeft">
+                        <a href="/login">点击参赛</a>
+                    </div>
+                    <div class="JMNoticeBoardRight">
+                        <span id="countDown" class="countDown"></span>
+                        <span class="title">征稿剩余天数</span>
+                    </div>
+                </div>
+                <div class="langBox">
+                    <!-- <a href="{{pageContext.request.contextPath}}index?locale=zh" class="lang_zh">中文</a>
+                    <a href="{{pageContext.request.contextPath}}index?locale=en" class="lang_en">English</a> -->
                 </div>
             </div>
         </div>
+
         <div class="JMTopNav">
-            <ul class="JMMenu">
-                <li class="JMItem"><a class="JMLink" href="/judges" data-page-name="judges">评委</a></li>
-                <li class="JMItem"><a class="JMLink" href="/rule" data-page-name="rule">章程</a></li>
-                <li class="JMItem"><a class="JMLink" href="/news" data-page-name="news">新闻</a></li>
-                <li class="JMItem"><a class="JMLink" href="/index" data-page-name="index">首页</a></li>
-            </ul>
-            <!-- <div>
-                <a href="${pageContext.request.contextPath}/index?locale=zh" data-page-name="zh">中文</a>
-                <a href="${pageContext.request.contextPath}/index?locale=en" data-page-name="en">英文</a>
-            </div> -->
-            <ul class="JMUserMenu">
-                {% if user %}
-                    <li class="JMItem"><a href="/works" class="JMLink JM20C7BE">[ {{user.realname}} ]</a></li>
-                    <li class="JMItem"><a class="JMLink" href="/logout">退出</a></li>
-                {% else %}
-                    <li style="position: absolute;top: 15px;border-left: solid 2px #6d6d6d;height: 23px;"></li>
-                    <li class="JMItem" style="width: 33px;margin-left: 33px;margin-right: 30px;"><a class="JMLink JMIconUser" href="/login"> </a></li>
-                {% endif %}
-            </ul>
+            <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 navItemBox">
+                <ul class="JMMenu">
+                    <li class="JMItem"><a class="JMLink" href="/index" data-page-name="index">首页</a></li>
+                    <li class="JMItem"><a class="JMLink" href="/news" data-page-name="news">新闻</a></li>
+                    <li class="JMItem"><a class="JMLink" href="/rule" data-page-name="rule">章程</a></li>
+                    <li class="JMItem"><a class="JMLink" href="/judges" data-page-name="judges">评委</a></li>
+                </ul>
+                <ul class="JMUserMenu">
+                    {% if user %}
+                        <li class="JMItem">
+                            {% if user.roles[0].rolename == 'judge' %}
+                                <a href="/judge" class="realname">[ {{user.realname}} ]</a>
+                            {% else %}
+                                <a href="/works" class="realname">[ {{user.realname}} ]</a>
+                            {% endif %}
+                        </li>
+                        <li class="JMItem"><a class="JMLink" href="/logout">退出</a></li>
+                    {% else %}
+                        <span></span>
+                        <li class="JMItem"><a class="JMLink" href="/login">登录/注册</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
         </div>
     </div>
     {% endblock %}
@@ -70,7 +93,7 @@
     {% block footer %}
     <div class="JMFooter">
     	<div class="JMFooter">
-    		<span style="margin-top: 20px;display: inline-block;">	&copy;湖南省康复辅具技术指导中心</span><br>
+    		<span style="margin-top: 20px;display: inline-block;">	&copy;中意（怀化）设计创新中心</span><br>
     		<span style="margin-top: 6px;display: inline-block;">网站版权所有 2018 湘ICP备14018746号-1</span>
     	</div>
     </div>

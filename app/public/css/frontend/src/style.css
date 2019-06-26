@@ -114,7 +114,7 @@ header h1 {
 }
 @media only screen and (min-width: 1024px) {
   .cd-items {
-    padding: 4em 0 0;
+    padding: 40px 0 0;
   }
 }
 

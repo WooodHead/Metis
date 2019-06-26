@@ -38,7 +38,7 @@ var config = {
         table:12	//请求12条数据	10
     },
     cssHeight:{
-    	headHeight:160,
+    	headHeight:250,
     	footHeight:80
     },
     ajaxUrls: {
@@ -163,6 +163,7 @@ function getBrowserInfo(){
         }
     }
 }
+var lang = document.cookie.split("=")[1];
 $(document).ready(function () {
 
 	getBrowserInfo();
@@ -198,6 +199,15 @@ $(document).ready(function () {
 		$(".JMIconUser").parent().css("background","white");
     	$(".JMIconUser").css("background-image","url(../../../../public/images/iconUser.png)");
     })
+
+    // 判断中英文切换按键状态
+    // if(lang == "zh-cn"){
+    //     $(".lang_zh").addClass('active');
+    //     $(".lang_en").removeClass('active');
+    // }else if(lang == "en-us"){
+    //     $(".lang_en").addClass('active');
+    //     $(".lang_zh").removeClass('active');
+    // }
 
     //zySelect控件
     $(document).click(function (e) {
