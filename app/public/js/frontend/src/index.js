@@ -11,24 +11,25 @@ var STS = OSS.STS;
 
 var pageName = "index";
 
-var mySwiper = new Swiper('.swiper-container', {
-	loop: true,
-	autoplay: {
-		delay:5000
-	},//可选选项，自动滑动
-	pagination: {
-        el: '.swiper-pagination'
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-})
+// var mySwiper = new Swiper('.swiper-container', {
+// 	loop: true,
+// 	autoplay: {
+// 		delay:5000
+// 	},//可选选项，自动滑动
+// 	pagination: {
+//         el: '.swiper-pagination'
+//     },
+//     navigation: {
+//         nextEl: '.swiper-button-next',
+//         prevEl: '.swiper-button-prev',
+//     },
+// })
 
 var index = new Vue({
 	el:".index",
 	data:function(){
 		return{
+			carouselModel:0,
 			aoData:{
 				limit:3,
 				offset:0,

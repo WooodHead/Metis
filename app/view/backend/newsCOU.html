@@ -20,7 +20,7 @@
 				</form-item>
 				<form-item label="封面图*">
 					<p>宽高比为1的png或jpg格式图片</p>
-					<img v-show="imgUrl.length" :src="imgUrl" style="width:120px;height:120px;"><br>
+					<img v-show="imgUrl.length" :src="imgUrl" style="width:120px;height:120px;margin-bottom:10px;"><br>
 					<input type="file" @change="doUpload" ref="inputFile" accept="image/*" />
 					<i-progress :percent="progressPercent" /><span v-text="progressPercent + '%'"></span>
 				</form-item>
@@ -30,8 +30,8 @@
 				<form-item label="摘要*" prop="news_abstract">
 					<i-input v-model="dataSourse.news_abstract" placeholder="请输入摘要..." name="news_abstract">{{dataSourse.news_abstract}}</i-input>
 				</form-item>
-				<form-item label="内容*" prop="content">
-					<textarea v-model="dataSourse.content" name="content" id="content">{{dataSourse.content}}</textarea>
+				<form-item label="内容*">
+					<script id="content" name="content" type="text/plain">{{dataSourse.content}}</script>
 				</form-item>
 				<form-item>
 					<i-button type="primary" v-on:click="submit" long>确定</i-button>

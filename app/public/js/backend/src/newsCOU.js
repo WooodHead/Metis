@@ -46,7 +46,11 @@ var newsCOU = new Vue({
             	  		that.progressPercent = 100;
                     	that.dataSourse.title = response.data.title;
                     	that.dataSourse.news_abstract = response.data.news_abstract;
-                    	that.dataSourse.content = response.data.content;
+                    	console.log(response.data.content);
+						ue.ready(function() {
+						    //异步回调
+	                    	ue.execCommand('insertHtml', response.data.content);
+						});
 						that.dataSourse.language = response.data.language.toString();
                     	that.submitUrl = config.ajaxUrls.newsUpdate.replace(":id",that.dataSourse.id);
                     }else{
