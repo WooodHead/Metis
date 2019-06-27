@@ -151,6 +151,16 @@ module.exports = app => {
     });
   }
 
+  User.findByUserWithEmailOrMobile = async function (email, mobile){
+    return await this.findOne({
+      where:{
+        [app.Sequelize.Op.or]: [{email: email}, {mobile: mobile}]
+      },
+
+      attributes:['Id','email','realname','mobile','password']
+    });
+  }
+
   User.updateUserActiveCodeByEmail = async function(email, activeCode){
     return await this.update({
       activecode:activeCode

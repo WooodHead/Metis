@@ -28,7 +28,7 @@ class User extends Service {
     if (user.email == '' || user.email == null) {
       throw new Error(ctx.__('noEmail'));
     } else {
-      const userObj = await this.ctx.model.User.findUserByEmail(user.email);
+      const userObj = await this.ctx.model.User.findByUserWithEmailOrMobile(user.email,user.mobile);
       if (userObj){
         throw new Error(ctx.__('userExist'));
       }
