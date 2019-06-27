@@ -8,12 +8,12 @@
     border-bottom: solid 1px #CFCFCF;
 }
 .JMRuleDetail{
-	width: 750px;
-	margin: 40px auto;
+	/* width: 750px; */
+	margin: 20px auto;
 }
 .JMRuleDetail .JMTitle .JMNum{
     font-size: 45px;
-    color: #47a8a9;
+    color: #0096FF;
     vertical-align: top;
     line-height: 45px;
     margin-right: 20px;
@@ -21,7 +21,7 @@
 
 .JMRuleDetail .JMTitle .JMText{
     font-size: 24px;
-    color: #47a8a9;
+    color: #0096FF;
     position: relative;
 }
 .JMRuleDetail .JMContent{
@@ -39,8 +39,8 @@
     color:#656564;
 }
 .JMRuleDetail .JMContent .JMSubTitle{
-    border-left:2px solid #47a8a9;
-    color: #47a8a9;
+    border-left:2px solid #0096FF;
+    color: #0096FF;
     font-weight: bold;
     padding-left: 30px;
     font-size: 14px;
@@ -51,7 +51,7 @@
 }
 .JMRuleDetail hr{
     height: 2px;
-    background: #47a8a9;
+    background: #0096FF;
     border: 0px;
 }
 @media screen and (min-width: 992px) and (max-width: 1200px){
@@ -59,8 +59,8 @@
     	width: 600px;
     }
 	.JMRuleDetail{
-		width: 600px;
-		margin: 40px auto;
+		/* width: 600px; */
+		margin: 20px auto;
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 992px){

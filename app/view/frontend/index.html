@@ -12,30 +12,25 @@
 <div class="col-md-8 col-md-offset-2 col-sm-12 home">
 	<row type="flex" justify="center">
 		<i-col span="24">
-			<!-- <img src="/public/ueditor/dialogs/image/images/image.png"> -->
 			<icon type="ios-information-circle" size="40"></icon>
 			<Carousel class="carousel" v-model="carouselModel">
 		        <carousel-item>
 		            <div class="carouselItem">
-						<img src="/public/ueditor/dialogs/image/images/image.png" alt="">
+						<video class="video" src="/public/images/video.mp4" controls></video>
 					</div>
 		        </carousel-item>
 		        <carousel-item>
 					<div class="carouselItem">
-						<img src="/public/ueditor/dialogs/image/images/image.png" alt="">
+						<img src="/public/images/carousel_1.jpg">
 					</div>
 		        </carousel-item>
 		        <carousel-item>
 					<div class="carouselItem">
-						 <img src="/public/ueditor/dialogs/image/images/image.png" alt="">
-					</div>
-		        </carousel-item>
-		        <carousel-item>
-					<div class="carouselItem">
-						 <img src="/public/ueditor/dialogs/image/images/image.png" alt="">
+						 <img src="/public/images/carousel_2.jpg">
 					</div>
 		        </carousel-item>
 		    </Carousel>
+			<img class="timeLine" src="/public/images/timeLine.png" alt="">
 			<div style="width: 100%; background-color: #f7f7f7">
 				<section class="DongTai">NEWS | 新闻动态</section>
 				<ul class="newsList">
@@ -43,10 +38,10 @@
 						:href="'newsDetail/' + item.Id" target="_blank">
 							<img class="zyThumb" :src="item.thumb">
 							<h3 class="title" v-text="item.title"></h3>
-							<span class="zyDate" v-text="item.publishTime"></span>
+							<p class="createAt" v-text="item.createAt"></p>
 					</a></li>
 				</ul>
-				<div style="width：100%;text-align:center;margin: 20px auto;">
+				<div style="width：100%;text-align:center;margin: 20px auto 0px;">
 					<i-button type="default" class="moreBtn" @click="tapMore">查看更多</i-button>
 				</div>
 			</div>
