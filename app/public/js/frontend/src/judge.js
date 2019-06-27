@@ -63,7 +63,6 @@ var judge = new Vue({
                 type: "get",
                 data: this.aoData,
                 success: function(response) {
-                    console.log(response);
                     if (response.status == 200) {
                         if (that.aoData.scoreSign == 2 && response.data.count == 0) {
                             that.unrated = true;
@@ -134,7 +133,7 @@ var judge = new Vue({
 
                     var selectedImage = $("#" + workId);
                     $('body').addClass('overlay-layer');
-                        that.animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
+                    that.animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
                 }
             })
         },

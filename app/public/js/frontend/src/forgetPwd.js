@@ -199,7 +199,6 @@ var forgetPwd = new Vue({
 		        	smsCode:this.formItem.mobileCode,
 		        },
 		        success:function(res){
-					console.log(res);
 		            if(res.status == 200){
 		    			that.$Loading.finish();
 		            	that.$Notice.success({title:res.data});

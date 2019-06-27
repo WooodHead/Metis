@@ -100,7 +100,6 @@ var judgeCOU = new Vue({
                 url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.judgesPath),
                 type: 'GET',
                 success:function(res){
-					console.log(res);
                     if (res.res.status == 200) {
                         let client = new OSS({
 							region:config.uploader.aLiYun.region,
