@@ -16,14 +16,12 @@ class HomeController extends Controller {
 
       });
     }
-
-    //console.log(this.ctx.cookies.get('locale', { httpOnly: false, signed: false }));
   }
 
   async logout(){
     const ctx = this.ctx;
     ctx.logout();
-    await ctx.render('frontend/index.html');
+    ctx.redirect('/index');
   }
 
   async index(){
