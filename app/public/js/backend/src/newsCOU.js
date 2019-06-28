@@ -46,7 +46,6 @@ var newsCOU = new Vue({
             	  		that.progressPercent = 100;
                     	that.dataSourse.title = response.data.title;
                     	that.dataSourse.news_abstract = response.data.news_abstract;
-                    	console.log(response.data.content);
 						ue.ready(function() {
 						    //异步回调
 	                    	ue.execCommand('insertHtml', response.data.content);
