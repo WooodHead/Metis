@@ -171,6 +171,12 @@ img{
     font-size: 14px;
     margin-right: 15px;
 }
+.JMUserMenu .realname:hover{
+    color: #0096FF;
+    font-weight: bold;
+    font-size: 17px;
+    margin-right: 15px;
+}
 .JMUserMenu .JMItem .JMLink {
 	cursor: pointer;
 	line-height: 40px;
@@ -178,6 +184,16 @@ img{
 	vertical-align: middle;
 	display: block;
 	color: #6d6d6d;
+    letter-spacing: 1px;
+}
+.JMUserMenu .JMItem .JMLink:hover {
+	cursor: pointer;
+	line-height: 40px;
+    font-size: 17px;
+    font-weight: bold;
+	vertical-align: middle;
+	display: block;
+	color: #0096FF;
     letter-spacing: 1px;
 }
 .JMUserMenu .JMItem .JMLink.JMIconUser {

@@ -1,3 +1,6 @@
+[ v-cloak]{
+   display:none;
+}
 .carousel{
     width: 100%;
     height: auto;

@@ -92,6 +92,6 @@ var resetInfo = new Vue({
         }
     },
     created: function() {
-        this.resetInfoStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 114 + "px";
+        this.resetInfoStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 115 + "px";
     }
 })

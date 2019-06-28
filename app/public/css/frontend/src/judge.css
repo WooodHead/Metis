@@ -1,3 +1,6 @@
+[ v-cloak]{
+   display:none;
+}
 .swiper-container {
     width: 475px;
     height: 672px;

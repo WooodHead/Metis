@@ -151,7 +151,7 @@ var works = new Vue({
 		}
 	},
 	created:function(){
-		this.workStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 130 + "px";
+		this.workStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 124 + "px";
 		var that = this;
 		this.$Loading.start();
 		$.ajax({

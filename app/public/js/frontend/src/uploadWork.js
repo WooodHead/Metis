@@ -345,7 +345,7 @@ var uploadWork = new Vue({
         }
 	},
 	created:function(){
-		this.uploadWorkStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 100 + "px";
+		this.uploadWorkStyle.minHeight = document.documentElement.clientHeight - config.cssHeight.headHeight - config.cssHeight.footHeight - 101 + "px";
 		var that = this;
 		this.$Loading.start();
 		this.formItem.id =  window.location.href.split("uploadWork/")[1];

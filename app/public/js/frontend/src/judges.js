@@ -30,6 +30,7 @@ var judges = new Vue({
 	        url:config.ajaxUrls.judgeGetByPage,
 	        data:that.aoData1,
 	        success: function (response) {
+				console.log(response);
 	            if(response.status == 200){
 					that.dataList = response.data.rows;
 					that.totalPage = response.data.count;
