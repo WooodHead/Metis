@@ -19,8 +19,8 @@
 					</radio-group>
 				</form-item>
 				<form-item label="封面图*">
-					<p>宽高比为1的png或jpg格式图片</p>
-					<img v-show="imgUrl.length" :src="imgUrl" style="width:120px;height:120px;margin-bottom:10px;"><br>
+					<p>宽高比为16:10的png或jpg格式图片</p>
+					<img v-show="imgUrl.length" :src="imgUrl" style="width:160px;height:100px;margin-bottom:10px;"><br>
 					<input type="file" @change="doUpload" ref="inputFile" accept="image/*" />
 					<i-progress :percent="progressPercent" /><span v-text="progressPercent + '%'"></span>
 				</form-item>

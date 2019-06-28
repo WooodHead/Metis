@@ -39,6 +39,14 @@ var index = new Vue({
 		}
 	},
 	methods:{
+		tapVideo:function(){
+			let video =  document.getElementById('video');
+			if(video.paused){ //如果已暂停则播放
+		        video.play(); //播放控制
+		    }else{ // 已播放点击则暂停
+		        video.pause(); //暂停控制
+		    }
+		},
 		tapMore:function(){
 			window.location.href = "news";
 		}

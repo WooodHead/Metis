@@ -93,9 +93,6 @@ a{
     border: none;
     background: #0096FF;
     border-radius: 2px;
-}
-.ctrlBtn:hover{
-    background: #3a8785;
     cursor: pointer;
 }
 label.error{

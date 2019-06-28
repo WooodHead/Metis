@@ -15,6 +15,7 @@
 .carousel .carouselItem .video{
     width: 100%;
     height: auto;
+    cursor: pointer;
 }
 
 .timeLine{
@@ -34,6 +35,9 @@
     text-align: center;
     justify-content: space-between;
 }
+.newsList .newsItem{
+    max-width: 320px;
+}
 .newsList .title{
     width: 100%;
     color: #414042;
@@ -51,7 +55,7 @@
     text-align: left;
 }
 .moreBtn{
-    margin: 10px auto;
+    margin: 10px auto 30px;
     color: #fff;
     background: #0096ff;
 }
@@ -71,5 +75,11 @@
         color: #5c5c5c;
         font-size: 20px;
         padding: 15px 0;
+    }
+    .newsList .newsItem{
+        width: 33.33%;
+    }
+    .newsList .title{
+        font-size: 12px;
     }
 }

@@ -16,7 +16,7 @@
 			<Carousel class="carousel" v-model="carouselModel">
 		        <carousel-item>
 		            <div class="carouselItem">
-						<video class="video" src="/public/images/video.mp4" controls></video>
+						<video id="video" class="video" @click="tapVideo" src="/public/images/video.mp4"></video>
 					</div>
 		        </carousel-item>
 		        <carousel-item>
@@ -26,7 +26,7 @@
 		        </carousel-item>
 		        <carousel-item>
 					<div class="carouselItem">
-						 <img src="/public/images/carousel_2.jpg">
+						<img src="/public/images/carousel_2.jpg">
 					</div>
 		        </carousel-item>
 		    </Carousel>
@@ -34,12 +34,13 @@
 			<div style="width: 100%; background-color: #f7f7f7">
 				<section class="DongTai">NEWS | 新闻动态</section>
 				<ul class="newsList">
-					<li class="newsItem" v-for="item in dataList"><a class="zyLink"
-						:href="'newsDetail/' + item.Id" target="_blank">
+					<li class="newsItem" v-for="item in dataList">
+						<a class="zyLink"	:href="'newsDetail/' + item.Id" target="_blank">
 							<img class="zyThumb" :src="item.thumb">
 							<h3 class="title" v-text="item.title"></h3>
-							<p class="createAt" v-text="item.createAt"></p>
-					</a></li>
+							<p class="createAt" v-text="item.createAt.split(' ')[0]"></p>
+						</a>
+					</li>
 				</ul>
 				<div style="width：100%;text-align:center;margin: 20px auto 0px;">
 					<i-button type="default" class="moreBtn" @click="tapMore">查看更多</i-button>

@@ -102,7 +102,7 @@ var newsCOU = new Vue({
 									let img = new Image();
 									img.src = res;
 									img.onload = function(){
-										if(img.width == img.height){
+										if(img.width * 5 == img.height * 8){
 											that.$Notice.success({title:'上传成功！'});
 											that.imgUrl = res;
 											that.fileName = fileName;
