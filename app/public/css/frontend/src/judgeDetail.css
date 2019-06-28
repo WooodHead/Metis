@@ -40,6 +40,9 @@
    .judgeDetail .content{
        width: 600px;
    }
+   .judgeInfo{
+      width: 380px;
+   }
 }
 @media screen and (min-width: 768px) and (max-width: 992px){
    .judgeDetail .header{
@@ -47,11 +50,13 @@
    }
    .judgeDetail .content{
        width: 95%;
-       height: 120px;
    }
    .judgeThumb{
        width: 120px;
        height: 120px;
+   }
+   .judgeInfo{
+      width: 380px;
    }
 }
 @media screen and (max-width: 768px){
@@ -60,7 +65,6 @@
    }
    .judgeDetail .content{
        width: 95%;
-       height: 120px;
    }
    .judgeThumb{
        width: 120px;
