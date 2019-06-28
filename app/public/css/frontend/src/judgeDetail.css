@@ -21,7 +21,7 @@
     height: 160px;
 }
 .judgeInfo{
-   width: 300px;
+   width: 500px;
    display: flex;
    flex-direction: column;
    margin-left: 20px;
