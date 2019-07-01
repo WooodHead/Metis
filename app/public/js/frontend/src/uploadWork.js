@@ -24,6 +24,7 @@ var uploadWork = new Vue({
 				participant_brief:"",		//个人简介
 				affiliatedUnit:"",			//所属单位---选择公司时隐藏
 				team_member:"",				//队员姓名---选择团队时显示
+				mobile:"",
 
 				title:"",					//作品标题
 				title_en:"",				//作品英文标题
@@ -41,6 +42,10 @@ var uploadWork = new Vue({
 				participant_name:[
 	                 {required: true, message: '请输入参赛人或单位', trigger: 'blur'}
 	            ],
+				mobile:[
+					{ required: true, message: '此项不能为空', trigger: 'blur' },
+					{ required: true, len:11, message: '请输出正确手机号格式', trigger: 'blur' }
+				],
 				participant_id_number:[{ required: true, message: '此项不能为空', trigger: 'blur' }],
 				participant_brief:[{ required: true, message: '此项不能为空', trigger: 'blur' }],
 				title:[{ required: true, message: '此项不能为空', trigger: 'blur' }],
@@ -90,12 +95,16 @@ var uploadWork = new Vue({
         	this.current = 0;
         },
         goStep2:function(){
-        	if(this.formItem.participant_name && this.formItem.participant_id_number  && this.formItem.participant_brief){
-            	this.step = "2";
-            	this.current = 1;
-        	}else{
-        		this.$Notice.error({title:"请输入参赛者信息"});
-        	}
+			if (config.regexString.phone.test(this.formItem.mobile)) {
+	        	if(this.formItem.participant_name && this.formItem.participant_id_number  && this.formItem.participant_brief){
+	            	this.step = "2";
+	            	this.current = 1;
+	        	}else{
+	        		this.$Notice.error({title:"请输入参赛者信息"});
+	        	}
+			} else {
+				this.$Notice.error({title:"请输入正确格式的手机号"})
+			}
         },
         goStep3:function(){
         	if(this.formItem.title && this.formItem.content){

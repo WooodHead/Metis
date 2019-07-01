@@ -70,6 +70,9 @@
 							<form-item :label="participantNameLabel" prop="participant_name">
 								<i-input v-model="formItem.participant_name" placeholder="请输入姓名或企业名称"></i-input>
 							</form-item>
+							<form-item label="手机号" prop="mobile">
+								<i-input v-model="formItem.mobile" placeholder="请输入联系人手机号"></i-input>
+							</form-item>
 							<form-item label="队员姓名" v-show="formItem.participant_type == '2'">
 								<i-input v-model="formItem.team_member" placeholder="成员姓名用中文逗号连接"></i-input>
 							</form-item>

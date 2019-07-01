@@ -16,6 +16,9 @@ body{
 	margin:20px auto;
 	text-align: left;
 }
+.produceImg img{
+	margin-top: 10px;
+}
 
 .backTitle{
 	text-align: center;
