@@ -12,6 +12,7 @@
     height: 49px;
     line-height: 49px;
     color: #6d6d6d;
+	text-decoration: none;
 }
 .zyPageMenu .zyItem .zyLink:hover,.zyPageMenu .zyItem .zyLink.zyActive{
     color: #0096FF;

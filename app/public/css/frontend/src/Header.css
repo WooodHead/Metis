@@ -149,6 +149,7 @@ img{
 	cursor: pointer;
 	color: #6d6d6d;
     font-weight: bold;
+    text-decoration: none;
 }
 .JMMenu .JMItem .JMLink:hover,
 .JMMenu .JMItem .JMLink.JMActive {
