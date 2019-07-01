@@ -28,6 +28,10 @@ module.exports = app => {
       type: STRING,
       allowNull: false,
     },
+    mobile: {
+      type: STRING,
+      allowNull: false,
+    },
     content: {
       type: STRING,
       allowNull: false,

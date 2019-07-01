@@ -70,6 +70,7 @@ class ProductionController extends BaseController{
       title: ctx.request.body.title,
       title_en: ctx.request.body.title_en,
       pImage: ctx.request.body.pImage,
+      mobile: ctx.request.body.mobile,
       content: ctx.request.body.content,
       content_en: ctx.request.body.content_en,
       status: ctx.request.body.status,
