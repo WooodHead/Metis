@@ -88,6 +88,7 @@ img{
 .JMHeader .JMNoticeBoard .JMNoticeBoardRight .countDown {
 	color: #0096FF;
 	font-size: 36px;
+    font-weight: bold;
 	display: block;
 	line-height: 1em;
 }
@@ -284,7 +285,7 @@ img{
         font-size: 10px;
     }
     .JMMenu .JMItem {
-        width: 60px;
+        width: 46px;
         height: 40px;
     }
     .JMUserMenu .realname {

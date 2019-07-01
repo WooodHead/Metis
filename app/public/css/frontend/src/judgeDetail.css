@@ -17,8 +17,8 @@
     margin:20px auto;
 }
 .judgeThumb{
-	width: 160px;
-    height: 160px;
+	width: 180px;
+    height: 215px;
 }
 .judgeInfo{
    width: 500px;
@@ -53,7 +53,7 @@
    }
    .judgeThumb{
        width: 120px;
-       height: 120px;
+       height: 143px;
    }
    .judgeInfo{
       width: 380px;
@@ -68,6 +68,6 @@
    }
    .judgeThumb{
        width: 120px;
-       height: 120px;
+       height: 143px;
    }
 }

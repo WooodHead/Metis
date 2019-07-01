@@ -23,7 +23,9 @@
 			<i-col class="rules" span="8">
 				<h2 class="uploadRuleTitle">上传作品</h2>
 				<div class="uploadRule_1" v-show="step === '1'">
+					<!-- <p class="uploadRuleText">
 
+					</p> -->
 				</div>
 				<div class="uploadRule_2" v-show="step === '2'">
 					<p class="uploadRuleText">
@@ -66,7 +68,7 @@
 								</radio-group>
 							</form-item>
 							<form-item :label="participantNameLabel" prop="participant_name">
-								<i-input v-model="formItem.participant_name" placeholder="请输入姓名"></i-input>
+								<i-input v-model="formItem.participant_name" placeholder="请输入姓名或企业名称"></i-input>
 							</form-item>
 							<form-item label="队员姓名" v-show="formItem.participant_type == '2'">
 								<i-input v-model="formItem.team_member" placeholder="成员姓名用中文逗号连接"></i-input>
@@ -78,7 +80,7 @@
 								<i-input v-model="formItem.affiliatedUnit" placeholder="请输入所属单位"></i-input>
 							</form-item>
 							<form-item label="简介" prop="participant_brief">
-								<i-input type="textarea" v-model="formItem.participant_brief" placeholder="请输入个人简介"></i-input>
+								<i-input type="textarea" v-model="formItem.participant_brief" placeholder="请输入个人或单位简介"></i-input>
 							</form-item>
 							<form-item>
 								<i-button type="primary" @click="goStep2">下一步</i-button>
