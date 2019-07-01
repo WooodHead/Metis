@@ -8,7 +8,7 @@ class JudgeService extends Service {
       let resultObj = await this.ctx.model.Judge.listJudges({ offset, limit, language });
       const helper = this.ctx.helper;
       resultObj.rows.forEach((element, index)=>{
-        element.headicon = helper.signatureUrl(helper.judgesPath + element.headicon, "thumb_180_215");
+        element.headicon = helper.signatureUrl(helper.judgesPath + element.headicon, "thumb_360_430");
       });
       return resultObj;
   }
