@@ -8,7 +8,7 @@ class NewsService extends Service {
     let resultObj = await this.ctx.model.News.listNews({offset,limit,language});
     const helper = this.ctx.helper;
     resultObj.rows.forEach((element, index)=>{
-      element.thumb = helper.signatureUrl(helper.newsPath + element.thumb, "thumb_320_200");
+      element.thumb = helper.signatureUrl(helper.newsPath + element.thumb, "thumb_180_215");
     });
     return resultObj;
   }
@@ -17,7 +17,7 @@ class NewsService extends Service {
     let resultObj =  await this.ctx.model.News.getTopNews({limit,language});
     const helper = this.ctx.helper;
     resultObj.forEach((element, index)=>{
-      element.thumb = helper.signatureUrl(helper.newsPath + element.thumb, "thumb_320_200");
+      element.thumb = helper.signatureUrl(helper.newsPath + element.thumb, "thumb_180_215");
     });
     return resultObj;
   }
