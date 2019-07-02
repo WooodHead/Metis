@@ -27,6 +27,8 @@
 .cd-quick-view .swiper-button-prev.swiper-button-disabled, .cd-quick-view .swiper-button-next.swiper-button-disabled{
 	pointer-events:auto;
 }
+
+
 .cd-score{
   	position: absolute;
     height: 35px;
@@ -41,7 +43,6 @@
     border-top-left-radius: 1em;
     border-bottom-left-radius: 1em;
 }
-
 
 .imgList{
     width: 50%;

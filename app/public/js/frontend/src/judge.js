@@ -64,6 +64,7 @@ var judge = new Vue({
                 type: "get",
                 data: this.aoData,
                 success: function(response) {
+                    // console.log(response.data.rows);
                     if (response.status == 200) {
                         if (that.aoData.scoreSign == 2 && response.data.count == 0) {
                             that.unrated = true;

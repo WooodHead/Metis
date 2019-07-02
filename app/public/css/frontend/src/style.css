@@ -151,7 +151,6 @@ header h1 {
     margin-right: 0;
   }
   .cd-item.empty-box::after {
-    /* box visible as placeholder when the .cd-quick-view zooms in */
     position: absolute;
     top: 0;
     left: 0;
@@ -189,8 +188,10 @@ header h1 {
   width: 100%;
   bottom: 0;
   left: 0;
-  background: rgba(71,168,169, 0.5);
-  text-align: center;
+  background: #0096FF;
+  font-size: 16px;
+  text-align: left;
+  text-indent: 2em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #ffffff;
@@ -210,40 +211,45 @@ header h1 {
     /* always visible on small devices */
     visibility: visible;
     opacity: 1;
+    position: absolute;
+    margin-bottom: 0px;
+    background: #0096FF;
   }
 }
 @media only screen and (min-width: 1170px) {
   .cd-trigger {
     visibility: visible;
     opacity: 1;
+    position: absolute;
+    margin-bottom: 0px;
+    background: #0096FF;
   }
 }
 
 @media only screen and (min-width: 1170px) {
   .no-touch .cd-item:hover .cd-trigger {
     opacity: 1;
+    position: absolute;
+    margin-bottom: 0px;
+    background: #0096FF;
   }
 
   .touch .cd-item .cd-trigger {
     opacity: 1;
+    position: absolute;
+    margin-bottom: 0px;
+    background: #0096FF;
   }
 }
-.cd-quick-view {
-  /* quick view non available on small devices */
+/* .cd-quick-view {
   display: none;
-}
+} */
  .cd-quick-view {
-   display: block;
+   display: flex;
    position: fixed;
    max-width: 1200px;
  	height:auto;
    visibility: hidden;
-   /* Force Hardware Acceleration in WebKit */
-   -webkit-transform: translateZ(0);
-   -moz-transform: translateZ(0);
-   -ms-transform: translateZ(0);
-   -o-transform: translateZ(0);
-   transform: translateZ(0);
    -webkit-backface-visibility: hidden;
    backface-visibility: hidden;
    will-change: left, top, width;
@@ -255,11 +261,9 @@ header h1 {
    clear: both;
  }
  .cd-quick-view.is-visible {
-   /* class added when user clicks on .cd-trigger */
    visibility: visible;
  }
  .cd-quick-view.animate-width {
-   /* class added at the end of the first zoom-in animation */
    background-color: #ffffff;
    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
    -webkit-transition: box-shadow 0.3s;
@@ -410,12 +414,14 @@ display: block;
   transition: opacity .3s, visibility 0s;
 }
 .cd-item-info h3 {
-  font-size: 28px;
-  font-size: 1.5rem;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  padding:5px 5px;
 }
 .cd-item-info p {
   line-height: 1.6em;
-  color: #67919c;
+  color: #0096FF;
 }
 .cd-item-info .cd-item-action li {
   display: inline-block;
@@ -443,10 +449,13 @@ display: block;
   cursor: pointer;
 }
 .add-content .cd-item-info {
-  /* class added at the end of the width animation, used to show the content */
   position: relative;
   visibility: visible;
   opacity: 1;
+  display: flex;
+  flex-direction: column;
+    width: 50%;
+    background: pink;
 }
 .add-content .cd-item-info h2 {
   -webkit-animation: cd-slide-in 0.3s;
