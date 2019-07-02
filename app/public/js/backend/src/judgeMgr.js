@@ -21,7 +21,7 @@ var Component = new Vue({
                                },
                                style: {
                                    width: '80px',
-                                   height:"80px",
+                                   height:"96px",
                                    margin:"10px auto"
                                },
                            })

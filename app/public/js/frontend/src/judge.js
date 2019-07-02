@@ -46,6 +46,7 @@ var judge = new Vue({
     },
     methods: {
         menuSelect: function(name) {
+            this.aoData.offset = 0;
             if (name == 1) {
                 this.aoData.scoreSign = 0;
             } else if (name == 2) {
@@ -209,7 +210,7 @@ var judge = new Vue({
             });
         },
         scoreBtnClick: function() {
-            var reg = /^[0-9]+$/;
+            var reg = /^100$|^(\d|[1-9]\d)$/;
             var that = this;
             if (reg.test(this.score)) {
                 $.ajax({

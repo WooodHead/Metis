@@ -95,16 +95,16 @@ var uploadWork = new Vue({
         	this.current = 0;
         },
         goStep2:function(){
-			if (config.regexString.phone.test(this.formItem.mobile)) {
-	        	if(this.formItem.participant_name && this.formItem.participant_id_number  && this.formItem.participant_brief){
+        	if(this.formItem.participant_name && this.formItem.participant_id_number  && this.formItem.participant_brief && this.formItem.mobile){
+				if (config.regexString.phone.test(this.formItem.mobile)) {
 	            	this.step = "2";
 	            	this.current = 1;
-	        	}else{
-	        		this.$Notice.error({title:"请输入参赛者信息"});
-	        	}
-			} else {
-				this.$Notice.error({title:"请输入正确格式的手机号"})
-			}
+				} else {
+					this.$Notice.error({title:"请输入正确格式的手机号"})
+				}
+        	}else{
+        		this.$Notice.error({title:"请输入参赛者信息"});
+        	}
         },
         goStep3:function(){
         	if(this.formItem.title && this.formItem.content && this.fileName_1){

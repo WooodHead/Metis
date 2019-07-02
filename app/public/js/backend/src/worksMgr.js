@@ -151,6 +151,7 @@ var vm = new Vue({
 			this.$Loading.start();
 			var that = this;
     		this.aoData1.offset = (index-1)*10;
+			this.dataList = [];
     		getPageData(this);
 		},
 		groupCheck:function(value){
