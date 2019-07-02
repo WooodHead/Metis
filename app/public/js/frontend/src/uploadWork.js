@@ -146,16 +146,16 @@ var uploadWork = new Vue({
 										let img = new Image();
 										img.src = res;
 										img.onload = function(){
-											if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
+											// if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
 												that.$Notice.success({title:'上传成功！'});
 												that.$Loading.finish();
 												that.imgUrl_1 = res;
 						        				that.fileName_1 = fileName;
-											}else{
-												that.progressPercent_1 = 0;
-												that.$Loading.error();
-												that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
-											}
+											// }else{
+											// 	that.progressPercent_1 = 0;
+											// 	that.$Loading.error();
+											// 	that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
+											// }
 										}
 	                                }
 	                            })
@@ -205,16 +205,16 @@ var uploadWork = new Vue({
 											let img = new Image();
 											img.src = res;
 											img.onload = function(){
-												if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
+												// if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
 													that.$Notice.success({title:'上传成功！'});
 													that.$Loading.finish();
 													that.imgUrl_2 = res;
 							        				that.fileName_2 = fileName;
-												}else{
-													that.progressPercent_2 = 0;
-													that.$Loading.error();
-													that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
-												}
+												// }else{
+												// 	that.progressPercent_2 = 0;
+												// 	that.$Loading.error();
+												// 	that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
+												// }
 											}
 		                                }
 		                            })
@@ -265,16 +265,16 @@ var uploadWork = new Vue({
 											let img = new Image();
 											img.src = res;
 											img.onload = function(){
-												if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
+												// if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
 													that.$Notice.success({title:'上传成功！'});
 													that.$Loading.finish();
 													that.imgUrl_3 = res;
 							        				that.fileName_3 = fileName;
-												}else{
-													that.progressPercent_3 = 0;
-													that.$Loading.error();
-													that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
-												}
+												// }else{
+												// 	that.progressPercent_3 = 0;
+												// 	that.$Loading.error();
+												// 	that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
+												// }
 											}
 		                                }
 		                            })
