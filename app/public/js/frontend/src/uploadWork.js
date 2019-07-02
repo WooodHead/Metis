@@ -107,7 +107,7 @@ var uploadWork = new Vue({
 			}
         },
         goStep3:function(){
-        	if(this.formItem.title && this.formItem.content){
+        	if(this.formItem.title && this.formItem.content && this.fileName_1){
             	this.step = "3";
             	this.current = 2;
         	}else{
@@ -118,51 +118,8 @@ var uploadWork = new Vue({
         doUpload_1:function(files){
 			let that = this;
             let file = files.target.files[0];
-            let fileName = calculate_object_name(files.target.files[0].name);
-            this.$Notice.success({title:'上传中···'});
-			this.$Loading.start();
-			$.ajax({
-                url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.productPath),
-                type: 'GET',
-                success:function(res){
-                    if (res.res.status == 200) {
-                        let client = new OSS({
-							region:config.uploader.aLiYun.region,
-                      		accessKeyId: res.credentials.AccessKeyId,
-                      		accessKeySecret: res.credentials.AccessKeySecret,
-                      		stsToken: res.credentials.SecurityToken,
-                          	bucket:bucket
-                    	});
-                        client.multipartUpload('product/'+ fileName, file, {
-                    		progress: progress1
-                    	}).then(function (res) {
-                            let objectPath = 'product/' + fileName;
-							$.ajax({
-                                url: config.ajaxUrls.getUrlSignature,
-                                type: 'GET',
-                                data:{objectPath:objectPath},
-                                success:function(res){
-									that.$Notice.success({title:'上传成功！'});
-									that.$Loading.finish();
-									that.imgUrl_1 = res;
-			        				that.fileName_1 = fileName;
-                                }
-                            })
-                    	});
-                    } else {
-						that.$Loading.error();
-                        that.$Notice.error({
-                            title:"上传出现异常，请刷新界面重试！"
-                        })
-                    }
-                }
-            })
-        },
-        doUpload_2:function(files){
-        	if(this.fileName_1){
-				let that = this;
-	            let file = files.target.files[0];
-	            let fileName = calculate_object_name(files.target.files[0].name);
+			if (file.size / 1048576 <= 5) {
+				let fileName = calculate_object_name(files.target.files[0].name);
 	            this.$Notice.success({title:'上传中···'});
 				this.$Loading.start();
 				$.ajax({
@@ -178,7 +135,7 @@ var uploadWork = new Vue({
 	                          	bucket:bucket
 	                    	});
 	                        client.multipartUpload('product/'+ fileName, file, {
-	                    		progress: progress2
+	                    		progress: progress1
 	                    	}).then(function (res) {
 	                            let objectPath = 'product/' + fileName;
 								$.ajax({
@@ -186,57 +143,20 @@ var uploadWork = new Vue({
 	                                type: 'GET',
 	                                data:{objectPath:objectPath},
 	                                success:function(res){
-										that.$Notice.success({title:'上传成功！'});
-										that.$Loading.finish();
-										that.imgUrl_2 = res;
-				        				that.fileName_2 = fileName;
-	                                }
-	                            })
-	                    	});
-	                    } else {
-	                        that.$Notice.error({
-	                            title:"上传出现异常，请刷新界面重试！"
-	                        })
-	                    }
-	                }
-	            })
-        	}else{
-				that.$Loading.error();
-        		this.$Notice.error({title:"请按照正常顺序上传作品"});
-        	}
-        },
-        doUpload_3:function(files){
-        	if(this.fileName_2){
-				let that = this;
-	            let file = files.target.files[0];
-	            let fileName = calculate_object_name(files.target.files[0].name);
-	            this.$Notice.success({title:'上传中···'});
-				this.$Loading.start();
-				$.ajax({
-	                url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.productPath),
-	                type: 'GET',
-	                success:function(res){
-	                    if (res.res.status == 200) {
-	                        let client = new OSS({
-								region:config.uploader.aLiYun.region,
-	                      		accessKeyId: res.credentials.AccessKeyId,
-	                      		accessKeySecret: res.credentials.AccessKeySecret,
-	                      		stsToken: res.credentials.SecurityToken,
-	                          	bucket:bucket
-	                    	});
-	                        client.multipartUpload('product/'+ fileName, file, {
-	                    		progress: progress3
-	                    	}).then(function (res) {
-	                            let objectPath = 'product/' + fileName;
-								$.ajax({
-	                                url: config.ajaxUrls.getUrlSignature,
-	                                type: 'GET',
-	                                data:{objectPath:objectPath},
-	                                success:function(res){
-										that.$Notice.success({title:'上传成功！'});
-										that.$Loading.finish();
-										that.imgUrl_3 = res;
-				        				that.fileName_3 = fileName;
+										let img = new Image();
+										img.src = res;
+										img.onload = function(){
+											if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
+												that.$Notice.success({title:'上传成功！'});
+												that.$Loading.finish();
+												that.imgUrl_1 = res;
+						        				that.fileName_1 = fileName;
+											}else{
+												that.progressPercent_1 = 0;
+												that.$Loading.error();
+												that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
+											}
+										}
 	                                }
 	                            })
 	                    	});
@@ -248,6 +168,128 @@ var uploadWork = new Vue({
 	                    }
 	                }
 	            })
+			} else {
+				this.$Notice.error({title:"图片大小超过5M，请重新上传..."})
+			}
+
+        },
+        doUpload_2:function(files){
+        	if(this.fileName_1){
+				let that = this;
+	            let file = files.target.files[0];
+				if (file.size / 1048576 <= 5) {
+					let fileName = calculate_object_name(files.target.files[0].name);
+		            this.$Notice.success({title:'上传中···'});
+					this.$Loading.start();
+					$.ajax({
+		                url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.productPath),
+		                type: 'GET',
+		                success:function(res){
+		                    if (res.res.status == 200) {
+		                        let client = new OSS({
+									region:config.uploader.aLiYun.region,
+		                      		accessKeyId: res.credentials.AccessKeyId,
+		                      		accessKeySecret: res.credentials.AccessKeySecret,
+		                      		stsToken: res.credentials.SecurityToken,
+		                          	bucket:bucket
+		                    	});
+		                        client.multipartUpload('product/'+ fileName, file, {
+		                    		progress: progress2
+		                    	}).then(function (res) {
+		                            let objectPath = 'product/' + fileName;
+									$.ajax({
+		                                url: config.ajaxUrls.getUrlSignature,
+		                                type: 'GET',
+		                                data:{objectPath:objectPath},
+		                                success:function(res){
+											let img = new Image();
+											img.src = res;
+											img.onload = function(){
+												if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
+													that.$Notice.success({title:'上传成功！'});
+													that.$Loading.finish();
+													that.imgUrl_2 = res;
+							        				that.fileName_2 = fileName;
+												}else{
+													that.progressPercent_2 = 0;
+													that.$Loading.error();
+													that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
+												}
+											}
+		                                }
+		                            })
+		                    	});
+		                    } else {
+		                        that.$Notice.error({
+		                            title:"上传出现异常，请刷新界面重试！"
+		                        })
+		                    }
+		                }
+		            })
+				}else{
+					this.$Notice.error({title:"图片大小超过5M，请重新上传..."})
+				}
+        	}else{
+        		this.$Notice.error({title:"请按照正常顺序上传作品"});
+        	}
+        },
+        doUpload_3:function(files){
+        	if(this.fileName_2){
+				let that = this;
+	            let file = files.target.files[0];
+				if (file.size / 1048576 <= 5) {
+					let fileName = calculate_object_name(files.target.files[0].name);
+		            this.$Notice.success({title:'上传中···'});
+					this.$Loading.start();
+					$.ajax({
+		                url: config.ajaxUrls.getSTSSignature.replace(':fileType',config.uploader.fileType.productPath),
+		                type: 'GET',
+		                success:function(res){
+		                    if (res.res.status == 200) {
+		                        let client = new OSS({
+									region:config.uploader.aLiYun.region,
+		                      		accessKeyId: res.credentials.AccessKeyId,
+		                      		accessKeySecret: res.credentials.AccessKeySecret,
+		                      		stsToken: res.credentials.SecurityToken,
+		                          	bucket:bucket
+		                    	});
+		                        client.multipartUpload('product/'+ fileName, file, {
+		                    		progress: progress3
+		                    	}).then(function (res) {
+		                            let objectPath = 'product/' + fileName;
+									$.ajax({
+		                                url: config.ajaxUrls.getUrlSignature,
+		                                type: 'GET',
+		                                data:{objectPath:objectPath},
+		                                success:function(res){
+											let img = new Image();
+											img.src = res;
+											img.onload = function(){
+												if(img.width >= 1675 && img.width <= 1695 && img.height >= 2375 && img.height <= 2395){
+													that.$Notice.success({title:'上传成功！'});
+													that.$Loading.finish();
+													that.imgUrl_3 = res;
+							        				that.fileName_3 = fileName;
+												}else{
+													that.progressPercent_3 = 0;
+													that.$Loading.error();
+													that.$Notice.error({title:"图片不符合尺寸要求，请重新上传..."});
+												}
+											}
+		                                }
+		                            })
+		                    	});
+		                    } else {
+								that.$Loading.error();
+		                        that.$Notice.error({
+		                            title:"上传出现异常，请刷新界面重试！"
+		                        })
+		                    }
+		                }
+		            })
+				} else {
+					this.$Notice.error({title:"图片大小超过5M，请重新上传..."})
+				}
         	}else{
         		this.$Notice.error({title:"请按照正常顺序上传作品"});
         	}

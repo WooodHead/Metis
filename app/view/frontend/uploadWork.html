@@ -37,17 +37,17 @@
 						<font class="improtentText">文旅融合:</font>包括各种农业生态、工业旅游、文化传播等于一体的产业融合产品、新业态，如：大健康、养老、休闲农庄、观光工厂、民俗体验、亲子乐园、露营地等展现美丽乡村风貌，具备娱乐休闲、生态景观、乡村旅游项目及服务设计。<br><br>
 						<font class="improtentText">生态科技:</font>包括以设计为导向，挖掘区域文化与生态资源，运用互联网＋、科技创新、智能服务、绿色设计、综合媒体艺术等跨学科的方式，为区域乡村振兴提供的前瞻性规划与解决方案。<br>
 					</p>
-					<!-- <h5 class="uploadRuleSubTitle">作品提交及报名要求</h5>
+					<h5 class="uploadRuleSubTitle">作品提交及报名要求</h5>
 					<p class="uploadRuleText">
 						所有参赛作品内容需要符合本次大赛的主题和征集方向，参赛者须保证对其参赛作品具有原创性，具有完整的知识产权，不存在知识产权侵权或任何其他侵权行为。<br>
 					</p>
 					<p class="uploadRuleText">
-						（1）作品版面大小为<font class="zyFF0000">A1</font>（840mm×594mm）图幅，<font class="improtentText">竖构图</font>，jpg格式，精度350dpi；单张图片大小<font class="improtentText">不得超过5M</font>。<br>
+						（1）作品版面大小为<font class="zyFF0000">A1</font>（594mm×840mm）图幅，<font class="improtentText">竖构图</font>，png或jpg格式，精度350dpi；单张图片大小<font class="improtentText">不得超过5M</font>。<br>
 						（2）每件参赛作品不超过3个版面，版面内容包含主题阐释、效果图、必要的结构图、基本外观尺寸图及设计说明等。
 					</p>
 					<p class="uploadRuleText">
 						另外，为保证本次大赛评选的公正性，参赛作品及版面上不得出现作者所在单位、姓名（包括英文或拼音缩写）或与作者身份有关的任何图标、图形等个人信息资料。
-					</p> -->
+					</p>
 				</div>
 			</i-col>
 			<!-- 右侧作品部分 -->
@@ -126,17 +126,17 @@
 								</radio-group>
 							</form-item>
 							<form-item label="图幅一" prop="fileName_1">
-								<img v-show="imgUrl_1.length" :src="imgUrl_1" style="width:120px;height:120px;margin-bottom:10px;">
+								<img v-show="imgUrl_1.length" :src="imgUrl_1" style="width:120px;height:169px;margin-bottom:10px;">
 								<input type="file" @change="doUpload_1" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_1" /><span v-text="progressPercent_1 + '%'"></span>
 							</form-item>
 							<form-item label="图幅二">
-								<img v-show="imgUrl_2.length" :src="imgUrl_2" style="width:120px;height:120px;margin-bottom:10px;">
+								<img v-show="imgUrl_2.length" :src="imgUrl_2" style="width:120px;height:169px;margin-bottom:10px;">
 								<input type="file" @change="doUpload_2" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_2" /><span v-text="progressPercent_2 + '%'"></span>
 							</form-item>
 							<form-item label="图幅三">
-								<img v-show="imgUrl_3.length" :src="imgUrl_3" style="width:120px;height:120px;margin-bottom:10px;">
+								<img v-show="imgUrl_3.length" :src="imgUrl_3" style="width:120px;height:169px;margin-bottom:10px;">
 								<input type="file" @change="doUpload_3" ref="inputFile" accept="image/*"/>
 								<i-progress :percent="progressPercent_3" /><span v-text="progressPercent_3 + '%'"></span>
 							</form-item>
