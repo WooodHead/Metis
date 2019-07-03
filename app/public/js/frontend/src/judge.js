@@ -64,7 +64,6 @@ var judge = new Vue({
                 type: "get",
                 data: this.aoData,
                 success: function(response) {
-                    // console.log(response.data.rows);
                     if (response.status == 200) {
                         if (that.aoData.scoreSign == 2 && response.data.count == 0) {
                             that.unrated = true;
@@ -213,34 +212,41 @@ var judge = new Vue({
         scoreBtnClick: function() {
             var reg = /^100$|^(\d|[1-9]\d)$/;
             var that = this;
-            if (reg.test(this.score)) {
-                $.ajax({
-                    url: config.ajaxUrls.judgeScore.replace(":id",this.reviewId),
-                    type: "put",
-                    data: {
-                        score: parseInt(this.score)
-                    },
-                    success: function(response) {
-                        if (response.status == 200) {
-                            for (var i = 0; i < that.list.length; i++) {
-                                if (that.list[i].production.Id == that.productionId) {
-                                    that.list[i].score = that.score;
-                                    break;
+            if (this.score > 0) {
+                if (reg.test(this.score)) {
+                    $.ajax({
+                        url: config.ajaxUrls.judgeScore.replace(":id",this.reviewId),
+                        type: "put",
+                        data: {
+                            score: parseInt(this.score)
+                        },
+                        success: function(response) {
+                            if (response.status == 200) {
+                                for (var i = 0; i < that.list.length; i++) {
+                                    if (that.list[i].production.Id == that.productionId) {
+                                        that.list[i].score = that.score;
+                                        break;
+                                    }
                                 }
+                                that.closeQuickView();
+                            } else {
+                                that.$Notice.error({
+                                    title: response.data
+                                });
                             }
-                            that.closeQuickView();
-                        } else {
-                            that.$Notice.error({
-                                title: response.data
-                            });
                         }
-                    }
-                })
+                    })
+                } else {
+                    that.$Notice.error({
+                        title: config.messages.scoreError
+                    });
+                }
             } else {
                 that.$Notice.error({
-                    title: config.messages.scoreError
+                    title: "请保证输入的分数大于0"
                 });
             }
+
         }
     },
 })

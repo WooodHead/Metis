@@ -6,7 +6,6 @@
 <link href="public/css/frontend/lib/animation.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/lib/swiper.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/src/Header.css" type="text/css" rel="stylesheet">
-<link href="public/css/frontend/src/style.css" type="text/css" rel="stylesheet">
 <link href="public/css/frontend/src/judge.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
@@ -28,61 +27,55 @@
 				</i-menu>
 			</div>
 
-
-			<ul class="cd-items cd-container">
-				<li v-for="item in list" class="cd-item">
-					<p class="cd-score" v-text="item.score ? item.score : '0'"></p>
-					<img :src="item.production.pImage" :id="item.production.Id" v-on:click="openDetail(item.production.Id,item.Id)" style="cursor: pointer;">
-					<p class="cd-trigger" v-text="item.production.title"></p>
-				</li>
-				<img v-if="unrated" style="width:180px;height:155px;margin: 40px auto;" src="public/images/12.jpg">
-				<p v-if="unrated" style="margin: 10px auto;text-align: center;color:#868686;font-size:18pt;" v-text="'您没有要评分作品哟~~'"></p>
-			</ul>
-			<div style="text-align: center; margin-bottom: 30px;">
-				<page :total="total" :page-size="pageSize" show-total @on-change="loadData"></page>
-			</div>
-
-			<div class="cd-quick-view">
-				<div class="cd-slider-wrapper">
-					<ul class="cd-slider">
-						<li class="selected">
-							<div class="swiper-container">
-								<div class="swiper-wrapper">
-									<div class='swiper-slide'>
-									</div>
-								</div>
-								<div class="swiper-pagination"></div>
-								<div class="swiper-button-prev"></div>
-								<div class="swiper-button-next"></div>
-							</div>
-						</li>
-					</ul>
-				</div>
-
-				<div class="cd-item-info">
-					<h3 v-text="'标题：'+ title"></h3>
-					<p style="padding:5px 5px;" v-html="'内容：<br />'+ content"></p>
-					<a v-if="attachFileShow" :href="attachFile">点击进行附件下载</a>
-					<div style="padding:5px 5px;">
-						<ul class="cd-item-action">
-							<i-col style="color:red;">请输入分数0-100的整数</i-col>
-							<li>
-								<input type="text" v-model="score" style="line-height: 1.5em; color: #0096FF; font-size: 32px; text-align: center; display: block; width: 96px; margin-top: 5px;float:left;" />
-								<i-button type="error" v-on:click="scoreBtnClick" style="margin-left:10px;height: 52px;width: 100px; margin-top: 5px;font-size: 24px;">打分</i-button>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-				<a href="#0" class="cd-close" v-on:click="closeQuickView">Close</a>
-			</div>
-			<modal v-model="previewModal" title="图片预览 (按Esc可返回)" footer-hide width="auto">
-				<img style="width:70%;heigth:auto;margin:0 auto;" :src="modelImg" />
-			</modal>
-
 		</i-col>
-	</row>
 
+	</row>
+	<ul class="cd-items cd-container">
+		<li v-for="item in list" class="cd-item">
+			<p class="cd-score" v-text="item.score ? item.score : '0'"></p>
+			<img :src="item.production.pImage" :id="item.production.Id" v-on:click="openDetail(item.production.Id,item.Id)" style="cursor: pointer;">
+			<p class="cd-trigger" v-text="item.production.title"></p>
+		</li>
+		<img v-if="unrated" style="width:180px;height:155px;margin: 40px auto;" src="public/images/12.jpg">
+		<p v-if="unrated" style="margin: 10px auto;text-align: center;color:#868686;font-size:18pt;" v-text="'您没有要评分作品哟~~'"></p>
+
+		<div style="text-align: center; margin-bottom: 30px;">
+			<page :total="total" :page-size="pageSize" show-total @on-change="loadData"></page>
+		</div>
+	</ul>
+
+	<div class="cd-quick-view">
+		<div class="cd-slider-wrapper">
+			<ul class="cd-slider">
+				<li class="selected">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class='swiper-slide'>
+							</div>
+						</div>
+						<div class="swiper-pagination"></div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="cd-item-info">
+			<h3 v-text="'标题：'+ title"></h3>
+			<p class="des" v-html="'内容：<br />'+ content"></p>
+			<a v-if="attachFileShow" :href="attachFile">点击进行附件下载<icon size="14" type="arrow-down-a"></icon></a>
+			<span class="errorText">请输入分数0-100的整数</span>
+			<div class="scoreBox">
+				<input class="scoreInput" v-model="score"/>
+				<button class="scoreBtn" @click="scoreBtnClick">打分</button>
+			</div>
+		</div>
+		<icon class="cd-close" size="26" type="close" v-on:click.native="closeQuickView"></icon>
+	</div>
+	<modal v-model="previewModal" title="图片预览 (按Esc可返回)" footer-hide width="auto">
+		<img style="width:70%;heigth:auto;margin:0 auto;" :src="modelImg" />
+	</modal>
 </div>
 {% endblock %}
 

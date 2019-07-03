@@ -1,15 +1,46 @@
-[ v-cloak]{
-   display:none;
+[ v-cloak] {
+    display: none;
 }
+
+body.overlay-layer::after {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+    -moz-transition: opacity .3s 0s, visibility 0s 0s;
+    transition: opacity .3s 0s, visibility 0s 0s;
+    content: '';
+}
+
+body::after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(71, 55, 78, 0.8);
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+    -moz-transition: opacity .3s 0s, visibility 0s .3s;
+    transition: opacity .3s 0s, visibility 0s .3s;
+}
+
+a,
+a:hover,
+a:link,
+a:active {
+    text-decoration: none;
+}
+
 .swiper-container {
     width: 475px;
     height: 672px;
 }
+
 .swiper-slide {
     text-align: center;
     font-size: 18px;
     background: #fff;
-
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -24,30 +55,281 @@
     align-items: center;
 }
 
-.cd-quick-view .swiper-button-prev.swiper-button-disabled, .cd-quick-view .swiper-button-next.swiper-button-disabled{
-	pointer-events:auto;
+.cd-quick-view .swiper-button-prev.swiper-button-disabled,
+.cd-quick-view .swiper-button-next.swiper-button-disabled {
+    pointer-events: auto;
 }
 
+.cd-container {
+    width: 1280px;
+    margin: 0 auto;
+}
 
-.cd-score{
-  	position: absolute;
+.cd-item {
+    width: 300px;
+    height: 424px;
+    margin: 10px 10px;
+}
+
+.cd-item img {
+    width: 300px;
+    height: 424px;
+}
+
+.cd-item .cd-score {
     height: 35px;
     line-height: 35px;
     width: 80px;
-    top: 10px;
-    right: 0;
-    font-size: 16pt;
+    position: relative;
+    font-size: 13pt;
     color: white;
     background: #2C8CF0;
     text-align: center;
+    margin-bottom: -35px;
+    margin-left: 220px;
     border-top-left-radius: 1em;
     border-bottom-left-radius: 1em;
 }
 
-.imgList{
-    width: 50%;
-    height: 100%;
+.cd-item .cd-trigger {
+    height: 35px;
+    line-height: 35px;
+    width: 100%;
+    font-size: 13pt;
+    color: white;
+    background: #2C8CF0;
+    text-align: center;
+    position: relative;
+    margin-top: -35px;
 }
-.ivu-modal{
-    top:0;
+
+.cd-quick-view {
+    display: none;
+}
+
+.cd-quick-view {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    max-width: 1200px;
+    height: auto;
+    visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: left, top, width;
+    z-index: 99;
+}
+
+.cd-quick-view:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.cd-quick-view.is-visible {
+    visibility: visible;
+}
+
+.cd-quick-view.animate-width {
+    background-color: #ffffff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    -webkit-transition: box-shadow 0.3s;
+    -moz-transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s;
+}
+
+.cd-item-info {
+    width: 630px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cd-item-info h3 {
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.cd-item-info .des {
+    width: 100%;
+    height: auto;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px 0 10px 10px;
+    background: #F1F2F2;
+    color: #2C8CF0;
+    letter-spacing: 1px;
+}
+
+.cd-item-info a {
+    width: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #2C8CF0;
+    letter-spacing: 1px;
+}
+
+.scoreBox {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.scoreBox .scoreInput {
+    width: 110px;
+    height: 50px;
+    line-height: 50px;
+    color: #0096FF;
+    font-size: 32px;
+    text-align: center;
+    border: solid 1px #0096FF;
+}
+.scoreBox .scoreBtn{
+    width: 80px;
+    height: 50px;
+    line-height: 50px;
+    background: #0096FF;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+}
+.cd-item-info .errorText{
+    font-weight: bold;
+    color: #0096FF;
+}
+.cd-close{
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.ivu-modal {
+    top: 0;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .cd-container {
+        width: 960px;
+        margin: 0 auto;
+    }
+
+    .cd-item {
+        width: 300px;
+        height: 424px;
+        margin: 10px 10px;
+    }
+
+    .cd-item img {
+        width: 300px;
+        height: 424px;
+    }
+
+    .cd-item .cd-score {
+        height: 30px;
+        line-height: 30px;
+        width: 80px;
+        position: relative;
+        font-size: 12pt;
+        color: white;
+        background: #2C8CF0;
+        text-align: center;
+        margin-bottom: -30px;
+        margin-left: 220px;
+        border-top-left-radius: 1em;
+        border-bottom-left-radius: 1em;
+    }
+
+    .cd-item .cd-trigger {
+        height: 30px;
+        line-height: 30px;
+        width: 100%;
+        font-size: 12pt;
+        color: white;
+        background: #2C8CF0;
+        text-align: center;
+        position: relative;
+        margin-top: -30px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .cd-container {
+        width: 960px;
+        margin: 0 auto;
+    }
+
+    .cd-item {
+        width: 300px;
+        height: 300px;
+    }
+
+    .cd-item img {
+        width: 300px;
+        height: 400px;
+    }
+
+    .cd-item .cd-score {
+        height: 26px;
+        line-height: 26px;
+        width: 40%;
+        position: relative;
+        font-size: 11pt;
+        color: white;
+        background: #2C8CF0;
+        text-align: center;
+        margin-bottom: -26px;
+        margin-left: 60%;
+        border-top-left-radius: 1em;
+        border-bottom-left-radius: 1em;
+    }
+
+    .cd-item .cd-trigger {
+        height: 26px;
+        line-height: 26px;
+        width: 100%;
+        font-size: 11pt;
+        color: white;
+        background: #2C8CF0;
+        text-align: center;
+        position: relative;
+        margin-top: -26px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cd-container {
+        width: 960px;
+        margin: 0 auto;
+        background: pink
+    }
+
+    .cd-item {
+        width: 24%;
+        height: 200px;
+    }
+
+    .cd-item img {
+        width: 100%;
+        height: 200px;
+    }
+
+    .cd-item .cd-trigger {
+        height: 26px;
+        line-height: 26px;
+        width: 100%;
+        font-size: 11pt;
+        color: white;
+        background: #2C8CF0;
+        text-align: center;
+        position: relative;
+        margin-top: -26px;
+    }
 }
