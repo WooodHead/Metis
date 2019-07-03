@@ -76,6 +76,23 @@ a:active {
     height: 424px;
 }
 
+.cd-item .cd-unScore {
+    height: 35px;
+    line-height: 31px;
+    width: 80px;
+    position: relative;
+    font-size: 13pt;
+    color: #0096FF;
+    background: #fff;
+    text-align: center;
+    margin-bottom: -35px;
+    margin-left: 220px;
+    border: solid 2px #0096FF;
+    border-right: none;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+}
+
 .cd-item .cd-score {
     height: 35px;
     line-height: 35px;

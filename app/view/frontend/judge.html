@@ -32,7 +32,8 @@
 	</row>
 	<ul class="cd-items cd-container">
 		<li v-for="item in list" class="cd-item">
-			<p class="cd-score" v-text="item.score ? item.score : '0'"></p>
+			<p class="cd-unScore" v-if="item.score == 0" v-text="'未打分'"></p>
+			<p class="cd-score" v-if="item.score != 0" v-text="item.score"></p>
 			<img :src="item.production.pImage" :id="item.production.Id" v-on:click="openDetail(item.production.Id,item.Id)" style="cursor: pointer;">
 			<p class="cd-trigger" v-text="item.production.title"></p>
 		</li>
