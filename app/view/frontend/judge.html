@@ -55,7 +55,7 @@
 							</div>
 						</div>
 						<div class="swiper-pagination"></div>
-						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-prev swiper-button-white"></div>
 						<div class="swiper-button-next"></div>
 					</div>
 				</li>
@@ -65,14 +65,14 @@
 		<div class="cd-item-info">
 			<h3 v-text="'标题：'+ title"></h3>
 			<p class="des" v-html="'内容：<br />'+ content"></p>
-			<a v-if="attachFileShow" :href="attachFile">点击进行附件下载<icon size="14" type="arrow-down-a"></icon></a>
+			<a v-if="attachFileShow" :href="attachFile">点击进行附件下载<icon size="18" type="md-arrow-down"></icon></a>
 			<span class="errorText">请输入分数0-100的整数</span>
 			<div class="scoreBox">
 				<input class="scoreInput" v-model="score"/>
 				<button class="scoreBtn" @click="scoreBtnClick">打分</button>
 			</div>
 		</div>
-		<icon class="cd-close" size="26" type="close" v-on:click.native="closeQuickView"></icon>
+		<icon class="cd-close" size="26" type="md-close" v-on:click.native="closeQuickView"></icon>
 	</div>
 	<modal v-model="previewModal" title="图片预览 (按Esc可返回)" footer-hide width="auto">
 		<img style="width:70%;heigth:auto;margin:0 auto;" :src="modelImg" />

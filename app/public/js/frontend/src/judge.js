@@ -102,7 +102,7 @@ var judge = new Vue({
                     list = res.data.pImage.split(",");
                     list.pop();
                     $(".selected").empty();
-                    $(".selected").append("<div class='swiper-container'> <div class='swiper-wrapper'></div><div class='swiper-pagination'>" + "</div><div class='swiper-button-prev'></div><div class='swiper-button-next'></div></div>");
+                    $(".selected").append("<div class='swiper-container'> <div class='swiper-wrapper'></div><div class='swiper-pagination'>" + "</div><div class='swiper-button-prev swiper-button-black'></div><div class='swiper-button-next swiper-button-black'></div></div>");
                     //swiper图片加载
                     for (var imgItem = 0; imgItem < list.length; imgItem++) {
                         var imgSrc = list[imgItem];
@@ -134,6 +134,7 @@ var judge = new Vue({
 
                     var selectedImage = $("#" + workId);
                     $('body').addClass('overlay-layer');
+                    $('.JMHeader .JMLogo img').addClass('overlay-layer');
                     that.animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
                 }
             })

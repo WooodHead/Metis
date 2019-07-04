@@ -20,8 +20,8 @@
 <div class="works" :style="workStyle" v-cloak>
 	<modal v-model="deleteModal" @on-ok="ok" title="警告！！！">
 		<p style="color:#ed3f14;text-align:center">
-			<icon type="information-circled"></icon>
-			<span style="font-size: 15px;">确定删除作品:{{productTitle}}？</span>
+			<icon type="md-information-circled"></icon>
+			<span style="font-size: 15px;" v-text="'确定删除作品:' +productTitle+'？'"></span>
 		</p>
 	</modal>
 	<i-table :columns="columns" :data="dataList"></i-table>
