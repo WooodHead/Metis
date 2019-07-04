@@ -38,7 +38,7 @@ var config = {
         table:12	//请求12条数据	10
     },
     cssHeight:{
-    	headHeight:250,
+    	headHeight:210,
     	footHeight:80
     },
     // 正则表达式
