@@ -193,6 +193,7 @@ var judge = new Vue({
                 $('.cd-quick-view').addClass("animated zoomOut");
                 $('.cd-quick-view').removeClass('add-content animate-width is-visible');
                 $('body').removeClass('overlay-layer');
+                $('.JMHeader .JMLogo img').removeClass('overlay-layer');
                 parentListItem.removeClass('empty-box');
             }
         },
@@ -203,6 +204,7 @@ var judge = new Vue({
                 widthSelected = image.width();
 
             $('body').removeClass('overlay-layer');
+            $('.JMHeader .JMLogo img').removeClass('overlay-layer');
             parentListItem.removeClass('empty-box');
             $('.cd-quick-view').velocity("stop").removeClass('add-content animate-width is-visible').css({
                 "top": topSelected,
