@@ -1,6 +1,49 @@
 [ v-cloak]{
    display:none;
 }
+
+.JMRuleTip{
+    position: fixed;
+    right: 3%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-left:1px solid #6d6d6d;
+    height: 400px;
+    padding-left: 1px;
+}
+.JMRuleTip .JMItem {
+    display: block;
+    list-style: square;
+    padding-left: 30px;
+    position: relative;
+    cursor: pointer;
+}
+.JMRuleTip .JMItem:before{
+    content: "";
+    border:1px solid #6d6d6d;
+    background: #fff;
+    border-radius: 20px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left:-6.5px;
+    top:5px;
+}
+.JMRuleTip .JMItem .JMLink{
+    color: #6d6d6d;
+}
+.JMRuleTip .JMItem.JMActive .JMLink{
+    color: #0096FF;
+    font-weight: bold;
+}
+
+.JMRuleTip .JMItem.JMActive:before{
+    border:2px solid #0096FF;
+}
+
+
 .JMRule .header{
 	width:750px;
 	margin: 0 auto;
@@ -13,6 +56,7 @@
 .JMRuleDetail{
 	/* width: 750px; */
 	margin: 20px auto;
+    position: relative;overflow-y: scroll;overflow-y: hidden;
 }
 .JMRuleDetail .JMTitle .JMNum{
     font-size: 45px;
@@ -62,9 +106,11 @@
     	width: 600px;
     }
 	.JMRuleDetail{
-		/* width: 600px; */
 		margin: 20px auto;
 	}
+    .JMRuleTip{
+        right: 1%;
+    }
 }
 @media screen and (min-width: 768px) and (max-width: 992px){
     .JMRule .header{
@@ -74,6 +120,9 @@
 		width: 95%;
 		margin: 40px auto;
 	}
+    .JMRuleTip{
+        display: none;
+    }
 }
 @media screen and (max-width: 768px){
     .JMRule .header{
@@ -84,4 +133,7 @@
 		margin: 20px auto;
 		padding: 0px;
 	}
+    .JMRuleTip{
+        display: none;
+    }
 }

@@ -1,7 +1,6 @@
 var pageName = "rule";
-$(document).ready(
-    function() {
-        var timer, scrollTops = [];
+var timer, scrollTops = [];
+$(document).ready(function() {
         function findIndex(list, value) {
             var flag = 0;
             for (var i = list.length - 1; i > 0; i--) {
@@ -12,6 +11,14 @@ $(document).ready(
             }
             return flag;
         }
+        $(".JMRuleDetail img").each(function(index, el) {
+            if (index != 1) {
+                $(this).load(function(){
+                  scrollTops.push($(this).offset().top);
+                });
+            }
+        });
+
         $("#JMRuleTip .JMItem").click(function() {
             var targetId = $(this).find(".JMLink").data("href");
             $("#JMRuleTip .JMActive").removeClass("JMActive");
@@ -19,10 +26,6 @@ $(document).ready(
             $('html,body').animate({
                 scrollTop : $(targetId).offset().top + 10
             }, 500);
-        });
-
-        $(".JMSection").each(function(index, el) {
-            scrollTops.push($(this).offset().top);
         });
 
         $(window).scroll(
@@ -37,8 +40,9 @@ $(document).ready(
                 }, 100);
             }
         );
-    }
-);
+
+
+});
 let index = new Vue({
     el:".index",
     data(){
