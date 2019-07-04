@@ -12,8 +12,7 @@
 <div class="col-md-8 col-md-offset-2 col-sm-12 home">
 	<row type="flex" justify="center">
 		<i-col span="24">
-			<icon type="ios-information-circle" size="40"></icon>
-			<Carousel class="carousel" v-model="carouselModel">
+			<Carousel class="carousel" v-model="carouselModel" loop>
 		        <carousel-item>
 		            <div class="carouselItem">
 						<video id="video" class="video" @click="tapVideo" autoplay src="/public/images/video.mp4"></video>
