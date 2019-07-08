@@ -52,10 +52,11 @@ img{
     width: 240px;
     height: 130px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     position: absolute;
-    right: 150px;
+    margin-left: 350px;
+    margin-top: 52px;
 }
 .JMHeader .countDownBox .JMNoticeBoard {
 	width: 240px;
