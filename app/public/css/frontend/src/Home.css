@@ -40,6 +40,7 @@
 }
 .newsList .newsItem{
     max-width: 320px;
+    width: 33.3%;
 }
 .newsList .title{
     width: 100%;
