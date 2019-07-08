@@ -76,8 +76,13 @@ class HomeController extends Controller {
 
   async uploadWork() {
     const ctx = this.ctx;
+    let expire = 0;
+    if(ctx.helper.getCountDownDay() <= 0){
+      expire = 1
+    }
     await ctx.render('frontend/uploadWork.html', {
-      user : ctx.user
+      user : ctx.user,
+      expire:expire
     });
   }
 

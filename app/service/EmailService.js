@@ -32,7 +32,7 @@ class Email extends Service {
 
     if (mailType == 0){
       mailOptions.text = "您好 ";
-       mailOptions.html = '<b>感谢您访问!</b> <a href="'+ctx.helper.email_verify_address
+       mailOptions.html = '<b>感谢您注册成为首届中国（怀化）乡村振兴设计创新大赛用户!</b> <a href="'+ctx.helper.email_verify_address
          +'?email='+email+'&activeCode='+activeCode+'">请点击激活账号</a>';
     }
     else if (mailType == 1){
@@ -73,7 +73,7 @@ class Email extends Service {
     }
 
     mailOptions.text = "您好 ";
-      mailOptions.html = '<b>感谢您访问!</b> <a href="'+ctx.helper.getBackPwd_email_verify_address
+      mailOptions.html = '<b>感谢您成为首届中国（怀化）乡村振兴设计创新大赛用户!</b> <a href="'+ctx.helper.getBackPwd_email_verify_address
         +'?email='+email+'&activeCode='+activeCode+'">请点击修改该账号的密码</a>';
 
     // 发送邮件
