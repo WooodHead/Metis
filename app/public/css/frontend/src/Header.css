@@ -44,9 +44,13 @@ img{
     flex-direction: row;
     justify-content: space-between;
 }
+.JMHeader .JMLogo{
+	height: 100px;
+    margin-top: 10px;
+}
 .JMHeader .JMLogo img{
 	width: auto;
-	height: 130px;
+	height: 100px;
 }
 .JMHeader .countDownBox{
     width: 240px;
@@ -234,6 +238,9 @@ img{
     padding-left: 30px;
     border-left: solid 1px #fff;
 }
+.JMFooter .footRight p{
+    margin:0px;
+}
 
 @media screen and (min-width: 992px) and (max-width: 1200px){
 
@@ -245,6 +252,10 @@ img{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+    }
+    .JMHeader .JMLogo{
+        height: 90px;
+        line-height: 90px;
     }
 }
 @media screen and (max-width: 768px){
@@ -259,12 +270,14 @@ img{
     .JMHeader .JMLogo{
         height: 90px;
         line-height: 90px;
+        margin-top: 0px;
     }
     .JMHeader .JMLogo img{
         height: 70px;
         margin-top: 10px;
     }
     .JMHeader .countDownBox{
+        display: none;
         height: 90px;
         justify-content: center;
         align-items: center;
