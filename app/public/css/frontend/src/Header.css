@@ -44,13 +44,9 @@ img{
     flex-direction: row;
     justify-content: space-between;
 }
-.JMHeader .JMLogo{
-	height: 100px;
-    margin-top: 10px;
-}
 .JMHeader .JMLogo img{
 	width: auto;
-	height: 100px;
+	height: 130px;
 }
 .JMHeader .countDownBox{
     width: 240px;
@@ -58,6 +54,8 @@ img{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    position: absolute;
+    right: 150px;
 }
 .JMHeader .countDownBox .JMNoticeBoard {
 	width: 240px;
@@ -99,6 +97,10 @@ img{
 .JMHeader .JMNoticeBoard .JMNoticeBoardRight .title {
     font-weight: bold;
 	color: #515151;
+}
+.jdLogo{
+    width: 118px;
+    margin-top: -20px;
 }
 .langBox a{
     display: inline-block;
@@ -253,9 +255,8 @@ img{
         flex-direction: row;
         justify-content: space-between;
     }
-    .JMHeader .JMLogo{
-        height: 90px;
-        line-height: 90px;
+    .JMHeader .countDownBox{
+        display: none;
     }
 }
 @media screen and (max-width: 768px){
@@ -270,7 +271,6 @@ img{
     .JMHeader .JMLogo{
         height: 90px;
         line-height: 90px;
-        margin-top: 0px;
     }
     .JMHeader .JMLogo img{
         height: 70px;
@@ -278,25 +278,10 @@ img{
     }
     .JMHeader .countDownBox{
         display: none;
-        height: 90px;
-        justify-content: center;
-        align-items: center;
     }
-    .JMHeader .countDownBox .JMNoticeBoard{
-        width: 160px;
-    }
-    .JMHeader .JMNoticeBoard .JMNoticeBoardLeft a {
-    	width: 100%;
-    	height: 60px;
-    	line-height: 60px;
-    	font-size: 14px;
-    	color: #fff;
-    }
-    .JMHeader .JMNoticeBoard .JMNoticeBoardRight .countDown{
-        font-size: 22px;
-    }
-    .JMHeader .JMNoticeBoard .JMNoticeBoardRight .title{
-        font-size: 10px;
+    .jdLogo{
+        width: 70px;
+        margin-top: -10px;
     }
     .JMMenu .JMItem {
         width: 46px;
