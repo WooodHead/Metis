@@ -334,7 +334,11 @@ class UsersController extends BaseController{
 
   async getCountDownDay(){
     const ctx = this.ctx;
-    ctx.body = ctx.helper.getCountDownDay();
+    let expire = ctx.helper.getCountDownDay();
+    if (expire < 0){
+      expire = 0;
+    }
+    ctx.body = expire;
   }
 }
 

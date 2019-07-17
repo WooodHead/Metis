@@ -47,7 +47,7 @@ class ProductionService extends Service {
     let pImageArray = resultObj.pImage.split(',');
     let imageStr = '';
     for (let image of pImageArray){
-      imageStr += helper.signatureUrl(helper.productPath + image, "thumb-792-1120") + ',';
+      imageStr += helper.signatureUrl(helper.productPath + image, "thumb-980-1386") + ',';
     }
     resultObj.pImage = imageStr;
     if(resultObj.attach_file){
@@ -106,7 +106,7 @@ class ProductionService extends Service {
     let pImageArray = resultObj.pImage.split(',');
     let imageStr = '';
     for (let image of pImageArray){
-      imageStr += helper.signatureUrl(helper.productPath + image, "thumb-792-1120") + ',';
+      imageStr += helper.signatureUrl(helper.productPath + image, "thumb-980-1386") + ',';
     }
     resultObj.pImage = imageStr;
     if(resultObj.attach_file){
