@@ -1,6 +1,6 @@
 var pageName = "judge";
 const sliderFinalWidth = 400;
-const maxQuickWidth = 1200;
+const maxQuickWidth = 1400;
 
 var judge = new Vue({
     el: '.index',
@@ -8,7 +8,20 @@ var judge = new Vue({
         return {
             productListStyle: {
                 width: "100%",
-                minHeight: ""
+                minHeight: "",
+            },
+            quickViewStyle:{
+                top:"",
+                left:"",
+                width:"",
+                height:""
+            },
+            swiperContanierStyle:{
+                width:"",
+                height:""
+            },
+            itemInfoStyle:{
+                width:""
             },
             total: 0,
             pageSize: 12,
@@ -101,15 +114,17 @@ var judge = new Vue({
                     that.productionId = res.data.Id;
                     list = res.data.pImage.split(",");
                     list.pop();
-                    $(".selected").empty();
-                    $(".selected").append("<div class='swiper-container'> <div class='swiper-wrapper'></div><div class='swiper-pagination'>" + "</div><div class='swiper-button-prev swiper-button-black'></div><div class='swiper-button-next swiper-button-black'></div></div>");
+                    $(".swiper-container").empty();
+                    $(".swiper-container").append("<div class='swiper-wrapper'></div><div class='swiper-pagination'>" + "</div><div class='swiper-button-prev swiper-button-black'></div><div class='swiper-button-next swiper-button-black'></div>");
                     //swiper图片加载
                     for (var imgItem = 0; imgItem < list.length; imgItem++) {
                         var imgSrc = list[imgItem];
                         $(".swiper-wrapper").append("<div class='swiper-slide'><img id='productImage' src=" + imgSrc + "></div>");
                     }
                     //初始化swiper
-                    $(".swiper-wrapper .swiper-slide img").css("cursor", "pointer");
+                    if(document.documentElement.clientHeight <= 900){
+                        $(".swiper-wrapper .swiper-slide img").css("cursor", "pointer");
+                    }
                     var mySwiper = new Swiper('.swiper-container', {
                         loop: false,
                         pagination: {
@@ -127,8 +142,10 @@ var judge = new Vue({
 
                     $("img[id='productImage']").each(function(index) {
                         $(this).click(function() {
-                            that.previewModal = true;
-                            that.modelImg = list[index];
+                            if(document.documentElement.clientHeight <= 900){
+                                that.previewModal = true;
+                                that.modelImg = list[index];
+                            }
                         })
                     })
 
@@ -157,33 +174,28 @@ var judge = new Vue({
             }
         },
         animateQuickView: function(image, finalWidth, maxQuickWidth, animationType) {
-            var parentListItem = image.parent('.cd-item'),
-                topSelected = image.offset().top - $(window).scrollTop(),
-                leftSelected = image.offset().left,
-                widthSelected = image.width(),
-                heightSelected = image.height(),
-                windowWidth = $(window).width(),
-                windowHeight = $(window).height(),
-                finalLeft = (windowWidth - finalWidth) / 2,
-                finalHeight = finalWidth * heightSelected / widthSelected + 240,
-                finalTop = (windowHeight - finalHeight) / 2 - 100,
-                quickViewWidth = (windowWidth * .8 < maxQuickWidth) ? windowWidth * .8 : maxQuickWidth,
-                quickViewLeft = (windowWidth - quickViewWidth) / 2;
-
-            if (windowHeight < 900) {
-                finalTop = 20;
-            }
-            if (windowHeight > 900) {
-                finalTop = 60;
-            }
+            var parentListItem = image.parent('.cd-item');
 
             if (animationType == 'open') {
                 parentListItem.addClass('empty-box');
-                $('.cd-quick-view').css({
-                    'top': finalTop + 'px',
-                    'left': quickViewLeft + 'px',
-                    'width': quickViewWidth + 'px',
-                }).addClass('is-visible');
+                if (document.documentElement.clientHeight > 900) {
+                    this.quickViewStyle.width = "1400px";
+                    this.quickViewStyle.top = "60px";
+                    this.quickViewStyle.height = document.documentElement.clientHeight - 120 + "px";
+                    this.quickViewStyle.left = (document.documentElement.clientWidth - 1400) / 2 + "px";
+                    this.swiperContanierStyle.width = "650px";
+                    this.swiperContanierStyle.height = document.documentElement.clientHeight - 120 + "px";
+                    this.itemInfoStyle.width = "630px";
+                } else {
+                    this.quickViewStyle.width = "1200px";
+                    this.quickViewStyle.top = "10px";
+                    this.quickViewStyle.height = document.documentElement.clientHeight - 20 + "px";
+                    this.quickViewStyle.left = (document.documentElement.clientWidth - 1200) / 2 + "px";
+                    this.swiperContanierStyle.width = (document.documentElement.clientHeight - 20) * 594 / 840 + "px" ;
+                    this.swiperContanierStyle.height = document.documentElement.clientHeight - 20 + "px";
+                    this.itemInfoStyle.width = "500px";
+                }
+                $('.cd-quick-view').addClass('is-visible');
                 $('.cd-quick-view').addClass('animate-width');
                 $('.cd-quick-view').addClass('add-content');
                 $('.cd-quick-view').removeClass("animated zoomOut");

@@ -34,11 +34,6 @@ a:active {
     text-decoration: none;
 }
 
-.swiper-container {
-    width: 475px;
-    height: 672px;
-}
-
 .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -130,7 +125,6 @@ a:active {
     display: flex;
     flex-direction: row;
     position: fixed;
-    max-width: 1200px;
     height: auto;
     visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -158,7 +152,6 @@ a:active {
 }
 
 .cd-item-info {
-    width: 630px;
     margin-left: 20px;
     display: flex;
     flex-direction: column;

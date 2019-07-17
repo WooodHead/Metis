@@ -15,13 +15,13 @@
 		<i-col span="20">
 			<div style="text-align: center">
 				<i-menu mode="horizontal" :theme="theme1" active-name="1" @on-select="menuSelect" style="width:100%;margin-top:10px;z-index:0">
-					<menu-item name="1"> <icon type="settings"></icon>
+					<menu-item name="1"> <icon type="md-settings"></icon>
 						全部
 					</menu-item>
-					<menu-item name="2"> <icon type="settings"></icon>
+					<menu-item name="2"> <icon type="md-settings"></icon>
 						已打分
 					</menu-item>
-					<menu-item name="3"> <icon type="settings"></icon>
+					<menu-item name="3"> <icon type="md-settings"></icon>
 						未打分
 					</menu-item>
 				</i-menu>
@@ -45,11 +45,11 @@
 		</div>
 	</ul>
 
-	<div class="cd-quick-view">
-		<div class="cd-slider-wrapper">
+	<div class="cd-quick-view" :style="quickViewStyle">
+		<div class="cd-slider-wrapper" >
 			<ul class="cd-slider">
 				<li class="selected">
-					<div class="swiper-container">
+					<div class="swiper-container" :style="swiperContanierStyle">
 						<div class="swiper-wrapper">
 							<div class='swiper-slide'>
 							</div>
@@ -62,7 +62,7 @@
 			</ul>
 		</div>
 
-		<div class="cd-item-info">
+		<div class="cd-item-info" :style="itemInfoStyle">
 			<h3 v-text="'标题：'+ title"></h3>
 			<p class="des" v-html="'内容：<br />'+ content"></p>
 			<a v-if="attachFileShow" :href="attachFile">点击进行附件下载<icon size="18" type="md-arrow-down"></icon></a>
