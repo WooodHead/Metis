@@ -70,7 +70,7 @@
                         <li class="JMItem">
                             {% if user.roles[0].rolename == 'judge' %}
                                 <a href="/judge" class="realname">[ {{user.realname}} ]</a>
-                            {% elsif user.roles[0].rolename == 'admin' %}
+                            {% elif user.roles[0].rolename == 'admin' %}
                                 <a href="/newsMgr" class="realname">[ {{user.realname}} ]</a>
                             {% else %}
                                 <a href="/works" class="realname">[ {{user.realname}} ]</a>
